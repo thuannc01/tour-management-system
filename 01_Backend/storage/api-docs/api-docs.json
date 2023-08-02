@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/api",
+            "url": "http://thuan-be:2001/api",
             "description": "Laravel & PostgreSQL"
         }
     ],

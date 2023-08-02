@@ -18,7 +18,7 @@ use Illuminate\Routing\Controller as BaseController;
  * ),
  * @OA\Server(
  *      description="Laravel & PostgreSQL",
- *      url="http://127.0.0.1:8000/api"
+ *      url="http://thuan-be:2001/api"
  *  ),
  * @OA\Tag(
  *     name="ThuanTourist Project",
