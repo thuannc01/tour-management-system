@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\User\IUserRepository;
@@ -19,6 +19,7 @@ class UserController extends Controller
      *  @OA\GET(
      *      path="/user",
      *      tags={"User"},
+     *      security={{"apiAuth":{}}},
      *      description="
      *      Code
      *          200 - Success

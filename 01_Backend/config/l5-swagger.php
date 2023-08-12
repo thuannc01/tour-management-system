@@ -191,6 +191,7 @@ return [
                         ],
                     ],
                 ],
+                
                 'sanctum' => [ // Unique name of security
                     'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Enter token in format (Bearer <token>)',
@@ -220,12 +221,12 @@ return [
          * Set this to `true` in development mode so that docs would be regenerated on each request
          * Set this to `false` to disable swagger generation on production
         */
-        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', false),
+        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', true),
 
         /*
          * Set this to `true` to generate a copy of documentation in yaml format
         */
-        'generate_yaml_copy' => env('L5_SWAGGER_GENERATE_YAML_COPY', false),
+        'generate_yaml_copy' => env('L5_SWAGGER_GENERATE_YAML_COPY', true),
 
         /*
          * Edit to trust the proxy's ip address - needed for AWS Load Balancer

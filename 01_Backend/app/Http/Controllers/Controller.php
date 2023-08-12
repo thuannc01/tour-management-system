@@ -24,6 +24,15 @@ use Illuminate\Routing\Controller as BaseController;
  *     name="ThuanTourist Project",
  *     description="API Endpoints of Projects"
  * )
+ * @OA\SecurityScheme(
+ *     type="http",
+ *     description="Login with email and password to get the authentication token",
+ *     name="Token based Based",
+ *     in="header",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     securityScheme="apiAuth",
+ * )
  */
 
 class Controller extends BaseController

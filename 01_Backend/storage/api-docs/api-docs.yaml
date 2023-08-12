@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  title: 'API Documentation - ThuanNC'
+  description: 'L5 Swagger OpenApi description'
+  contact:
+    email: congthuan701@gmail.com
+  version: v1.0
+servers:
+  -
+    url: 'http://thuan-be:2001/api'
+    description: 'Laravel & PostgreSQL'
+paths:
+  /user:
+    get:
+      tags:
+        - User
+      summary: 'Get all user.'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: c5892e9954ff5ccf5cac53a8cadb4650
+      responses:
+        200:
+          description: 'Successful operation'
+      security:
+        -
+          '': []
+components:
+  securitySchemes:
+    apiAuth:
+      type: http
+      description: 'Login with email and password to get the authentication token'
+      name: 'Token based Based'
+      in: header
+      bearerFormat: JWT
+      scheme: bearer
+tags:
+  -
+    name: 'ThuanTourist Project'
+    description: 'API Endpoints of Projects'

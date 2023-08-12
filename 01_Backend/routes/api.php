@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\UserController as UserController;
+use App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,16 +15,22 @@ use App\Http\Controllers\Api\UserController as UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Handel token
+Route::group([
+    'middleware' => 'api',
+], function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
 });
 
-//Route user
-Route::apiResource('/user', UserController::class);
-
-// start
-Route::post('auth/register', [AuthController::class, 'register']);
-Route::post('auth/login', [AuthController::class, 'login']);
-Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::get('user-info', 'AuthController@getUserInfo');
+// Auth
+Route::group([
+    'middleware' => 'auth'
+], function () {
+    Route::apiResource('/user', UserController::class);
 });
+
+// No auth
