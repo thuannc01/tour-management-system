@@ -16,10 +16,45 @@ class AuthController extends Controller
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
+
     /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Login to get token.
+     * Created: 2023/08/13
+     * @param  LoginRequest $request
+     * @return DataResponse
+     *  @OA\Post(
+     *      path="/login",
+     *      tags={"Authentication"},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\RequestBody(
+     *          description="Data login",
+     *          @OA\JsonContent(
+     *              required={"loginid", "password"},
+     *              @OA\Property(property="email", type="string", example="thuan@gmail.com"),
+     *              @OA\Property(property="password", type="string", format="password", example="123123"),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result after check account",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Data of token after login. Empty if have error"
+     *              )
+     *          )
+     *      )
+     *  )
      */
     public function login(Request $request){
     	$validator = Validator::make($request->all(), [
@@ -34,10 +69,47 @@ class AuthController extends Controller
         }
         return $this->createNewToken($token);
     }
+    
     /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Register for a user account
+     * Created: 2023/08/13
+     * @param  LoginRequest $request
+     * @return DataResponse
+     *  @OA\Post(
+     *      path="/register",
+     *      tags={"Authentication"},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\RequestBody(
+     *          description="Data login",
+     *          @OA\JsonContent(
+     *              required={"name", "email", "password", "password_confirms"},
+     *              @OA\Property(property="name", type="string", example="Thuan Nguyen Cong"),
+     *              @OA\Property(property="email", type="string", example="thuannc@gmail.com"),
+     *              @OA\Property(property="password", type="string", format="password", example="123123"),
+     *              @OA\Property(property="password_confirmation", type="string", format="password", example="123123"),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result after register account success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Data of token after login. Empty if have error"
+     *              )
+     *          )
+     *      )
+     *  )
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
@@ -59,30 +131,114 @@ class AuthController extends Controller
     }
 
     /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Logout
+     * Created: 2023/08/13
+     * @param  LoginRequest $request
+     * @return DataResponse
+     *  @OA\Post(
+     *      path="/logout",
+     *      tags={"Authentication"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result after success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Data of token after login. Empty if have error"
+     *              )
+     *          )
+     *      )
+     *  )
      */
     public function logout() {
         auth()->logout();
         return response()->json(['message' => 'User successfully signed out']);
     }
+    
     /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Refresh a token
+     * Created: 2023/08/13
+     * @param  LoginRequest $request
+     * @return DataResponse
+     *  @OA\Post(
+     *      path="/refresh",
+     *      tags={"Authentication"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result after success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Data of token after login. Empty if have error"
+     *              )
+     *          )
+     *      )
+     *  )
      */
     public function refresh() {
         return $this->createNewToken(auth()->refresh());
     }
+
     /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Get the authenticated User (user-profile)
+     * Created: 2023/08/13
+     * @param  LoginRequest $request
+     * @return DataResponse
+     *  @OA\Get(
+     *      path="/user-profile",
+     *      tags={"Authentication"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result after success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Data of token after login. Empty if have error"
+     *              )
+     *          )
+     *      )
+     *  )
      */
     public function userProfile() {
         return response()->json(auth()->user());
     }
+
     /**
      * Get the token array structure.
      *

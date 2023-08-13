@@ -21,7 +21,7 @@ class UnauthorizedApi
         if (!Auth::check()) {
             return response()->json([
                 'error' => 'Unauthorized',
-                'status' => 401], 401);
+                'code' => 401], 401);
         }
 
         return $next($request);

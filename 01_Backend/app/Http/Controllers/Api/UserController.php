@@ -16,6 +16,9 @@ class UserController extends Controller
 
     /**
      * Get all user.
+     * Created: 2023/08/13
+     * @param  LoginRequest $request
+     * @return DataResponse
      *  @OA\GET(
      *      path="/user",
      *      tags={"User"},
@@ -32,7 +35,14 @@ class UserController extends Controller
      *      ",
      *      @OA\Response(
      *          response=200,
-     *          description="Successful operation"
+     *          description="Result after success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Data of token after login. Empty if have error"
+     *              )
+     *          )
      *      )
      *  )
      */
