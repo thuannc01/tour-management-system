@@ -1,0 +1,43 @@
+<div id="auth-login">
+	<section class="container-auth forms">
+		<div class="form login">
+			<div class="form-content">
+				<header>Đăng Nhập</header>
+				<form @submit="checkForm">
+					<div class="field input-field d-flex">
+						<input type="email" placeholder="Email" class="input form-control" v-model="email"
+							maxlength="50" required>
+					</div>
+
+					<div class="field input-field">
+						<input type="password" placeholder="Mật khẩu" class="password form-control" v-model="password"
+							maxlength="50" required>
+						<i class='bx bx-hide eye-icon'></i>
+					</div>
+
+					<div class="form-link">
+						<a class="forgot-pass">Quên mật khẩu?</a>
+					</div>
+
+					<div class="field button-field">
+						<button>Đăng nhập</button>
+					</div>
+				</form>
+
+				<div class="form-link">
+					<span>Bạn chưa có tài khoản? <a class="link signup-link"><router-link to="/register">Đăng
+								ký.</router-link></a></span>
+				</div>
+			</div>
+
+			<div class="line"></div>
+
+			<div class="media-options">
+				<a class="field google">
+					<img src="/src/assets/images/google.png" alt="" class="google-img">
+					<span>Đăng nhập với Google</span>
+				</a>
+			</div>
+		</div>
+	</section>
+</div>

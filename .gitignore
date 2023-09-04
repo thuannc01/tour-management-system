@@ -16,6 +16,7 @@ yarn-error.log
 /.idea
 /.vscode
 # 02_Frontend
+/02_Frontend/node_modules
 /dist
 /tests/e2e/videos/
 /tests/e2e/screenshots/

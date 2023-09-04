@@ -1,0 +1,105 @@
+@import '_var';
+
+body {
+	background-color: $white;
+
+	#header-stick {
+		position: sticky;
+		top: 0;
+		background-color: $white;
+		z-index: 1;
+	}
+
+	#gn-header {
+		display: flex;
+		border-bottom: 1px solid red;
+		margin: 0px 10px 5px;
+		padding-top: 5px
+	}
+}
+
+.gn-menu-wrapper {
+	position: fixed;
+	width: 150px;
+	height: 100vh;
+	float: left;
+
+	>div {
+		background: $gainsboro;
+		height: 100%;
+	}
+
+	ul {
+		&.gn-menu {
+			padding-top: 44px;
+
+			li {
+				padding-top: 15px;
+				padding-bottom: 15px;
+
+				a {
+					color: $black;
+					text-decoration: unset
+				}
+			}
+		}
+	}
+}
+
+.header-error {
+	background-color: $crimson;
+	min-height: 34px;
+
+	.fs-5 {
+		color: $white;
+		margin-bottom: 0px;
+	}
+
+	.btn-close-error {
+		position: absolute;
+		right: 5px;
+
+		button {
+			height: 33px;
+			padding-top: 3px;
+
+			span {
+				color: $white;
+			}
+		}
+	}
+}
+
+.loading {
+	.loading-bg {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 9999999999;
+		background-color: $grey_loading;
+		opacity: 0.5;
+	}
+
+	img {
+		position: fixed;
+		top: calc(50% - 25px);
+		left: calc(50% - 25px);
+		width: 50px;
+		height: 50px;
+		z-index: 10000000000;
+	}
+}
+
+ul {
+	list-style-type: none;
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.mt-10 {
+	margin-top: 10px;
+}

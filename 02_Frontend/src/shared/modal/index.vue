@@ -1,0 +1,50 @@
+<script>
+import { mapState, mapMutations } from 'vuex';
+
+import { MSG_TYPE } from '@/utils/messages';
+
+import template from './template.html';
+
+const ModalMessage = {
+    name: 'ModalMessage',
+    template: template,
+    computed: {
+        ...mapState('app', ['modalMessage', 'isShowModalMessage']),
+        showModal: {
+            get() {
+                return this.isShowModalMessage;
+            },
+            set(value) {
+                this.updateShowModalMessage(value);
+            }
+        },
+        showCancel() {
+            return (
+                this.modalMessage.type == MSG_TYPE.CONFIRM ||
+                this.modalMessage.type == MSG_TYPE.WARNING
+            );
+        },
+        showTitle() {
+            return this.modalMessage.title && this.modalMessage.title != '';
+        }
+    },
+    methods: {
+        ...mapMutations('app', ['hideModalMessage', 'updateShowModalMessage']),
+        onClickOk() {
+            const callback = this.modalMessage.callback;
+            this.hideModalMessage();
+            if (callback) {
+                callback(true);
+            }
+        },
+        onClickCancel() {
+            const callback = this.modalMessage.callback;
+            this.hideModalMessage();
+            if (callback) {
+                callback(false);
+            }
+        }
+    }
+};
+export default ModalMessage;
+</script>
