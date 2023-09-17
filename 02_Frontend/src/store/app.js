@@ -1,16 +1,20 @@
 import messages, { MSG_TYPE, MSG_TITLE } from '@/utils/messages';
 import helpers from '@/utils/helpers';
 
+const dataPathAdmin = {
+    pageNameAdmin: '',
+    pagePathAdmin1: '',
+    routePagePathAdmin1: '',
+    pagePathAdmin2: '',
+    routePagePathAdmin2: '',
+    pagePathAdmin3: '',
+    routePagePathAdmin3: ''
+};
+
 export default {
     namespaced: true,
     state: {
-        pageNameAdmin: '',
-        pagePathAdmin1: '',
-        routePagePathAdmin1: '',
-        pagePathAdmin2: '',
-        routePagePathAdmin2: '',
-        pagePathAdmin3: '',
-        routePagePathAdmin3: '',
+        initPathAdminLayout: { ...dataPathAdmin },
         isLoading: false,
         isForceLoading: false,
         isNoLoading: false,
@@ -47,25 +51,25 @@ export default {
     getters: {},
     mutations: {
         setPageNameAdmin(state, data) {
-            state.pageNameAdmin = data;
+            state.initPathAdminLayout.pageNameAdmin = data;
         },
         setPagePathAdmin1(state, data) {
-            state.pagePathAdmin1 = data;
+            state.initPathAdminLayout.pagePathAdmin1 = data;
         },
         setRoutePagePathAdmin1(state, data) {
-            state.routePagePathAdmin1 = data;
+            state.initPathAdminLayout.routePagePathAdmin1 = data;
         },
         setPagePathAdmin2(state, data) {
-            state.pagePathAdmin2 = data;
+            state.initPathAdminLayout.pagePathAdmin2 = data;
         },
         setRoutePagePathAdmin2(state, data) {
-            state.routePagePathAdmin2 = data;
+            state.initPathAdminLayout.routePagePathAdmin2 = data;
         },
         setPagePathAdmin3(state, data) {
-            state.pagePathAdmin3 = data;
+            state.initPathAdminLayout.pagePathAdmin3 = data;
         },
         setRoutePagePathAdmin3(state, data) {
-            state.routePagePathAdmin3 = data;
+            state.initPathAdminLayout.routePagePathAdmin3 = data;
         },
         showLoading(state) {
             state.isLoading = true;

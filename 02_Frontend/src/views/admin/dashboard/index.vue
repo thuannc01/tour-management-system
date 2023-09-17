@@ -3,6 +3,7 @@ import { mapActions, mapMutations } from 'vuex';
 
 import template from './template.html';
 
+import './style.scss';
 import store from '@/store';
 import DashboardStore from '@/views/admin/dashboard/store';
 
@@ -17,7 +18,7 @@ var Dashboard = {
     mounted() {
         this.setPageNameAdmin('Dashboard');
         this.setPagePathAdmin1('Dashboard');
-        this.setRoutePagePathAdmin1('/thuannc');
+        this.setRoutePagePathAdmin1('/thuan-nguyen');
     },
     unmounted() {
         this.setPageNameAdmin('');

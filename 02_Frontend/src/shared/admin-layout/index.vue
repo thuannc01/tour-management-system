@@ -12,23 +12,10 @@ export default {
         Loading
     },
     computed: {
-        ...mapState('app', [
-            'isLogout',
-            'pageNameAdmin',
-            'pagePathAdmin1',
-            'routePagePathAdmins1',
-            'pagePathAdmin2',
-            'routePagePathAdmins2',
-            'pagePathAdmin3',
-            'routePagePathAdmins3'
-        ])
+        ...mapState('app', ['isLogout', 'initPathAdminLayout'])
     },
     data() {
-        return {
-            routePagePathAdmin1: this.routePagePathAdmins1,
-            routePagePathAdmin2: this.routePagePathAdmins2,
-            routePagePathAdmin3: this.routePagePathAdmins3
-        };
+        return {};
     },
     methods: {
         ...mapMutations('app', ['setLogout']),

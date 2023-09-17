@@ -18,32 +18,8 @@ body {
 	}
 }
 
-.gn-menu-wrapper {
-	position: fixed;
-	width: 150px;
-	height: 100vh;
-	float: left;
-
-	>div {
-		background: $gainsboro;
-		height: 100%;
-	}
-
-	ul {
-		&.gn-menu {
-			padding-top: 44px;
-
-			li {
-				padding-top: 15px;
-				padding-bottom: 15px;
-
-				a {
-					color: $black;
-					text-decoration: unset
-				}
-			}
-		}
-	}
+a.dropdown-item:hover {
+	cursor: pointer !important;
 }
 
 .header-error {

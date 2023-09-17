@@ -108,24 +108,24 @@
                 <div class="page-title mb-3">
                     <div class="row">
                         <div class="col-md-6 order-md-1 order-last">
-                            <h3>{{pageNameAdmin}}</h3>
+                            <h3>{{initPathAdminLayout.pageNameAdmin}}</h3>
                         </div>
                         <div class="col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><router-link to="/dashboard">Dashboard</router-link>
                                     </li>
-                                    <li :class="{'breadcrumb-item': pagePathAdmin1.trim() != ''}" class="active"
-                                        aria-current="page"><router-link
-                                            :to="{name: routePagePathAdmin1, encode: false }">{{pagePathAdmin1}}</router-link>
+                                    <li :class="{'breadcrumb-item': initPathAdminLayout.pagePathAdmin1.trim() != ''}"
+                                        class="active" aria-current="page"><router-link
+                                            :to="initPathAdminLayout.routePagePathAdmin1">{{initPathAdminLayout.pagePathAdmin1}}</router-link>
                                     </li>
-                                    <li :class="{'breadcrumb-item': pagePathAdmin2.trim() != ''}" class="active"
-                                        aria-current="page"><router-link
-                                            :to="{name: routePagePathAdmin2, encode: false }">{{pagePathAdmin2}}</router-link>
+                                    <li :class="{'breadcrumb-item': initPathAdminLayout.pagePathAdmin2.trim() != ''}"
+                                        class="active" aria-current="page"><router-link
+                                            :to="initPathAdminLayout.routePagePathAdmin2">{{initPathAdminLayout.pagePathAdmin2}}</router-link>
                                     </li>
-                                    <li :class="{'breadcrumb-item': pagePathAdmin3.trim() != ''}" class="active"
-                                        aria-current="page"><router-link
-                                            :to="{name: routePagePathAdmin3, encode: false }">{{pagePathAdmin3}}</router-link>
+                                    <li :class="{'breadcrumb-item': initPathAdminLayout.pagePathAdmin3.trim() != ''}"
+                                        class="active" aria-current="page"><router-link
+                                            :to="initPathAdminLayout.routePagePathAdmin3">{{initPathAdminLayout.pagePathAdmin3}}</router-link>
                                     </li>
                                 </ol>
                             </nav>
