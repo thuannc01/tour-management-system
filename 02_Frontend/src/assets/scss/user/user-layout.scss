@@ -13,6 +13,14 @@
         width: 100%;
         z-index: 1;
 
+        small {
+            cursor: pointer;
+        }
+
+        .bg-header-search-global {
+            background: rgba(0, 114, 188, 1);
+        }
+
         .bg-primary {
             background-color: rgba(0, 114, 188, 0.5) !important;
         }

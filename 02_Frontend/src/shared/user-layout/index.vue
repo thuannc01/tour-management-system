@@ -27,18 +27,25 @@ export default {
             const divHeaderTopbar = document.getElementById('header-topbar');
             const divHeaderNavbar = document.getElementById('header-navbar');
             const textHeaderNav = document.querySelectorAll('.nav-link');
+            const btnSearchGlobal = document.querySelector(
+                'button.btn.btn-md.btn-secondary.border-0'
+            );
             if (scrollY !== 0) {
                 divHeaderTopbar.classList.add('d-none');
                 divHeaderNavbar.classList.add('bg-white');
                 textHeaderNav.forEach(function (element) {
                     element.classList.remove('text-white');
                 });
+                btnSearchGlobal.classList.remove('bg-transparent');
+                btnSearchGlobal.classList.add('bg-header-search-global');
             } else {
                 divHeaderTopbar.classList.remove('d-none');
                 divHeaderNavbar.classList.remove('bg-white');
                 textHeaderNav.forEach(function (element) {
                     element.classList.add('text-white');
                 });
+                btnSearchGlobal.classList.add('bg-transparent');
+                btnSearchGlobal.classList.remove('bg-header-search-global');
             }
         }
     }
