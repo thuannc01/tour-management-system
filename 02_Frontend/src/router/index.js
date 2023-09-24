@@ -3,6 +3,7 @@ import store from '@/store';
 import messages, { MSG_TYPE, MSG_TITLE } from '../utils/messages';
 import AuthRoutes from '@/router/auth-router';
 import AdminRoutes from '@/router/admin-router';
+import UserRoutes from '@/router/user-router';
 
 const PageNotFound = () => import('@/views/common/404');
 const ServerError = () => import('@/views/common/500');
@@ -13,7 +14,8 @@ const baseRoutes = [
         name: 'PageNotFound',
         component: PageNotFound,
         meta: {
-            title: 'Error-404'
+            title: 'Error-404',
+            layout: 'EmptyLayout'
         }
     },
     {
@@ -21,7 +23,8 @@ const baseRoutes = [
         name: 'ServerError',
         component: ServerError,
         meta: {
-            title: 'Error-500'
+            title: 'Error-500',
+            layout: 'EmptyLayout'
         }
     },
     {
@@ -30,7 +33,10 @@ const baseRoutes = [
     }
 ];
 
-const routes = baseRoutes.concat(AuthRoutes).concat(AdminRoutes);
+const routes = baseRoutes
+    .concat(AuthRoutes)
+    .concat(AdminRoutes)
+    .concat(UserRoutes);
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),

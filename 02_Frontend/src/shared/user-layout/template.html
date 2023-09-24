@@ -1,7 +1,140 @@
-<div class="body main no-touch">
+<div id="user-layout" class="body main no-touch main_wrapper">
     <header-error />
-    <div class="content-container jf">
+    <!-- header -->
+    <div id="header">
+        <!-- Topbar Start -->
+        <div id="header-topbar" class="container-fluid bg-primary text-white py-1">
+            <div class="container px-0">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <small class="ms-4"><i class="fa fa-map-marker-alt me-3"></i>48 Cao Thang, Danang,
+                            Vietnam</small>
+                        <small class="ms-4"><i class="fa fa-envelope me-3"></i>thuan.23701@gmail.com</small>
+                        <small class="ms-4"><i class="fa fa-phone-alt me-3"></i>+84 098 1234 898</small>
+                    </div>
+                    <div>
+                        <small class="ms-4"><i class="bi bi-box-arrow-in-right pe-2"></i>Đăng nhập</small>
+                        <small class="ms-4 d-none"><i class="bi bi-box-arrow-in-left pe-2"></i>Đăng xuất</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
+        <!-- Navbar Start -->
+        <div id="header-navbar" class="container-fluid sticky-top">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light p-lg-0">
+                    <a href="index.html" class="navbar-brand d-lg-none">
+                        <h1 class="fw-bold m-0">GrowMark</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarCollapse">
+                        <div class="logo">
+                            <img src="/src/assets/images/logo.png" style="height: 50px !important;">
+                        </div>
+                        <div class="navbar-nav">
+                            <a href="index.html" class="nav-item nav-link">Home</a>
+                            <a href="about.html" class="nav-item nav-link">About</a>
+                            <a href="service.html" class="nav-item nav-link">Services</a>
+                            <a href="project.html" class="nav-item nav-link">Projects</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
+                                    <a href="feature.html" class="dropdown-item">Features</a>
+                                    <a href="team.html" class="dropdown-item">Our Team</a>
+                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                    <a href="quote.html" class="dropdown-item">Quotation</a>
+                                    <a href="404.html" class="dropdown-item">404 Page</a>
+                                </div>
+                            </div>
+                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a class="nav-item nav-link"><b-button v-b-modal.search-global>Tìm kiếm</b-button></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- Navbar End -->
+    </div>
+    <!-- End header -->
+    <div class="content-container">
         <router-view />
     </div>
+    <!-- footer -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Về chúng tôi</h2>
+                    <p>Lữ hành Saigontourist, thương hiệu lữ hành hàng đầu Việt Nam</p>
+                    <p>Thương hiệu quốc gia</p>
+                    <ul class="ftco-footer-social p-0">
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                title="Twitter"><span class="bi bi-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                title="Facebook"><span class="bi bi-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                title="Instagram"><span class="bi bi-instagram"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Tin mới nhất</h2>
+                    <div class="block-21 mb-4 d-flex">
+                        <img class="img mr-4 rounded" src="/src/assets/images/footer_img1.jpg">
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Saigontourist tung ưu đãi đến 60%</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> 23/09/2023</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Thuan Admin</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-21 mb-4 d-flex">
+                        <img class="img mr-4 rounded" src="/src/assets/images/footer_img2.jpg">
+                        <div class="text">
+                            <h3 class="heading"><a href="#">'Ông lớn' ngành du lịch có lãi trở lại</a></h3>
+                            <div class="meta">
+                                <div><a href="#"><span class="icon-calendar"></span> 09/10/2023</a></div>
+                                <div><a href="#"><span class="icon-person"></span> Thuan Admin</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Bạn có câu hỏi?</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="bi bi-geo-alt-fill pe-3"></span><span class="text">48 Cao Thắng, Thanh
+                                    Bình, Hải
+                                    Châu, Đà Nẵng</span></li>
+                            <li><a href="#"><span class="bi bi-telephone-fill pe-3"></span><span class="text">+84 098
+                                        1234
+                                        898</span></a></li>
+                            <li><a href="#"><span class="bi bi-envelope-fill pe-3"></span><span
+                                        class="text">thuan.237@gmail.com</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center pt-2">
+                    <p class="copyright my-0">
+                        Copyright &copy; All rights reserved | This template is made with <i class="ion-ios-heart"
+                            aria-hidden="true"></i> by <a href="#">ThuanNC</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
     <loading />
+    <!-- modal search global -->
+    <b-modal id="search-global" title="BootstrapVue">
+        <p class="my-4">Tìm kiếm ...</p>
+    </b-modal>
 </div>

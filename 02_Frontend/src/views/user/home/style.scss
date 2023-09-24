@@ -1,0 +1,12 @@
+@import '../../../assets/scss/common/var';
+
+#user-home {
+    #carousel-1 {
+
+        button.carousel-control-next,
+        button.carousel-control-prev {
+            width: fit-content;
+            margin: 0 2rem;
+        }
+    }
+}
