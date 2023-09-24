@@ -9,6 +9,7 @@ import './style.scss';
 
 var Home = {
     template: template,
+    components: {},
     beforeCreate() {
         if (!store.hasModule('login')) {
             store.registerModule('login', HomeStore);
