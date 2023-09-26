@@ -28,7 +28,7 @@ export default {
             const divHeaderNavbar = document.getElementById('header-navbar');
             const textHeaderNav = document.querySelectorAll('.nav-link');
             const btnSearchGlobal = document.querySelector(
-                'button.btn.btn-md.btn-secondary.border-0'
+                'button.border-0.btn.btn-primary'
             );
             if (scrollY !== 0) {
                 divHeaderTopbar.classList.add('d-none');
