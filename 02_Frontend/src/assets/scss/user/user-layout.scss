@@ -13,8 +13,14 @@
         width: 100%;
         z-index: 1;
 
+        #header-navbar {}
+
         small {
             cursor: pointer;
+        }
+
+        .bg-white {
+            box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
         }
 
         .bg-header-search-global {
@@ -37,12 +43,18 @@
                     outline: none;
 
                     &:hover {
-                        color: $primary;
+                        color: $primary !important;
                     }
                 }
 
                 .nav-link.active {
                     color: primary;
+                }
+
+                .dropdown-menu {
+                    .dropdown-item:hover {
+                        color: $primary;
+                    }
                 }
             }
         }
@@ -326,4 +338,12 @@
             }
         }
     }
+    .breadcrumb-item+.breadcrumb-item::before {
+        color: $white;
+    }
+}
+
+body.modal-open {
+    padding: 0 !important;
+    margin: 0 !important;
 }

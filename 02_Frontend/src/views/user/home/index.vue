@@ -11,8 +11,8 @@ var Home = {
     template: template,
     components: {},
     beforeCreate() {
-        if (!store.hasModule('login')) {
-            store.registerModule('login', HomeStore);
+        if (!store.hasModule('HomeStore')) {
+            store.registerModule('HomeStore', HomeStore);
         }
     },
     created() {},
@@ -20,9 +20,7 @@ var Home = {
     watch: {},
     data() {
         return {
-            label: label,
-            slide: 0,
-            sliding: null
+            label: label
         };
     },
     computed: {
@@ -35,14 +33,7 @@ var Home = {
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', ['']),
-        // carousel component
-        onSlideStart() {
-            this.sliding = true;
-        },
-        onSlideEnd() {
-            this.sliding = false;
-        }
+        ...mapActions('', [''])
     }
 };
 export default Home;

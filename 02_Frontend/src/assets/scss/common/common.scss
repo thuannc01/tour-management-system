@@ -1,6 +1,7 @@
 @import '_var';
 
 body {
+
 	background-color: $white;
 	font-family: $font-primary;
 	font-size: 15px;
@@ -14,6 +15,7 @@ body {
 		&:focus {
 			text-decoration: none !important;
 			outline: none !important;
+			cursor: pointer;
 		}
 	}
 
@@ -28,7 +30,7 @@ body {
 	.h4,
 	.h5 {
 		line-height: 1.5;
-		font-weight: 400;
+		font-weight: 500;
 		font-family: $font-primary;
 	}
 

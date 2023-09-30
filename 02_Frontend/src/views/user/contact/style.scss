@@ -1,0 +1,43 @@
+@import '../../../assets/scss/common/var';
+
+#user-contact {
+    .background-image {
+        background: url('@/assets/images/contact.jpg');
+        opacity: 1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 480px;
+        background-size: cover;
+    }
+
+    .breadcrumb-nav {
+        position: absolute;
+        bottom: 4rem;
+    }
+
+
+    .btn-square {
+        width: 38px;
+        height: 38px;
+    }
+
+    .btn-sm-square {
+        width: 32px;
+        height: 32px;
+    }
+
+    .btn-lg-square {
+        width: 48px;
+        height: 48px;
+    }
+
+    .btn-square,
+    .btn-sm-square,
+    .btn-lg-square {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: normal;
+    }
+}

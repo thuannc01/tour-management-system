@@ -5,7 +5,7 @@
         font-weight: 400;
     }
 
-    #carousel-1 {
+    #carousel-home {
 
         button.carousel-control-next,
         button.carousel-control-prev {
@@ -14,7 +14,7 @@
         }
     }
 
-    #hot-tour{}
+    #hot-tour {}
 
     #travel-guide {
         .service-item.position-relative.h-100 {
@@ -23,7 +23,6 @@
 
         .service-item {
             .service-text {
-                position: relative;
                 width: 100%;
                 top: 0;
                 left: 0;
@@ -31,7 +30,6 @@
                 background: #FFFFFF;
                 box-shadow: 0 0 45px rgba(0, 0, 0, .06);
                 transition: .5s;
-                z-index: 1;
 
                 h5 {
                     transition: .5s;
