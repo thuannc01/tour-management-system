@@ -4,5 +4,8 @@
         placeholder="Your email ..." />
     <thuan-textarea v-model="data.test" type="text" id="email" :maxLength="13" :isRequired="true" label="Email"
         placeholder="Your email ..." customStyle="height: 200px" />
-    <thuan-select />
+    {{data.selectedOption}}
+    <thuan-select :options="selectOptions" v-model="data.selectedOption" />
+
+    <thuan-button name="Gởi" @click="handleButtonClick" />
 </div>

@@ -29,7 +29,7 @@ var Dashboard = {
         return {};
     },
     computed: {
-        ...mapState('DashboardStore', ['data'])
+        ...mapState('DashboardStore', ['data', 'selectOptions'])
     },
     methods: {
         ...mapActions('app', []),
@@ -42,7 +42,10 @@ var Dashboard = {
             'setRoutePagePathAdmin2',
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
-        ])
+        ]),
+        handleButtonClick() {
+            alert('Button clicked!');
+        }
     }
 };
 

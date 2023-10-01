@@ -1,6 +1,7 @@
 #admin-layout {
     background-color: whitesmoke;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
 
     a.dropdown-item {
         cursor: pointer;
@@ -1156,12 +1157,12 @@
         }
 
         .menu {
-            padding: 0 2rem;
+            padding: 0 1rem;
             font-weight: 600;
 
             .sidebar-title {
                 padding: 0 1rem;
-                margin: 1.5rem 0 1rem;
+                margin: 0.5rem 0 1rem;
                 font-size: 1rem;
                 list-style: none;
                 font-weight: 600;
@@ -1322,7 +1323,7 @@
     }
 
     .navbar {
-        height: 90px;
+        height: 80px;
         padding: 0 1.5rem;
 
         .navbar-brand {

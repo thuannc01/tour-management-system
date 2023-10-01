@@ -11,6 +11,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import ThuanInput from '@/components/thuanInput';
 import ThuanTextarea from '@/components/thuanTextarea';
 import ThuanSelect from '@/components/thuanSelect';
+import ThuanButton from '@/components/thuanButton';
 
 const app = createApp(App);
 app.use(vClickOutside);
@@ -26,5 +27,6 @@ app.use(router);
 app.component('ThuanInput', ThuanInput);
 app.component('ThuanTextarea', ThuanTextarea);
 app.component('ThuanSelect', ThuanSelect);
+app.component('ThuanButton', ThuanButton);
 
 app.mount('#app');
