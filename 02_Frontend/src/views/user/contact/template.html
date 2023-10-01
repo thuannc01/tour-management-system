@@ -17,40 +17,30 @@
 		<div class="container">
 			<div class="row g-5">
 				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<h3 class="mb-4">Need a functional contact form?</h3>
-					<p class="mb-4">The contact form is currently inactive. Get a functional and working contact form
-						with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're
-						done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+					<h3 class="mb-4">Chúng tôi luôn sẵn sàng hỗ trợ, dù bạn ở bất cứ nơi đâu!</h3>
+					<p class="mb-4">Các chủ đề phổ biến: Đặt chỗ trực tiếp để đảm bảo an toàn. Cách đổi lịch vé máy bay
+						của tôi. Cách huỷ vé và hoàn tiền cho đặt chỗ máy bay, vé tàu, vé xe. Cách sửa hoặc đổi tên hành
+						khách bay. Cách làm thủ tục trực tuyến.</p>
 					<form>
 						<div class="row g-3">
 							<div class="col-md-6">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="name" placeholder="Your Name">
-									<label for="name">Your Name</label>
-								</div>
+								<thuan-input type="text" id="name" :maxLength="50" :isRequired="true"
+									label="Tên của bạn" placeholder="Nhập tên của bạn ..." />
 							</div>
 							<div class="col-md-6">
-								<div class="form-floating">
-									<input type="email" class="form-control" id="email" placeholder="Your Email">
-									<label for="email">Your Email</label>
-								</div>
+								<thuan-input type="email" id="email" :maxLength="50" :isRequired="true"
+									label="Email của bạn" placeholder="Nhập Email của bạn ..." />
 							</div>
 							<div class="col-12">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="subject" placeholder="Subject">
-									<label for="subject">Subject</label>
-								</div>
+								<thuan-input type="text" id="subject" :maxLength="100" :isRequired="true"
+									label="Tiêu đề" placeholder="Tiêu đề ..." />
 							</div>
 							<div class="col-12">
-								<div class="form-floating">
-									<textarea class="form-control" placeholder="Leave a message here" id="message"
-										style="height: 200px"></textarea>
-									<label for="message">Message</label>
-								</div>
+								<thuan-textarea id="content" :maxLength="1000" :isRequired="false" label="Nội dung"
+									placeholder="Nhập nội dung ..." customStyle="height: 200px" />
 							</div>
 							<div class="col-12">
-								<button class="btn btn-primary rounded-pill py-3 px-5" type="submit">Send
-									Message</button>
+								<button class="btn btn-primary rounded-pill py-3 px-5" type="submit">Gửi</button>
 							</div>
 						</div>
 					</form>

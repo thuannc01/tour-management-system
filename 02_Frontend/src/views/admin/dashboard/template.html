@@ -1,7 +1,8 @@
 <div id="dashboard">
     {{data.test}}
-    <thuan-input :v-model="data.test" type="text" id="email" :maxLength="13" :isRequired="true" label="Mailll"
+    <thuan-input v-model="data.test" type="text" id="email" :maxLength="13" :isRequired="true" label="Email"
         placeholder="Your email ..." />
-    <thuan-textarea />
+    <thuan-textarea v-model="data.test" type="text" id="email" :maxLength="13" :isRequired="true" label="Email"
+        placeholder="Your email ..." customStyle="height: 200px" />
     <thuan-select />
 </div>
