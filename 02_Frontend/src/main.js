@@ -8,6 +8,10 @@ import VueCookies from 'vue3-cookies';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+import ThuanInput from '@/components/thuanInput';
+import ThuanTextarea from '@/components/thuanTextarea';
+import ThuanSelect from '@/components/thuanSelect';
+
 const app = createApp(App);
 app.use(vClickOutside);
 app.use(BootstrapVueNext);
@@ -17,5 +21,10 @@ app.use(VueCookies, {
 });
 app.use(store);
 app.use(router);
+
+// mapping components
+app.component('ThuanInput', ThuanInput);
+app.component('ThuanTextarea', ThuanTextarea);
+app.component('ThuanSelect', ThuanSelect);
 
 app.mount('#app');

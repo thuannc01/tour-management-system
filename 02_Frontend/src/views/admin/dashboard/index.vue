@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 import template from './template.html';
 
@@ -10,14 +10,14 @@ import DashboardStore from '@/views/admin/dashboard/store';
 var Dashboard = {
     template: template,
     beforeCreate() {
-        if (!store.hasModule('dashboard')) {
-            store.registerModule('dashboard', DashboardStore);
+        if (!store.hasModule('DashboardStore')) {
+            store.registerModule('DashboardStore', DashboardStore);
         }
     },
     created() {},
     mounted() {
         this.setPageNameAdmin('Dashboard');
-        this.setPagePathAdmin1('Dashboard');
+        this.setPagePathAdmin1('Dashboard 111');
         this.setRoutePagePathAdmin1('/thuan-nguyen');
     },
     unmounted() {
@@ -27,6 +27,9 @@ var Dashboard = {
     },
     data() {
         return {};
+    },
+    computed: {
+        ...mapState('DashboardStore', ['data'])
     },
     methods: {
         ...mapActions('app', []),

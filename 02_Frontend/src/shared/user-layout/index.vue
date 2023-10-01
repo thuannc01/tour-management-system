@@ -30,6 +30,7 @@ export default {
             const btnSearchGlobal = document.querySelector(
                 'button.border-0.btn.btn-primary'
             );
+            const divLogo = document.getElementById('logo-img');
             if (scrollY !== 0) {
                 divHeaderTopbar.classList.add('d-none');
                 divHeaderNavbar.classList.add('bg-white');
@@ -38,6 +39,10 @@ export default {
                 });
                 btnSearchGlobal.classList.remove('bg-transparent');
                 btnSearchGlobal.classList.add('bg-header-search-global');
+                divLogo.setAttribute(
+                    'style',
+                    'filter: invert(17%) sepia(15%) saturate(6227%) hue-rotate(192deg) brightness(96%) contrast(97%)'
+                );
             } else {
                 divHeaderTopbar.classList.remove('d-none');
                 divHeaderNavbar.classList.remove('bg-white');
@@ -46,6 +51,10 @@ export default {
                 });
                 btnSearchGlobal.classList.add('bg-transparent');
                 btnSearchGlobal.classList.remove('bg-header-search-global');
+                divLogo.setAttribute(
+                    'style',
+                    'filter: brightness(0) invert(1);'
+                );
             }
         }
     }

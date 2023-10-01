@@ -1,0 +1,6 @@
+<div class="form-floating mb-1">
+    <input :id="id" :type="type" :placeholder="placeholder" class="form-control" :required="isRequired"
+        :disabled="isDisabled" :readonly="isReadonly" :maxlength="maxLength" :style="style" @focus="focusInput"
+        @blur="blurInput" @change="updateInput" v-model="value" @input="$emit('input', $event)">
+    <label :for="id">{{label}}</label>
+</div>

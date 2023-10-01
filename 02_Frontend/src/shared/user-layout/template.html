@@ -38,11 +38,10 @@
                     </button>
                     <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarCollapse">
                         <div class="logo">
-                            <img src="/src/assets/images/logo.png" style="height: 50px !important;">
+                            <img id="logo-img" src="/src/assets/images/logo.png">
                         </div>
                         <div class="navbar-nav">
                             <router-link class="nav-item nav-link text-white" to="/">Trang chủ</router-link>
-                            <router-link class="nav-item nav-link text-white" to="/about">Về chúng tôi</router-link>
                             <div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tour du lịch</a>
                                 <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
@@ -60,6 +59,7 @@
                                     <a class="dropdown-item">Địa điểm ăn uống</a>
                                 </div>
                             </div>
+                            <router-link class="nav-item nav-link text-white" to="/">Cẩm nang du lịch</router-link>
                             <router-link class="nav-item nav-link text-white" to="/contact">Liên hệ</router-link>
                             <a class="nav-item nav-link">
                                 <button class="border-0" type="button" class="btn btn-primary" data-bs-toggle="modal"

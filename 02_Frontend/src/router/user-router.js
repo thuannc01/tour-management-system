@@ -1,6 +1,5 @@
 const Home = () => import('@/views/user/home');
 const Contact = () => import('@/views/user/contact');
-const About = () => import('@/views/user/about');
 
 export default [
     {
@@ -18,15 +17,6 @@ export default [
         component: Contact,
         meta: {
             title: 'Liên hệ',
-            layout: 'MainLayout'
-        }
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: About,
-        meta: {
-            title: 'Về chúng tôi',
             layout: 'MainLayout'
         }
     }

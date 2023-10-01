@@ -1143,7 +1143,8 @@
             font-weight: 700;
 
             img {
-                height: 1.2rem;
+                width: 100%;
+                filter: invert(35%) sepia(32%) saturate(1998%) hue-rotate(199deg) brightness(91%) contrast(87%);
             }
         }
 
@@ -1155,7 +1156,6 @@
         }
 
         .menu {
-            margin-top: 2rem;
             padding: 0 2rem;
             font-weight: 600;
 
