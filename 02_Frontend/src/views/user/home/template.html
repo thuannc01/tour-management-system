@@ -45,16 +45,29 @@
 			</button>
 		</div>
 	</div>
+	<!-- search -->
+	<div id="search" class="pt-4">
+		<div class="container w-50">
+			<div class="input-group" @click="clickSearch">
+				<input type="text" class="form-control" placeholder="Tìm kiếm thêm tour du lịch...">
+				<button id="search-global-home" class="border-0" type="button" class="btn btn-primary"
+					data-bs-toggle="modal" data-bs-target="#SearchGlobal">
+					<i class="bi bi-search"></i>
+				</button>
+			</div>
+		</div>
+	</div>
 	<!-- start: tour du lịch hot-->
 	<div id="hot-tour">
-		<div class="container-xxl pt-5">
+		<div class="container-xxl pt-4">
 			<div class="container">
 				<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp d-flex justify-content-center">
-					<h1 class="mb-5">ĐIỂM ĐẾN ĐANG HOT</h1>
+					<h3 class="mb-4">ĐIỂM ĐẾN ĐANG HOT</h3>
 				</div>
 				<div class="owl-carousel project-carousel wow fadeInUp">
-					<swiper :modules="modules" :slides-per-view="3" :space-between="40" navigation
-						:pagination="{ clickable: true }" @swiper="onSwiper" @slideChange="onSlideChange">
+					<swiper :modules="modules" :slides-per-view="3" :space-between="50" navigation
+						:pagination="{ clickable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
+						:autoplay="autoplay">
 						<swiper-slide>
 							<div class="project-item mb-5">
 								<div class="position-relative">
@@ -134,10 +147,10 @@
 	</div>
 	<!-- start: cam nan du lich -->
 	<div id="travel-guide">
-		<div class="container-xxl py-5">
+		<div class="container-xxl py-4">
 			<div class="container">
 				<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-					<h1 class="mb-5">CẨM NANG DU LỊCH</h1>
+					<h3 class="mb-4">CẨM NANG DU LỊCH</h3>
 				</div>
 				<div class="row g-4">
 					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -147,10 +160,10 @@
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-5.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Digital Marketing</h4>
-									<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-										diam
-										stet</p>
+								<h5 class="mb-3">Digital Marketing</h5>
+								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
+									diam
+									stet</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
 								<a class="text-primary fw-medium" href="">Read More<i
@@ -165,10 +178,10 @@
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-6.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Internet Marketing</h4>
-									<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-										diam
-										stet</p>
+								<h5 class="mb-3">Internet Marketing</h5>
+								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
+									diam
+									stet</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
 								<a class="text-primary fw-medium" href="">Read More<i
@@ -183,10 +196,10 @@
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-7.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Content Marketing</h4>
-									<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-										diam
-										stet</p>
+								<h5 class="mb-3">Content Marketing</h5>
+								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
+									diam
+									stet</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
 								<a class="text-primary fw-medium" href="">Read More<i
@@ -201,10 +214,10 @@
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-8.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Social Marketing</h4>
-									<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-										diam
-										stet</p>
+								<h5 class="mb-3">Social Marketing</h5>
+								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
+									diam
+									stet</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
 								<a class="text-primary fw-medium" href="">Read More<i
@@ -219,10 +232,10 @@
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-9.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">B2B Marketing</h4>
-									<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-										diam
-										stet</p>
+								<h5 class="mb-3">B2B Marketing</h5>
+								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
+									diam
+									stet</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
 								<a class="text-primary fw-medium" href="">Read More<i
@@ -237,15 +250,61 @@
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-10.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">E-mail Marketing</h4>
-									<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-										diam
-										stet</p>
+								<h5 class="mb-3">E-mail Marketing</h5>
+								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
+									diam
+									stet</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
 								<a class="text-primary fw-medium" href="">Read More<i
 										class="bi bi-chevron-double-right ms-2"></i></a>
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Features Start -->
+	<div id="feature">
+		<div class="container-xxl py-4">
+			<div class="container">
+				<div class="row g-0 feature-row">
+					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+						<div class="feature-item border h-100 p-5">
+							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+								<img class="img-fluid" src="/src/assets/images/icon-10.png" alt="Icon">
+							</div>
+							<h5 class="mb-3">Giá tốt - Nhiều ưu đãi</h5>
+							<p class="mb-0">Ưu đãi và quà tặng hấp dẫn khi mua tour online</p>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+						<div class="feature-item border h-100 p-5">
+							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+								<img class="img-fluid" src="/src/assets/images/icon-10.png" alt="Icon">
+							</div>
+							<h5 class="mb-3">Thanh toán an toàn</h5>
+							<p class="mb-0">Được bảo mật bởi tổ chức một thành viên ThuanNC</p>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+						<div class="feature-item border h-100 p-5">
+							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+								<img class="img-fluid" src="/src/assets/images/icon-10.png" alt="Icon">
+							</div>
+							<h5 class="mb-3">Tư vấn miễn phí</h5>
+							<p class="mb-0">Hỗ trợ tư vấn online miễn phí</p>
+						</div>
+					</div>
+					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+						<div class="feature-item border h-100 p-5">
+							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+								<img class="img-fluid" src="/src/assets/images/icon-10.png" alt="Icon">
+							</div>
+							<h5 class="mb-3">Thương hiệu uy tín</h5>
+							<p class="mb-0">Thương hiệu lữ hành hàng đầu Việt Nam</p>
 						</div>
 					</div>
 				</div>

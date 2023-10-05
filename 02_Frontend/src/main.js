@@ -7,10 +7,6 @@ import BootstrapVueNext from 'bootstrap-vue-next';
 import VueCookies from 'vue3-cookies';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 
 import ThuanInput from '@/components/thuanInput';
 import ThuanTextarea from '@/components/thuanTextarea';

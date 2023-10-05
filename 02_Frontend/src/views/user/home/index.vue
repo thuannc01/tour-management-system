@@ -3,10 +3,23 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 import store from '@/store';
 import HomeStore from '@/views/user/home/store';
 import label from './label';
+// import Swiper core and required modules
+import {
+    Navigation,
+    Pagination,
+    Scrollbar,
+    A11y,
+    Autoplay
+} from 'swiper/modules';
+
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
+
 // Import Swiper styles
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 import template from './template.html';
 import './style.scss';
@@ -15,8 +28,7 @@ var Home = {
     template: template,
     components: {
         Swiper,
-        SwiperSlide,
-        modules: [Navigation, Pagination, Scrollbar, A11y]
+        SwiperSlide
     },
     beforeCreate() {
         if (!store.hasModule('HomeStore')) {
@@ -28,7 +40,12 @@ var Home = {
     watch: {},
     data() {
         return {
-            label: label
+            label: label,
+            modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: true
+            }
         };
     },
     computed: {
@@ -47,6 +64,10 @@ var Home = {
         },
         onSlideChange() {
             console.log('slide change');
+        },
+        clickSearch() {
+            console.log('search');
+            document.getElementById('search-global-home').click();
         }
     }
 };

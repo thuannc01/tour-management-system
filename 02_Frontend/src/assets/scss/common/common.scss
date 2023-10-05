@@ -30,6 +30,16 @@ body {
 	.h4,
 	.h5 {
 		line-height: 1.5;
+		font-weight: 600;
+		font-family: $font-primary;
+		color: $dash-blue;
+	}
+
+	h4,
+	h5,
+	.h4,
+	.h5 {
+		line-height: 1.5;
 		font-weight: 500;
 		font-family: $font-primary;
 	}

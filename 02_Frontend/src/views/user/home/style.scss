@@ -12,9 +12,40 @@
             width: fit-content;
             margin: 0 2rem;
         }
+
+        h5 {
+            color: white;
+        }
+    }
+
+    #search {
+        cursor: pointer;
+
+        .input-group {
+            height: 45px;
+        }
+
+        input.form-control {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        button.border-0.btn.btn-primary {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            background-color: $primary;
+        }
+
+        input::placeholder {
+            font-weight: 500;
+        }
     }
 
     #hot-tour {
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: rgba(117, 117, 117, 0.5);
+        }
+
         .project-item {
             position: relative;
             border-radius: 8px;
@@ -119,6 +150,16 @@
                 transition: .5s;
                 z-index: 0;
             }
+        }
+    }
+
+    #feature {
+        .feature-row {
+            box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+        }
+
+        .feature-item {
+            border-color: rgba(0, 0, 0, .03) !important;
         }
     }
 }
