@@ -56,6 +56,12 @@ export default {
                     'filter: brightness(0) invert(1);'
                 );
             }
+        },
+        navTour() {
+            this.$router.push({ path: `/tour` });
+        },
+        navNews() {
+            this.$router.push({ path: `/news` });
         }
     }
 };
