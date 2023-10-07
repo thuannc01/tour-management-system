@@ -1,8 +1,8 @@
-<div class="form-floating mb-1">
+<div class="form-group">
+    <label :for="id">{{label}} <span v-if="isRequired" class="text-danger ps-1"><i
+                class="bi bi-exclamation-circle"></i></span></label>
     <textarea class="form-control" :id="id" :class="(inputClass ? inputClass : '') + (isRequired ? ' required' : '')"
         :placeholder="placeholder" :value="Value" :required="isRequired" :disabled="isDisabled" :readonly="isReadonly"
         :maxlength="maxLength" :style="customStyle" ref="input" @focus="focusInput" @blur="blurInput"
-        @change="updateInput" @keydown="inputKeydown" @keyup="inputKeyup"></textarea>
-    <label :for="id">{{label}} <span v-if="isRequired" class="text-danger ps-1"><i
-                class="bi bi-exclamation-circle"></i></span></label>
+        @change="updateInput" @keydown="inputKeydown" @keyup="inputKeyup" :rows="rowsArea"></textarea>
 </div>

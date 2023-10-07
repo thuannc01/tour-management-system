@@ -1,18 +1,18 @@
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
 import store from '@/store';
-import TourStore from '@/views/user/tour/store';
+import ProfileStore from '@/views/user/profile/store';
 import label from './label';
 
 import template from './template.html';
 import './style.scss';
 
-var Tour = {
+var Profile = {
     template: template,
     components: {},
     beforeCreate() {
-        if (!store.hasModule('TourStore')) {
-            store.registerModule('TourStore', TourStore);
+        if (!store.hasModule('ProfileStore')) {
+            store.registerModule('ProfileStore', ProfileStore);
         }
     },
     created() {},
@@ -20,16 +20,13 @@ var Tour = {
     watch: {},
     data() {
         return {
-            label: label,
-            rows: 10,
-            perPage: 3,
-            currentPage: 1
+            label: label
         };
     },
     computed: {
         // app
         // module
-        ...mapState('TourStore', ['data', 'priceOptions'])
+        ...mapState('ProfileStore', [''])
     },
     methods: {
         // app
@@ -39,5 +36,5 @@ var Tour = {
         ...mapActions('', [''])
     }
 };
-export default Tour;
+export default Profile;
 </script>

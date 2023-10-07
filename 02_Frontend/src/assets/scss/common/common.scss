@@ -115,4 +115,27 @@ body {
 	ul {
 		list-style-type: none;
 	}
+
+	.form-group {
+		margin-bottom: 0.7rem;
+
+		label {
+			color: $primary;
+			font-weight: 600;
+		}
+
+		small {
+			font-size: 0.7rem;
+		}
+	}
+
+	label.label-select-component {
+		color: $primary;
+		font-weight: 600;
+	}
+
+	.bg-btn-primary-custom {
+		background: $primary;
+		border-color: $primary;
+	}
 }

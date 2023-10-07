@@ -1,6 +1,11 @@
-<select :id="id" class="form-select mb-1 py-2" :class="(btnClass ? btnClass : '')" :required="isRequired"
-    :disabled="isDisabled" :readonly="isReadonly" ref="select" @focus="focusBtn" @blur="blurBtn" @change="updateBtn">
-    <option v-for="(option, i) in listOptions" :key="i" :value="option.code" :selected="option.code == vewValue">
-        {{option.name}}
-    </option>
-</select>
+<div>
+    <label class="label-select-component">{{label}}<span v-if="isRequired" class="text-danger ps-1"><i
+                class="bi bi-exclamation-circle"></i></span></label>
+    <select :id="id" class="form-select mb-1 py-2" :class="(btnClass ? btnClass : '')" :required="isRequired"
+        :disabled="isDisabled" :readonly="isReadonly" ref="select" @focus="focusBtn" @blur="blurBtn"
+        @change="updateBtn">
+        <option v-for="(option, i) in listOptions" :key="i" :value="option.code" :selected="option.code == vewValue">
+            {{option.name}}
+        </option>
+    </select>
+</div>

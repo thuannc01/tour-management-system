@@ -62,6 +62,9 @@ export default {
         },
         navNews() {
             this.$router.push({ path: `/news` });
+        },
+        navProfile() {
+            this.$router.push({ path: `/profile` });
         }
     }
 };

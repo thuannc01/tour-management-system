@@ -13,10 +13,70 @@
 		</div>
 	</div>
 	<!-- Contact Start -->
-	<div class="container-xxl py-5">
+	<div class="container-xxl py-4">
 		<div class="container">
-			<div class="row g-5">
-				<tour>Tour du lich</tour>
+			<div class="row p-3 bg-search-tour">
+				<div class="col-3">
+					<thuan-input type="text" label="Tìm kiếm tour" placeholder="Nhập để tìm kiếm ..." />
+				</div>
+				<div class="col-2">
+					<thuan-input label="Từ ngày" type="date" />
+				</div>
+				<div class="col-2">
+					<thuan-input label="Đến ngày" type="date" />
+				</div>
+				<div class="col-3">
+					<thuan-select label="Chọn giá tour" :options="priceOptions" v-model="data.priceSelected" />
+				</div>
+				<div class="col-2 d-flex align-items-center justify-content-end pt-3">
+					<thuan-button name="Tìm kiếm" />
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-4" v-for="item in 9">
+					<div class="project-item mb-4">
+						<div class="position-relative">
+							<img class="img-fluid" src="/src/assets/images/hcmcity.jpg" alt="">
+							<div class="project-overlay">
+								<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-1.jpg"
+									data-lightbox="project"><i class="fa fa-eye"></i></a>
+								<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
+										class="fa fa-link"></i></a>
+							</div>
+						</div>
+						<div class="px-4 py-3">
+							<a class="d-block h4" href="">DU LỊCH HÀ NỘI - NINH BÌNH - HẠ LONG - SAPA - LÀO CAI - PHÚ
+								THỌ</a>
+							<div class="block-desc">
+								<div class="row d-flex justify-content-start">
+									<div class="d-flex">
+										<i class="bi bi-alarm pe-2"></i>
+										<p class="p-600 m-0 p-0">Lịch trình:&ensp;</p>
+										<p class="m-0 p-0">6 ngày 5 đêm</p>
+									</div>
+									<div class="d-flex">
+										<i class="bi bi-calendar-check pe-2"></i>
+										<p class="p-600 m-0 p-0">Khởi hành:&ensp;</p>
+										<p class="m-0 p-0">11/10/2023</p>
+									</div>
+									<div class="d-flex">
+										<i class="bi bi-car-front-fill pe-2"></i>
+										<p class="p-600 m-0 p-0">Phương tiện:&ensp;</p>
+										<p class="m-0 p-0">Hàng không Vietnam Airlines</p>
+									</div>
+									<div class="d-flex justify-content-center px-4 py-1 mt-2 ms-2 block-price">
+										<h5 class="p-0 m-0">Giá:&ensp;</h5>
+										<h5 class="p-0 m-0 p-600">7.090.321 đ</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<b-pagination v-model="currentPage" :total-rows="rows" align="center"
+					:per-page="perPage"></b-pagination>
 			</div>
 		</div>
 	</div>

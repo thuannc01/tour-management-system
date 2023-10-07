@@ -2,10 +2,10 @@
     {{data.test}}
     <thuan-input v-model="data.test" type="text" id="email" :maxLength="13" :isRequired="true" label="Email"
         placeholder="Your email ..." />
-    <thuan-textarea v-model="data.test" type="text" id="email" :maxLength="13" :isRequired="true" label="Email"
-        placeholder="Your email ..." customStyle="height: 200px" />
+    <thuan-textarea v-model="data.test" type="text" id="email" :maxLength="13" :isRequired="true" label="Textarea"
+        placeholder="Your textarea ..." rowsArea="7" />
     {{data.selectedOption}}
-    <thuan-select :options="selectOptions" v-model="data.selectedOption" />
+    <thuan-select label="Thuannc" :options="selectOptions" :isRequired="true" v-model="data.selectedOption" />
 
     <thuan-button name="Gởi" @click="handleButtonClick" />
 </div>

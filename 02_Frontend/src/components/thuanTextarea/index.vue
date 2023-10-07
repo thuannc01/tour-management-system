@@ -17,7 +17,8 @@ var ThuanTextarea = {
         onClick: Function,
         label: String,
         modelValue: String,
-        maxLength: Number
+        maxLength: Number,
+        rowsArea: String
     },
     emits: ['update:modelValue'],
     data() {
