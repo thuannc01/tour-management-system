@@ -7,11 +7,14 @@ import BootstrapVueNext from 'bootstrap-vue-next';
 import VueCookies from 'vue3-cookies';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
+//
+import StarRating from 'vue-star-rating';
+//
 import ThuanInput from '@/components/thuanInput';
 import ThuanTextarea from '@/components/thuanTextarea';
 import ThuanSelect from '@/components/thuanSelect';
 import ThuanButton from '@/components/thuanButton';
+import ThuanDatePicker from '@/components/thuanDatePicker';
 
 const app = createApp(App);
 app.use(vClickOutside);
@@ -23,10 +26,13 @@ app.use(VueCookies, {
 app.use(store);
 app.use(router);
 
+// rating component
+app.component('StarRating', StarRating);
 // mapping components
 app.component('ThuanInput', ThuanInput);
 app.component('ThuanTextarea', ThuanTextarea);
 app.component('ThuanSelect', ThuanSelect);
 app.component('ThuanButton', ThuanButton);
+app.component('ThuanDatePicker', ThuanDatePicker);
 
 app.mount('#app');

@@ -25,6 +25,7 @@ var Dashboard = {
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
     },
+    watch: {},
     data() {
         return {};
     },

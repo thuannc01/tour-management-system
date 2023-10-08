@@ -7,7 +7,7 @@ var ThuanButton = {
         idBtn: String,
         typeBtn: String,
         classBtn: String,
-        name: String,
+        label: String,
         handleClick: Function
     },
     data() {

@@ -6,6 +6,8 @@
         placeholder="Your textarea ..." rowsArea="7" />
     {{data.selectedOption}}
     <thuan-select label="Thuannc" :options="selectOptions" :isRequired="true" v-model="data.selectedOption" />
+    <p>Data date: {{data.selectedOption}}</p>
+    <thuan-date-picker label="Thuannc" :isRequired="true" v-model="data.selectedOption" />
 
     <thuan-button name="Gởi" @click="handleButtonClick" />
 </div>
