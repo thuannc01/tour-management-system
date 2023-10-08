@@ -17,18 +17,24 @@ var TourDetails = {
     },
     created() {},
     mounted() {
-        // this.setMarginInfoTour();
-        // window.addEventListener('resize', this.setMarginInfoTour);
-        // window.addEventListener('scroll', this.setMarginInfoTour);
+        this.widthTourInfo = document.getElementById('info-tour').offsetWidth;
+        this.marginRight = this.getMarginRightTourDetail();
+        this.paddingLeft = this.getPaddingLeftTourInfo();
+        this.setPositionInfoTour();
+        window.addEventListener('resize', this.setPositionInfoTour);
+        window.addEventListener('scroll', this.setPositionInfoTour);
     },
     unmounted() {
-        // window.removeEventListener('resize', this.setMarginInfoTour);
-        // window.removeEventListener('scroll', this.setMarginInfoTour);
+        window.removeEventListener('resize', this.setPositionInfoTour);
+        window.removeEventListener('scroll', this.setPositionInfoTour);
     },
     watch: {},
     data() {
         return {
             label: label,
+            widthTourInfo: 0,
+            marginRight: 0,
+            paddingLeft: 0,
             rating: 3.5
         };
     },
@@ -43,7 +49,10 @@ var TourDetails = {
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
         ...mapActions('', ['']),
-        setMarginInfoTour() {
+        setPositionInfoTour() {
+            const widthTourInfo_ = this.widthTourInfo;
+            const marginRight_ = parseFloat(this.marginRight);
+            const paddingLeft_ = parseFloat(this.paddingLeft);
             const scrollY = window.scrollY;
             const divInfoTour = document.getElementById('info-tour');
             const divHeader = document.getElementById('header-navbar');
@@ -55,13 +64,37 @@ var TourDetails = {
             if (scrollY >= heightDivBreadcrumb) {
                 divInfoTour.classList.add('info-tour-position');
                 divInfoTour.style.top = `${heightDivHeader + 10}px`;
-                divInfoTour.style.right = `${4}rem`;
-                divInfoTour.style.width = `${30}%`;
+                divInfoTour.style.right = `${marginRight_ + paddingLeft_}px`;
+                divInfoTour.style.width = `${widthTourInfo_}px`;
+                divInfoTour.style.bottom = `${200}px`;
             } else {
                 divInfoTour.classList.remove('info-tour-position');
                 divInfoTour.style.top = '';
-                divInfoTour.style.right = '';
+                divInfoTour.style.left = '';
             }
+            //
+            const footer = document.getElementById('footer');
+            const footerRect = footer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (footerRect.top <= windowHeight) {
+                divInfoTour.classList.remove('info-tour-position');
+            }
+        },
+        getMarginRightTourDetail() {
+            var element = document.getElementById('detail-tour');
+            var style = window.getComputedStyle(element);
+            var marginRight = style
+                .getPropertyValue('margin-right')
+                .replace(/[^\d.]/g, '');
+            return marginRight;
+        },
+        getPaddingLeftTourInfo() {
+            var element = document.getElementById('info-tour');
+            var style = window.getComputedStyle(element);
+            var paddingLeft = style
+                .getPropertyValue('padding-left')
+                .replace(/[^\d.]/g, '');
+            return paddingLeft;
         }
     }
 };
