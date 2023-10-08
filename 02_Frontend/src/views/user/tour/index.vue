@@ -36,7 +36,10 @@ var Tour = {
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', [''])
+        ...mapActions('', ['']),
+        seeDetails() {
+            this.$router.push({ path: `/detail` });
+        }
     }
 };
 export default Tour;

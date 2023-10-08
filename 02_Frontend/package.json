@@ -37,6 +37,7 @@
     "vue-flatpickr-component": "^11.0.3",
     "vue-owl-carousel": "^2.0.3",
     "vue-router": "^4.0.3",
+    "vue-sidebar-menu-akahon": "^1.0.2",
     "vue-star-rating": "^2.1.0",
     "vue-template-compiler": "^2.7.14",
     "vue3-cookies": "^1.0.6",

@@ -1,5 +1,8 @@
 <script>
+import { mapActions, mapMutations, mapState } from 'vuex';
 import template from './template.html';
+import store from '@/store';
+import UserLayoutStore from '@/shared/user-layout/store';
 
 import HeaderError from '@/components/headerError';
 import Loading from '@/components/loading';
@@ -11,6 +14,11 @@ export default {
         HeaderError,
         Loading
     },
+    beforeCreate() {
+        if (!store.hasModule('UserLayoutStore')) {
+            store.registerModule('UserLayoutStore', UserLayoutStore);
+        }
+    },
     mounted() {
         this.stickyTop();
         window.addEventListener('resize', this.stickyTop);
@@ -21,7 +29,17 @@ export default {
         window.removeEventListener('scroll', this.stickyTop);
     },
     watch: {},
+    computed: {
+        // app
+        // module
+        ...mapState('UserLayoutStore', ['data', 'priceOptions'])
+    },
     methods: {
+        // app
+        ...mapActions('app', []),
+        ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
+        // module
+        ...mapActions('', ['']),
         stickyTop() {
             const scrollY = window.scrollY;
             const divHeaderTopbar = document.getElementById('header-topbar');
