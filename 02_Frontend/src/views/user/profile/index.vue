@@ -41,9 +41,11 @@ var Profile = {
                 document.getElementById('wait-confirmation');
             const ratingTour = document.getElementById('rating-tour');
             const allTour = document.getElementById('all-tour');
+            const cancelTour = document.getElementById('cancel-tour');
             //
             const navUserInfo = document.getElementById('nav-user-info');
             const navHistoryTour = document.getElementById('nav-history-tour');
+            const navCancelTour = document.getElementById('nav-cancel-tour');
 
             if (code == 1) {
                 this.removeDisplayNone(userInfo);
@@ -51,35 +53,57 @@ var Profile = {
                 this.addDisplayNone(waitConfirmation);
                 this.addDisplayNone(ratingTour);
                 this.addDisplayNone(allTour);
+                this.addDisplayNone(cancelTour);
+                navCancelTour.classList.remove('active');
                 navUserInfo.classList.add('active');
                 navHistoryTour.classList.remove('active');
             } else {
-                navUserInfo.classList.remove('active');
-                navHistoryTour.classList.add('active');
-                if (code == 2) {
-                    this.addDisplayNone(userInfo);
-                    this.removeDisplayNone(waitForPay);
-                    this.addDisplayNone(waitConfirmation);
-                    this.addDisplayNone(ratingTour);
-                    this.addDisplayNone(allTour);
-                } else if (code == 3) {
-                    this.addDisplayNone(userInfo);
-                    this.addDisplayNone(waitForPay);
-                    this.removeDisplayNone(waitConfirmation);
-                    this.addDisplayNone(ratingTour);
-                    this.addDisplayNone(allTour);
-                } else if (code == 4) {
+                if (code == 6) {
                     this.addDisplayNone(userInfo);
                     this.addDisplayNone(waitForPay);
                     this.addDisplayNone(waitConfirmation);
-                    this.removeDisplayNone(ratingTour);
+                    this.addDisplayNone(ratingTour);
                     this.addDisplayNone(allTour);
+                    this.removeDisplayNone(cancelTour);
+                    navCancelTour.classList.add('active');
+                    navUserInfo.classList.remove('active');
+                    navHistoryTour.classList.remove('active');
                 } else {
-                    this.addDisplayNone(userInfo);
-                    this.addDisplayNone(waitForPay);
-                    this.addDisplayNone(waitConfirmation);
-                    this.addDisplayNone(ratingTour);
-                    this.removeDisplayNone(allTour);
+                    navUserInfo.classList.remove('active');
+                    navHistoryTour.classList.add('active');
+                    if (code == 2) {
+                        this.addDisplayNone(userInfo);
+                        this.removeDisplayNone(waitForPay);
+                        this.addDisplayNone(waitConfirmation);
+                        this.addDisplayNone(ratingTour);
+                        this.addDisplayNone(allTour);
+                        this.addDisplayNone(cancelTour);
+                        navCancelTour.classList.remove('active');
+                    } else if (code == 3) {
+                        this.addDisplayNone(userInfo);
+                        this.addDisplayNone(waitForPay);
+                        this.removeDisplayNone(waitConfirmation);
+                        this.addDisplayNone(ratingTour);
+                        this.addDisplayNone(allTour);
+                        this.addDisplayNone(cancelTour);
+                        navCancelTour.classList.remove('active');
+                    } else if (code == 4) {
+                        this.addDisplayNone(userInfo);
+                        this.addDisplayNone(waitForPay);
+                        this.addDisplayNone(waitConfirmation);
+                        this.removeDisplayNone(ratingTour);
+                        this.addDisplayNone(allTour);
+                        this.addDisplayNone(cancelTour);
+                        navCancelTour.classList.remove('active');
+                    } else {
+                        this.addDisplayNone(userInfo);
+                        this.addDisplayNone(waitForPay);
+                        this.addDisplayNone(waitConfirmation);
+                        this.addDisplayNone(ratingTour);
+                        this.removeDisplayNone(allTour);
+                        this.addDisplayNone(cancelTour);
+                        navCancelTour.classList.remove('active');
+                    }
                 }
             }
         },
