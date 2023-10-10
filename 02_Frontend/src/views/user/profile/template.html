@@ -29,7 +29,7 @@
 										</a>
 									</li>
 
-									<li class="sidebar-item  has-sub" id="nav-history-tour">
+									<li class="sidebar-item" id="nav-history-tour">
 										<a class='sidebar-link'>
 											<i class="bi bi-hourglass-split"></i>
 											<span>Lịch sử đặt tour</span>
@@ -83,30 +83,48 @@
 												<h5 class="mt-3 font-weight-600">Nguyễn Công Thuận</h5>
 												<p class="text-muted mb-3">Khách hàng kim cương</p>
 												<div class="d-flex justify-content-center">
-													<thuan-button label="Chỉnh sửa" classBtn="btn-outline-success" />
+													<thuan-button label="Cập nhật" classBtn="btn btn-success" />
 												</div>
 											</div>
 										</div>
 										<div class="col-lg-8">
 											<div class="card-body">
 												<div class="row">
-													<thuan-input type="text" id="fullName" :maxLength="50"
-														:isRequired="true" label="Họ và tên"
-														placeholder="Nhập họ và tên ..." />
+													<div class="col-6">
+														<thuan-input type="text" id="fullName" :maxLength="50"
+															:isRequired="true" label="Họ và tên"
+															placeholder="Nhập họ và tên ..." />
+													</div>
+													<div class="col-6">
+														<thuan-input type="text" id="email" :maxLength="50"
+															:isRequired="true" label="Email"
+															placeholder="Nhập email ..." />
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-6">
+														<thuan-input type="text" id="phoneNumber" :maxLength="50"
+															:isRequired="true" label="Số điện thoại"
+															placeholder="Nhập số điện thoại ..." />
+													</div>
+													<div class="col-6">
+														<thuan-select label="Tỉnh / Thành phố" />
+													</div>
 												</div>
 												<div class="row">
-													<thuan-input type="text" id="email" :maxLength="50"
-														:isRequired="true" label="Email" placeholder="Nhập email ..." />
+													<div class="col-6">
+														<thuan-select label="Quận / Huyện" />
+													</div>
+													<div class="col-6">
+														<thuan-select label="Phường / Xã" />
+													</div>
 												</div>
 												<div class="row">
-													<thuan-input type="text" id="phoneNumber" :maxLength="50"
-														:isRequired="true" label="Số điện thoại"
-														placeholder="Nhập số điện thoại ..." />
-												</div>
-												<div class="row">
-													<thuan-input type="text" id="address" :maxLength="50"
-														:isRequired="true" label="Địa chỉ"
-														placeholder="Nhập địa chỉ ..." />
+													<div class="col-12">
+														<thuan-input type="text" id="address" :maxLength="50"
+															label="Địa chỉ" placeholder="Nhập địa chỉ ..." />
+													</div>
 												</div>
 											</div>
 										</div>
@@ -189,7 +207,43 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
-										<p class="m-0">Nội dung ở đây</p>
+										<div class="cancel-tour-block-text">
+											<h6 class="text-cancel-tour-title">1. Trường hợp bị huỷ do chúng tôi</h6>
+											<p>Nếu doanh nghiệp chúng tôi không thực hiện được chuyến du lịch thì phải
+												báo ngay cho khách hàng biết và hoàn tiền lại toàn bộ số
+												tiền khách hàng đã đóng trong vòng 3 ngày kể từ lúc việc thông báo hủy
+												chuyến du lịch.</p>
+										</div>
+										<div class="cancel-tour-block-text">
+											<h6 class="text-cancel-tour-title">2. Trường hợp bị hủy bỏ do khách hàng
+											</h6>
+											<p class="m-0">- Sau khi đặt cọc đến 3 ngày trước ngày khởi hành: phí huỷ
+												20% tiền tour.</p>
+											<p class="m-0">- Huỷ tour 3 – 2 ngày trước ngày khởi hành: phí huỷ 30% tiền
+												tour.</p>
+											<p class="m-0">- Huỷ tour 24 tiếng trước ngày khởi hành: phí huỷ 50% tiền
+												tour.</p>
+											<p class="m-0">- Huỷ tour ngay trong ngày khởi hành: phí huỷ 100% tiền tour.
+											</p>
+											<p class="m-0">- Trường hợp quý khách đến trễ giờ máy bay khởi hành được
+												tính là huỷ tour ngay trong ngày khởi hành: phí huỷ 100% tiền tour.</p>
+											<p class="m-0">- Vé máy bay được xuất ngay sau khi quý khách đóng tiền và có
+												xác nhận sự chính xác về họ, tên, ngày tháng năm sinh,… của Quý khách.
+												Mọi sự thay đổi về ngày giờ hay huỷ vé, Quý khách vui lòng chịu chi phí
+												theo quy định của hãng hàng không.</p>
+											<p>- Phí hoàn tiền khi huỷ tour sẽ được được trả lại sau 1 tháng kể từ ngày
+												đăng ký hoặc huỷ tour.</p>
+										</div>
+										<div class="cancel-tour-block-text">
+											<h6 class="text-cancel-tour-title">3. Trường hợp bất khả kháng</h6>
+											<p>Nếu chương trình du lịch bị hủy bỏ hoặc thay đổi bởi một trong hai bên vì
+												một lý do bất khả kháng (hỏa hoạn, thời tiết, tai nạn, thiên tai, chiến
+												tranh, hoãn và hủy chuyến của các phương tiện vận chuyển công cộng…),
+												thì hai bên sẽ không chịu bất kỳ nghĩa vụ bồi hoàn các tổn thất đã xảy
+												ra và không chịu bất kỳ trách nhiệm pháp lý nào. Tuy nhiên mỗi bên có
+												trách nhiệm cố gắng tối đa để giúp đỡ bên bị thiệt hại nhằm giảm thiểu
+												các tổn thất gây ra vì lý do bất khả kháng.</p>
+										</div>
 									</div>
 								</div>
 							</section>

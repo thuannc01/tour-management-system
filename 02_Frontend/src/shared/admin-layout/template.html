@@ -12,36 +12,40 @@
             </div>
             <div class="sidebar-menu">
                 <ul class="menu">
-                    <li class="sidebar-title">Menu</li>
-
-                    <li class="sidebar-item active ">
+                    <li class="sidebar-title"></li>
+                    <li class="sidebar-item active">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex" style="padding-top: 1px;"></i>
-                            <span>Dashboard</span>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Thống kê</span>
                         </a>
+                        <ul class="submenu d-block">
+                            <li class="submenu-item " @click="handelNavSidebar(2)">
+                                <a>Theo doanh thu</a>
+                            </li>
+                            <li class="submenu-item " @click="handelNavSidebar(3)">
+                                <a>Theo tour</a>
+                            </li>
+                        </ul>
                     </li>
-
                     <li class="sidebar-item">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex" style="padding-top: 1px;"></i>
-                            <span>Người dùng</span>
+                        <a class='sidebar-link'>
+                            <i class="bi bi-people-fill d-flex"></i>
+                            <span>Quản lý tài khoản</span>
                         </a>
-                    </li>
-
-                    <li class="sidebar-title">Tour</li>
-
-                    <li class="sidebar-item ">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex" style="padding-top: 1px;"></i>
-                            <span>Quản lý tour</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item ">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex" style="padding-top: 1px;"></i>
-                            <span>Quản lý nhà hàng</span>
-                        </a>
+                        <ul class="submenu d-block">
+                            <li class="submenu-item " @click="handelNavSidebar(2)">
+                                <a>Phân quyền</a>
+                            </li>
+                            <li class="submenu-item " @click="handelNavSidebar(3)">
+                                <a>Nhân viên điều hành tour</a>
+                            </li>
+                            <li class="submenu-item " @click="handelNavSidebar(4)">
+                                <a>Hướng dẫn viên du lịch</a>
+                            </li>
+                            <li class="submenu-item " @click="handelNavSidebar(5)">
+                                <a>Khách hàng</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

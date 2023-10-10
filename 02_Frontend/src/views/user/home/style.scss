@@ -165,4 +165,14 @@
             border-color: rgba(0, 0, 0, .03) !important;
         }
     }
+
+    // 
+    .project-item.mb-5 {
+        cursor: pointer;
+    }
+
+    .text-color-carousel {
+        color: $white;
+        font-weight: 800;
+    }
 }

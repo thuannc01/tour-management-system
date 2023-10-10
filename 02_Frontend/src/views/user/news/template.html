@@ -2,7 +2,7 @@
 	<!-- start breadcrumb -->
 	<div class="background-image container-fluid text-center position-relative d-flex justify-content-center">
 		<div class="breadcrumb-nav">
-			<h1 class="text-white"><strong>Tin tức</strong></h1>
+			<h1 class="text-white"><strong>Cẩm nang và tin tức du lịch</strong></h1>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb justify-content-center mb-0">
 					<li class="breadcrumb-item text-white"><router-link class="nav-item nav-link text-white" to="/">
@@ -13,10 +13,62 @@
 		</div>
 	</div>
 	<!-- Contact Start -->
-	<div class="container-xxl py-5">
+	<div class="container-xxl py-4">
 		<div class="container">
-			<div class="row g-5">
-				<tour>Tin tức</tour>
+			<div class="row p-3 bg-search-tour">
+				<div class="col-4">
+					<thuan-input type="text" label="Nhập để tìm kiếm tin tức" placeholder="Nhập để tìm kiếm ..." />
+				</div>
+				<div class="col-3">
+					<thuan-select label="Chọn loại tin tức" :options="newsTypeList" v-model="data.newsType" />
+				</div>
+				<div class="col-3">
+					<thuan-select label="Sắp xếp" :options="sortList" v-model="data.sort" />
+				</div>
+				<div class="col-2 d-flex align-items-center justify-content-end pt-3">
+					<thuan-button label="Tìm kiếm" />
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-4" v-for="item in 9">
+					<div class="project-item mb-4">
+						<div class="position-relative">
+							<img class="img-fluid" src="/src/assets/images/hcmcity.jpg" alt="">
+							<div class="project-overlay">
+								<a class="btn btn-lg-square btn-light rounded-circle m-1" @click="seeDetails"
+									data-lightbox="project"><i class="fa fa-eye"></i></a>
+							</div>
+						</div>
+						<div class="px-4 py-3">
+							<a class="d-block h4" href="">Review kinh nghiệm du lịch Bảo tàng Khmer - Sóc Trăng cực chi
+								tiết</a>
+							<div class="block-desc">
+								<div class="row d-flex justify-content-start">
+									<div class="col-5">
+										<div class="d-flex date-post">
+											<i class="bi bi-calendar-check pe-2"></i>
+											<p class="m-0 p-0">28/09/2023</p>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="d-flex view-post">
+											<i class="bi bi-eye pe-2 d-flex align-items-center"></i>
+											<p class="m-0 p-0">2001</p>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<p class="m-0 pt-1">Bảo tàng Khmer - Sóc Trăng có gì thú vị? Lưu lại ngay bí kíp du lịch Sóc Trăng,
+										...</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<b-pagination v-model="currentPage" :total-rows="rows" align="center"
+					:per-page="perPage"></b-pagination>
 			</div>
 		</div>
 	</div>

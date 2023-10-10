@@ -13,16 +13,16 @@
 					<img width="1024" height="480" src="https://wallpaperaccess.com/full/201088.jpg"
 						class="d-block w-100">
 					<div class="carousel-caption d-none d-md-block">
-						<h5>First slide label</h5>
-						<p>Some representative placeholder content for the first slide.</p>
+						<h4 class="text-color-carousel text-uppercase">TOUR TẾT ÂM LỊCH 2024 - TẬN HƯỞNG TẾT NGUYÊN ĐÁN TẠI VỊNH HẠ LONG</h4>
+						<p>Tết đi chơi, thảnh thơi khám phá</p>
 					</div>
 				</div>
 				<div class="carousel-item" data-bs-interval="2000">
 					<img width="1024" height="480" src="https://wallpapercave.com/wp/wp7311917.jpg"
 						class="d-block w-100">
 					<div class="carousel-caption d-none d-md-block">
-						<h5>Second slide label</h5>
-						<p>Some representative placeholder content for the second slide.</p>
+						<h4 class="text-color-carousel text-uppercase">Du lịch Đà Nẵng - Huế - Động Phong Nha 5N4Đ từ Sài Gòn 2024</h4>
+						<p>Thành phố biển du lịch Đà Nẵng - nơi mà quý khách có thể cảm nhận được sự pha trộn giữa khí hậu miền Bắc, miền Nam</p>
 					</div>
 				</div>
 				<div class="carousel-item" data-bs-interval="2000">
@@ -30,8 +30,8 @@
 						src="https://images2.thanhnien.vn/528068263637045248/2023/4/4/hoi-an-1680591517857660432696.jpg"
 						class="d-block w-100">
 					<div class="carousel-caption d-none d-md-block">
-						<h5>Third slide label</h5>
-						<p>Some representative placeholder content for the third slide.</p>
+						<h4 class="text-color-carousel text-uppercase">Du lịch Đà Nẵng - Bà Nà - Hội An từ Sài Gòn 2024</h4>
+						<p>Trải nghiệm Show diễn “Ký Ức Hội An”, chương trình văn hóa nghệ thuật ngoài trời độc đáo, với sự tổng hòa tinh tế của âm nhạc</p>
 					</div>
 				</div>
 			</div>
@@ -68,25 +68,7 @@
 					<swiper :modules="modules" :slides-per-view="3" :space-between="50" navigation
 						:pagination="{ clickable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
 						:autoplay="autoplay">
-						<swiper-slide>
-							<div class="project-item mb-5">
-								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/hcmcity.jpg" alt="">
-									<div class="project-overlay">
-										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
-												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
-									</div>
-								</div>
-								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
+						<swiper-slide v-for="i in 5">
 							<div class="project-item mb-5">
 								<div class="position-relative">
 									<img class="img-fluid" src="/src/assets/images/dalat.jpg" alt="">
@@ -94,49 +76,12 @@
 										<a class="btn btn-lg-square btn-light rounded-circle m-1"
 											href="img/project-1.jpg" data-lightbox="project"><i
 												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
 									</div>
 								</div>
 								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="project-item mb-5">
-								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/danang.jpg" alt="">
-									<div class="project-overlay">
-										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
-												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
-									</div>
-								</div>
-								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="project-item mb-5">
-								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/hue.jpg" alt="">
-									<div class="project-overlay">
-										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
-												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
-									</div>
-								</div>
-								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+									<a class="d-block h5">Du lịch vườn quốc gia Nam Cát Tiên</a>
+									<span>“Check-in hồ bơi vô cực” giữa không gian núi rừng thoáng đãng, trong lành
+										...</span>
 								</div>
 							</div>
 						</swiper-slide>
@@ -153,110 +98,102 @@
 					<h3 class="mb-4">CẨM NANG DU LỊCH</h3>
 				</div>
 				<div class="row g-4">
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="col-lg-4 col-md-6 wow">
 						<div class="service-item position-relative h-100">
 							<div class="service-text rounded p-5">
 								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-5.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Digital Marketing</h5>
-								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-									diam
-									stet</p>
+								<h5 class="mb-3">Bỏ Túi 7 Địa Điểm Du Lịch Ninh Bình Đẹp Nổi Tiếng</h5>
+								<p class="mb-3">Địa điểm du lịch Ninh Bình nổi tiếng khi được nhắc đến người ta thường
+									...</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Read More<i
+								<a class="text-primary fw-medium" href="">Đọc thêm<i
 										class="bi bi-chevron-double-right ms-2"></i></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+					<div class="col-lg-4 col-md-6">
 						<div class="service-item position-relative h-100">
 							<div class="service-text rounded p-5">
 								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-6.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Internet Marketing</h5>
-								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-									diam
-									stet</p>
+								<h5 class="mb-3">Khám Phá 6 Nét Đẹp Văn Hóa Huế Đặc Trưng</h5>
+								<p class="mb-3">Ai đã từng Du lịch Huế một lần đều thương nhớ khôn nguôi mảnh đất ...
+								</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Read More<i
+								<a class="text-primary fw-medium" href="">Đọc thêm<i
 										class="bi bi-chevron-double-right ms-2"></i></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+					<div class="col-lg-4 col-md-6">
 						<div class="service-item position-relative h-100">
 							<div class="service-text rounded p-5">
 								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-7.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Content Marketing</h5>
-								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-									diam
-									stet</p>
+								<h5 class="mb-3">Top 5 Thức Quà Đặc Trưng Mùa Hè Hà Nội</h5>
+								<p class="mb-3">Có vô vàn những món ngon mùa hè ưu ái ban tặng cho Hà Nội ...</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Read More<i
+								<a class="text-primary fw-medium" href="">Đọc thêm<i
 										class="bi bi-chevron-double-right ms-2"></i></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="col-lg-4 col-md-6">
 						<div class="service-item position-relative h-100">
 							<div class="service-text rounded p-5">
 								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-8.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">Social Marketing</h5>
-								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-									diam
-									stet</p>
+								<h5 class="mb-3">Tổng hợp 42 địa chỉ mua đặc sản Đà Lạt làm quà chất lượng</h5>
+								<p class="mb-3">Bạn yêu Đà Lạt bởi cảnh đẹp thiên nhiên thơ mộng hay những món đặc ...
+								</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Read More<i
+								<a class="text-primary fw-medium" href="">Đọc thêm<i
 										class="bi bi-chevron-double-right ms-2"></i></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+					<div class="col-lg-4 col-md-6">
 						<div class="service-item position-relative h-100">
 							<div class="service-text rounded p-5">
 								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-9.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">B2B Marketing</h5>
-								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-									diam
-									stet</p>
+								<h5 class="mb-3">Tổng hợp kinh nghiệm du lịch Hội An</h5>
+								<p class="mb-3">Bạn muốn chọn Hội An làm điểm dừng chân cho chuyến nghỉ ngơi của mình
+									...</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Read More<i
+								<a class="text-primary fw-medium" href="">Đọc thêm<i
 										class="bi bi-chevron-double-right ms-2"></i></a>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+					<div class="col-lg-4 col-md-6">
 						<div class="service-item position-relative h-100">
 							<div class="service-text rounded p-5">
 								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
 									style="width: 64px; height: 64px;">
 									<img class="img-fluid" src="/src/assets/images/icon-10.png" alt="Icon">
 								</div>
-								<h5 class="mb-3">E-mail Marketing</h5>
-								<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-									diam
-									stet</p>
+								<h5 class="mb-3">Tổng hợp kinh nghiệm du lịch Bà Nà Hills Đà Nẵng từ A – Z </h5>
+								<p class="mb-3">Bạn đã từng một lần nghe tới Bà Nà Hill chưa? Bạn có biết tại ...</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Read More<i
+								<a class="text-primary fw-medium" href="">Đọc thêm<i
 										class="bi bi-chevron-double-right ms-2"></i></a>
 							</div>
 						</div>
@@ -276,43 +213,7 @@
 					<swiper :modules="modules" :slides-per-view="3" :space-between="50" navigation
 						:pagination="{ clickable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
 						:autoplay="autoplay">
-						<swiper-slide>
-							<div class="project-item mb-5">
-								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/hcmcity.jpg" alt="">
-									<div class="project-overlay">
-										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
-												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
-									</div>
-								</div>
-								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="project-item mb-5">
-								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/dalat.jpg" alt="">
-									<div class="project-overlay">
-										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
-												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
-									</div>
-								</div>
-								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
+						<swiper-slide v-for="i in 7">
 							<div class="project-item mb-5">
 								<div class="position-relative">
 									<img class="img-fluid" src="/src/assets/images/danang.jpg" alt="">
@@ -320,31 +221,12 @@
 										<a class="btn btn-lg-square btn-light rounded-circle m-1"
 											href="img/project-1.jpg" data-lightbox="project"><i
 												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
 									</div>
 								</div>
 								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide>
-							<div class="project-item mb-5">
-								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/hue.jpg" alt="">
-									<div class="project-overlay">
-										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
-												class="fa fa-eye"></i></a>
-										<a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-												class="fa fa-link"></i></a>
-									</div>
-								</div>
-								<div class="p-4">
-									<a class="d-block h5" href="">Data Analytics & Insights</a>
-									<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+									<a class="d-block h5">Du lịch tại Đà Nẵng - Khu du lịch Bà Nà</a>
+									<span>Tham quan Bảo tàng tranh 3D Art In Paradise Đà Nẵng, du khách sẽ hoá thân
+										...</span>
 								</div>
 							</div>
 						</swiper-slide>

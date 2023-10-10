@@ -20,13 +20,16 @@ var News = {
     watch: {},
     data() {
         return {
-            label: label
+            label: label,
+            rows: 10,
+            perPage: 3,
+            currentPage: 1
         };
     },
     computed: {
         // app
         // module
-        ...mapState('NewsStore', [''])
+        ...mapState('NewsStore', ['data', 'newsTypeList', 'sortList'])
     },
     methods: {
         // app
