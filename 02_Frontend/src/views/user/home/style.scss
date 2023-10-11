@@ -135,7 +135,7 @@
                 }
 
                 .service-btn {
-                    bottom: -1.5rem;
+                    bottom: -0.8rem;
                 }
             }
 
@@ -174,5 +174,22 @@
     .text-color-carousel {
         color: $white;
         font-weight: 800;
+    }
+
+    //
+    .good-price-icon {
+        filter: invert(45%) sepia(53%) saturate(4908%) hue-rotate(336deg) brightness(88%) contrast(112%);
+    }
+
+    .secure-payment-icon {
+        filter: invert(30%) sepia(89%) saturate(1324%) hue-rotate(118deg) brightness(91%) contrast(101%);
+    }
+
+    .free-consultation-icon {
+        filter: invert(9%) sepia(90%) saturate(6496%) hue-rotate(299deg) brightness(76%) contrast(105%);
+    }
+
+    .reputable-brand-icon {
+        filter: invert(77%) sepia(27%) saturate(3838%) hue-rotate(326deg) brightness(91%) contrast(94%);
     }
 }
