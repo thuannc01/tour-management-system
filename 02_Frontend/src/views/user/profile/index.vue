@@ -39,6 +39,7 @@ var Profile = {
             const waitForPay = document.getElementById('wait-for-pay');
             const waitConfirmation =
                 document.getElementById('wait-confirmation');
+            const waitVehicle = document.getElementById('wait-vehicle');
             const ratingTour = document.getElementById('rating-tour');
             const allTour = document.getElementById('all-tour');
             const cancelTour = document.getElementById('cancel-tour');
@@ -54,6 +55,7 @@ var Profile = {
                 this.addDisplayNone(ratingTour);
                 this.addDisplayNone(allTour);
                 this.addDisplayNone(cancelTour);
+                this.addDisplayNone(waitVehicle);
                 navCancelTour.classList.remove('active');
                 navUserInfo.classList.add('active');
                 navHistoryTour.classList.remove('active');
@@ -65,6 +67,7 @@ var Profile = {
                     this.addDisplayNone(ratingTour);
                     this.addDisplayNone(allTour);
                     this.removeDisplayNone(cancelTour);
+                    this.addDisplayNone(waitVehicle);
                     navCancelTour.classList.add('active');
                     navUserInfo.classList.remove('active');
                     navHistoryTour.classList.remove('active');
@@ -78,6 +81,7 @@ var Profile = {
                         this.addDisplayNone(ratingTour);
                         this.addDisplayNone(allTour);
                         this.addDisplayNone(cancelTour);
+                        this.addDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
                     } else if (code == 3) {
                         this.addDisplayNone(userInfo);
@@ -86,6 +90,7 @@ var Profile = {
                         this.addDisplayNone(ratingTour);
                         this.addDisplayNone(allTour);
                         this.addDisplayNone(cancelTour);
+                        this.addDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
                     } else if (code == 4) {
                         this.addDisplayNone(userInfo);
@@ -94,6 +99,16 @@ var Profile = {
                         this.removeDisplayNone(ratingTour);
                         this.addDisplayNone(allTour);
                         this.addDisplayNone(cancelTour);
+                        this.addDisplayNone(waitVehicle);
+                        navCancelTour.classList.remove('active');
+                    } else if (code == 7) {
+                        this.addDisplayNone(userInfo);
+                        this.addDisplayNone(waitForPay);
+                        this.addDisplayNone(waitConfirmation);
+                        this.addDisplayNone(ratingTour);
+                        this.addDisplayNone(allTour);
+                        this.addDisplayNone(cancelTour);
+                        this.removeDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
                     } else {
                         this.addDisplayNone(userInfo);
@@ -102,6 +117,7 @@ var Profile = {
                         this.addDisplayNone(ratingTour);
                         this.removeDisplayNone(allTour);
                         this.addDisplayNone(cancelTour);
+                        this.addDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
                     }
                 }
