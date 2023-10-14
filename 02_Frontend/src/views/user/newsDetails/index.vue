@@ -1,18 +1,18 @@
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
 import store from '@/store';
-import NewsStore from '@/views/user/news/store';
+import NewsDetailsStore from '@/views/user/newsDetails/store';
 import label from './label';
 
 import template from './template.html';
 import './style.scss';
 
-var News = {
+var NewsDetails = {
     template: template,
     components: {},
     beforeCreate() {
-        if (!store.hasModule('NewsStore')) {
-            store.registerModule('NewsStore', NewsStore);
+        if (!store.hasModule('NewsDetailsStore')) {
+            store.registerModule('NewsDetailsStore', NewsDetailsStore);
         }
     },
     created() {},
@@ -20,27 +20,21 @@ var News = {
     watch: {},
     data() {
         return {
-            label: label,
-            rows: 10,
-            perPage: 3,
-            currentPage: 1
+            label: label
         };
     },
     computed: {
         // app
         // module
-        ...mapState('NewsStore', ['data', 'newsTypeList', 'sortList'])
+        ...mapState('NewsDetailsStore', [''])
     },
     methods: {
         // app
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', ['']),
-        navNewsDetail() {
-            this.$router.push({ path: `/news-detail` });
-        }
+        ...mapActions('', [''])
     }
 };
-export default News;
+export default NewsDetails;
 </script>

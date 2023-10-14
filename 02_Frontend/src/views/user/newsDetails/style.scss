@@ -1,0 +1,18 @@
+@import '../../../assets/scss/common/var';
+
+#user-news-details {
+    .background-image {
+        background: url('@/assets/images/contact.jpg');
+        opacity: 1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 480px;
+        background-size: cover;
+    }
+
+    .breadcrumb-nav {
+        position: absolute;
+        bottom: 4rem;
+    }
+
+}

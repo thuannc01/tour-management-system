@@ -5,6 +5,7 @@ const News = () => import('@/views/user/news');
 const Profile = () => import('@/views/user/profile');
 const TourDetails = () => import('@/views/user/tourDetails');
 const BookTour = () => import('@/views/user/bookTour');
+const NewsDetails = () => import('@/views/user/newsDetails');
 
 export default [
     {
@@ -67,6 +68,15 @@ export default [
         component: BookTour,
         meta: {
             title: 'Đặt tour du lịch',
+            layout: 'MainLayout'
+        }
+    },
+    {
+        path: '/news-detail',
+        name: 'NewsDetails',
+        component: NewsDetails,
+        meta: {
+            title: 'Chi tiết tin tức',
             layout: 'MainLayout'
         }
     }
