@@ -20,7 +20,8 @@ var Profile = {
     watch: {},
     data() {
         return {
-            label: label
+            label: label,
+            rating: 3.5
         };
     },
     computed: {

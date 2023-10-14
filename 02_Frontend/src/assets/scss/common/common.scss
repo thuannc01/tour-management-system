@@ -138,4 +138,15 @@ body {
 		background: $primary;
 		border-color: $primary;
 	}
+
+	table {
+		tr:hover {
+			cursor: pointer;
+
+			th,
+			td {
+				background-color: $hover-td-table;
+			}
+		}
+	}
 }

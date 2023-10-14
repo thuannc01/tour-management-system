@@ -8,7 +8,8 @@ var ThuanButton = {
         typeBtn: String,
         classBtn: String,
         label: String,
-        handleClick: Function
+        handleClick: Function,
+        isDisabled: Boolean
     },
     data() {
         return {};
@@ -16,8 +17,10 @@ var ThuanButton = {
     mounted() {},
     computed: {},
     methods: {
-        handleClickCustom() {
-            this.$emit('click');
+        handleClickCustom(e) {
+            if (this.handleClick) {
+                this.handleClick(e);
+            }
         }
     }
 };

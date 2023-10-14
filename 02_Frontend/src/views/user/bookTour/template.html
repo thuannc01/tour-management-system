@@ -1,0 +1,263 @@
+<div id="user-book-tour">
+	<!-- start breadcrumb -->
+	<div id="breadcrumb-book-tour"
+		class="background-image container-fluid text-center position-relative d-flex justify-content-center">
+		<div class="breadcrumb-nav">
+			<h1 class="text-white"><strong>Đặt tour du lịch</strong></h1>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb justify-content-center mb-0">
+					<li class="breadcrumb-item text-white"><router-link class="nav-item nav-link text-white" to="/">
+							Trang chủ</router-link></li>
+					<li class="breadcrumb-item text-primary" aria-current="page">Đặt tour</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<!-- Start book tour-->
+	<div id="detail-tour" class="container-xxl py-4">
+		<div class="container position-relative">
+			<!-- price book a tour -->
+			<div class="group-processing">
+				<div class="row d-flex justify-content-between">
+					<div id="nav-choose-service-book-tour" class="col-2 px-2 py-3 active">
+						<h6 class="m-0 text-uppercase">1. Chọn Dịch Vụ</h6>
+					</div>
+					<div id="nav-input-info-book-tour" class="col-2 px-2 py-3">
+						<h6 class="m-0 text-uppercase">2. Nhập thông tin</h6>
+					</div>
+					<div id="nav-payment-book-tour" class="col-2 px-2 py-3">
+						<h6 class="m-0 text-uppercase">3. Thanh Toán</h6>
+					</div>
+					<div id="nav-confirm-book-tour" class="col-2 px-2 py-3">
+						<h6 class="m-0 text-uppercase">4. Xác nhận</h6>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<!-- content book tour -->
+				<div class="col-8 tour-content">
+					<div id="choose-service-book-tour" class="choose-service">
+						<div class="quantity-customer">
+							<div class="row d-flex align-items-center">
+								<div class="col-5">
+									<thuan-input type="number" :isRequired="true" label="Số lượng người lớn" />
+								</div>
+								<div class="col-7">
+									<p class="m-0 p-0 pt-3">Người từ 12 tuổi trở lên và số lượng người đặt không được
+										lớn
+										hơn số chỗ còn lại của tour du lịch</p>
+								</div>
+							</div>
+							<div class="row d-flex align-items-center">
+								<div class="col-5">
+									<thuan-input type="number" label="Số lượng trẻ em" />
+								</div>
+								<div class="col-7">
+									<p class="m-0 p-0 pt-3">Người từ 6 đến 12 tuổi</p>
+								</div>
+							</div>
+							<div class="row d-flex align-items-center">
+								<div class="col-5">
+									<thuan-input type="number" label="Số lượng em bé" />
+								</div>
+								<div class="col-7">
+									<p class="m-0 p-0 pt-3">Em bé dưới 2 tuổi</p>
+								</div>
+							</div>
+						</div>
+						<div class="additional-service">
+							<h5 class="py-2 text-uppercase">Dịch vụ cộng thêm</h5>
+							<div class="additional-service-item">
+								<div class="row">
+									<div class="col-4">
+										<img class="img-additional-service" src="/src/assets/images/add-service.jpeg"
+											alt="">
+									</div>
+									<div class="col-8">
+										<div class="row">
+											<div class="col-7">
+												<h6 class="text-uppercase">PHỤ THU PHÒNG ĐƠN</h6>
+											</div>
+											<div class="col-5 d-flex">
+												<h6 class="text-uppercase pe-2">Giá: </h6>
+												<h6 class="font-weight-600 h6-title-add-service">1.200.000</h6>
+												<h6>đ/Khách</h6>
+											</div>
+										</div>
+										<div class="row d-flex align-items-center mt-1">
+											<div class="col-7 mt-4">
+												<p>- Áp dụng cho khách ngủ 1 mình 1 phòng.</p>
+											</div>
+											<div class="col-5 d-flex">
+												<thuan-input label="Chọn số lượng" type="number" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="btn-action mt-3">
+							<div class="row d-flex justify-content-end">
+								<div class="col-2 d-flex justify-content-end">
+									<thuan-button aria-disabled="" classBtn="btn btn-danger" label="Trở về"
+										:handleClick="onBack" />
+								</div>
+								<div class="col-2 d-flex justify-content-end">
+									<button type="button" class="text-white btn btn-primary bg-btn-primary-custom"
+										@click="navBookATour(2)">
+										Tiếp theo
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="input-info-book-tour" class="d-none">
+						<template v-for="i in 2">
+							<div class="input-info-group" v-if="i === 1">
+								<h6 class="font-weight-600 pb-2">Nhập thông tin hành khách No.{{i}}</h6>
+								<!-- first -->
+								<div class="info-group">
+									<div class="row">
+										<div class="col-6">
+											<thuan-input label="Họ và tên" :isRequired="true" />
+										</div>
+										<div class="col-6">
+											<thuan-input label="Số điện thoại" :isRequired="true" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<thuan-input label="Email" :isRequired="true" />
+										</div>
+										<div class="col-6">
+											<thuan-select label="Tỉnh/Thành phố" />
+										</div>
+									</div>
+									<div class="ror">
+										<div class="col-12">
+											<thuan-input label="Địa chỉ" :isRequired="true" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="input-info-group" v-else>
+								<h6 class="font-weight-600 pb-2">Nhập thông tin hành khách No.{{i}}</h6>
+								<!-- first -->
+								<div class="info-group">
+									<div class="row">
+										<div class="col-6">
+											<thuan-input label="Họ và tên" />
+										</div>
+										<div class="col-6">
+											<thuan-input label="Số điện thoại" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6">
+											<thuan-input label="Email" />
+										</div>
+										<div class="col-6">
+											<thuan-select label="Tỉnh/Thành phố" />
+										</div>
+									</div>
+									<div class="ror">
+										<div class="col-12">
+											<thuan-input label="Địa chỉ" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</template>
+						<div class="btn-action mt-3">
+							<div class="row d-flex justify-content-end">
+								<div class="col-2 d-flex justify-content-end">
+									<thuan-button aria-disabled="" classBtn="btn btn-danger" label="Trở về"
+										:handleClick="onBack" />
+								</div>
+								<div class="col-2 d-flex justify-content-end">
+									<button type="button" class="text-white btn btn-primary bg-btn-primary-custom"
+										@click="navBookATour(3)">
+										Tiếp theo
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="payment-book-tour" class="d-none">
+						Thanh toán tại đây
+						<div class="btn-action mt-3">
+							<div class="row d-flex justify-content-end">
+								<div class="col-2 d-flex justify-content-end">
+									<thuan-button aria-disabled="" classBtn="btn btn-danger" label="Trở về"
+										:handleClick="onBack" />
+								</div>
+								<div class="col-2 d-flex justify-content-end">
+									<button type="button" class="text-white btn btn-primary bg-btn-primary-custom"
+										@click="navBookATour(4)">
+										Tiếp theo
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="confirm-book-tour" class="d-none">
+						Xác nhận tại đây
+						<div class="btn-action mt-3">
+							<div class="row d-flex justify-content-end">
+								<div class="col-2 d-flex justify-content-end">
+									<thuan-button aria-disabled="" classBtn="btn btn-danger" label="Trở về"
+										:handleClick="onBack" />
+								</div>
+								<div class="col-2 d-flex justify-content-end">
+									<button type="button" class="text-white btn btn-primary bg-btn-primary-custom"
+										@click="navBookATour(5)">
+										Đặt tour
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- price tour -->
+				<div class="col-4" id="info-tour">
+					<div class="feature-item border rounded-25 pt-3 px-3">
+						<h6 class="mb-3 text-uppercase">Du lịch Đông Bắc Hà Nội - Hà Giang</h6>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-qr-code-scan pe-2"></i>Mã tour&ensp;</p>
+							<p class="p-0 m-0">TMO0232</p>
+						</div>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-calendar2-check pe-2"></i>Ngày đi&ensp;</p>
+							<p class="p-0 m-0">18/12/2023</p>
+						</div>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-calendar2-check pe-2"></i>Ngày về&ensp;</p>
+							<p class="p-0 m-0">23/12/2023</p>
+						</div>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-alarm pe-2"></i>Thời gian&ensp;</p>
+							<p class="p-0 m-0">6 ngày 5 đêm</p>
+						</div>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-piggy-bank pe-2"></i></i>Giá người lớn&ensp;
+							</p>
+							<p class="p-0 m-0">0<span>đ</span> </p>
+						</div>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-piggy-bank pe-2"></i></i>Giá trẻ em&ensp;</p>
+							<p class="p-0 m-0">0<span>đ</span> </p>
+						</div>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-piggy-bank pe-2"></i></i>Giá em bé&ensp;</p>
+							<p class="p-0 m-0">0<span>đ</span> </p>
+						</div>
+						<div class="d-flex border-top d-flex justify-content-center">
+							<p class="m-0 p-0 p-title-sum"><i class="bi bi-coin pe-2"></i></i>TỔNG:&ensp;</p>
+							<p class="p-0 m-0 p-price-sum">12.000.999<span>đ</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

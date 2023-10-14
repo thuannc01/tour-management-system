@@ -1,0 +1,122 @@
+@import '../../../assets/scss/common/var';
+
+#user-book-tour {
+    .background-image {
+        background: url('@/assets/images/contact.jpg');
+        opacity: 1;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 480px;
+        background-size: cover;
+    }
+
+    .breadcrumb-nav {
+        position: absolute;
+        bottom: 4rem;
+    }
+
+    // 
+    .group-processing {
+        .col-2 {
+            &.active {
+                background-color: $primary;
+                color: $white;
+                border-radius: 10px;
+                display: flex;
+                vertical-align: middle;
+                align-items: center;
+                justify-content: center;
+
+                h6 {
+                    font-size: 110%;
+                    font-weight: 600;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    // 
+    .font-weight-600 {
+        font-weight: 600;
+    }
+
+    .border-top {
+        border-top: 1px solid #2d2d2d;
+        padding: 10px 0px;
+    }
+
+    .none-border-top {
+        padding: 10px 0px;
+
+        button {
+            font-weight: 600;
+        }
+    }
+
+    .feature-item {
+        &.rounded-25 {
+            border-radius: 5px;
+        }
+    }
+
+    .p-title {
+        font-weight: 550;
+        width: 45%;
+
+        &.p-title-rating {
+            color: $orange-price;
+        }
+    }
+
+    .p-title-sum {
+        font-weight: 550;
+        margin-right: 10px;
+        color: $orange-price;
+        font-size: 110%;
+    }
+
+    .p-price-sum {
+        font-weight: 550;
+        color: $orange-price;
+        font-size: 110%;
+    }
+
+    span.vue-star-rating-rating-text {
+        display: none;
+    }
+
+    // 
+    .info-tour-position {
+        position: fixed;
+        right: 0;
+        background-color: transparent;
+    }
+
+    // 
+    .additional-service {
+        h5 {
+            font-weight: 600;
+        }
+
+        .img-additional-service {
+            width: 263px;
+            height: 135px;
+        }
+    }
+
+    // 
+    .h6-title-add-service {
+        color: $orange-price;
+    }
+
+    // 
+    #input-info-book-tour {
+        .input-info-group {
+            background-color: rgb(250, 250, 250);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+    }
+}

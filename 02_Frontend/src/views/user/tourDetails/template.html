@@ -43,21 +43,38 @@
 										<th scope="col">Giá trẻ em</th>
 										<th scope="col">Giá em bé</th>
 										<th scope="col">Dự báo thời tiết</th>
+										<th scope="col">Số lượng</th>
 										<th scope="col"></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="i in 5">
+									<tr v-for="i in 2">
 										<th scope="row">{{i}}</th>
 										<td>09/10/2023<span></span></td>
 										<td>10.979.000<span>đ</span></td>
 										<td>6.885.000<span>đ</span></td>
 										<td>2.790.000<span>đ</span></td>
 										<td>
-											<thuan-button label="Xem" classBtn="btn-outline-success" />
+											<thuan-button label="Xem" classBtn="btn-sm btn-success" />
 										</td>
+										<td>8/15</td>
 										<td>
-											<thuan-button label="Đặt chỗ" />
+											<thuan-button label="Đặt chỗ" :handleClick="bookATour" />
+										</td>
+									</tr>
+									<tr v-for="i in 2">
+										<th scope="row">{{i}}</th>
+										<td>09/10/2023<span></span></td>
+										<td>10.979.000<span>đ</span></td>
+										<td>6.885.000<span>đ</span></td>
+										<td>2.790.000<span>đ</span></td>
+										<td>
+											<thuan-button label="Xem" classBtn="btn-sm btn-success" />
+										</td>
+										<td>10/10</td>
+										<td>
+											<thuan-button aria-disabled="" classBtn="btn btn-danger" :isDisabled="true"
+												label="Hết chỗ" />
 										</td>
 									</tr>
 								</tbody>
@@ -235,23 +252,23 @@
 							từ
 							Đà Nẵng 2023</h6>
 						<div class="d-flex border-top">
-							<p class="m-0 p-0 p-title"><i class="bi bi-qr-code-scan pe-2"></i>Mã tour:&ensp;</p>
+							<p class="m-0 p-0 p-title"><i class="bi bi-qr-code-scan pe-2"></i>Mã tour&ensp;</p>
 							<p class="p-0 m-0">TMO0232</p>
 						</div>
 						<div class="d-flex border-top">
-							<p class="m-0 p-0 p-title"><i class="bi bi-alarm pe-2"></i>Thời gian:&ensp;</p>
+							<p class="m-0 p-0 p-title"><i class="bi bi-alarm pe-2"></i>Thời gian&ensp;</p>
 							<p class="p-0 m-0">6 ngày 5 đêm</p>
 						</div>
 						<div class="d-flex border-top">
-							<p class="m-0 p-0 p-title"><i class="bi bi-airplane pe-2"></i>Phương tiện:&ensp;</p>
+							<p class="m-0 p-0 p-title"><i class="bi bi-airplane pe-2"></i>Phương tiện&ensp;</p>
 							<p class="p-0 m-0">Xe du lịch, Máy bay </p>
 						</div>
 						<div class="d-flex border-top">
-							<p class="m-0 p-0 p-title"><i class="bi bi-pin-map pe-2"></i>Điểm xuất phát:&ensp;</p>
+							<p class="m-0 p-0 p-title"><i class="bi bi-pin-map pe-2"></i>Điểm xuất phát&ensp;</p>
 							<p class="p-0 m-0">Đà Nẵng </p>
 						</div>
 						<div class="d-flex border-top">
-							<p class="m-0 p-0 p-title"><i class="bi bi-check-circle pe-2"></i>Điểm đến:&ensp;</p>
+							<p class="m-0 p-0 p-title"><i class="bi bi-check-circle pe-2"></i>Điểm đến&ensp;</p>
 							<p class="p-0 m-0">Hà Nội </p>
 						</div>
 						<div class="d-flex border-top justify-content-center">
@@ -267,11 +284,11 @@
 					<div id="customer-support" class="feature-item border rounded-25 pt-3 px-3 mt-3">
 						<h6 class="mb-3 text-uppercase">Hỗ trợ khách hàng</h6>
 						<div class="d-flex border-top">
-							<p class="m-0 p-0 p-title"><i class="bi bi-telephone-fill pe-2"></i></i>Hotline:&ensp;</p>
+							<p class="m-0 p-0 p-title"><i class="bi bi-telephone-fill pe-2"></i></i>Hotline&ensp;</p>
 							<p class="p-0 m-0">+84 098 1234 898</p>
 						</div>
 						<div class="d-flex border-top">
-							<p class="m-0 p-0 p-title"><i class="bi bi-envelope-fill pe-2"></i>Email:&ensp;</p>
+							<p class="m-0 p-0 p-title"><i class="bi bi-envelope-fill pe-2"></i>Email&ensp;</p>
 							<p class="p-0 m-0">congthuan701@gmail.com</p>
 						</div>
 					</div>

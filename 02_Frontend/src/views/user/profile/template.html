@@ -47,11 +47,11 @@
 											<li class="submenu-item " @click="handelNavSidebar(4)">
 												<a>Đánh giá tour đã hoàn thành</a>
 											</li>
-											<li class="submenu-item " @click="handelNavSidebar(5)">
+											<li class="submenu-item d-none" @click="handelNavSidebar(5)">
 												<a>Tất cả</a>
 											</li>
 										</ul>
-									</li> 
+									</li>
 
 									<li class="sidebar-item " id="nav-cancel-tour">
 										<a class='sidebar-link' @click="handelNavSidebar(6)">
@@ -146,7 +146,37 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
-										<p class="m-0">Nội dung ở đây</p>
+										<thuan-input label="Tìm kiếm" class="col-4" />
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="align-middle text-center" scope="col">STT</th>
+													<th class="align-middle" scope="col">Tên tour</th>
+													<th class="align-middle" scope="col">Ngày đặt</th>
+													<th class="align-middle" scope="col">Người lớn</th>
+													<th class="align-middle" scope="col">Trẻ em</th>
+													<th class="align-middle" scope="col">Em bé</th>
+													<th class="align-middle" scope="col">Giá tiền</th>
+													<th class="align-middle" scope="col">Trạng thái</th>
+													<th class="align-middle text-center" scope="col">Huỷ đơn</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="i in 5">
+													<th class="align-middle text-center" scope="row">1</th>
+													<td class="align-middle">Mark</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">Đang xử lý</td>
+													<td class="align-middle text-center"><thuan-button
+															class="btn-sm bi bi-x-circle" />
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</section>
@@ -162,7 +192,37 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
-										<p class="m-0">Nội dung ở đây</p>
+										<thuan-input label="Tìm kiếm" class="col-4" />
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="align-middle text-center" scope="col">STT</th>
+													<th class="align-middle" scope="col">Tên tour</th>
+													<th class="align-middle" scope="col">Ngày đặt</th>
+													<th class="align-middle" scope="col">Người lớn</th>
+													<th class="align-middle" scope="col">Trẻ em</th>
+													<th class="align-middle" scope="col">Em bé</th>
+													<th class="align-middle" scope="col">Giá tiền</th>
+													<th class="align-middle" scope="col">Trạng thái</th>
+													<th class="align-middle text-center" scope="col">Huỷ đơn</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="i in 4">
+													<th class="align-middle text-center" scope="row">1</th>
+													<td class="align-middle">Mark</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">Đang xử lý</td>
+													<td class="align-middle text-center"><thuan-button
+															class="btn-sm bi bi-x-circle" />
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</section>
@@ -178,7 +238,37 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
-										<p class="m-0">Nội dung ở đây</p>
+										<thuan-input label="Tìm kiếm" class="col-4" />
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="align-middle text-center" scope="col">STT</th>
+													<th class="align-middle" scope="col">Tên tour</th>
+													<th class="align-middle" scope="col">Ngày đặt</th>
+													<th class="align-middle" scope="col">Người lớn</th>
+													<th class="align-middle" scope="col">Trẻ em</th>
+													<th class="align-middle" scope="col">Em bé</th>
+													<th class="align-middle" scope="col">Giá tiền</th>
+													<th class="align-middle" scope="col">Trạng thái</th>
+													<th class="align-middle text-center" scope="col">Huỷ đơn</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="i in 7">
+													<th class="align-middle text-center" scope="row">1</th>
+													<td class="align-middle">Mark</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">Đang đặt vé máy bay</td>
+													<td class="align-middle text-center"><thuan-button
+															class="btn-sm bi bi-x-circle" />
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</section>
@@ -194,7 +284,39 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
-										<p class="m-0">Nội dung ở đây</p>
+										<thuan-input label="Tìm kiếm" class="col-4" />
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="align-middle text-center" scope="col">STT</th>
+													<th class="align-middle" scope="col">Tên tour</th>
+													<th class="align-middle" scope="col">Ngày đặt</th>
+													<th class="align-middle" scope="col">Người lớn</th>
+													<th class="align-middle" scope="col">Trẻ em</th>
+													<th class="align-middle" scope="col">Em bé</th>
+													<th class="align-middle" scope="col">Giá tiền</th>
+													<th class="align-middle text-center" scope="col">Đánh giá</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="i in 7">
+													<th class="align-middle text-center" scope="row">1</th>
+													<td class="align-middle">Mark</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">Otto</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle">@mdo</td>
+													<td class="align-middle text-center">
+														<button class="border-0" type="button"
+															class="btn btn-success btn-sm" data-bs-toggle="modal"
+															data-bs-target="#RatingGlobal">
+															<i class=" bi bi-chat-heart"></i>
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</section>
@@ -273,4 +395,29 @@
 		</div>
 	</div>
 	<!-- Contact End -->
+	<!-- modal rating the tour for user page -->
+	<div class="modal fade" id="RatingGlobal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Đánh giá tour du lịch</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<h6 class="modal-title text-center mb-2" id="exampleModalLabel">Tour mùa đông 2023 - Khám phá Hạ
+						Long Bay</h6>
+					<div class="rating-tour d-flex justify-content-center my-3">
+						<star-rating v-model:rating="rating" v-bind:increment="0.5" inactive-color="gainsboro"
+							active-color="#ff891e" v-bind:star-size="40">
+						</star-rating>
+					</div>
+					<thuan-textarea label="Nội dung đánh giá" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+					<button type="button" class="btn btn-primary bg-btn-primary-custom">Lưu đánh giá</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

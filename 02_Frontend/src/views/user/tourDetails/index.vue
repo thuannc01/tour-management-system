@@ -95,6 +95,9 @@ var TourDetails = {
                 .getPropertyValue('padding-left')
                 .replace(/[^\d.]/g, '');
             return paddingLeft;
+        },
+        bookATour() {
+            this.$router.push({ path: `/book-tour` });
         }
     }
 };
