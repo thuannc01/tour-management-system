@@ -21,6 +21,7 @@ var Profile = {
     data() {
         return {
             label: label,
+            money: '3.123.654 đ',
             rating: 3.5
         };
     },

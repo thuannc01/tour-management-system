@@ -297,9 +297,14 @@
         // wait-confirmation
         // all-tour
         // cancel-tour
-        .text-cancel-tour-title{
+        .text-cancel-tour-title {
             color: $dash-blue;
             font-weight: 550;
         }
+    }
+
+    // 
+    .text-reason-cancel-order-tour {
+        color: $orange-price;
     }
 }
