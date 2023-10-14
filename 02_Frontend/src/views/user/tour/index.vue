@@ -38,7 +38,7 @@ var Tour = {
         // module
         ...mapActions('', ['']),
         seeDetails() {
-            this.$router.push({ path: `/detail` });
+            this.$router.push({ path: `/tour-detail` });
         }
     }
 };

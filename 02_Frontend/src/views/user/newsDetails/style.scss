@@ -2,7 +2,7 @@
 
 #user-news-details {
     .background-image {
-        background: url('@/assets/images/contact.jpg');
+        background: url('@/assets/images/tour_details.jpg');
         opacity: 1;
         background-size: cover;
         background-repeat: no-repeat;
@@ -15,4 +15,16 @@
         bottom: 4rem;
     }
 
+    // 
+    .font-weight-600 {
+        font-weight: 600;
+    }
+
+    .desc-news-detail {
+        font-size: 95%;
+    }
+
+    .news-detail-content {
+        text-align: justify;
+    }
 }
