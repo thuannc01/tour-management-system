@@ -1,18 +1,18 @@
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
 import store from '@/store';
-import TourDetailsStore from '@/views/user/tourDetails/store';
+import BookATourStore from '@/views/user/bookATour/store';
 import label from './label';
 
 import template from './template.html';
 import './style.scss';
 
-var TourDetails = {
+var BookATour = {
     template: template,
     components: {},
     beforeCreate() {
-        if (!store.hasModule('TourDetailsStore')) {
-            store.registerModule('TourDetailsStore', TourDetailsStore);
+        if (!store.hasModule('BookATourStore')) {
+            store.registerModule('BookATourStore', BookATourStore);
         }
     },
     created() {},
@@ -41,7 +41,7 @@ var TourDetails = {
     computed: {
         // app
         // module
-        ...mapState('TourDetailsStore', [''])
+        ...mapState('BookATourStore', [''])
     },
     methods: {
         // app
@@ -76,7 +76,7 @@ var TourDetails = {
             const footer = document.getElementById('footer');
             const footerRect = footer.getBoundingClientRect();
             const windowHeight = window.innerHeight;
-            if (footerRect.top <= windowHeight) {
+            if (footerRect.top <= windowHeight - 200) {
                 divInfoTour.classList.remove('info-tour-position');
             }
         },
@@ -96,10 +96,75 @@ var TourDetails = {
                 .replace(/[^\d.]/g, '');
             return paddingLeft;
         },
-        bookATour() {
-            this.$router.push({ path: `/book-a-tour` });
+        navBookATour(id) {
+            window.scrollTo(0, 100);
+            // nav
+            // const navChooseService = document.getElementById(
+            //     'nav-choose-service-book-tour'
+            // );
+            const navInputInfo = document.getElementById(
+                'nav-input-info-book-tour'
+            );
+            const navPayment = document.getElementById('nav-payment-book-tour');
+            const navConfirm = document.getElementById('nav-confirm-book-tour');
+            // body content
+            const bodyChooseService = document.getElementById(
+                'choose-service-book-tour'
+            );
+            const bodyInputInfo = document.getElementById(
+                'input-info-book-tour'
+            );
+            const bodyPayment = document.getElementById('payment-book-tour');
+            const bodyConfirm = document.getElementById('confirm-book-tour');
+            if (id == 1) {
+                //
+            } else if (id == 2) {
+                //nav
+                // navChooseService.classList.remove('active');
+                navInputInfo.classList.add('active');
+                navPayment.classList.remove('active');
+                navConfirm.classList.remove('active');
+                // body
+                this.addDisplayNone(bodyChooseService);
+                this.removeDisplayNone(bodyInputInfo);
+                this.addDisplayNone(bodyPayment);
+                this.addDisplayNone(bodyConfirm);
+            } else if (id == 3) {
+                //nav
+                // navChooseService.classList.remove('active');
+                // navInputInfo.classList.remove('active');
+                navPayment.classList.add('active');
+                navConfirm.classList.remove('active');
+                // body
+                this.addDisplayNone(bodyChooseService);
+                this.addDisplayNone(bodyInputInfo);
+                this.removeDisplayNone(bodyPayment);
+                this.addDisplayNone(bodyConfirm);
+            } else if (id == 4) {
+                //nav
+                // navChooseService.classList.remove('active');
+                // navInputInfo.classList.remove('active');
+                // navPayment.classList.remove('active');
+                navConfirm.classList.add('active');
+                // body
+                this.addDisplayNone(bodyChooseService);
+                this.addDisplayNone(bodyInputInfo);
+                this.addDisplayNone(bodyPayment);
+                this.removeDisplayNone(bodyConfirm);
+            } else {
+                console.log('đặt tour');
+            }
+        },
+        addDisplayNone(elem) {
+            elem.classList.add('d-none');
+        },
+        removeDisplayNone(elem) {
+            elem.classList.remove('d-none');
+        },
+        onBack() {
+            window.history.back();
         }
     }
 };
-export default TourDetails;
+export default BookATour;
 </script>

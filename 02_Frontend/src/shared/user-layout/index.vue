@@ -34,6 +34,9 @@ export default {
         // module
         ...mapState('UserLayoutStore', ['data', 'priceOptions'])
     },
+    data() {
+        return {};
+    },
     methods: {
         // app
         ...mapActions('app', []),
