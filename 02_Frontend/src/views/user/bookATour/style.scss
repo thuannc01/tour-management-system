@@ -133,4 +133,17 @@
         border-radius: 10px;
         margin-bottom: 1rem;
     }
+
+    input#creditCard,
+    input#paymentCash {
+        font-size: 16px;
+        border: 1.5px solid rgb(160, 160, 160);
+    }
+
+    //
+    .bank-img:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: transform 0.3s;
+    }
 }

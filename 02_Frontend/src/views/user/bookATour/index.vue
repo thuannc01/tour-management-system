@@ -163,6 +163,13 @@ var BookATour = {
         },
         onBack() {
             window.history.back();
+        },
+        showModalBankAccount() {
+            document.getElementById('showModalBankAccount').click();
+        },
+        clickImgBank() {
+            const vm = this;
+            vm.showModalBankAccount();
         }
     }
 };
