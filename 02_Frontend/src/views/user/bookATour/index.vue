@@ -161,8 +161,63 @@ var BookATour = {
         removeDisplayNone(elem) {
             elem.classList.remove('d-none');
         },
-        onBack() {
-            window.history.back();
+        onBack(id) {
+            window.scrollTo(0, 100);
+            // nav
+            const navChooseService = document.getElementById(
+                'nav-choose-service-book-tour'
+            );
+            const navInputInfo = document.getElementById(
+                'nav-input-info-book-tour'
+            );
+            const navPayment = document.getElementById('nav-payment-book-tour');
+            const navConfirm = document.getElementById('nav-confirm-book-tour');
+            // body content
+            const bodyChooseService = document.getElementById(
+                'choose-service-book-tour'
+            );
+            const bodyInputInfo = document.getElementById(
+                'input-info-book-tour'
+            );
+            const bodyPayment = document.getElementById('payment-book-tour');
+            const bodyConfirm = document.getElementById('confirm-book-tour');
+            //
+            if (id == 2) {
+                window.history.back();
+            } else if (id == 3) {
+                //nav
+                navChooseService.classList.add('active');
+                navInputInfo.classList.remove('active');
+                navPayment.classList.remove('active');
+                navConfirm.classList.remove('active');
+                // body
+                this.removeDisplayNone(bodyChooseService);
+                this.addDisplayNone(bodyInputInfo);
+                this.addDisplayNone(bodyPayment);
+                this.addDisplayNone(bodyConfirm);
+            } else if (id == 4) {
+                //nav
+                navChooseService.classList.add('active');
+                navInputInfo.classList.add('active');
+                navPayment.classList.remove('active');
+                navConfirm.classList.remove('active');
+                // body
+                this.addDisplayNone(bodyChooseService);
+                this.removeDisplayNone(bodyInputInfo);
+                this.addDisplayNone(bodyPayment);
+                this.addDisplayNone(bodyConfirm);
+            } else if (id == 5) {
+                //nav
+                navChooseService.classList.add('active');
+                navInputInfo.classList.add('active');
+                navPayment.classList.add('active');
+                navConfirm.classList.remove('active');
+                // body
+                this.addDisplayNone(bodyChooseService);
+                this.addDisplayNone(bodyInputInfo);
+                this.removeDisplayNone(bodyPayment);
+                this.addDisplayNone(bodyConfirm);
+            }
         },
         showModalBankAccount() {
             document.getElementById('showModalBankAccount').click();
