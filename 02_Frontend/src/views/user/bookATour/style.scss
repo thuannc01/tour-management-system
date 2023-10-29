@@ -46,6 +46,11 @@
         font-weight: 500;
     }
 
+    .link-color {
+        color: blue;
+        text-decoration: underline;
+    }
+
     .border-top {
         border-top: 1px solid #2d2d2d;
         padding: 10px 0px;
@@ -118,7 +123,7 @@
     // 
     #input-info-book-tour {
         .input-info-group {
-            background-color: rgba(131, 173, 255, 0.09);
+            background-color: rgba(198, 198, 198, 0.09);
             padding: 1rem 2rem;
             border-radius: 10px;
             margin-bottom: 1rem;
@@ -126,9 +131,16 @@
     }
 
     // ------------------------------------------------------------------------
+    #payment-book-tour {
+        img {
+            border: $primary 1px solid;
+        }
+    }
+
+    // ------------------------------------------------------------------------
     .payment-cash,
     .credit-card {
-        background-color: rgba(131, 173, 255, 0.09);
+        background-color: rgba(198, 198, 198, 0.09);
         padding: 1rem 2rem;
         border-radius: 10px;
         margin-bottom: 1rem;
@@ -145,5 +157,10 @@
         cursor: pointer;
         transform: scale(1.1);
         transition: transform 0.3s;
+    }
+
+    .line {
+        border-top: 1px solid #a9a9a9;
+        margin: 10px 0;
     }
 }
