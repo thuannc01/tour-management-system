@@ -44,15 +44,20 @@ var Register = {
                 password,
                 password_confirmation
             } = this;
-            console.log('phone: ', phoneNumber);
-            this.register({ fullName, email, password, password_confirmation });
+            this.register({
+                fullName,
+                email,
+                phoneNumber,
+                password,
+                password_confirmation
+            });
             setTimeout(() => {
                 if (this.data.status) {
                     const vm = this;
                     vm.showModalMessage({
                         type: MSG_TYPE.SUCCESS,
-                        title: MSG_TITLE.T001,
-                        content: messages.E001,
+                        title: MSG_TITLE.S001,
+                        content: messages.S001,
                         okText: 'Đồng ý',
                         callback: (ok) => {
                             if (ok) {

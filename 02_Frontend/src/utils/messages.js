@@ -1,6 +1,7 @@
 export default {
     // Confirm message
     // Success
+    S001: 'Quay lại trang đăng nhập',
     // Error message
     E000: 'Một lỗi gì đó đang xảy ra, vui lòng kiểm tra lại.',
     E001: 'Email hoặc mật khẩu sai.',
@@ -9,7 +10,10 @@ export default {
 };
 
 export const MSG_TITLE = {
-    T001: 'Đăng ký tài khoản thành công'
+    // Confirm message
+    // Success
+    S001: 'Đăng ký tài khoản thành công'
+    // Error message
 };
 
 export const MSG_TYPE = {

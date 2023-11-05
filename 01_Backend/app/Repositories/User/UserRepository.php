@@ -12,9 +12,4 @@ class UserRepository extends BaseRepository implements IUserRepository
     {
         return \App\Models\User::class;
     }
-
-    public function getUser()
-    {
-        return $this->model->select('name')->take(5)->get();
-    }
 }

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
+use App\Constants\ResponseCodeConstant;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -57,17 +59,41 @@ class AuthController extends Controller
      *  )
      */
     public function login(Request $request){
-    	$validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['Message' => $validator->errors()], 200);
+        $code = ResponseCodeConstant::OK;
+        $data = [];
+        $messageNo = "";
+        $message = "";
+        $dataErrors = [];
+        // get data
+        $credentials = $request->only('email', 'password');
+        //
+        $user = User::where('email', $request->email)->first();
+        // show error
+        if (!$user) {
+            $code = ResponseCodeConstant::HAVE_ERROR;
+            $message = "Email đăng nhập không tồn tại";
+        } elseif ($user && !Hash::check($request->password, $user->password)) {
+            $code = ResponseCodeConstant::HAVE_ERROR;
+            $message = "Mật khẩu không đúng";
+        } elseif ($user && $user['status'] != "Hoạt động") {
+            $code = ResponseCodeConstant::HAVE_ERROR;
+            $message = "Tài khoản đã bị khoá hoặc chưa được kích hoạt";
+        } else {
+            if ($token = auth()->attempt($credentials)) {
+                $data = [$this->createNewToken($token)->original];
+            } else {
+                $code = ResponseCodeConstant::UNAUTHORIZED;
+            }
         }
-        if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['Message' => 'Unauthorized'], 200);
-        }
-        return $this->createNewToken($token);
+        // response json
+        $response = response()->json([
+            'Code'         => $code,
+            'Data'         => $data,
+            'MessageNo'    => $messageNo,
+            'Message'      => $message,
+            'DataErrors'   => $dataErrors
+        ]); 
+        return $response;
     }
     
     /**
@@ -91,9 +117,10 @@ class AuthController extends Controller
      *      @OA\RequestBody(
      *          description="Data login",
      *          @OA\JsonContent(
-     *              required={"name", "email", "password", "password_confirms"},
+     *              required={"name", "email", "password", "phone_number", "password_confirms"},
      *              @OA\Property(property="name", type="string", example="Thuan Nguyen Cong"),
      *              @OA\Property(property="email", type="string", example="thuannc@gmail.com"),
+     *              @OA\Property(property="phone_number", type="string", example="0909090932"),
      *              @OA\Property(property="password", type="string", format="password", example="123123"),
      *              @OA\Property(property="password_confirmation", type="string", format="password", example="123123"),
      *          )
@@ -112,22 +139,41 @@ class AuthController extends Controller
      *  )
      */
     public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-        ]);
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+        $code = ResponseCodeConstant::OK;
+        $data_res = [];
+        $messageNo = "";
+        $message = "";
+        $dataErrors = [];
+        // get data
+        $data = $request->only('name', 'email', 'phone_number', 'password', 'password_confirmation');
+        // check password
+        if ($data['password'] !== $data['password_confirmation']) {
+            $code = ResponseCodeConstant::HAVE_ERROR;
+            $message = "Mật khẩu xác nhận không khớp.";
+        } elseif (User::where('email', $data['email'])->first()) {
+            $code = ResponseCodeConstant::HAVE_ERROR;
+            $message = "Email đã tồn tại.";
+        } else {
+            $user = new User();
+            $user->full_name = $data['name'];
+            $user->email = $data['email'];
+            $user->phone_number = $data['phone_number'];
+            $user->status = "Hoạt động";
+            $user->role_id = 1;
+            $user->password = bcrypt($data['password']);
+            $user->save();
+            $data_res = User::where('id', $user->id)->first();
+            $message = "Đăng ký tài khoản khách hàng thành công";
         }
-        $user = User::create(array_merge(
-                    $validator->validated(),
-                    ['password' => bcrypt($request->password)]
-                ));
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+        // response json
+        $response = response()->json([
+            'Code'         => $code,
+            'Data'         => $data_res,
+            'MessageNo'    => $messageNo,
+            'Message'      => $message,
+            'DataErrors'   => $dataErrors
+        ]); 
+        return $response;
     }
 
     /**

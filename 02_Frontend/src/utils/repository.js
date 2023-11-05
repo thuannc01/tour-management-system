@@ -1,7 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash-uuid';
 import messages, { MSG_TYPE, MSG_TITLE } from './messages';
-import label from './label';
 import store from '@/store';
 import Router from '@/router';
 
@@ -66,24 +65,6 @@ repository.interceptors.response.use(
                 });
             } else if (data.Code === 403) {
                 store.commit('app/showHeaderError', [messages.E000]);
-            } else if (data.Code === 422) {
-                let i = 0;
-                for (const key in data.DataErrors) {
-                    if (
-                        Object.prototype.hasOwnProperty.call(
-                            data.DataErrors,
-                            key
-                        ) &&
-                        i == 0
-                    ) {
-                        const screenId = store.state.app.screenId;
-                        const tbl = label[screenId][key];
-                        store.commit('app/showHeaderError', [
-                            tbl + messages[data.DataErrors[key][0]]
-                        ]);
-                        i++;
-                    }
-                }
             } else if (data.Code === 423) {
                 store.commit('app/showHeaderError', [data.Message]);
             } else {

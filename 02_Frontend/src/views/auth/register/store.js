@@ -17,11 +17,12 @@ export default {
             try {
                 repository.register(user).then((res) => {
                     const { data } = res;
-                    console.log('data: ', data.user.id);
-                    if (data.user.id) {
-                        context.commit('setStatus', true);
-                    } else {
-                        context.commit('setStatus', false);
+                    if (data.Code == 200) {
+                        if (data.Data.id) {
+                            context.commit('setStatus', true);
+                        } else {
+                            context.commit('setStatus', false);
+                        }
                     }
                 });
             } catch (e) {

@@ -7,6 +7,7 @@ export default {
         return repository.post(`${resource}/register`, {
             name: payload.fullName,
             email: payload.email,
+            phone_number: payload.phoneNumber,
             password: payload.password,
             password_confirmation: payload.password_confirmation
         });
