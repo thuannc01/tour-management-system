@@ -181,6 +181,38 @@ CREATE TABLE service_details (
 	deleted_at TIMESTAMP,
 	PRIMARY KEY (additional_services_id, tour_id)
 );
+-- Table food_spots
+CREATE TYPE food_spot_type AS ENUM ('Nhà hàng', 'Quán ăn đường phố', 'Quán cà phê');
+CREATE TABLE food_spots (
+    id serial PRIMARY KEY,
+	name character varying(200),
+	menu text, 
+	address character varying(500),
+	phone_number character varying(20),
+	email character varying(100),
+	type food_spot_type,
+	location_map text,
+	opening_hours character varying(30),
+	province_id integer REFERENCES province(id),
+    created_at TIMESTAMP,
+	updated_at TIMESTAMP,
+	deleted_at TIMESTAMP
+);
+-- Table hotel_spots
+CREATE TYPE hotel_spot_type AS ENUM ('Khách sạn', 'Khu nghỉ dưỡng', 'Nhà nghỉ');
+CREATE TABLE hotel_spots (
+    id serial PRIMARY KEY,
+	name character varying(200),
+	address character varying(500),
+	phone_number character varying(20),
+	email character varying(100),
+	type hotel_spot_type,
+	location_map text,
+	province_id integer REFERENCES province(id),
+    created_at TIMESTAMP,
+	updated_at TIMESTAMP,
+	deleted_at TIMESTAMP
+);
 -- Table schedules
 CREATE TABLE schedules (
     id serial PRIMARY KEY,
@@ -228,6 +260,7 @@ CREATE TABLE periods (
 	infant_ticket_price numeric(18, 0),
 	quantity smallint,
 	maximum_quantity smallint,
+	tourist_guide_id integer REFERENCES users(id),
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -294,6 +327,7 @@ INSERT INTO roles (name, created_at)
 VALUES
     ('Khách hàng thành viên', CURRENT_DATE),
 	('Nhân viên điều hành tour', CURRENT_DATE),
+	('Hướng dẫn viên du lịch', CURRENT_DATE),
 	('Nhà quản lý', CURRENT_DATE);
 -- Table users
 INSERT INTO users (role_id, full_name, email, phone_number, gender, status, password)
