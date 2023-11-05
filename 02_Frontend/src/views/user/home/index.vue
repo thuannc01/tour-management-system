@@ -63,10 +63,9 @@ var Home = {
             console.log(swiper);
         },
         onSlideChange() {
-            console.log('slide change');
+            // console.log('slide change');
         },
         clickSearch() {
-            console.log('search');
             document.getElementById('search-global-home').click();
         }
     }

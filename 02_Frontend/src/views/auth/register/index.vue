@@ -20,11 +20,11 @@ var Register = {
     data() {
         return {
             label: label,
-            fullName: null,
-            email: null,
-            phoneNumber: null,
-            password: null,
-            password_confirmation: null
+            fullName: '',
+            email: '',
+            phoneNumber: '',
+            password: '',
+            password_confirmation: ''
         };
     },
     computed: {
@@ -36,7 +36,7 @@ var Register = {
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
 
         checkForm: function (e) {
-            e.preventDefault();
+            const vm = this;
             const {
                 fullName,
                 email,
@@ -44,6 +44,32 @@ var Register = {
                 password,
                 password_confirmation
             } = this;
+            e.preventDefault();
+            if (vm.isStringEmpty(fullName)) {
+                this.showHeaderError(['Họ và tên' + messages.E002]);
+                return false;
+            } else if (!vm.isUsernameValid(fullName)) {
+                this.showHeaderError([messages.E005]);
+                return false;
+            } else if (vm.isStringEmpty(email)) {
+                this.showHeaderError(['Email' + messages.E002]);
+                return false;
+            } else if (!vm.isEmail(email)) {
+                this.showHeaderError([messages.E003]);
+                return false;
+            } else if (vm.isStringEmpty(phoneNumber)) {
+                this.showHeaderError(['Số điện thoại' + messages.E002]);
+                return false;
+            } else if (!vm.isNumber(phoneNumber)) {
+                this.showHeaderError([messages.E004]);
+                return false;
+            } else if (vm.isStringEmpty(password)) {
+                this.showHeaderError(['Mật khẩu' + messages.E002]);
+                return false;
+            } else if (vm.isStringEmpty(password_confirmation)) {
+                this.showHeaderError(['Xác nhận lại mật khẩu' + messages.E002]);
+                return false;
+            }
             this.register({
                 fullName,
                 email,
@@ -67,6 +93,21 @@ var Register = {
                     });
                 }
             }, 600);
+        },
+        isEmail(email) {
+            const emailRegex =
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailRegex.test(email);
+        },
+        isStringEmpty(str) {
+            return str.trim() === '';
+        },
+        isNumber(value) {
+            return !isNaN(parseFloat(value)) && isFinite(value);
+        },
+        isUsernameValid(username) {
+            const regex = /^[^0-9]/;
+            return regex.test(username);
         }
     }
 };

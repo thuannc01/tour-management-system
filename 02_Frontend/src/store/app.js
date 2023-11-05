@@ -1,5 +1,5 @@
 import messages, { MSG_TYPE, MSG_TITLE } from '@/utils/messages';
-import helpers from '@/utils/helpers';
+// import helpers from '@/utils/helpers';
 
 const dataPathAdmin = {
     pageNameAdmin: '',
@@ -10,12 +10,27 @@ const dataPathAdmin = {
     pagePathAdmin3: '',
     routePagePathAdmin3: ''
 };
+const userInfo = {
+    id: '',
+    role_id: '',
+    full_name: '',
+    email: '',
+    phone_number: '',
+    avatar_url: '',
+    province_id: '',
+    district_id: '',
+    ward_id: '',
+    address: '',
+    gender: '',
+    status: ''
+};
 
 export default {
     namespaced: true,
     state: {
         initPathAdminLayout: { ...dataPathAdmin },
         isLoading: false,
+        userData: { ...userInfo },
         isForceLoading: false,
         isNoLoading: false,
         countLoading: 0,
@@ -30,14 +45,6 @@ export default {
             cancelText: 'Huỷ bỏ',
             callback: () => {}
         },
-        header: {
-            title: '',
-            showBack: false,
-            fixBc: false,
-            onBack: () => {
-                helpers.func_back();
-            }
-        },
         footer: {
             footerButtons: []
         },
@@ -45,11 +52,24 @@ export default {
         isShowMenu: false,
         screenId: 'login',
         isLogout: false,
-        isLogin: false,
-        user: {}
+        isLogin: false
     },
     getters: {},
     mutations: {
+        setUserData(state, data) {
+            state.userData.id = data.id ?? '';
+            state.userData.role_id = data.role_id ?? '';
+            state.userData.full_name = data.full_name ?? '';
+            state.userData.email = data.email ?? '';
+            state.userData.phone_number = data.phone_number ?? '';
+            state.userData.avatar_url = data.avatar_url ?? '';
+            state.userData.province_id = data.province_id ?? '';
+            state.userData.district_id = data.district_id ?? '';
+            state.userData.ward_id = data.ward_id ?? '';
+            state.userData.address = data.address ?? '';
+            state.userData.gender = data.gender ?? '';
+            state.userData.status = data.status ?? '';
+        },
         setPageNameAdmin(state, data) {
             state.initPathAdminLayout.pageNameAdmin = data;
         },

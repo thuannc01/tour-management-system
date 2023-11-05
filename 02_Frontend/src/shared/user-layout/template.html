@@ -13,12 +13,18 @@
                         <small class="ms-4"><i class="fa fa-phone-alt me-3"></i>+84 098 1234 898</small>
                     </div>
                     <div>
-                        <small class="ms-4" @click="navProfile"><i class="bi bi-person-circle pe-2"></i>User</small>
+                        <small class="ms-4" @click="navProfile"><i
+                                class="bi bi-person-circle pe-2"></i>{{userData.full_name}}</small>
                         <small class="ms-4">|</small>
                         <small class="ms-4"><i class="bi bi-bell-fill pe-2"></i>5 Thông báo</small>
                         <small class="ms-4">|</small>
-                        <small class="ms-4"><i class="bi bi-box-arrow-in-right pe-2"></i>Đăng nhập</small>
-                        <small class="ms-4 d-none"><i class="bi bi-box-arrow-in-left pe-2"></i>Đăng xuất</small>
+                        <small @click="login" class="ms-4" v-if="userData.id == ''"><i
+                                class="bi bi-box-arrow-in-right pe-2"></i>
+                            Đăng nhập
+                        </small>
+                        <small @click="logout" class="ms-4" v-else>
+                            <i class="bi bi-box-arrow-in-left pe-2"></i>Đăng xuất
+                        </small>
                     </div>
                 </div>
             </div>

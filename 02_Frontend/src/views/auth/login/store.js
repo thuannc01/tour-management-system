@@ -29,30 +29,16 @@ export default {
                             vm.commit('app/hideModalMessage', null, {
                                 root: true
                             });
-                            let beforeUrl = localStorage.getItem('beforeUrl');
-                            if (
-                                beforeUrl == undefined ||
-                                beforeUrl == null ||
-                                beforeUrl == ''
-                            ) {
-                                beforeUrl = '/';
-                            }
-                            localStorage.removeItem('beforeUrl');
-                            if (user.saveAccount) {
-                                localStorage.setItem(
-                                    'username',
-                                    btoa(user.username)
-                                );
-                                localStorage.setItem(
-                                    'password',
-                                    btoa(user.password)
-                                );
-                            } else {
-                                localStorage.removeItem('username');
-                                localStorage.removeItem('password');
+                            const role = data.Data[0].user.role_id;
+                            let beforeUrl = '/';
+                            if (role != 1) {
+                                beforeUrl = '/dashboard';
                             }
                             Router.push(beforeUrl);
                         }
+                        vm.commit('app/setUserData', data.Data[0].user, {
+                            root: true
+                        });
                     }
                 });
             } catch (e) {

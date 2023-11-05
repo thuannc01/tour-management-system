@@ -52,6 +52,7 @@ router.beforeEach((to, from, next) => {
         localStorage.removeItem('historyURL');
         store.commit('app/setLogout', false);
         store.commit('app/setLogin', false);
+        store.commit('app/setUserData', {});
     };
     const func_beforeEach = (to, from, next) => {
         store.commit('app/hideHeaderError');

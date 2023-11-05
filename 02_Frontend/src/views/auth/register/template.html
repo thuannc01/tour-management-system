@@ -6,28 +6,28 @@
 				<form @submit="checkForm">
 					<div class="field input-field">
 						<input type="text" placeholder="Họ và tên" class="input form-control" v-model="fullName"
-							maxlength="50" required>
+							maxlength="50">
 					</div>
 
 					<div class="field input-field d-flex">
-						<input type="email" placeholder="Email" class="input form-control" v-model="email"
-							maxlength="50" required>
+						<input type="text" placeholder="Email" class="input form-control" v-model="email"
+							maxlength="50">
 					</div>
 
 					<div class="field input-field d-flex">
 						<input type="text" placeholder="Số điện thoại" class="input form-control" v-model="phoneNumber"
-							maxlength="10" required>
+							maxlength="10">
 					</div>
 
 					<div class="field input-field">
 						<input type="password" placeholder="Mật khẩu" class="password form-control" v-model="password"
-							maxlength="50" required>
+							maxlength="50">
 						<i class='bx bx-hide eye-icon'></i>
 					</div>
 
 					<div class="field input-field">
 						<input type="password" placeholder="Nhập lại mật khẩu" class="password form-control"
-							v-model="password_confirmation" maxlength="50" required>
+							v-model="password_confirmation" maxlength="50">
 						<i class='bx bx-hide eye-icon'></i>
 					</div>
 

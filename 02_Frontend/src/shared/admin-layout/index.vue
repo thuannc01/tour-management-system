@@ -12,7 +12,7 @@ export default {
         Loading
     },
     computed: {
-        ...mapState('app', ['isLogout', 'initPathAdminLayout'])
+        ...mapState('app', ['isLogout', 'initPathAdminLayout', 'userData'])
     },
     data() {
         return {};

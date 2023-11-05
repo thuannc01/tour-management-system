@@ -28,9 +28,19 @@ export default {
         window.removeEventListener('resize', this.stickyTop);
         window.removeEventListener('scroll', this.stickyTop);
     },
-    watch: {},
+    watch: {
+        // userData: {
+        //     handler(newValue) {
+        //         if (newValue && newValue.id) {
+        //             this.user_id = newValue.id;
+        //         }
+        //     },
+        //     deep: true
+        // }
+    },
     computed: {
         // app
+        ...mapState('app', ['isLogout', 'userData']),
         // module
         ...mapState('UserLayoutStore', ['data', 'priceOptions'])
     },
@@ -39,7 +49,7 @@ export default {
     },
     methods: {
         // app
-        ...mapActions('app', []),
+        ...mapMutations('app', ['setLogout']),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
         ...mapActions('', ['']),
@@ -86,6 +96,13 @@ export default {
         },
         navProfile() {
             this.$router.push({ path: `/profile` });
+        },
+        logout: function () {
+            this.setLogout(true);
+            this.$router.push('/login');
+        },
+        login: function () {
+            this.$router.push('/login');
         }
     }
 };

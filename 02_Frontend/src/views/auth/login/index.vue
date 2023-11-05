@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 import template from './template.html';
 
@@ -24,7 +24,6 @@ var Login = {
             if (pass && pass != '') {
                 this.password = atob(pass);
             }
-            this.saveAccount = true;
         }
     },
     watch: {},
@@ -36,20 +35,43 @@ var Login = {
             showPassword: false
         };
     },
+    computed: {
+        ...mapState('LoginStore', ['']),
+        ...mapState('app', ['userData'])
+    },
     methods: {
         ...mapActions('login', ['login']),
         ...mapActions('app', []),
-        ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
+        ...mapMutations('app', [
+            'showHeaderError',
+            'showModalMessage',
+            'setUserData'
+        ]),
 
         checkForm: function (e) {
-            e.preventDefault();
             const { email, password } = this;
-            if (!email && password) {
-                this.showHeaderError('ID' + [messages.E001]);
-                return;
+            const vm = this;
+            e.preventDefault();
+            if (vm.isStringEmpty(email)) {
+                this.showHeaderError(['Email' + messages.E002]);
+                return false;
+            } else if (!vm.isEmail(email)) {
+                this.showHeaderError([messages.E003]);
+                return false;
+            } else if (vm.isStringEmpty(password)) {
+                this.showHeaderError(['Mật khẩu' + messages.E002]);
+                return false;
             }
             this.login({ email, password });
             return true;
+        },
+        isEmail(email) {
+            const emailRegex =
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailRegex.test(email);
+        },
+        isStringEmpty(str) {
+            return str.trim() === '';
         }
     }
 };
