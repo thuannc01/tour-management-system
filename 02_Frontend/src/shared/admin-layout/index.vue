@@ -2,7 +2,9 @@
 import template from './template.html';
 import HeaderError from '@/components/headerError';
 import Loading from '@/components/loading';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
+import store from '@/store';
+import AdminLayoutStore from '@/shared/admin-layout/store';
 
 export default {
     name: 'AdminLayout',
@@ -11,14 +13,27 @@ export default {
         HeaderError,
         Loading
     },
+    beforeCreate() {
+        if (!store.hasModule('AdminLayoutStore')) {
+            store.registerModule('AdminLayoutStore', AdminLayoutStore);
+        }
+    },
+    created() {},
+    mounted() {
+        this.getRoleNameInit();
+    },
+    unmounted() {},
+    watch: {},
     computed: {
-        ...mapState('app', ['isLogout', 'initPathAdminLayout', 'userData'])
+        ...mapState('app', ['isLogout', 'initPathAdminLayout', 'userData']),
+        ...mapState('AdminLayoutStore', ['data'])
     },
     data() {
         return {};
     },
     methods: {
         ...mapMutations('app', ['setLogout']),
+        ...mapActions('AdminLayoutStore', ['getRoleName']),
         logout: function () {
             this.setLogout(true);
             this.$router.push('/login');
@@ -30,6 +45,13 @@ export default {
                 console.error('Error decoding URL:', error);
                 return url; // Return the original URL in case of an error
             }
+        },
+        getRoleNameInit() {
+            const vm = this;
+            const conditions = {
+                id: vm.userData.role_id
+            };
+            vm.getRoleName(conditions);
         }
     }
 };

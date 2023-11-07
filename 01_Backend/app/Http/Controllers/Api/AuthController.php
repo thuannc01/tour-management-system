@@ -52,7 +52,7 @@ class AuthController extends Controller
      *              @OA\Property(property="Code", type="integer", example="200"),
      *              @OA\Property(
      *                  property="Data",
-     *                  description="Data of token after login. Empty if have error"
+     *                  description="Result of success"
      *              )
      *          )
      *      )
@@ -132,7 +132,7 @@ class AuthController extends Controller
      *              @OA\Property(property="Code", type="integer", example="200"),
      *              @OA\Property(
      *                  property="Data",
-     *                  description="Data of token after login. Empty if have error"
+     *                  description="Result of success"
      *              )
      *          )
      *      )
@@ -202,7 +202,7 @@ class AuthController extends Controller
      *              @OA\Property(property="Code", type="integer", example="200"),
      *              @OA\Property(
      *                  property="Data",
-     *                  description="Data of token after login. Empty if have error"
+     *                  description="Result of success"
      *              )
      *          )
      *      )
@@ -239,7 +239,7 @@ class AuthController extends Controller
      *              @OA\Property(property="Code", type="integer", example="200"),
      *              @OA\Property(
      *                  property="Data",
-     *                  description="Data of token after login. Empty if have error"
+     *                  description="Result of success"
      *              )
      *          )
      *      )
@@ -275,7 +275,7 @@ class AuthController extends Controller
      *              @OA\Property(property="Code", type="integer", example="200"),
      *              @OA\Property(
      *                  property="Data",
-     *                  description="Data of token after login. Empty if have error"
+     *                  description="Result of success"
      *              )
      *          )
      *      )

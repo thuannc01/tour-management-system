@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\RoleController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,7 +31,9 @@ Route::group([
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    Route::apiResource('/user', UserController::class);
+    // Route::apiResource('/user', UserController::class);
 });
 
 // No auth
+// role
+Route::apiResource('/role', RoleController::class);

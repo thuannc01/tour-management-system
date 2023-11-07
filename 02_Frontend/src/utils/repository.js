@@ -19,10 +19,10 @@ var repository = axios.create({
 repository.interceptors.request.use(
     function (config) {
         config.headers['x-request-id'] = _.uuid();
-        const token = localStorage.getItem('token');
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
+        // const token = localStorage.getItem('token');
+        // if (token) {
+        //     config.headers.Authorization = `Bearer ${token}`;
+        // }
         const clientCode = localStorage.getItem('clientcode');
         if (clientCode) {
             config.headers['clientcode'] = clientCode;

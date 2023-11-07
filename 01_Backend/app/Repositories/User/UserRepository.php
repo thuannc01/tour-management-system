@@ -7,7 +7,6 @@ use App\Repositories\BaseRepository;
 
 class UserRepository extends BaseRepository implements IUserRepository
 {
-    //lấy model tương ứng
     public function getModel()
     {
         return \App\Models\User::class;

@@ -60,7 +60,7 @@
                                             "example": "200"
                                         },
                                         "Data": {
-                                            "description": "Data of token after login. Empty if have error"
+                                            "description": "Result of success"
                                         }
                                     },
                                     "type": "object"
@@ -132,7 +132,7 @@
                                             "example": "200"
                                         },
                                         "Data": {
-                                            "description": "Data of token after login. Empty if have error"
+                                            "description": "Result of success"
                                         }
                                     },
                                     "type": "object"
@@ -163,7 +163,7 @@
                                             "example": "200"
                                         },
                                         "Data": {
-                                            "description": "Data of token after login. Empty if have error"
+                                            "description": "Result of success"
                                         }
                                     },
                                     "type": "object"
@@ -199,7 +199,7 @@
                                             "example": "200"
                                         },
                                         "Data": {
-                                            "description": "Data of token after login. Empty if have error"
+                                            "description": "Result of success"
                                         }
                                     },
                                     "type": "object"
@@ -235,7 +235,7 @@
                                             "example": "200"
                                         },
                                         "Data": {
-                                            "description": "Data of token after login. Empty if have error"
+                                            "description": "Result of success"
                                         }
                                     },
                                     "type": "object"
@@ -249,6 +249,47 @@
                         "apiAuth": []
                     }
                 ]
+            }
+        },
+        "/role": {
+            "get": {
+                "tags": [
+                    "Role"
+                ],
+                "summary": "Get role name by id",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "d43bbacd0271bcd2ffa5f1f312ea7c46",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Get name by id",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
