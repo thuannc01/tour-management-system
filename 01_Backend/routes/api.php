@@ -31,9 +31,8 @@ Route::group([
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    // Route::apiResource('/user', UserController::class);
+    // role
+    Route::apiResource('/role', RoleController::class);
 });
 
 // No auth
-// role
-Route::apiResource('/role', RoleController::class);

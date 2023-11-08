@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Role\IRoleRepository;
+use App\Constants\ResponseCodeConstant;
 
 class RoleController extends Controller
 {
@@ -20,6 +21,7 @@ class RoleController extends Controller
      *  @OA\GET(
      *      path="/role",
      *      tags={"Role"},
+     *      security={{"apiAuth":{}}},
      *      description="
      *      Code
      *          200 - Success
@@ -52,8 +54,15 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         try {
-            dd(123123);
-            $response = $this->roleRepository->find($request->all()['id']);
+            $data_res = $this->roleRepository->find($request->all()['id']);
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
         }
         catch (\Exception $e) {
             //

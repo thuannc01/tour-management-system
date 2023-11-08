@@ -193,6 +193,9 @@ paths:
                   Data:
                     description: 'Result of success'
                 type: object
+      security:
+        -
+          apiAuth: []
 components:
   securitySchemes:
     apiAuth:

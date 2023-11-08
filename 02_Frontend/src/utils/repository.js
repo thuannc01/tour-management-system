@@ -19,10 +19,10 @@ var repository = axios.create({
 repository.interceptors.request.use(
     function (config) {
         config.headers['x-request-id'] = _.uuid();
-        // const token = localStorage.getItem('token');
-        // if (token) {
-        //     config.headers.Authorization = `Bearer ${token}`;
-        // }
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
         const clientCode = localStorage.getItem('clientcode');
         if (clientCode) {
             config.headers['clientcode'] = clientCode;
@@ -68,7 +68,9 @@ repository.interceptors.response.use(
             } else if (data.Code === 423) {
                 store.commit('app/showHeaderError', [data.Message]);
             } else {
-                store.commit('app/showHeaderError', [messages.E000]);
+                if (data.Code != 200) {
+                    store.commit('app/showHeaderError', [messages.E000]);
+                }
             }
             store.commit('app/hideForceLoading');
         }
