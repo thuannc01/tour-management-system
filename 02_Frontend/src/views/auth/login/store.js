@@ -36,9 +36,9 @@ export default {
                             }
                             Router.push(beforeUrl);
                         }
-                        // vm.commit('app/setUserData', data.Data[0].user, {
-                        //     root: true
-                        // });
+                        vm.commit('app/setUserData', data.Data[0].user, {
+                            root: true
+                        });
                     }
                 });
             } catch (e) {

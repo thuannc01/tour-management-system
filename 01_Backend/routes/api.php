@@ -24,13 +24,14 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
 });
 
 // Auth
 Route::group([
     'middleware' => 'auth'
 ], function () {
+    // user
+    Route::get('/user-profile', [UserController::class, 'userProfile']);    
     // role
     Route::apiResource('/role', RoleController::class);
 });

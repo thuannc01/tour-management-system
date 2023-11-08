@@ -57,7 +57,7 @@ class RoleController extends Controller
             $data_res = $this->roleRepository->find($request->all()['id']);
 
             $response = response()->json([
-                'Code'         => ResponseCodeConstant::OK,
+                'Code'         => ResponseCodeConstant::UNAUTHORIZED,
                 'Data'         => $data_res,
                 'MessageNo'    => "",
                 'Message'      => "",

@@ -250,42 +250,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the authenticated User (user-profile)
-     * Created: 2023/08/13
-     * @param  LoginRequest $request
-     * @return DataResponse
-     *  @OA\Get(
-     *      path="/user-profile",
-     *      tags={"Authentication"},
-     *      security={{"apiAuth":{}}},
-     *      description="
-     *      Code
-     *          200 - Success
-     *          400 - Bad request
-     *          401 - Not authentication
-     *          403 - Not access
-     *          422 - Input invalidate
-     *          423 - Have other error
-     *          500 - Server error
-     *      ",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Result after success",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="Code", type="integer", example="200"),
-     *              @OA\Property(
-     *                  property="Data",
-     *                  description="Result of success"
-     *              )
-     *          )
-     *      )
-     *  )
-     */
-    public function userProfile() {
-        return response()->json(auth()->user());
-    }
-
-    /**
      * Get the token array structure.
      *
      * @param  string $token

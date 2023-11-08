@@ -143,29 +143,6 @@ paths:
       security:
         -
           apiAuth: []
-  /user-profile:
-    get:
-      tags:
-        - Authentication
-      summary: "Get the authenticated User (user-profile)\nCreated: 2023/08/13"
-      description: "\r\n     *      Code\r\n     *          200 - Success\r\n     *          400 - Bad request\r\n     *          401 - Not authentication\r\n     *          403 - Not access\r\n     *          422 - Input invalidate\r\n     *          423 - Have other error\r\n     *          500 - Server error\r\n     *      "
-      operationId: ac2c3d26e0495f5a44901120aad18023
-      responses:
-        200:
-          description: 'Result after success'
-          content:
-            application/json:
-              schema:
-                properties:
-                  Code:
-                    type: integer
-                    example: '200'
-                  Data:
-                    description: 'Result of success'
-                type: object
-      security:
-        -
-          apiAuth: []
   /role:
     get:
       tags:
@@ -183,6 +160,29 @@ paths:
       responses:
         200:
           description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
+  /user-profile:
+    get:
+      tags:
+        - User
+      summary: "Get the authenticated User (user-profile)\nCreated: 2023/08/13"
+      description: "\r\n     *      Code\r\n     *          200 - Success\r\n     *          400 - Bad request\r\n     *          401 - Not authentication\r\n     *          403 - Not access\r\n     *          422 - Input invalidate\r\n     *          423 - Have other error\r\n     *          500 - Server error\r\n     *      "
+      operationId: 89596c0f7bec9b13e6cfae792269be07
+      responses:
+        200:
+          description: 'Result after success'
           content:
             application/json:
               schema:

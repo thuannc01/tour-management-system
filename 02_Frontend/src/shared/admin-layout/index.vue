@@ -5,13 +5,15 @@ import Loading from '@/components/loading';
 import { mapState, mapMutations, mapActions } from 'vuex';
 import store from '@/store';
 import AdminLayoutStore from '@/shared/admin-layout/store';
+import ModalMessage from '@/shared/modal';
 
 export default {
     name: 'AdminLayout',
     template: template,
     components: {
         HeaderError,
-        Loading
+        Loading,
+        ModalMessage
     },
     beforeCreate() {
         if (!store.hasModule('AdminLayoutStore')) {
@@ -32,7 +34,11 @@ export default {
         return {};
     },
     methods: {
-        ...mapMutations('app', ['setLogout']),
+        ...mapMutations('app', [
+            'setLogout',
+            'showHeaderError',
+            'showModalMessage'
+        ]),
         ...mapActions('AdminLayoutStore', ['getRoleName']),
         logout: function () {
             this.setLogout(true);
