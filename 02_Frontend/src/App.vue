@@ -16,7 +16,9 @@ export default {
             layout: null
         };
     },
-    mounted() {},
+    mounted() {
+        this.getUserInfoAction();
+    },
     watch: {
         $route(to) {
             if (to.meta.layout !== undefined) {
@@ -29,7 +31,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('app', [])
+        ...mapActions('app', ['getUserInfoAction'])
     }
 };
 </script>

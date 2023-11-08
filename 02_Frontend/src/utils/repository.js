@@ -68,9 +68,7 @@ repository.interceptors.response.use(
             } else if (data.Code === 423) {
                 store.commit('app/showHeaderError', [data.Message]);
             } else {
-                if (data.Code != 200) {
-                    store.commit('app/showHeaderError', [messages.E000]);
-                }
+                store.commit('app/showHeaderError', [messages.E000]);
             }
             store.commit('app/hideForceLoading');
         }

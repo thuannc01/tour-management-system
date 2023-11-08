@@ -42,11 +42,7 @@ var Login = {
     methods: {
         ...mapActions('login', ['login']),
         ...mapActions('app', []),
-        ...mapMutations('app', [
-            'showHeaderError',
-            'showModalMessage',
-            'setUserData'
-        ]),
+        ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
 
         checkForm: function (e) {
             const { email, password } = this;

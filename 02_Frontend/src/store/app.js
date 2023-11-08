@@ -1,4 +1,5 @@
 import messages, { MSG_TYPE, MSG_TITLE } from '@/utils/messages';
+import repository from '@/repository';
 // import helpers from '@/utils/helpers';
 
 const dataPathAdmin = {
@@ -182,5 +183,20 @@ export default {
             state.isLogin = data;
         }
     },
-    actions: {}
+    actions: {
+        getUserInfoAction(context) {
+            try {
+                repository.getUserInfo({}).then((res) => {
+                    const { data } = res;
+                    if (data.id) {
+                        context.commit('setUserData', data ?? {});
+                    } else {
+                        context.commit('setUserData', {});
+                    }
+                });
+            } catch (e) {
+                console.log('Action getAppState: ' + e.message);
+            }
+        }
+    }
 };
