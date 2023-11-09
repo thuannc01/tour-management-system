@@ -1053,18 +1053,17 @@
     }
 
     .sidebar-wrapper {
-        width: 300px;
+        width: 320px;
         height: 100vh;
         position: fixed;
         top: 0;
         z-index: 10;
-        overflow-y: auto;
         background-color: #fff;
         bottom: 0;
         transition: left 0.5s ease-out;
 
         .sidebar-header {
-            padding: 2rem 2rem 1rem;
+            padding: 1rem 3rem 1rem;
             font-size: 2rem;
             font-weight: 700;
 
@@ -1072,6 +1071,11 @@
                 width: 100%;
                 filter: invert(35%) sepia(32%) saturate(1998%) hue-rotate(199deg) brightness(91%) contrast(87%);
             }
+        }
+
+        .sidebar-menu {
+            height: 100vh;
+            overflow-y: auto;
         }
 
         .sidebar-toggler.x {
@@ -1082,7 +1086,7 @@
         }
 
         .menu {
-            padding: 0 1rem;
+            padding: 0.5rem 1rem 1rem 1rem;
             font-weight: 600;
 
             .sidebar-title {
@@ -1097,7 +1101,7 @@
             .sidebar-link {
                 display: block;
                 padding: 0.7rem 1rem;
-                font-size: 1rem;
+                font-size: 0.95rem;
                 display: flex;
                 align-items: center;
                 border-radius: 0.5rem;
@@ -1184,7 +1188,7 @@
 
                 .submenu-item {
                     a {
-                        padding: 0.7rem 1rem;
+                        padding: 0.5rem 0.5rem;
                         display: block;
                         color: #25396f;
                         font-size: 0.85rem;
@@ -1688,7 +1692,7 @@
     }
 
     #main {
-        margin-left: 300px;
+        margin-left: 320px;
 
         #main-content {
             padding: 0 2rem;

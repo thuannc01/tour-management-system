@@ -1,5 +1,6 @@
 <div id="admin-layout">
     <header-error />
+    <modal />
     <!-- start: sidebar -->
     <div id="sidebar" class="active">
         <div class="sidebar-wrapper active">
@@ -12,7 +13,6 @@
             </div>
             <div class="sidebar-menu">
                 <ul class="menu">
-                    <li class="sidebar-title"></li>
                     <li class="sidebar-item active">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-grid-fill d-flex"></i>
@@ -34,18 +34,90 @@
                         </a>
                         <ul class="submenu d-block">
                             <li class="submenu-item " @click="handelNavSidebar(2)">
-                                <a>Phân quyền</a>
+                                <a>Thêm mới tài khoản</a>
                             </li>
                             <li class="submenu-item " @click="handelNavSidebar(3)">
                                 <a>Nhân viên điều hành tour</a>
                             </li>
-                            <li class="submenu-item " @click="handelNavSidebar(4)">
-                                <a>Hướng dẫn viên du lịch</a>
-                            </li>
                             <li class="submenu-item " @click="handelNavSidebar(5)">
                                 <a>Khách hàng</a>
                             </li>
+                            <li class="submenu-item " @click="handelNavSidebar(4)">
+                                <a>Hướng dẫn viên du lịch</a>
+                            </li>
                         </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Quản lý tour</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Thời gian mở bản tour</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Đơn đặt tour</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Phương tiện liên kết</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Địa điểm ăn uống liên kết</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Địa điểm lưu trú liên kết</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Phản hồi - đánh giá</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Dịch vụ kèm tour</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Cẩm nang và tin tức</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Loại tour</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Địa điểm</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-grid-fill d-flex"></i>
+                            <span>Đối tượng</span>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import _ from 'lodash-uuid';
 import messages, { MSG_TYPE, MSG_TITLE } from './messages';
 import store from '@/store';
-// import Router from '@/router';
+import Router from '@/router';
 
 const baseUrl = process.env.VUE_APP_BASE_DOMAIN + process.env.VUE_APP_BASE_PATH;
 const apiKey = process.env.VUE_APP_API_KEY;
@@ -49,19 +49,25 @@ repository.interceptors.response.use(
         const { data } = response;
         if (data.Code !== 200 && data.Code != undefined) {
             if (data.Code === 401) {
+                console.log('401 showModalMessage');
                 store.commit('app/showModalMessage', {
-                    type: MSG_TYPE.SUCCESS,
+                    type: MSG_TYPE.ERROR,
                     title: MSG_TITLE.E001,
                     content: messages.E401,
+                    okText: 'Đồng ý',
                     callback: () => {
-                        // localStorage.setItem(
-                        //     'beforeUrl',
-                        //     window.location.pathname
-                        // );
-                        // localStorage.removeItem('token');
-                        // localStorage.removeItem('tokenTimeout');
-                        // Router.push('/login');
+                        store.commit('app/setLogout', true);
+                        Router.push('/login');
                     }
+                    // callback: () => {
+                    // localStorage.setItem(
+                    //     'beforeUrl',
+                    //     window.location.pathname
+                    // );
+                    // localStorage.removeItem('token');
+                    // localStorage.removeItem('tokenTimeout');
+                    // Router.push('/login');
+                    // }
                 });
             } else if (data.Code === 403) {
                 store.commit('app/showHeaderError', [messages.E000]);

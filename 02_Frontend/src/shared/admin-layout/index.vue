@@ -5,7 +5,7 @@ import Loading from '@/components/loading';
 import { mapState, mapMutations, mapActions } from 'vuex';
 import store from '@/store';
 import AdminLayoutStore from '@/shared/admin-layout/store';
-import ModalMessage from '@/shared/modal';
+import Modal from '@/shared/modal';
 
 export default {
     name: 'AdminLayout',
@@ -13,7 +13,7 @@ export default {
     components: {
         HeaderError,
         Loading,
-        ModalMessage
+        Modal
     },
     beforeCreate() {
         if (!store.hasModule('AdminLayoutStore')) {
@@ -23,6 +23,9 @@ export default {
     created() {},
     mounted() {
         this.getRoleNameInit();
+        if (this.userData.role_id == 1) {
+            this.logout();
+        }
     },
     unmounted() {},
     watch: {},

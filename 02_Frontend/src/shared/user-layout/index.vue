@@ -6,13 +6,15 @@ import UserLayoutStore from '@/shared/user-layout/store';
 
 import HeaderError from '@/components/headerError';
 import Loading from '@/components/loading';
+import Modal from '@/shared/modal';
 
 export default {
     name: 'MainLayout',
     template: template,
     components: {
         HeaderError,
-        Loading
+        Loading,
+        Modal
     },
     beforeCreate() {
         if (!store.hasModule('UserLayoutStore')) {
@@ -23,6 +25,9 @@ export default {
         this.stickyTop();
         window.addEventListener('resize', this.stickyTop);
         window.addEventListener('scroll', this.stickyTop);
+        if (this.userData.role_id != 1) {
+            this.logout();
+        }
     },
     unmounted() {
         window.removeEventListener('resize', this.stickyTop);
