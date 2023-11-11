@@ -13,109 +13,133 @@
             </div>
             <div class="sidebar-menu">
                 <ul class="menu">
-                    <li class="sidebar-item active">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                    <li id="sidebar-item-statistical" class="sidebar-item active"
+                        :class="[userData.role_id == 4 ? '' : 'd-none']">
+                        <a class='sidebar-link'>
+                            <i class="bi bi-bar-chart-fill d-flex"></i>
                             <span>Thống kê</span>
                         </a>
                         <ul class="submenu d-block">
-                            <li class="submenu-item " @click="handelNavSidebar(2)">
-                                <a>Theo doanh thu</a>
+                            <li class="submenu-item ">
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Theo doanh
+                                            thu</a></span></router-link>
                             </li>
-                            <li class="submenu-item " @click="handelNavSidebar(3)">
-                                <a>Theo tour</a>
+                            <li class="submenu-item ">
+                                <router-link to="/admin/statistics-by-tour"><span><a>Theo
+                                            tour</a></span></router-link>
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item" id="sidebar-item-user">
                         <a class='sidebar-link'>
                             <i class="bi bi-people-fill d-flex"></i>
                             <span>Quản lý tài khoản</span>
                         </a>
                         <ul class="submenu d-block">
-                            <li class="submenu-item " @click="handelNavSidebar(2)">
+                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
                                 <a>Thêm mới tài khoản</a>
                             </li>
-                            <li class="submenu-item " @click="handelNavSidebar(3)">
+                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
                                 <a>Nhân viên điều hành tour</a>
                             </li>
-                            <li class="submenu-item " @click="handelNavSidebar(5)">
+                            <li class="submenu-item "
+                                :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                                 <a>Khách hàng</a>
                             </li>
-                            <li class="submenu-item " @click="handelNavSidebar(4)">
+                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
                                 <a>Hướng dẫn viên du lịch</a>
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item">
+                    <li id="sidebar-item-tour" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-airplane-fill d-flex"></i>
                             <span>Quản lý tour</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li id="sidebar-item-tour-time" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-alarm-fill d-flex"></i>
                             <span>Thời gian mở bản tour</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li id="sidebar-item-order" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-card-heading d-flex"></i>
                             <span>Đơn đặt tour</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li id="sidebar-item-transport" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-car-front d-flex"></i>
                             <span>Phương tiện liên kết</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item-food"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-egg-fried d-flex"></i>
                             <span>Địa điểm ăn uống liên kết</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item-accommodation" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-geo-fill d-flex"></i>
                             <span>Địa điểm lưu trú liên kết</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item-rating" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-reply-all-fill d-flex"></i>
                             <span>Phản hồi - đánh giá</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item-service" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-bag-heart-fill d-flex"></i>
                             <span>Dịch vụ kèm tour</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item-news" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-newspaper d-flex"></i>
                             <span>Cẩm nang và tin tức</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
-                            <span>Loại tour</span>
-                        </a>
+                    <li class="sidebar-item-category" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
+                        <router-link to="/admin/category">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-list-ul d-flex"></i>
+                                <span>Loại tour</span>
+                            </a>
+                        </router-link>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item-location" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-compass d-flex"></i>
                             <span>Địa điểm</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item-object" class="sidebar-item-object mb-5" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-grid-fill d-flex"></i>
+                            <i class="bi bi-person-fill-add d-flex"></i>
+                            <span>Đối tượng</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item" :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
+                        <a class='sidebar-link'>
+                            <i class="bi bi-person-fill-add d-flex"></i>
                             <span>Đối tượng</span>
                         </a>
                     </li>

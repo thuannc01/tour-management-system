@@ -25,13 +25,11 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
 });
-
 // Auth
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    // user
-    Route::get('/user-profile', [UserController::class, 'userProfile']);    
+    Route::get('/user-profile', [UserController::class, 'userProfile']);
     // role
     Route::apiResource('/role', RoleController::class);
 });

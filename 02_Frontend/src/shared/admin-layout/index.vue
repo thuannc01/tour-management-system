@@ -61,6 +61,55 @@ export default {
                 id: vm.userData.role_id
             };
             vm.getRoleName(conditions);
+        },
+        addActiveClass(elem) {
+            elem.classList.add('active');
+        },
+        removeActiveClass(elem) {
+            elem.classList.remove('active');
+        },
+        removeActiveSidebar() {
+            const divStatistical = document.getElementById(
+                'sidebar-item-statistical'
+            );
+            const divUser = document.getElementById('sidebar-item-user');
+            const divTour = document.getElementById('sidebar-item-tour');
+            const divTourTime = document.getElementById(
+                'sidebar-item-tour-time'
+            );
+            const divTourOrder = document.getElementById('sidebar-item-order');
+            const divTransport = document.getElementById(
+                'sidebar-item-transport'
+            );
+            const divFood = document.getElementById('sidebar-item-food');
+            const divAccommodation = document.getElementById(
+                'sidebar-item-accommodation'
+            );
+            const divRating = document.getElementById('sidebar-item-rating');
+            const divService = document.getElementById('sidebar-item-service');
+            const divNews = document.getElementById('sidebar-item-news');
+            const divCategory = document.getElementById(
+                'sidebar-item-category'
+            );
+            const divLocation = document.getElementById(
+                'sidebar-item-location'
+            );
+            const divObject = document.getElementById('sidebar-item-object');
+            //
+            this.removeActiveClass(divStatistical);
+            this.removeActiveClass(divUser);
+            this.removeActiveClass(divTour);
+            this.removeActiveClass(divTourTime);
+            this.removeActiveClass(divTourOrder);
+            this.removeActiveClass(divTransport);
+            this.removeActiveClass(divFood);
+            this.removeActiveClass(divAccommodation);
+            this.removeActiveClass(divRating);
+            this.removeActiveClass(divService);
+            this.removeActiveClass(divNews);
+            this.removeActiveClass(divCategory);
+            this.removeActiveClass(divLocation);
+            this.removeActiveClass(divObject);
         }
     }
 };

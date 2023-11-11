@@ -9,7 +9,7 @@ export default {
     },
     mutations: {
         setRoleName(state, data) {
-            state.data.roleName = data;
+            state.data.roleName = data ?? '';
         }
     },
     actions: {
@@ -18,6 +18,7 @@ export default {
                 repository.getRoleName(payload).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
+                        console.log(data.Data.name);
                         context.commit('setRoleName', data.Data.name);
                     }
                 });

@@ -5,18 +5,18 @@ import template from './template.html';
 
 import './style.scss';
 import store from '@/store';
-import DashboardStore from '@/views/admin/dashboard/store';
+import CategoryStore from '@/views/admin/category/store';
 
-var Dashboard = {
+var Category = {
     template: template,
     beforeCreate() {
-        if (!store.hasModule('DashboardStore')) {
-            store.registerModule('DashboardStore', DashboardStore);
+        if (!store.hasModule('CategoryStore')) {
+            store.registerModule('CategoryStore', CategoryStore);
         }
     },
     created() {},
     mounted() {
-        this.setPageNameAdmin('Thống kê theo doanh thu');
+        this.setPageNameAdmin('Cập nhật loại tour du lịch');
         this.setPagePathAdmin1('Dashboard 111');
         this.setRoutePagePathAdmin1('/thuan-nguyen');
     },
@@ -50,5 +50,5 @@ var Dashboard = {
     }
 };
 
-export default Dashboard;
+export default Category;
 </script>

@@ -32,7 +32,7 @@ export default {
                             const role = data.Data[0].user.role_id;
                             let beforeUrl = '/';
                             if (role != 1) {
-                                beforeUrl = '/dashboard';
+                                beforeUrl = '/admin/statistics-by-revenue';
                             }
                             Router.push(beforeUrl);
                         }
