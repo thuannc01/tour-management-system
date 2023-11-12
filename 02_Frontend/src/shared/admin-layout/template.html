@@ -37,17 +37,21 @@
                         </a>
                         <ul class="submenu d-block">
                             <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
-                                <a>Thêm mới tài khoản</a>
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Thêm mới tài
+                                            khoản</a></span></router-link>
                             </li>
                             <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
-                                <a>Nhân viên điều hành tour</a>
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Nhân viên điều hành
+                                            tour</a></span></router-link>
                             </li>
                             <li class="submenu-item "
                                 :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                                <a>Khách hàng</a>
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Khách
+                                            hàng</a></span></router-link>
                             </li>
                             <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
-                                <a>Hướng dẫn viên du lịch</a>
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Hướng dẫn viên du
+                                            lịch</a></span></router-link>
                             </li>
                         </ul>
                     </li>
@@ -79,6 +83,20 @@
                             <span>Phương tiện liên kết</span>
                         </a>
                     </li>
+                    <li class="sidebar-item-rating" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-reply-all-fill d-flex"></i>
+                            <span>Phản hồi - đánh giá</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item-news" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-newspaper d-flex"></i>
+                            <span>Cẩm nang và tin tức</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item-food"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
@@ -93,25 +111,11 @@
                             <span>Địa điểm lưu trú liên kết</span>
                         </a>
                     </li>
-                    <li class="sidebar-item-rating" class="sidebar-item"
-                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-reply-all-fill d-flex"></i>
-                            <span>Phản hồi - đánh giá</span>
-                        </a>
-                    </li>
                     <li class="sidebar-item-service" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-bag-heart-fill d-flex"></i>
                             <span>Dịch vụ kèm tour</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item-news" class="sidebar-item"
-                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-newspaper d-flex"></i>
-                            <span>Cẩm nang và tin tức</span>
                         </a>
                     </li>
                     <li class="sidebar-item-category" class="sidebar-item"
