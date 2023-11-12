@@ -46,7 +46,7 @@ class UserController extends Controller
      *      )
      *  )
      */
-    public function userProfile() {
+    public function userProfile() { 
         return response()->json(auth()->user());
     }
 }

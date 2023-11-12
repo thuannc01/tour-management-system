@@ -48,13 +48,13 @@ var Login = {
             const { email, password } = this;
             const vm = this;
             e.preventDefault();
-            if (vm.isStringEmpty(email)) {
+            if (vm.isStringEmpty(email ?? '')) {
                 this.showHeaderError(['Email' + messages.E002]);
                 return false;
-            } else if (!vm.isEmail(email)) {
+            } else if (!vm.isEmail(email ?? '')) {
                 this.showHeaderError([messages.E003]);
                 return false;
-            } else if (vm.isStringEmpty(password)) {
+            } else if (vm.isStringEmpty(password ?? '')) {
                 this.showHeaderError(['Mật khẩu' + messages.E002]);
                 return false;
             }
@@ -67,7 +67,7 @@ var Login = {
             return emailRegex.test(email);
         },
         isStringEmpty(str) {
-            return str.trim() === '';
+            return str.trim() == '';
         }
     }
 };

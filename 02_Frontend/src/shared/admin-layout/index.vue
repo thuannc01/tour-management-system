@@ -28,7 +28,11 @@ export default {
         }
     },
     unmounted() {},
-    watch: {},
+    watch: {
+        userData() {
+            this.getRoleNameInit();
+        }
+    },
     computed: {
         ...mapState('app', ['isLogout', 'initPathAdminLayout', 'userData']),
         ...mapState('AdminLayoutStore', ['data'])

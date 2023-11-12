@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\RoleController;
 */
 
 // Handel token
+Route::get('/user-profile', [UserController::class, 'userProfile']);
 Route::group([
     'middleware' => 'api',
 ], function () {
@@ -29,7 +30,6 @@ Route::group([
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    Route::get('/user-profile', [UserController::class, 'userProfile']);
     // role
     Route::apiResource('/role', RoleController::class);
 });

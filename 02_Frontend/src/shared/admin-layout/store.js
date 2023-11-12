@@ -18,8 +18,10 @@ export default {
                 repository.getRoleName(payload).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
-                        console.log(data.Data.name);
-                        context.commit('setRoleName', data.Data.name);
+                        console.log(data.Data);
+                        if (data.Data != null) {
+                            context.commit('setRoleName', data.Data.name ?? '');
+                        }
                     }
                 });
             } catch (e) {

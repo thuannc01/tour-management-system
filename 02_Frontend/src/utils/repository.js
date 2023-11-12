@@ -49,7 +49,6 @@ repository.interceptors.response.use(
         const { data } = response;
         if (data.Code !== 200 && data.Code != undefined) {
             if (data.Code === 401) {
-                console.log('401 showModalMessage');
                 store.commit('app/showModalMessage', {
                     type: MSG_TYPE.ERROR,
                     title: MSG_TITLE.E001,
