@@ -25,9 +25,9 @@ export default {
         this.stickyTop();
         window.addEventListener('resize', this.stickyTop);
         window.addEventListener('scroll', this.stickyTop);
-        if (this.userData.role_id != 1) {
-            this.logout();
-        }
+        // if (this.userData.role_id != 1) {
+        //     this.logout();
+        // }
     },
     unmounted() {
         window.removeEventListener('resize', this.stickyTop);
