@@ -1,3 +1,96 @@
 <div id="dashboard">
-    Nội dung thống kê theo doanh thu ở đây ...
+    <!-- total -->
+    <div class="row">
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon">
+                        <i class="bi bi-amd"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tổng tour đã mở</h6>
+                    <h6 class="font-extrabold mb-0">1.067</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon" style="background-color: #43CD80;">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tour đã triển khai</h6>
+                    <h6 class="font-extrabold mb-0">498</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon" style="background-color: #EEB4B4;">
+                        <i class="bi bi-person-hearts"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tổng khách hàng</h6>
+                    <h6 class="font-extrabold mb-0">3.607</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon" style="background-color: #F4A460;">
+                        <i class="bi bi-piggy-bank-fill"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tổng doanh thu</h6>
+                    <h6 class="font-extrabold mb-0">18.943.324đ</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- filter -->
+    <hr>
+    <div class="row">
+        <div class="col-6 d-flex">
+            <div class="title-filter me-4">
+                <p>Chọn loại thời gian</p>
+            </div>
+            <div class="radio-filter d-flex">
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        <p>Tháng</p>
+                    </label>
+                </div>
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        <p>Quý</p>
+                    </label>
+                </div>
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        <p>Năm</p>
+                    </label>
+                </div>
+            </div>
+            <!-- button action -->
+        </div>
+        <div class="col-6 d-flex justify-content-between">
+            <div class="col-5">
+                <thuan-input label="Thời gian bắt đầu" type="date" />
+            </div>
+            <div class="col-5">
+                <thuan-input label="Thời gian kết thúc" type="date" />
+            </div>
+        </div>
+    </div>
+    <!-- detail data -->
 </div>

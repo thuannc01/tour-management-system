@@ -107,6 +107,7 @@ export default {
             this.$router.push('/login');
         },
         login: function () {
+            this.setLogout(true);
             this.$router.push('/login');
         }
     }

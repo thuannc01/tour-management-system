@@ -17,8 +17,8 @@ var Dashboard = {
     created() {},
     mounted() {
         this.setPageNameAdmin('Thống kê theo doanh thu');
-        this.setPagePathAdmin1('Dashboard 111');
-        this.setRoutePagePathAdmin1('/thuan-nguyen');
+        this.setPagePathAdmin1('Theo doanh thu');
+        this.setRoutePagePathAdmin1('/admin/statistics-by-revenue');
     },
     unmounted() {
         this.setPageNameAdmin('');
