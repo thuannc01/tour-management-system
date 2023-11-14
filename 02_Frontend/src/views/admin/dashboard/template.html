@@ -57,28 +57,37 @@
     <!-- filter -->
     <hr>
     <div class="row">
-        <div class="col-6 d-flex">
-            <div class="title-filter me-4">
-                <p>Chọn loại thời gian</p>
-            </div>
-            <div class="radio-filter d-flex">
-                <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        <p>Tháng</p>
-                    </label>
+        <div class="col-6 d-flex align-items-center">
+            <div class="row">
+                <div class="col-12 d-flex">
+                    <div class="title-filter me-4">
+                        <p>Chọn loại thời gian</p>
+                    </div>
+                    <div class="radio-filter d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                <p>Tháng</p>
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                <p>Quý</p>
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                <p>Năm</p>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        <p>Quý</p>
-                    </label>
-                </div>
-                <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        <p>Năm</p>
-                    </label>
+                <div class="col-12">
+                    <thuan-button label="Thống kê" />
                 </div>
             </div>
             <!-- button action -->
@@ -92,5 +101,41 @@
             </div>
         </div>
     </div>
+    <!-- chart -->
+    <div class="row">
+        <p>Biểu đồ ở đây</p>
+    </div>
     <!-- detail data -->
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="align-middle text-center" scope="col">STT</th>
+                    <th class="align-middle" scope="col">Khách hàng</th>
+                    <th class="align-middle" scope="col">SL tour bán</th>
+                    <th class="align-middle" scope="col">Đơn giá</th>
+                    <th class="align-middle" scope="col">SL hoàn tour</th>
+                    <th class="align-middle" scope="col">Tiền hoàn trả</th>
+                    <th class="align-middle" scope="col">Thời gian thanh toán</th>
+                    <th class="align-middle" scope="col">Loại tour</th>
+                    <th class="align-middle text-center" scope="col">Doanh thu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="i in 5">
+                    <th class="align-middle text-center" scope="row">{{i}}</th>
+                    <td class="align-middle">Mark</td>
+                    <td class="align-middle">Otto</td>
+                    <td class="align-middle">@mdo</td>
+                    <td class="align-middle">Otto</td>
+                    <td class="align-middle">@mdo</td>
+                    <td class="align-middle">@mdo</td>
+                    <td class="align-middle">Đang xử lý</td>
+                    <td class="align-middle text-center">
+                        xxx
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
