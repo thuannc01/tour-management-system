@@ -15,6 +15,8 @@ import ThuanTextarea from '@/components/thuanTextarea';
 import ThuanSelect from '@/components/thuanSelect';
 import ThuanButton from '@/components/thuanButton';
 import ThuanDatePicker from '@/components/thuanDatePicker';
+import ThuanBarChart from '@/components/thuanBarChart';
+import ThuanPieChart from '@/components/thuanPieChart';
 
 const app = createApp(App);
 app.use(vClickOutside);
@@ -34,5 +36,7 @@ app.component('ThuanTextarea', ThuanTextarea);
 app.component('ThuanSelect', ThuanSelect);
 app.component('ThuanButton', ThuanButton);
 app.component('ThuanDatePicker', ThuanDatePicker);
+app.component('ThuanBarChart', ThuanBarChart);
+app.component('ThuanPieChart', ThuanPieChart);
 
 app.mount('#app');
