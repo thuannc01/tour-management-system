@@ -1,3 +1,46 @@
 @import '../../../assets/scss/common/var';
 
-#dashboard {}
+#dashboard2 {
+    .col-2.left-column {
+        width: 20% !important;
+    }
+
+    .col-10.right-column {
+        width: 80% !important;
+    }
+
+    .filter-area,
+    .filter-province,
+    .filter-category,
+    .filter-object {
+        background-color: rgb(238, 238, 238);
+        width: fit-content;
+        border-radius: 10px;
+        padding: 1rem;
+    }
+
+    .filter-province {
+        max-height: 220px;
+        overflow-y: auto;
+    }
+
+    .filter-category {
+        max-height: 170px;
+        overflow-y: auto;
+    }
+
+    .filter-object {
+        max-height: 150px;
+        overflow-y: auto;
+    }
+
+    ul.pagination.pagination-md.justify-content-center {
+        margin-bottom: 0 !important;
+    }
+
+    .pagination {
+        li {
+            margin: 0 !important;
+        }
+    }
+}

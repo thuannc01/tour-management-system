@@ -1,5 +1,5 @@
 <template>
-    <div class="container my-2">
+    <div class="container mb-2 mt-3">
         <h5 class="mb-2 text-center text-uppercase">
             Tổng Doanh thu theo thời gian và loại tour
         </h5>

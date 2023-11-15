@@ -1,28 +1,27 @@
 <template>
-    <div class="container mt-3">
+    <div class="container mb-2">
         <h5 class="mb-2 text-center text-uppercase">
-            Doanh thu theo vùng miền
+            Tỷ lệ người lớn, trẻ em và em bé trong tour
         </h5>
-        <Pie id="my-chart-id" :options="chartOptions" :data="chartData" />
+        <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" />
     </div>
 </template>
 
 <script>
-import { Pie } from 'vue-chartjs';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'vue-chartjs';
 ChartJS.register(ArcElement, Tooltip, Legend);
-
 export default {
-    name: 'PieChart',
-    components: { Pie },
+    name: 'DoughnutChart',
+    components: { Doughnut },
     data() {
         return {
             chartData: {
-                labels: ['Miền Bắc', 'Miền Trung', 'Miền Nam'],
+                labels: ['Người lớn', 'Trẻ em', 'Em bé'],
                 datasets: [
                     {
                         backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
-                        data: [40, 20, 80]
+                        data: [80, 20, 20]
                     }
                 ]
             },

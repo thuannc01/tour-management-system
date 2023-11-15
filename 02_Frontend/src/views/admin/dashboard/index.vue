@@ -27,7 +27,11 @@ var Dashboard = {
     },
     watch: {},
     data() {
-        return {};
+        return {
+            rows: 10,
+            perPage: 3,
+            currentPage: 1
+        };
     },
     computed: {
         ...mapState('DashboardStore', ['data', 'selectOptions'])

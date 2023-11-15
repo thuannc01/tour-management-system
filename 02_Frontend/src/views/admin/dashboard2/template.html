@@ -1,3 +1,271 @@
-<div id="dashboard">
-    Nội dung thống kê theo tour ở đây ...
+<div id="dashboard2">
+    <!-- total -->
+    <div class="row">
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon">
+                        <i class="bi bi-amd"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tổng tour đã mở</h6>
+                    <h6 class="font-extrabold mb-0">1.067</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon" style="background-color: #43CD80;">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tour đã triển khai</h6>
+                    <h6 class="font-extrabold mb-0">498</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon" style="background-color: #EEB4B4;">
+                        <i class="bi bi-person-hearts"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tổng khách hàng</h6>
+                    <h6 class="font-extrabold mb-0">3.607</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stats-icon" style="background-color: #F4A460;">
+                        <i class="bi bi-piggy-bank-fill"></i>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-muted font-semibold">Tổng doanh thu</h6>
+                    <h6 class="font-extrabold mb-0">18.943.324đ</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- content -->
+    <div class="row m-0">
+        <!-- filter sidebar -->
+        <div class="col-2 left-column">
+            <div class="row">
+                <div class="col-12 filter-area w-100">
+                    <h6 class="text-uppercase">Chọn vùng miền</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Miền Bắc
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Miền Trung
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Miền Nam
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 filter-province w-100">
+                    <h6 class="text-uppercase">Chọn tỉnh, TP</h6>
+                    <div class="form-check" v-for="i in 20">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Thành phố Huế
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 filter-category w-100">
+                    <h6 class="text-uppercase">Chọn loại tour</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Văn Hóa và Lịch Sử
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Dài ngày
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Ngắn ngày
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Ẩm Thực và Gia Vị
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 filter-object w-100">
+                    <h6 class="text-uppercase">Chọn đối tượng</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Khách cá nhân
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Khách đoàn
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div class="col-10 right-column">
+            <!-- chart -->
+            <div class="row">
+                <div class="col-5">
+                    <thuan-doughnut-chart />
+                </div>
+                <div class="col-7">
+                    <h5 class="text-center text-uppercase">Thống kê chi tiết từng tour theo gian bắt đầu - thuộc tour đã
+                        chọn
+                    </h5>
+                    <div class="row">
+                        <div class="col-12 p-0 d-flex justify-content-start">
+                            <div class="title-filter me-4">
+                                <p class="m-0">Tổng: &emsp;<strong>0</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <table class="table table-striped mt-1 w-100" style="font-size: 0.8rem;">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle text-center" scope="col">STT</th>
+                                    <th class="align-middle" scope="col">Mã tour</th>
+                                    <th class="align-middle" scope="col">Tên tour</th>
+                                    <th class="align-middle" scope="col">Miền</th>
+                                    <th class="align-middle" scope="col">Tỉnh thành phố</th>
+                                    <th class="align-middle" scope="col">Tổng SL khách</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="i in 5">
+                                    <th class="align-middle text-center" scope="row">{{i}}</th>
+                                    <td class="align-middle">Mark</td>
+                                    <td class="align-middle">Otto</td>
+                                    <td class="align-middle">@mdo</td>
+                                    <td class="align-middle">Otto</td>
+                                    <td class="align-middle">@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- detail data -->
+            <div class="row mt-2 mx-0">
+                <div class="col-6 d-flex p-0">
+                    <div class="radio-filter d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                <p class="m-0">Tất cả</p>
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                <p class="m-0">Có khách</p>
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                <p class="m-0">Không có khách</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 p-0 d-flex justify-content-end">
+                    <div class="title-filter me-4">
+                        <p class="m-0">Sắp xếp</p>
+                    </div>
+                    <div class="radio-filter d-flex">
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                <p class="m-0">Thời gian</p>
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                <p class="m-0">Số lượng</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped mt-1" style="font-size: 0.8rem;">
+                    <thead>
+                        <tr>
+                            <th class="align-middle text-center" scope="col">STT</th>
+                            <th class="align-middle" scope="col">Mã tour</th>
+                            <th class="align-middle" scope="col">Tên tour</th>
+                            <th class="align-middle" scope="col">Miền</th>
+                            <th class="align-middle" scope="col">Tỉnh thành phố</th>
+                            <th class="align-middle" scope="col">Tổng SL khách</th>
+                            <th class="align-middle" scope="col">Thời gian mở tour</th>
+                            <th class="align-middle" scope="col">Nhóm đối tượng</th>
+                            <th class="align-middle text-center" scope="col">Loại tour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="i in 5">
+                            <th class="align-middle text-center" scope="row">{{i}}</th>
+                            <td class="align-middle">Mark</td>
+                            <td class="align-middle">Otto</td>
+                            <td class="align-middle">@mdo</td>
+                            <td class="align-middle">Otto</td>
+                            <td class="align-middle">@mdo</td>
+                            <td class="align-middle">@mdo</td>
+                            <td class="align-middle">Đang xử lý</td>
+                            <td class="align-middle text-center">
+                                xxx
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+                    <b-pagination v-model="currentPage" :total-rows="rows" align="center"
+                        :per-page="perPage"></b-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

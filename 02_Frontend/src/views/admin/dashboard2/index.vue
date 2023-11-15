@@ -17,8 +17,8 @@ var Dashboard2 = {
     created() {},
     mounted() {
         this.setPageNameAdmin('Thống kê theo tour');
-        this.setPagePathAdmin1('Dashboard 111');
-        this.setRoutePagePathAdmin1('/thuan-nguyen');
+        this.setPagePathAdmin1('Theo tour');
+        this.setRoutePagePathAdmin1('/admin/statistics-by-tour');
     },
     unmounted() {
         this.setPageNameAdmin('');
@@ -27,7 +27,11 @@ var Dashboard2 = {
     },
     watch: {},
     data() {
-        return {};
+        return {
+            rows: 10,
+            perPage: 3,
+            currentPage: 1
+        };
     },
     computed: {
         ...mapState('DashboardStore', ['data', 'selectOptions'])

@@ -58,36 +58,37 @@
     <hr>
     <div class="row">
         <div class="col-6 d-flex align-items-center">
-            <div class="row">
-                <div class="col-12 d-flex">
-                    <div class="title-filter me-4">
-                        <p>Chọn loại thời gian</p>
+            <div class="row mx-0">
+                <div class="col-12 d-flex filter-category-tour">
+                    <div class="title-filter me-4 pt-1">
+                        <p class="m-0 ms-3">Chọn loại thời gian</p>
                     </div>
                     <div class="radio-filter d-flex">
-                        <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <div class="form-check me-4 pt-1">
+                            <input class="form-check-input mt-1" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
-                                <p>Tháng</p>
+                                <p class="m-0">Tháng</p>
                             </label>
                         </div>
-                        <div class="form-check me-4">
+                        <div class="form-check me-4 pt-1">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
                                 checked>
                             <label class="form-check-label" for="flexRadioDefault2">
-                                <p>Quý</p>
+                                <p class="m-0">Quý</p>
                             </label>
                         </div>
-                        <div class="form-check me-4">
+                        <div class="form-check me-4 pt-1">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
                                 checked>
                             <label class="form-check-label" for="flexRadioDefault3">
-                                <p>Năm</p>
+                                <p class="m-0">Năm</p>
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <thuan-button label="Thống kê" />
+                <div class="col-3 mt-2 m-0 p-0">
+                    <thuan-button label=" Thống kê" class="bi bi-pie-chart-fill" />
                 </div>
             </div>
             <!-- button action -->
@@ -111,8 +112,49 @@
         </div>
     </div>
     <!-- detail data -->
-    <div class="row mt-2">
-        <table class="table table-striped">
+    <div class="row mt-2 mx-0">
+        <div class="col-6 d-flex p-0">
+            <div class="radio-filter d-flex">
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        <p class="m-0">Tất cả</p>
+                    </label>
+                </div>
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        <p class="m-0">Tour dài ngày</p>
+                    </label>
+                </div>
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        <p class="m-0">Tour ngắn ngày</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 p-0 d-flex justify-content-end">
+            <div class="title-filter me-4">
+                <p class="m-0">Sắp xếp</p>
+            </div>
+            <div class="radio-filter d-flex">
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        <p class="m-0">Theo thời gian</p>
+                    </label>
+                </div>
+                <div class="form-check me-4">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        <p class="m-0">Theo doanh thu</p>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped mt-1">
             <thead>
                 <tr>
                     <th class="align-middle text-center" scope="col">STT</th>
@@ -142,5 +184,9 @@
                 </tr>
             </tbody>
         </table>
+        <!-- pagination -->
+        <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+            <b-pagination v-model="currentPage" :total-rows="rows" align="center" :per-page="perPage"></b-pagination>
+        </div>
     </div>
 </div>
