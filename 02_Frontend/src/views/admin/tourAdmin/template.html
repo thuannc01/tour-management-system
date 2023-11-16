@@ -1,0 +1,113 @@
+<div id="tour-admin">
+    <!-- step -->
+    <div class="row">
+        <div class="col-4">
+            <div class="row">
+                <div class="col-6">
+                    <thuan-button label=" Liệt kê tour" class="bi bi-list-check" />
+                </div>
+                <div class="col-5 p-0">
+                    <thuan-button label=" Thêm mới" classBtn="btn-success" class="bi bi-plus-circle-fill" />
+                </div>
+            </div>
+        </div>
+        <div class="col-4" style="margin-top: -5px;">
+            <div class="row d-flex justify-content-center blur-background">
+                <div class="col-md-9 d-flex justify-content-between">
+                    <div class="card text-center m-0 step-tour-admin">
+                        <h3 class="card-title m-0">1</h3>
+                    </div>
+                    <div class="card text-center m-0 custom-line-0">
+                        <p class="custom-line m-0 p-0"></p>
+                    </div>
+                    <div class="card text-center m-0 step-tour-admin-disable">
+                        <h3 class="card-title m-0">2</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-6 d-flex justify-content-end">
+                    <button type="button" disabled class="btn btn-danger">
+                        <i class="bi bi-arrow-left"></i> Trở về
+                    </button>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <button type="button" disabled class="btn btn-primary bg-btn-primary-custom">
+                        Tiếp theo <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- list tour -->
+    <div id="list-tour">
+        <!-- search -->
+        <div class="row mb-3 d-flex justify-content-between">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-2 d-flex align-items-center">
+                        <p class="m-0">Hiển thị</p>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="0" selected>8 tour du lịch</option>
+                            <option value="1">16 tour du lịch</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Nhập thông tin tìm kiếm tour ...">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div class="row">
+            <div class="col-3" v-for="item in 8">
+                <div class="project-item mb-4">
+                    <div class="position-relative">
+                        <img class="img-fluid" src="/src/assets/images/footer_img2.jpg" alt="">
+                        <div class="project-overlay">
+                            <a class="btn btn-lg-square btn-light rounded-circle m-1" @click="seeDetails"
+                                data-lightbox="project"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-lg-square btn-light rounded-circle m-1" @click="seeDetails"
+                                data-lightbox="project"><i class="bi bi-trash-fill"></i></a>
+                        </div>
+                    </div>
+                    <div class="px-4 py-3">
+                        <a class="d-block h5" href="">DU LỊCH HÀ NỘI - NINH BÌNH - HẠ LONG - SAPA - LÀO CAI - PHÚ
+                            THỌ</a>
+                        <div class="block-desc">
+                            <div class="row d-flex justify-content-start">
+                                <div>
+                                    <span class="p-600 m-0 p-0">Lịch trình:&ensp;</span>
+                                    <span>6 ngày 5 đêm</span>
+                                </div>
+                                <div>
+                                    <span class="p-600 m-0 p-0">Khởi hành:&ensp;</span>
+                                    <span>16/11/2023</span>
+                                </div>
+                                <div>
+                                    <span class="p-600 m-0 p-0">Phương tiện:&ensp;</span>
+                                    <span>Vietnam Airlines</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- pagination -->
+        <div class="row">
+            <b-pagination v-model="currentPage" :total-rows="rows" align="center" :per-page="perPage"></b-pagination>
+        </div>
+    </div>
+    <!-- update tour -->
+</div>

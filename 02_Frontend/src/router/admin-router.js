@@ -1,6 +1,7 @@
 const Dashboard = () => import('@/views/admin/dashboard');
 const Dashboard2 = () => import('@/views/admin/dashboard2');
 const Category = () => import('@/views/admin/category');
+const TourAdmin = () => import('@/views/admin/tourAdmin');
 
 export default [
     {
@@ -27,6 +28,15 @@ export default [
         component: Category,
         meta: {
             title: 'Loại tour',
+            layout: 'AdminLayout'
+        }
+    },
+    {
+        path: '/admin/tour',
+        name: 'TourAdmin',
+        component: TourAdmin,
+        meta: {
+            title: 'Quản lý tour',
             layout: 'AdminLayout'
         }
     }
