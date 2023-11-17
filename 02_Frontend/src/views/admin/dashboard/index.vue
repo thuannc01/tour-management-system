@@ -19,11 +19,17 @@ var Dashboard = {
         this.setPageNameAdmin('Thống kê theo doanh thu');
         this.setPagePathAdmin1('Theo doanh thu');
         this.setRoutePagePathAdmin1('/admin/statistics-by-revenue');
+        document
+            .getElementById('sidebar-item-statistical')
+            .classList.add('active');
     },
     unmounted() {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
+        document
+            .getElementById('sidebar-item-statistical')
+            .classList.remove('active');
     },
     watch: {},
     data() {
@@ -37,7 +43,7 @@ var Dashboard = {
         ...mapState('DashboardStore', ['data', 'selectOptions'])
     },
     methods: {
-        ...mapActions('app', []),
+        ...mapActions('app', ['']),
         ...mapMutations('app', [
             'showHeaderError',
             'setPageNameAdmin',

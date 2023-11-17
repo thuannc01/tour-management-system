@@ -19,11 +19,13 @@ var TourAdmin = {
         this.setPageNameAdmin('Quản lý tour du lịch');
         this.setPagePathAdmin1('Cập nhật tour du lịch');
         this.setRoutePagePathAdmin1('/admin/tour');
+        document.getElementById('sidebar-item-tour').classList.add('active');
     },
     unmounted() {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
+        document.getElementById('sidebar-item-tour').classList.remove('active');
     },
     watch: {},
     data() {
@@ -34,10 +36,11 @@ var TourAdmin = {
         };
     },
     computed: {
-        ...mapState('DashboardStore', ['data', 'selectOptions'])
+        ...mapState('DashboardStore', ['']),
+        ...mapState('TourAdminStore', ['data', 'btnUpdateTour'])
     },
     methods: {
-        ...mapActions('app', []),
+        ...mapActions('app', ['']),
         ...mapMutations('app', [
             'showHeaderError',
             'setPageNameAdmin',
@@ -48,8 +51,45 @@ var TourAdmin = {
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
         ]),
-        handleButtonClick() {
-            alert('Button clicked!');
+        ...mapMutations('TourAdminStore', ['setBtnUpdateTour']),
+        switchMode(id) {
+            const vm = this;
+            const divListTour = document.getElementById('list-tour');
+            const divUpdateTour = document.getElementById('update-tour');
+            const divProcessing = document.getElementById(
+                'processing-update-tour'
+            );
+            if (id == 1) {
+                vm.removeDisplayNone(divListTour);
+                vm.addDisplayNone(divUpdateTour);
+                divProcessing.classList.add('blur-background');
+                const statusBtn = {
+                    backDisable: true,
+                    nextDisable: true,
+                    btnList: true,
+                    btnUpdate: false
+                };
+                vm.setBtnUpdateTour(statusBtn);
+                this.setPageNameAdmin('Liệt kê tất cả tour du lịch');
+            } else if (id == 2) {
+                vm.addDisplayNone(divListTour);
+                vm.removeDisplayNone(divUpdateTour);
+                divProcessing.classList.remove('blur-background');
+                const statusBtn = {
+                    backDisable: false,
+                    nextDisable: false,
+                    btnList: false,
+                    btnUpdate: true
+                };
+                this.setPageNameAdmin('Thêm mới tour du lịch');
+                vm.setBtnUpdateTour(statusBtn);
+            }
+        },
+        addDisplayNone(elem) {
+            elem.classList.add('d-none');
+        },
+        removeDisplayNone(elem) {
+            elem.classList.remove('d-none');
         }
     }
 };

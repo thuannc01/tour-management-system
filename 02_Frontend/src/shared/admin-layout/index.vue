@@ -72,7 +72,8 @@ export default {
         removeActiveClass(elem) {
             elem.classList.remove('active');
         },
-        removeActiveSidebar() {
+        setActiveSidebar(id) {
+            console.log(id);
             const divStatistical = document.getElementById(
                 'sidebar-item-statistical'
             );
@@ -82,6 +83,8 @@ export default {
                 'sidebar-item-tour-time'
             );
             const divTourOrder = document.getElementById('sidebar-item-order');
+            const divNews = document.getElementById('sidebar-item-news');
+            const divRating = document.getElementById('sidebar-item-rating');
             const divTransport = document.getElementById(
                 'sidebar-item-transport'
             );
@@ -89,9 +92,7 @@ export default {
             const divAccommodation = document.getElementById(
                 'sidebar-item-accommodation'
             );
-            const divRating = document.getElementById('sidebar-item-rating');
             const divService = document.getElementById('sidebar-item-service');
-            const divNews = document.getElementById('sidebar-item-news');
             const divCategory = document.getElementById(
                 'sidebar-item-category'
             );
@@ -105,12 +106,12 @@ export default {
             this.removeActiveClass(divTour);
             this.removeActiveClass(divTourTime);
             this.removeActiveClass(divTourOrder);
+            this.removeActiveClass(divNews);
+            this.removeActiveClass(divRating);
             this.removeActiveClass(divTransport);
             this.removeActiveClass(divFood);
             this.removeActiveClass(divAccommodation);
-            this.removeActiveClass(divRating);
             this.removeActiveClass(divService);
-            this.removeActiveClass(divNews);
             this.removeActiveClass(divCategory);
             this.removeActiveClass(divLocation);
             this.removeActiveClass(divObject);

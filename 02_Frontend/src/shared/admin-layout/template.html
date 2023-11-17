@@ -13,14 +13,14 @@
             </div>
             <div class="sidebar-menu">
                 <ul class="menu">
-                    <li id="sidebar-item-statistical" class="sidebar-item active"
+                    <li id="sidebar-item-statistical" class="sidebar-item"
                         :class="[userData.role_id == 4 ? '' : 'd-none']">
                         <a class='sidebar-link'>
                             <i class="bi bi-bar-chart-fill d-flex"></i>
                             <span>Thống kê</span>
                         </a>
                         <ul class="submenu d-block">
-                            <li class="submenu-item ">
+                            <li class="submenu-item">
                                 <router-link to="/admin/statistics-by-revenue"><span><a>Theo doanh
                                             thu</a></span></router-link>
                             </li>
@@ -99,28 +99,28 @@
                             <span>Phương tiện liên kết</span>
                         </a>
                     </li>
-                    <li class="sidebar-item-food"
+                    <li id="sidebar-item-food" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-egg-fried d-flex"></i>
                             <span>Địa điểm ăn uống liên kết</span>
                         </a>
                     </li>
-                    <li class="sidebar-item-accommodation" class="sidebar-item"
+                    <li id="sidebar-item-accommodation" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-geo-fill d-flex"></i>
                             <span>Địa điểm lưu trú liên kết</span>
                         </a>
                     </li>
-                    <li class="sidebar-item-service" class="sidebar-item"
+                    <li id="sidebar-item-service" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-bag-heart-fill d-flex"></i>
                             <span>Dịch vụ kèm tour</span>
                         </a>
                     </li>
-                    <li class="sidebar-item-category" class="sidebar-item"
+                    <li id="sidebar-item-category" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <router-link to="/admin/category">
                             <a class='sidebar-link'>
@@ -129,14 +129,14 @@
                             </a>
                         </router-link>
                     </li>
-                    <li class="sidebar-item-location" class="sidebar-item"
+                    <li id="sidebar-item-location" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-compass d-flex"></i>
                             <span>Địa điểm</span>
                         </a>
                     </li>
-                    <li class="sidebar-item-object" class="sidebar-item-object mb-5" class="sidebar-item"
+                    <li id="sidebar-item-object" class="sidebar-item-object mb-5" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-fill-add d-flex"></i>

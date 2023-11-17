@@ -19,11 +19,17 @@ var Dashboard2 = {
         this.setPageNameAdmin('Thống kê theo tour');
         this.setPagePathAdmin1('Theo tour');
         this.setRoutePagePathAdmin1('/admin/statistics-by-tour');
+        document
+            .getElementById('sidebar-item-statistical')
+            .classList.add('active');
     },
     unmounted() {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
+        document
+            .getElementById('sidebar-item-statistical')
+            .classList.remove('active');
     },
     watch: {},
     data() {

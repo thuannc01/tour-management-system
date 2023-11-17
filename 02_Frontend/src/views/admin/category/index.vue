@@ -19,11 +19,17 @@ var Category = {
         this.setPageNameAdmin('Cập nhật loại tour du lịch');
         this.setPagePathAdmin1('Dashboard 111');
         this.setRoutePagePathAdmin1('/thuan-nguyen');
+        document
+            .getElementById('sidebar-item-category')
+            .classList.add('active');
     },
     unmounted() {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
+        document
+            .getElementById('sidebar-item-category')
+            .classList.remove('active');
     },
     watch: {},
     data() {

@@ -4,15 +4,17 @@
         <div class="col-4">
             <div class="row">
                 <div class="col-6">
-                    <thuan-button label=" Liệt kê tour" class="bi bi-list-check" />
+                    <thuan-button @click="switchMode(1)" :disabled="btnUpdateTour.btnList" label=" Liệt kê tour"
+                        class="bi bi-list-check" />
                 </div>
                 <div class="col-5 p-0">
-                    <thuan-button label=" Thêm mới" classBtn="btn-success" class="bi bi-plus-circle-fill" />
+                    <thuan-button @click="switchMode(2)" :disabled="btnUpdateTour.btnUpdate" label=" Thêm mới"
+                        classBtn="btn-success" class="bi bi-plus-circle-fill" />
                 </div>
             </div>
         </div>
         <div class="col-4" style="margin-top: -5px;">
-            <div class="row d-flex justify-content-center blur-background">
+            <div id="processing-update-tour" class="row d-flex justify-content-center blur-background">
                 <div class="col-md-9 d-flex justify-content-between">
                     <div class="card text-center m-0 step-tour-admin">
                         <h3 class="card-title m-0">1</h3>
@@ -29,12 +31,13 @@
         <div class="col-4">
             <div class="row">
                 <div class="col-6 d-flex justify-content-end">
-                    <button type="button" disabled class="btn btn-danger">
+                    <button type="button" :disabled="btnUpdateTour.backDisable" class="btn btn-danger">
                         <i class="bi bi-arrow-left"></i> Trở về
                     </button>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <button type="button" disabled class="btn btn-primary bg-btn-primary-custom">
+                    <button type="button" :disabled="btnUpdateTour.nextDisable"
+                        class="btn btn-primary bg-btn-primary-custom">
                         Tiếp theo <i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
@@ -110,4 +113,15 @@
         </div>
     </div>
     <!-- update tour -->
+    <div id="update-tour" class="d-none">
+        <div class="row">
+            <div class="col-4">
+                <thuan-input type="text" label="Tên tour du lịch" :isRequired="true"
+                    placeholder="Nhập tên tour du lịch ..." />
+            </div>
+            <div class="col-4">
+                <thuan-select label="Loại tour du lịch" :isRequired="true" />
+            </div>
+        </div>
+    </div>
 </div>

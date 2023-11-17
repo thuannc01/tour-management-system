@@ -1,19 +1,24 @@
 // import repository from './repository';
 
-const initData = {
-    test: '',
-    selectedOption: '2'
-};
+const initData = {};
 export default {
     namespaced: true,
     state: {
         data: { ...initData },
-        selectOptions: [
-            { code: '1', name: 'Option 1' },
-            { code: '2', name: 'Option 2' },
-            { code: '3', name: 'Option 3' }
-        ]
+        btnUpdateTour: {
+            backDisable: true,
+            nextDisable: true,
+            btnList: true,
+            btnUpdate: false
+        }
     },
-    mutations: {},
+    mutations: {
+        setBtnUpdateTour(state, data) {
+            state.btnUpdateTour.backDisable = data.backDisable;
+            state.btnUpdateTour.nextDisable = data.nextDisable;
+            state.btnUpdateTour.btnList = data.btnList;
+            state.btnUpdateTour.btnUpdate = data.btnUpdate;
+        }
+    },
     actions: {}
 };
