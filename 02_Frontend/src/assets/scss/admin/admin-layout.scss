@@ -1145,6 +1145,20 @@
                 }
             }
 
+            //
+            .submenu-item.active {
+                span {
+                    a {
+                        font-weight: bold;
+                        color: darkblue;
+                        background-color: rgb(238, 238, 238);
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        margin-top: 5px;
+                    }
+                }
+            }
+
             .sidebar-item.active {
                 .sidebar-link {
                     background-color: #435ebe;
@@ -1197,7 +1211,7 @@
                         transition: all 0.3s;
 
                         &:hover {
-                            margin-left: 0.3rem;
+                            // margin-left: 0.18rem;
                         }
                     }
                 }

@@ -23,13 +23,17 @@ var Category = {
             .getElementById('sidebar-item-category')
             .classList.add('active');
     },
+    beforeRouteLeave(to, from, next) {
+        document
+            .getElementById('sidebar-item-category')
+            .classList.remove('active');
+
+        next();
+    },
     unmounted() {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
-        document
-            .getElementById('sidebar-item-category')
-            .classList.remove('active');
     },
     watch: {},
     data() {

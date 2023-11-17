@@ -22,14 +22,24 @@ var Dashboard2 = {
         document
             .getElementById('sidebar-item-statistical')
             .classList.add('active');
+        document
+            .getElementById('sidebar-item-statistical-tour')
+            .classList.add('active');
+    },
+    beforeRouteLeave(to, from, next) {
+        document
+            .getElementById('sidebar-item-statistical')
+            .classList.remove('active');
+        document
+            .getElementById('sidebar-item-statistical-tour')
+            .classList.remove('active');
+
+        next();
     },
     unmounted() {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
-        document
-            .getElementById('sidebar-item-statistical')
-            .classList.remove('active');
     },
     watch: {},
     data() {

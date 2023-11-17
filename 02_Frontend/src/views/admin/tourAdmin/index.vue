@@ -21,11 +21,15 @@ var TourAdmin = {
         this.setRoutePagePathAdmin1('/admin/tour');
         document.getElementById('sidebar-item-tour').classList.add('active');
     },
+    beforeRouteLeave(to, from, next) {
+        document.getElementById('sidebar-item-tour').classList.remove('active');
+
+        next();
+    },
     unmounted() {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
-        document.getElementById('sidebar-item-tour').classList.remove('active');
     },
     watch: {},
     data() {
