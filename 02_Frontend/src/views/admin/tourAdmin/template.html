@@ -158,6 +158,22 @@
                         placeholder="Nhập số ngày diễn ra tour du lịch ..." />
                 </div>
                 <div class="col-6">
+                    <thuan-input type="number" label="Giá vé người lớn" :isRequired="true"
+                        placeholder="Người từ 12 tuổi trở lên ..." />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <thuan-input type="number" label="Giá vé trẻ em" :isRequired="true"
+                        placeholder="Người từ 6 đến 12 tuổi ..." />
+                </div>
+                <div class="col-6">
+                    <thuan-input type="number" label="Giá vé em bé" :isRequired="true"
+                        placeholder="Em bé dưới 2 tuổi ..." />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-2">
                     <label class="label-multiple-select">Chọn dịch vụ kèm tour</label>
                     <VueMultiselect v-model="selected" :options="options" :multiple="true" :close-on-select="true"
                         label="name" track-by="name">
@@ -205,20 +221,22 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <thuan-input type="text" label="Tiêu đề" :isRequired="true"
                                 placeholder="Nhập tiêu đề của ngày du lịch này ..." />
-                        </div>
-                        <div class="col-6">
-                            <label class="label-multiple-select">Chọn địa điểm lưu trú</label>
-                            <VueMultiselect v-model="tourDateData.hotel_spot_id" :options="dataList.hotelSpotsList"
-                                :multiple="true" :close-on-select="true" label="name" track-by="name">
-                            </VueMultiselect>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <label class="label-multiple-select">Chọn địa điểm ăn uống</label>
+                            <label class="label-multiple-select">Chọn địa điểm lưu trú<span class="text-danger ps-1"><i
+                                        class="bi bi-exclamation-circle"></i></span></label>
+                            <VueMultiselect v-model="tourDateData.hotel_spot_id" :options="dataList.hotelSpotsList"
+                                :multiple="true" :close-on-select="true" label="name" track-by="name">
+                            </VueMultiselect>
+                        </div>
+                        <div class="col-6">
+                            <label class="label-multiple-select">Chọn địa điểm ăn uống<span class="text-danger ps-1"><i
+                                        class="bi bi-exclamation-circle"></i></span></label>
                             <VueMultiselect v-model="tourDateData.food_spot_id" :options="dataList.foodSpotsList"
                                 :multiple="true" :close-on-select="true" label="name" track-by="name">
                             </VueMultiselect>
@@ -226,7 +244,8 @@
                     </div>
                     <div class="row my-2">
                         <div class="col-12">
-                            <label class="label-multiple-select">Nội dung</label>
+                            <label class="label-multiple-select">Nội dung<span class="text-danger ps-1"><i
+                                        class="bi bi-exclamation-circle"></i></span></label>
                             <CKEditorCustom />
                         </div>
                     </div>
