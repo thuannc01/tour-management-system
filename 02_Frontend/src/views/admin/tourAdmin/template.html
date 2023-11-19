@@ -22,7 +22,7 @@
                     <div class="card text-center m-0 custom-line-0">
                         <p class="custom-line m-0 p-0"></p>
                     </div>
-                    <div class="card text-center m-0 step-tour-admin-disable">
+                    <div id="step-tour-admin-2" class="card text-center m-0 step-tour-admin-disable">
                         <h3 class="card-title m-0">2</h3>
                     </div>
                 </div>
@@ -31,13 +31,14 @@
         <div class="col-4">
             <div class="row">
                 <div class="col-6 d-flex justify-content-end">
-                    <button type="button" :disabled="btnUpdateTour.backDisable" class="btn btn-danger">
+                    <button @click="updateTourStep(1)" type="button" :disabled="btnUpdateTour.backDisable"
+                        class="btn btn-danger">
                         <i class="bi bi-arrow-left"></i> Trở về
                     </button>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
-                    <button type="button" :disabled="btnUpdateTour.nextDisable"
-                        class="btn btn-primary bg-btn-primary-custom">
+                    <button @click="updateTourStep(2)" type="button" :disabled="btnUpdateTour.nextDisable"
+                        class="btn btn-primary bg-btn-primary-custom" id="btn-next-update">
                         Tiếp theo <i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
@@ -113,13 +114,96 @@
         </div>
     </div>
     <!-- update tour -->
-    <div id="update-tour" class="d-none" style="height: 500px;">
-        <div class="row">
-            <div class="col-4">
-                <thuan-input type="text" label="Tên tour du lịch" :isRequired="true"
-                    placeholder="Nhập tên tour du lịch ..." />
+    <div id="update-tour" class="d-none">
+        <div id="update-tour-tab-1">
+            <div class="row">
+                <div class="col-6">
+                    <thuan-input type="text" label="Tên tour du lịch" :isRequired="true"
+                        placeholder="Nhập tên tour du lịch ..." />
+                </div>
+                <div class="col-6">
+                    <label class="label-multiple-select">Chọn loại tour<span class="text-danger ps-1"><i
+                                class="bi bi-exclamation-circle"></i></span></label>
+                    <VueMultiselect v-model="selected" :options="options" :multiple="true" :close-on-select="true"
+                        label="name" track-by="name">
+                    </VueMultiselect>
+                </div>
             </div>
-            <div class="col-4">
+            <div class="row">
+                <div class="col-6">
+                    <label class="label-multiple-select">Chọn đối tượng<span class="text-danger ps-1"><i
+                                class="bi bi-exclamation-circle"></i></span></label>
+                    <VueMultiselect v-model="selected" :options="options" :multiple="true" :close-on-select="true"
+                        label="name" track-by="name">
+                    </VueMultiselect>
+                </div>
+                <div class="col-6">
+                    <thuan-select type="text" label="Chọn loại phương tiện" :isRequired="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <thuan-select type="text" label="Chọn nơi khởi hành" :isRequired="true" />
+                </div>
+                <div class="col-6">
+                    <thuan-select type="text" label="Chọn nơi đến" :isRequired="true" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <thuan-input type="number" label="Thời gian" :isRequired="true"
+                        placeholder="Nhập số ngày diễn ra tour du lịch ..." />
+                </div>
+                <div class="col-6">
+                    <label class="label-multiple-select">Chọn dịch vụ kèm tour</label>
+                    <VueMultiselect v-model="selected" :options="options" :multiple="true" :close-on-select="true"
+                        label="name" track-by="name">
+                    </VueMultiselect>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-2">
+                    <label class="label-multiple-select">Hình ảnh</label>
+                    <Uploader server="/api/upload" @change="changeMedia" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <thuan-textarea type="text" label="Điểm nhấn hành trình"
+                        placeholder="Nhập đặt điểm nổi bậc của tour du lịch này ở đây ..." :rowsArea="5" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <thuan-textarea type="text" label="Chính sách tour"
+                        placeholder="Nhập chính sách tour du lịch này ở đây ..." :rowsArea="7" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <thuan-textarea type="text" label="Ghi chú" placeholder="Nhập các thông tin cần chú ý ở đây ..."
+                        :rowsArea="5" />
+                </div>
+            </div>
+        </div>
+        <div id="update-tour-tab-2" class="d-none">
+            <div class="row m-auto">
+                <b-card no-body>
+                    <b-tabs pills card vertical>
+                        <b-tab title="Tab 1" active><b-card-text>Tab contents 1</b-card-text></b-tab>
+                        <b-tab title="Tab 2"><b-card-text>Tab contents 2</b-card-text></b-tab>
+                        <b-tab title="Tab 3"><b-card-text>Tab contents 3</b-card-text></b-tab>
+                    </b-tabs>
+                </b-card>
+                <!-- <div class="col-2 left-sidebar-activity d-block text-center">
+                    <div class="d-block w-100 item" v-for="i in 4">
+                        <p class="m-0 text-center text-uppercase">Ngày</p>
+                        <p class="m-0 text-center text-uppercase">{{i}}</p>
+                    </div>
+                </div>
+                <div class="col-10 right-sidebar-activity">
+                    action
+                </div> -->
             </div>
         </div>
     </div>

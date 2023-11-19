@@ -25792,7 +25792,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGLVhkJcMUPBLc="
 							},
-							"name": "avatar_url",
+							"name": "avatar_path",
 							"length": 0
 						},
 						{
@@ -27042,7 +27042,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGLe9MUD6eoy0I="
 							},
-							"name": "img_url",
+							"name": "img_path",
 							"length": 0
 						}
 					]
@@ -27716,7 +27716,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGLgPD9P+nfbxA="
 							},
-							"name": "url",
+							"name": "path",
 							"length": 0
 						},
 						{

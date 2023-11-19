@@ -29,7 +29,7 @@ CREATE TABLE additional_services (
     name character varying (200),
     "desc" text,
 	price numeric(18, 0),
-	img_url text,
+	img_path text,
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -61,8 +61,8 @@ CREATE TABLE district (
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
 );
--- Table ward 
-CREATE TABLE ward (
+-- Table wards
+CREATE TABLE wards (
     id serial PRIMARY KEY,
     name character varying (100),
 	district_id integer REFERENCES district(id),
@@ -88,10 +88,10 @@ CREATE TABLE users (
 	full_name character varying(100),
 	email character varying(100),
 	phone_number character varying(15),
-	avatar_url text,
+	avatar_path text,
 	province_id integer REFERENCES province(id),
 	district_id integer REFERENCES district(id),
-	ward_id integer REFERENCES ward(id),
+	ward_id integer REFERENCES wards(id),
 	address character varying(300),
 	gender gender_user_type,
 	status status_user_type,
@@ -192,7 +192,7 @@ CREATE TABLE food_spots (
 	email character varying(100),
 	type food_spot_type,
 	location_map text,
-	opening_hours character varying(30),
+	opening_hours character varying(200),
 	province_id integer REFERENCES province(id),
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
@@ -231,7 +231,7 @@ CREATE TABLE images (
 	foreign_key_1 integer,
 	foreign_key_2 integer,
 	img_name character varying(200),
-	url text,
+	path text,
 	type image_type,
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
@@ -330,11 +330,52 @@ VALUES
 	('Hướng dẫn viên du lịch', CURRENT_DATE),
 	('Nhà quản lý', CURRENT_DATE);
 -- Table users
-INSERT INTO users (role_id, full_name, email, phone_number, gender, status, password)
+INSERT INTO users (role_id, full_name, email, phone_number, gender, status, password, created_at)
 VALUES
-    (3, 'Nguyễn Công Thuận', 'thuan@gmail.com','0909091233', 'Nam', 'Hoạt động', '123123');
-
-
-
-
-
+    (4, 'Công Thuận Admin', 'admin@gmail.com','0909091233', 'Nam', 'Hoạt động', '$2y$10$w5xJK8Q2AI5PrUuSP.ObROwPRQNcDefy2evjuxrYFuaZ2kkqJFMZy', CURRENT_DATE),
+	(2, 'Thuận Nguyễn DHT', 'dieuhanhtour@gmail.com','0909091233', 'Nam', 'Hoạt động', '$2y$10$w5xJK8Q2AI5PrUuSP.ObROwPRQNcDefy2evjuxrYFuaZ2kkqJFMZy', CURRENT_DATE),
+	(3, 'Thuận HDV', 'hdv@gmail.com','0909091233', 'Nam', 'Hoạt động', '$2y$10$w5xJK8Q2AI5PrUuSP.ObROwPRQNcDefy2evjuxrYFuaZ2kkqJFMZy', CURRENT_DATE);
+-- Table categories
+INSERT INTO categories (name, parent_id, created_at)
+VALUES 
+	('Ngắn ngày', null, CURRENT_DATE), -- từ 1 đến 2 ngày
+	('Dài ngày', null, CURRENT_DATE), -- từ 3 ngày trở lên
+	('Phổ Thông', 2, CURRENT_DATE),
+	('Mạo hiểm - Phượt', 1, CURRENT_DATE),
+	('Văn Hóa và Lịch Sử', 2, CURRENT_DATE),
+	('Ẩm Thực và Gia vị', 2, CURRENT_DATE),
+	('Sinh Thái và Bảo Tồn Môi Trường', 2, CURRENT_DATE),
+	('Theo Chuỗi Sự Kiện', 2, CURRENT_DATE),
+	('Mua sắm', 2, CURRENT_DATE);
+-- Table tourist_segments
+INSERT INTO tourist_segments (name, parent_id, created_at)
+VALUES 
+	('Khách cá nhân', null, CURRENT_DATE),
+	('Khách đoàn', null, CURRENT_DATE),
+	('Cặp đôi', null, CURRENT_DATE),
+	('Gia đình', 2, CURRENT_DATE),
+	('Doanh nghiệp - Hội nghị', 2, CURRENT_DATE);
+-- Table types_transportation
+INSERT INTO types_transportation (name, parent_id, created_at)
+VALUES 
+	('Hàng không', null, CURRENT_DATE),
+	('Xe khách', null, CURRENT_DATE),
+	('Hàng không Vietnam Airlines', 1, CURRENT_DATE),
+	('Hàng không Vietnam Vietjet Air', 1, CURRENT_DATE),
+	('Xe khách Thành Bưởi', 2, CURRENT_DATE),
+	('Xe khách phương trang', 2, CURRENT_DATE);
+-- Table additional_services
+INSERT INTO additional_services (name, "desc", price, img_path, created_at)
+VALUES 
+	('Phụ thu phòng đơn', '- Áp dụng cho khách ngủ 1 mình 1 phòng.', 1200000, '/src/assets/images/add-service.jpeg', CURRENT_DATE),
+	('Thẻ SIM và Internet', '- Cung cấp SIM điện thoại di động hoặc dịch vụ internet để du khách có thể liên lạc và truy cập thông tin dễ dàng hơn.', 250000, '/src/assets/images/add-service.jpeg', CURRENT_DATE),
+	('Dịch Vụ Spa và Wellness', '- Dịch vụ tập trung vào thư giãn và sức khỏe, bao gồm liệu pháp spa, yoga.', 890000, '/src/assets/images/add-service.jpeg', CURRENT_DATE);
+-- Table hotel_spots
+INSERT INTO hotel_spots (name, address, phone_number, email, type, location_map, province_id, created_at)
+VALUES 
+	('Khách sạn Mường Thanh Luxury Đà Nẵng', '270 Võ Nguyên Giáp Ngu Hanh Son District, My An, Đà Nẵng, Việt Nam', '0543543345', 'muongthanh@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE),
+	('Golden Lotus Grand Da Nang', '86 Lê Quang Đạo, Đà Nẵng, Việt Nam', '0435436685', 'golden@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE);
+-- Table food_spots
+INSERT INTO food_spots (name, menu, address, phone_number, email, type, location_map, opening_hours, province_id, created_at)
+VALUES 
+	('Bún chả cá bà bé', 'Riêu chả, chả cá, riêu cua, cá ngừ, trứng cá', '120 Trần Cao Vân - TP.Đà Nẵng', '0653653787', 'babe@gmail.com', 'Quán ăn đường phố', 'google.map', '17h - 23h Hằng ngày', 32, CURRENT_DATE);

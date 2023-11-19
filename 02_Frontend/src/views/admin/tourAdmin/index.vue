@@ -6,8 +6,11 @@ import template from './template.html';
 import './style.scss';
 import store from '@/store';
 import TourAdminStore from '@/views/admin/tourAdmin/store';
+import VueMultiselect from 'vue-multiselect';
+import Uploader from 'vue-media-upload';
 
 var TourAdmin = {
+    components: { VueMultiselect, Uploader },
     template: template,
     beforeCreate() {
         if (!store.hasModule('TourAdminStore')) {
@@ -36,7 +39,13 @@ var TourAdmin = {
         return {
             rows: 10,
             perPage: 3,
-            currentPage: 1
+            currentPage: 1,
+            selected: { name: 'Javascript', code: 'js' },
+            options: [
+                { name: 'Vue.js', code: 'vu' },
+                { name: 'Javascript', code: 'js' },
+                { name: 'Open Source', code: 'os' }
+            ]
         };
     },
     computed: {
@@ -94,9 +103,48 @@ var TourAdmin = {
         },
         removeDisplayNone(elem) {
             elem.classList.remove('d-none');
+        },
+        updateTourStep(id) {
+            const divStep1 = document.getElementById('update-tour-tab-1');
+            const divStep2 = document.getElementById('update-tour-tab-2');
+            const divBtnNext = document.getElementById('btn-next-update');
+            if (id == 1) {
+                //
+                document
+                    .getElementById('step-tour-admin-2')
+                    .classList.add('step-tour-admin-disable');
+                document
+                    .getElementById('step-tour-admin-2')
+                    .classList.remove('step-tour-admin');
+                //
+                divBtnNext.innerHTML = 'Tiếp theo';
+                divBtnNext.classList.add('bg-btn-primary-custom');
+                divBtnNext.classList.remove('btn-success');
+                //
+                this.removeDisplayNone(divStep1);
+                this.addDisplayNone(divStep2);
+            } else if (id == 2) {
+                document
+                    .getElementById('step-tour-admin-2')
+                    .classList.remove('step-tour-admin-disable');
+                document
+                    .getElementById('step-tour-admin-2')
+                    .classList.add('step-tour-admin');
+                //
+                divBtnNext.innerHTML = 'Lưu thay đổi';
+                divBtnNext.classList.remove('bg-btn-primary-custom');
+                divBtnNext.classList.add('btn-success');
+                //
+                this.addDisplayNone(divStep1);
+                this.removeDisplayNone(divStep2);
+            }
+        },
+        changeMedia(media) {
+            this.media = media;
         }
     }
 };
 
 export default TourAdmin;
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
