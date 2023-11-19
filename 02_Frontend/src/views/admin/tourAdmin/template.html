@@ -144,10 +144,12 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <thuan-select type="text" label="Chọn nơi khởi hành" :isRequired="true" />
+                    <thuan-select v-model="tourData.from_province_id" :options="dataList.locationList" type="text"
+                        label="Chọn nơi khởi hành" :isRequired="true" />
                 </div>
                 <div class="col-6">
-                    <thuan-select type="text" label="Chọn nơi đến" :isRequired="true" />
+                    <thuan-select v-model="tourData.to_province_id" :options="dataList.locationList" type="text"
+                        label="Chọn nơi đến" :isRequired="true" />
                 </div>
             </div>
             <div class="row">
@@ -209,16 +211,16 @@
                         </div>
                         <div class="col-6">
                             <label class="label-multiple-select">Chọn địa điểm lưu trú</label>
-                            <VueMultiselect v-model="selected" :options="options" :multiple="true"
-                                :close-on-select="true" label="name" track-by="name">
+                            <VueMultiselect v-model="tourDateData.hotel_spot_id" :options="dataList.hotelSpotsList"
+                                :multiple="true" :close-on-select="true" label="name" track-by="name">
                             </VueMultiselect>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <label class="label-multiple-select">Chọn địa điểm ăn uống</label>
-                            <VueMultiselect v-model="selected" :options="options" :multiple="true"
-                                :close-on-select="true" label="name" track-by="name">
+                            <VueMultiselect v-model="tourDateData.food_spot_id" :options="dataList.foodSpotsList"
+                                :multiple="true" :close-on-select="true" label="name" track-by="name">
                             </VueMultiselect>
                         </div>
                     </div>

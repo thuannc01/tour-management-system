@@ -51,7 +51,12 @@ var TourAdmin = {
     },
     computed: {
         ...mapState('app', ['']),
-        ...mapState('TourAdminStore', ['tourData', 'btnUpdateTour', 'dataList'])
+        ...mapState('TourAdminStore', [
+            'tourData',
+            'btnUpdateTour',
+            'dataList',
+            'tourDateData'
+        ])
     },
     methods: {
         ...mapActions('app', ['']),
@@ -69,7 +74,10 @@ var TourAdmin = {
         ...mapActions('TourAdminStore', [
             'getAllCategories',
             'getAllSegment',
-            'getAllTypesTransportation'
+            'getAllTypesTransportation',
+            'getAllLocation',
+            'getAllFoodSpots',
+            'getAllHotelSpots'
         ]),
         switchMode(id) {
             const vm = this;
@@ -106,6 +114,9 @@ var TourAdmin = {
                 this.getAllCategories();
                 this.getAllSegment();
                 this.getAllTypesTransportation();
+                this.getAllLocation();
+                this.getAllFoodSpots();
+                this.getAllHotelSpots();
             }
         },
         addDisplayNone(elem) {

@@ -30,31 +30,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="sidebar-item" id="sidebar-item-user">
-                        <a class='sidebar-link'>
-                            <i class="bi bi-people-fill d-flex"></i>
-                            <span>Quản lý tài khoản</span>
-                        </a>
-                        <ul class="submenu d-block">
-                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
-                                <router-link to="/admin/statistics-by-revenue"><span><a>Thêm mới tài
-                                            khoản</a></span></router-link>
-                            </li>
-                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
-                                <router-link to="/admin/statistics-by-revenue"><span><a>Nhân viên điều hành
-                                            tour</a></span></router-link>
-                            </li>
-                            <li class="submenu-item "
-                                :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                                <router-link to="/admin/statistics-by-revenue"><span><a>Khách
-                                            hàng</a></span></router-link>
-                            </li>
-                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
-                                <router-link to="/admin/statistics-by-revenue"><span><a>Hướng dẫn viên du
-                                            lịch</a></span></router-link>
-                            </li>
-                        </ul>
-                    </li>
                     <li id="sidebar-item-tour" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <router-link to="/admin/tour">
@@ -112,6 +87,31 @@
                             <i class="bi bi-geo-fill d-flex"></i>
                             <span>Địa điểm lưu trú liên kết</span>
                         </a>
+                    </li>
+                    <li class="sidebar-item" id="sidebar-item-user">
+                        <a class='sidebar-link'>
+                            <i class="bi bi-people-fill d-flex"></i>
+                            <span>Quản lý tài khoản</span>
+                        </a>
+                        <ul class="submenu d-block">
+                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Thêm mới tài
+                                            khoản</a></span></router-link>
+                            </li>
+                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Nhân viên điều hành
+                                            tour</a></span></router-link>
+                            </li>
+                            <li class="submenu-item "
+                                :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Khách
+                                            hàng</a></span></router-link>
+                            </li>
+                            <li class="submenu-item " :class="[userData.role_id == 4 ? '' : 'd-none']">
+                                <router-link to="/admin/statistics-by-revenue"><span><a>Hướng dẫn viên du
+                                            lịch</a></span></router-link>
+                            </li>
+                        </ul>
                     </li>
                     <li id="sidebar-item-service" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">

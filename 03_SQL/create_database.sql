@@ -220,6 +220,8 @@ CREATE TABLE schedules (
 	day	smallint,
 	title character varying(200),
 	body text,
+	food_spot_id character varying(300),
+	hotel_spot_id character varying(300),
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP

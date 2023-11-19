@@ -4,7 +4,7 @@
     <select :id="id" class="form-select mb-1" :class="(btnClass ? btnClass : '')" :required="isRequired"
         :disabled="isDisabled" :readonly="isReadonly" ref="select" @focus="focusBtn" @blur="blurBtn"
         @change="updateBtn">
-        <option v-for="(option, i) in listOptions" :key="i" :value="option.code" :selected="option.code == vewValue">
+        <option v-for="(option, i) in listOptions" :key="i" :value="option.id" :selected="option.id == vewValue">
             {{option.name}}
         </option>
     </select>

@@ -6,8 +6,8 @@ const initData = {
     tourist_segment_id: { name: '', code: '' },
     additional_services_id: '',
     type_transportation_id: 1,
-    from_province_id: '',
-    to_province_id: '',
+    from_province_id: '1',
+    to_province_id: '33',
     number_of_day: '',
     itinerary_highlight: '',
     policy: '',
@@ -19,8 +19,8 @@ const tourDateData = {
     day: '',
     title: '',
     body: '',
-    food_spot_id: '',
-    hotel_spot_id: ''
+    food_spot_id: { name: '', code: '' },
+    hotel_spot_id: { name: '', code: '' }
 };
 
 export default {
@@ -72,9 +72,13 @@ export default {
         },
         setFoodSpotsList(state, data) {
             state.dataList.foodSpotsList = data;
+            state.tourDateData.food_spot_id.name = data[0].name;
+            state.tourDateData.food_spot_id.code = data[0].id;
         },
         setHotelSpotsList(state, data) {
             state.dataList.hotelSpotsList = data;
+            state.tourDateData.hotel_spot_id.name = data[0].name;
+            state.tourDateData.hotel_spot_id.code = data[0].id;
         }
     },
     actions: {
@@ -82,7 +86,6 @@ export default {
             try {
                 repository.getAllCategories().then((res) => {
                     const { data } = res;
-                    console.log(data.Data);
                     if (data.Code == 200) {
                         context.commit('setCategoriesList', data.Data ?? '');
                     }
@@ -115,6 +118,42 @@ export default {
                             'setTypesTransportationList',
                             data.Data ?? ''
                         );
+                    }
+                });
+            } catch (e) {
+                console.log('Action login: ' + e.message);
+            }
+        },
+        getAllLocation(context) {
+            try {
+                repository.getAllLocation().then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setLocationList', data.Data ?? '');
+                    }
+                });
+            } catch (e) {
+                console.log('Action login: ' + e.message);
+            }
+        },
+        getAllFoodSpots(context) {
+            try {
+                repository.getAllFoodSpots().then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setFoodSpotsList', data.Data ?? '');
+                    }
+                });
+            } catch (e) {
+                console.log('Action login: ' + e.message);
+            }
+        },
+        getAllHotelSpots(context) {
+            try {
+                repository.getAllHotelSpots().then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setHotelSpotsList', data.Data ?? '');
                     }
                 });
             } catch (e) {
