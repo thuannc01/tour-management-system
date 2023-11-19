@@ -5,6 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\SegmentController;
+use App\Http\Controllers\Api\TypeTransportationController;
+use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\AdditionalServiceController;
+use App\Http\Controllers\Api\FoodSpotController;
+use App\Http\Controllers\Api\HotelSpotController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,6 +40,20 @@ Route::group([
 ], function () {
     // role
     Route::apiResource('/role', RoleController::class);
+    // category
+    Route::apiResource('/category', CategoryController::class);
+    // segment
+    Route::apiResource('/segment', SegmentController::class);
+    // type transportation
+    Route::apiResource('/type-transportation', TypeTransportationController::class);
+    // location
+    Route::apiResource('/location', LocationController::class);
+    // additional service
+    Route::apiResource('/additional-service', AdditionalServiceController::class);
+    // food spot
+    Route::apiResource('/food-spot', FoodSpotController::class);
+    // hotel spot
+    Route::apiResource('/hotel-spot', HotelSpotController::class);
 });
 
 // No auth

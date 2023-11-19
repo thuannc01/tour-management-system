@@ -9,6 +9,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 //
 import StarRating from 'vue-star-rating';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 //
 import ThuanInput from '@/components/thuanInput';
 import ThuanTextarea from '@/components/thuanTextarea';
@@ -31,6 +32,7 @@ app.use(router);
 
 // rating component
 app.component('StarRating', StarRating);
+app.use(CKEditor);
 // mapping components
 app.component('ThuanInput', ThuanInput);
 app.component('ThuanTextarea', ThuanTextarea);

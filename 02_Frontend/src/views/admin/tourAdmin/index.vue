@@ -8,9 +8,10 @@ import store from '@/store';
 import TourAdminStore from '@/views/admin/tourAdmin/store';
 import VueMultiselect from 'vue-multiselect';
 import Uploader from 'vue-media-upload';
+import CKEditorCustom from './CKEditorCustom.vue';
 
 var TourAdmin = {
-    components: { VueMultiselect, Uploader },
+    components: { VueMultiselect, Uploader, CKEditorCustom },
     template: template,
     beforeCreate() {
         if (!store.hasModule('TourAdminStore')) {
@@ -49,8 +50,8 @@ var TourAdmin = {
         };
     },
     computed: {
-        ...mapState('DashboardStore', ['']),
-        ...mapState('TourAdminStore', ['data', 'btnUpdateTour'])
+        ...mapState('app', ['']),
+        ...mapState('TourAdminStore', ['tourData', 'btnUpdateTour', 'dataList'])
     },
     methods: {
         ...mapActions('app', ['']),
@@ -65,6 +66,11 @@ var TourAdmin = {
             'setRoutePagePathAdmin3'
         ]),
         ...mapMutations('TourAdminStore', ['setBtnUpdateTour']),
+        ...mapActions('TourAdminStore', [
+            'getAllCategories',
+            'getAllSegment',
+            'getAllTypesTransportation'
+        ]),
         switchMode(id) {
             const vm = this;
             const divListTour = document.getElementById('list-tour');
@@ -96,6 +102,10 @@ var TourAdmin = {
                 };
                 this.setPageNameAdmin('Thêm mới tour du lịch');
                 vm.setBtnUpdateTour(statusBtn);
+                //
+                this.getAllCategories();
+                this.getAllSegment();
+                this.getAllTypesTransportation();
             }
         },
         addDisplayNone(elem) {

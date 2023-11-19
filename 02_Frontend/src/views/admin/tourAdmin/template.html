@@ -124,8 +124,8 @@
                 <div class="col-6">
                     <label class="label-multiple-select">Chọn loại tour<span class="text-danger ps-1"><i
                                 class="bi bi-exclamation-circle"></i></span></label>
-                    <VueMultiselect v-model="selected" :options="options" :multiple="true" :close-on-select="true"
-                        label="name" track-by="name">
+                    <VueMultiselect v-model="tourData.category_id" :options="dataList.categoriesList" :multiple="true"
+                        :close-on-select="true" label="name" track-by="name">
                     </VueMultiselect>
                 </div>
             </div>
@@ -133,12 +133,13 @@
                 <div class="col-6">
                     <label class="label-multiple-select">Chọn đối tượng<span class="text-danger ps-1"><i
                                 class="bi bi-exclamation-circle"></i></span></label>
-                    <VueMultiselect v-model="selected" :options="options" :multiple="true" :close-on-select="true"
-                        label="name" track-by="name">
+                    <VueMultiselect v-model="tourData.tourist_segment_id" :options="dataList.touristSegmentsList"
+                        :multiple="true" :close-on-select="true" label="name" track-by="name">
                     </VueMultiselect>
                 </div>
                 <div class="col-6">
-                    <thuan-select type="text" label="Chọn loại phương tiện" :isRequired="true" />
+                    <thuan-select v-model="tourData.type_transportation_id" :options="dataList.typesTransportationList"
+                        type="text" label="Chọn loại phương tiện" :isRequired="true" />
                 </div>
             </div>
             <div class="row">
@@ -187,23 +188,47 @@
             </div>
         </div>
         <div id="update-tour-tab-2" class="d-none">
-            <div class="row m-auto">
-                <b-card no-body>
-                    <b-tabs pills card vertical>
-                        <b-tab title="Tab 1" active><b-card-text>Tab contents 1</b-card-text></b-tab>
-                        <b-tab title="Tab 2"><b-card-text>Tab contents 2</b-card-text></b-tab>
-                        <b-tab title="Tab 3"><b-card-text>Tab contents 3</b-card-text></b-tab>
-                    </b-tabs>
-                </b-card>
-                <!-- <div class="col-2 left-sidebar-activity d-block text-center">
-                    <div class="d-block w-100 item" v-for="i in 4">
-                        <p class="m-0 text-center text-uppercase">Ngày</p>
-                        <p class="m-0 text-center text-uppercase">{{i}}</p>
-                    </div>
+            <div class="row m-auto d-flex justify-content-between">
+                <div class="col-2 left-sidebar-activity d-block text-center py-1">
+                    <template v-for="i in 4" :key="i">
+                        <div class="d-block w-100" :class="[i == 1 ? 'item-active' : 'item-not-active']">
+                            <p class="m-0 text-center text-uppercase">Ngày</p>
+                            <p class="m-0 text-center text-uppercase">{{i}}</p>
+                        </div>
+                    </template>
                 </div>
                 <div class="col-10 right-sidebar-activity">
-                    action
-                </div> -->
+                    <div class="title">
+                        <h5 class="text-uppercase">Hoạt động của ngày thứ 1</h5>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <thuan-input type="text" label="Tiêu đề" :isRequired="true"
+                                placeholder="Nhập tiêu đề của ngày du lịch này ..." />
+                        </div>
+                        <div class="col-6">
+                            <label class="label-multiple-select">Chọn địa điểm lưu trú</label>
+                            <VueMultiselect v-model="selected" :options="options" :multiple="true"
+                                :close-on-select="true" label="name" track-by="name">
+                            </VueMultiselect>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="label-multiple-select">Chọn địa điểm ăn uống</label>
+                            <VueMultiselect v-model="selected" :options="options" :multiple="true"
+                                :close-on-select="true" label="name" track-by="name">
+                            </VueMultiselect>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-12">
+                            <label class="label-multiple-select">Nội dung</label>
+                            <CKEditorCustom />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -15,6 +15,42 @@
         }
     ],
     "paths": {
+        "/additional-service": {
+            "get": {
+                "tags": [
+                    "Additional Service"
+                ],
+                "summary": "Get all additional service",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "d1d8990b88865266fc1e709e27d97bf4",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/login": {
             "post": {
                 "tags": [
@@ -215,6 +251,150 @@
                 ]
             }
         },
+        "/category": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Get all category",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "91fc23f78e8b18b8cd5d4650eddea6ae",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/food-spot": {
+            "get": {
+                "tags": [
+                    "Food spot"
+                ],
+                "summary": "Get all food spots",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "eaf81ffcf837a8d0aaef36f1fbd57bb4",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/hotel-spot": {
+            "get": {
+                "tags": [
+                    "Hotel spots"
+                ],
+                "summary": "Get all hotel spots",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "0faa4783df8423b21f2f57b090f9bec3",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/location": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Get all location",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "b16da93f833d1851f8ea08146d8650df",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/role": {
             "get": {
                 "tags": [
@@ -233,6 +413,78 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/segment": {
+            "get": {
+                "tags": [
+                    "Segment"
+                ],
+                "summary": "Get all segment tourist",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "b306cf6fd6903597660c7c5a5ac81748",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/type-transportation": {
+            "get": {
+                "tags": [
+                    "Type transportation"
+                ],
+                "summary": "Get all type transportation",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "3ab835a69991f65f6c56ed7bf53c641e",
                 "responses": {
                     "200": {
                         "description": "Result of success",
