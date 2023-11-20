@@ -7,11 +7,14 @@ import './style.scss';
 import store from '@/store';
 import TourAdminStore from '@/views/admin/tourAdmin/store';
 import VueMultiselect from 'vue-multiselect';
-import Uploader from 'vue-media-upload';
 import CKEditorCustom from './CKEditorCustom.vue';
+import axios from 'axios';
 
 var TourAdmin = {
-    components: { VueMultiselect, Uploader, CKEditorCustom },
+    components: {
+        VueMultiselect,
+        CKEditorCustom
+    },
     template: template,
     beforeCreate() {
         if (!store.hasModule('TourAdminStore')) {
@@ -160,8 +163,40 @@ var TourAdmin = {
                 this.removeDisplayNone(divStep2);
             }
         },
-        changeMedia(media) {
-            this.media = media;
+        addTourImg(event) {
+            const vm = this;
+            vm.uploadImg(event);
+        },
+        async uploadImg(event) {
+            const files = event.target.files;
+            if (!files) {
+                return;
+            }
+            // call api
+            const CLOUD_NAME = 'dih79o7tn';
+            const PRESET_NAME = 'thuan_tourist';
+            const FOLDER_NAME = 'thuan_tourist';
+            const urls = [];
+            const api = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
+            for (const file of files) {
+                const formData = new FormData(); // key: value
+                formData.append('upload_preset', PRESET_NAME);
+                formData.append('folder', FOLDER_NAME);
+                formData.append('file', file);
+
+                const response = await axios
+                    .post(api, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .catch((error) =>
+                        console.error('Error uploading image:', error)
+                    );
+                urls.push(response.data.secure_url);
+            }
+            return urls;
         }
     }
 };
