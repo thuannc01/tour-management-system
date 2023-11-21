@@ -1,6 +1,5 @@
 <header v-if="isShowHeaderError && headerErrors.length" class="d-flex flex-wrap justify-content-end mt-4 mx-4"
     :class="(isMobile ? 'text-center fixed-top top-84px' : 'fixed-top') + ' ' + (!isMobile && havePopup ? 'havePopup' : '') ">
-
     <div class="alert alert-danger alert-dismissible fade show m-0 border-0" style="background: #f3616d; color: white;"
         role="alert" v-for="error in headerErrors">
         <strong><i class="bi bi-exclamation-circle"></i>&nbsp;</strong> {{ error }}

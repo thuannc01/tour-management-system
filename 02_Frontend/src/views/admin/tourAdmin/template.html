@@ -158,25 +158,50 @@
                         placeholder="Nhập số ngày diễn ra tour du lịch ..." />
                 </div>
                 <div class="col-6">
-                    <thuan-input v-model="tourData.adult_ticket_price" type="number" label="Giá vé người lớn"
-                        :isRequired="true" placeholder="Người từ 12 tuổi trở lên ..." />
+                    <div class="form-group">
+                        <label for="adult_ticket_price">Giá vé người lớn<span class="text-danger ps-1"><i
+                                    class="bi bi-exclamation-circle"></i></span></label>
+                        <input class="form-control" id="adult_ticket_price" type="text"
+                            v-model="tourData. adult_ticket_price" maxlength="30" @change="formatMoneyInput"
+                            placeholder="Người từ 12 tuổi trở lên ...">
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <thuan-input v-model="tourData.child_ticket_price" type="number" label="Giá vé trẻ em"
-                        :isRequired="true" placeholder="Người từ 6 đến 12 tuổi ..." />
+                    <div class="form-group">
+                        <label for="child_ticket_price">Giá vé trẻ em<span class="text-danger ps-1"><i
+                                    class="bi bi-exclamation-circle"></i></span></label>
+                        <input class="form-control" id="child_ticket_price" type="text"
+                            v-model="tourData.child_ticket_price" maxlength="30" @change="formatMoneyInput"
+                            placeholder="Người từ 6 đến 12 tuổi ...">
+                    </div>
                 </div>
                 <div class="col-6">
-                    <thuan-input v-model="tourData.infant_ticket_price" type="number" label="Giá vé em bé"
-                        :isRequired="true" placeholder="Em bé dưới 2 tuổi ..." />
+                    <div class="form-group">
+                        <label for="infant_ticket_price">Giá vé em bé<span class="text-danger ps-1"><i
+                                    class="bi bi-exclamation-circle"></i></span></label>
+                        <input class="form-control" id="infant_ticket_price" type="text"
+                            v-model="tourData.infant_ticket_price" maxlength="30" @change="formatMoneyInput"
+                            placeholder="Em bé dưới 2 tuổi ...">
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 mb-2">
                     <label class="label-multiple-select">Chọn dịch vụ kèm tour</label>
+                    <!-- <VueMultiselect v-model="tourData.additional_services_id" :options="dataList.additionalServicesList"
+                        :multiple="true" :close-on-select="true" label="name" track-by="name">
+                    </VueMultiselect> -->
                     <VueMultiselect v-model="tourData.additional_services_id" :options="dataList.additionalServicesList"
                         :multiple="true" :close-on-select="true" label="name" track-by="name">
+                        <template slot="option" slot-scope="{ option }">
+                            <div>
+                                <img :src="option.imageUrl" alt="Service Image"
+                                    style="width: 30px; height: 30px; margin-right: 10px;" />
+                                {{ option.name }} - {{ option.additionalInfo }}
+                            </div>
+                        </template>
                     </VueMultiselect>
                 </div>
             </div>
@@ -236,7 +261,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-12">
-                            <thuan-input type="text" label="Tiêu đề" :isRequired="true"
+                            <thuan-input v-model="tourDateData.title" type="text" label="Tiêu đề" :isRequired="true"
                                 placeholder="Nhập tiêu đề của ngày du lịch này ..." />
                         </div>
                     </div>

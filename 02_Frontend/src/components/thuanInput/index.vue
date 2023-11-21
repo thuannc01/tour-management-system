@@ -43,6 +43,10 @@ var ThuanInput = {
             const val = this.$refs.input.value;
             let value = val;
             this.$emit('update:modelValue', value);
+
+            if (typeof this.onBlur === 'function') {
+                this.onBlur();
+            }
         },
         inputKeydown() {
             const val = this.$refs.input.value;

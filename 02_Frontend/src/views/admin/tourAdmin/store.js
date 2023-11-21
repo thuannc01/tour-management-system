@@ -8,9 +8,9 @@ const initData = {
     from_province_id: '1',
     to_province_id: '33',
     number_of_day: '',
-    adult_ticket_price: '0',
-    child_ticket_price: '0',
-    infant_ticket_price: '0',
+    adult_ticket_price: '',
+    child_ticket_price: '',
+    infant_ticket_price: '',
     additional_services_id: { name: '', code: '' },
     images: [],
     itinerary_highlight: '',
@@ -49,6 +49,10 @@ export default {
         }
     },
     mutations: {
+        initScreen(state) {
+            state.tourData = { ...initData };
+            state.tourDateData = { ...tourDateData };
+        },
         setBtnUpdateTour(state, data) {
             state.btnUpdateTour.backDisable = data.backDisable;
             state.btnUpdateTour.nextDisable = data.nextDisable;
@@ -88,7 +92,6 @@ export default {
             state.dataList.additionalServicesList = data;
             state.tourData.additional_services_id.name = data[0].name;
             state.tourData.additional_services_id.code = data[0].id;
-            console.log(state.dataList.additionalServicesList);
         },
         setImagesTourList(state, data) {
             state.tourData.images = data;

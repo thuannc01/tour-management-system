@@ -23,6 +23,8 @@ var TourAdmin = {
     },
     created() {},
     mounted() {
+        this.initScreen();
+        this.setInitImagesTourList();
         this.setPageNameAdmin('Quản lý tour du lịch');
         this.setPagePathAdmin1('Cập nhật tour du lịch');
         this.setRoutePagePathAdmin1('/admin/tour');
@@ -72,13 +74,17 @@ var TourAdmin = {
             'setPagePathAdmin2',
             'setRoutePagePathAdmin2',
             'setPagePathAdmin3',
-            'setRoutePagePathAdmin3'
+            'setRoutePagePathAdmin3',
+            'showHeaderError',
+            'showModalMessage',
+            'hideHeaderError'
         ]),
         ...mapMutations('TourAdminStore', [
             'setBtnUpdateTour',
             'setImagesTourList',
             'setInitImagesTourList',
-            'deleteImagesTourList'
+            'deleteImagesTourList',
+            'initScreen'
         ]),
         ...mapActions('TourAdminStore', [
             'getAllCategories',
@@ -158,20 +164,74 @@ var TourAdmin = {
                 this.removeDisplayNone(divStep1);
                 this.addDisplayNone(divStep2);
             } else if (id == 2) {
-                document
-                    .getElementById('step-tour-admin-2')
-                    .classList.remove('step-tour-admin-disable');
-                document
-                    .getElementById('step-tour-admin-2')
-                    .classList.add('step-tour-admin');
-                //
-                divBtnNext.innerHTML = 'Lưu thay đổi';
-                divBtnNext.classList.remove('bg-btn-primary-custom');
-                divBtnNext.classList.add('btn-success');
-                //
-                this.addDisplayNone(divStep1);
-                this.removeDisplayNone(divStep2);
+                // check data
+                if (this.checkData()) {
+                    document
+                        .getElementById('step-tour-admin-2')
+                        .classList.remove('step-tour-admin-disable');
+                    document
+                        .getElementById('step-tour-admin-2')
+                        .classList.add('step-tour-admin');
+                    //
+                    divBtnNext.innerHTML = 'Lưu thay đổi';
+                    divBtnNext.classList.remove('bg-btn-primary-custom');
+                    divBtnNext.classList.add('btn-success');
+                    //
+                    this.addDisplayNone(divStep1);
+                    this.removeDisplayNone(divStep2);
+                }
+                return;
             }
+        },
+        checkData() {
+            const vm = this;
+            let result = true;
+            if (vm.tourData.title.trim() == '') {
+                this.showHeaderError(['Tên tour du lịch không được để trống!']);
+                result = false;
+            } else if (vm.tourData.category_id.length == 0) {
+                this.showHeaderError(['Vui lòng chọn ít nhất một loại tour.']);
+                result = false;
+            } else if (vm.tourData.tourist_segment_id.length == 0) {
+                this.showHeaderError(['Vui lòng chọn ít nhất một đối tượng!']);
+                result = false;
+            } else if (
+                vm.tourData.number_of_day == '' ||
+                isNaN(vm.tourData.number_of_day)
+            ) {
+                this.showHeaderError([
+                    'Vui lòng nhập thời gian tour diễn ra trong bao nhiêu ngày và nhập đúng định dạng số nguyên'
+                ]);
+                result = false;
+            } else if (
+                vm.tourData.adult_ticket_price == '' ||
+                isNaN(vm.tourData.adult_ticket_price)
+            ) {
+                this.showHeaderError([
+                    'Vui lòng nhập giá vé người lớn hoặc giá trị nhập vào không đúng định dạng'
+                ]);
+                result = false;
+            } else if (
+                vm.tourData.child_ticket_price == '' ||
+                isNaN(vm.tourData.adult_ticket_price)
+            ) {
+                this.showHeaderError([
+                    'Vui lòng nhập giá vé trẻ em hoặc giá trị nhập vào không đúng định dạng'
+                ]);
+                result = false;
+            } else if (
+                vm.tourData.infant_ticket_price == '' ||
+                isNaN(vm.tourData.adult_ticket_price)
+            ) {
+                this.showHeaderError([
+                    'Vui lòng nhập giá vé em bé hoặc giá trị nhập vào không đúng định dạng'
+                ]);
+                result = false;
+            }
+            if (result) {
+                this.hideHeaderError();
+            }
+            return result;
         },
         addTourImg(event) {
             const vm = this;
@@ -215,6 +275,17 @@ var TourAdmin = {
         },
         deleteTourImg(public_id) {
             this.deleteImagesTourList(public_id);
+        },
+        formatMoneyInput(event) {
+            const inputValue = event.target.value;
+
+            let numericValue = parseFloat(inputValue.replace(/[^0-9.-]/g, ''));
+            if (!isNaN(numericValue)) {
+                event.target.value = numericValue.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                });
+            }
         }
     }
 };
