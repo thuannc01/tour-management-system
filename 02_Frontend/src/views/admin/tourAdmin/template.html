@@ -118,7 +118,7 @@
         <div id="update-tour-tab-1">
             <div class="row">
                 <div class="col-6">
-                    <thuan-input type="text" label="Tên tour du lịch" :isRequired="true"
+                    <thuan-input v-model="tourData.title" type="text" label="Tên tour du lịch" :isRequired="true"
                         placeholder="Nhập tên tour du lịch ..." />
                 </div>
                 <div class="col-6">
@@ -154,29 +154,29 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <thuan-input type="number" label="Thời gian" :isRequired="true"
+                    <thuan-input v-model="tourData.number_of_day" type="number" label="Thời gian" :isRequired="true"
                         placeholder="Nhập số ngày diễn ra tour du lịch ..." />
                 </div>
                 <div class="col-6">
-                    <thuan-input type="number" label="Giá vé người lớn" :isRequired="true"
-                        placeholder="Người từ 12 tuổi trở lên ..." />
+                    <thuan-input v-model="tourData.adult_ticket_price" type="number" label="Giá vé người lớn"
+                        :isRequired="true" placeholder="Người từ 12 tuổi trở lên ..." />
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <thuan-input type="number" label="Giá vé trẻ em" :isRequired="true"
-                        placeholder="Người từ 6 đến 12 tuổi ..." />
+                    <thuan-input v-model="tourData.child_ticket_price" type="number" label="Giá vé trẻ em"
+                        :isRequired="true" placeholder="Người từ 6 đến 12 tuổi ..." />
                 </div>
                 <div class="col-6">
-                    <thuan-input type="number" label="Giá vé em bé" :isRequired="true"
-                        placeholder="Em bé dưới 2 tuổi ..." />
+                    <thuan-input v-model="tourData.infant_ticket_price" type="number" label="Giá vé em bé"
+                        :isRequired="true" placeholder="Em bé dưới 2 tuổi ..." />
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 mb-2">
                     <label class="label-multiple-select">Chọn dịch vụ kèm tour</label>
-                    <VueMultiselect v-model="selected" :options="options" :multiple="true" :close-on-select="true"
-                        label="name" track-by="name">
+                    <VueMultiselect v-model="tourData.additional_services_id" :options="dataList.additionalServicesList"
+                        :multiple="true" :close-on-select="true" label="name" track-by="name">
                     </VueMultiselect>
                 </div>
             </div>
@@ -184,24 +184,38 @@
                 <div class="col-12 mb-2">
                     <label class="label-multiple-select">Hình ảnh</label>
                     <input type="file" id="tour-image" @change="addTourImg" multiple class="form-control" />
+                    <div class="img-upload-list p-3 mt-2">
+                        <p><i class="bi bi-images pe-2"></i>Danh sách hình ảnh đã upload</p>
+                        <div class="row">
+                            <div class="col-2" v-for="img in tourData.images" style="position: relative;">
+                                <img :src="img.secure_url" class="rounded" width="150" height="120">
+                                <p class="m-0 text-center mt-1 px-1" style="font-weight: 400;">{{img.original_filename}}
+                                </p>
+                                <button type="button" class="btn btn-danger btn-sm"
+                                    @click="deleteTourImg(img.public_id)"
+                                    style="position: absolute; top: 0.3rem; right: 1.5rem; opacity: 0.9;"><i
+                                        class="bi bi-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <thuan-textarea type="text" label="Điểm nhấn hành trình"
+                    <thuan-textarea v-model="tourData.itinerary_highlight" type="text" label="Điểm nhấn hành trình"
                         placeholder="Nhập đặt điểm nổi bậc của tour du lịch này ở đây ..." :rowsArea="5" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <thuan-textarea type="text" label="Chính sách tour"
+                    <thuan-textarea v-model="tourData.policy" type="text" label="Chính sách tour"
                         placeholder="Nhập chính sách tour du lịch này ở đây ..." :rowsArea="7" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <thuan-textarea type="text" label="Ghi chú" placeholder="Nhập các thông tin cần chú ý ở đây ..."
-                        :rowsArea="5" />
+                    <thuan-textarea v-model="tourData.note" type="text" label="Ghi chú"
+                        placeholder="Nhập các thông tin cần chú ý ở đây ..." :rowsArea="5" />
                 </div>
             </div>
         </div>

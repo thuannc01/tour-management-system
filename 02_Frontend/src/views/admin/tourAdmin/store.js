@@ -4,11 +4,15 @@ const initData = {
     title: '',
     category_id: { name: '', code: '' },
     tourist_segment_id: { name: '', code: '' },
-    additional_services_id: '',
     type_transportation_id: 1,
     from_province_id: '1',
     to_province_id: '33',
     number_of_day: '',
+    adult_ticket_price: '0',
+    child_ticket_price: '0',
+    infant_ticket_price: '0',
+    additional_services_id: { name: '', code: '' },
+    images: [],
     itinerary_highlight: '',
     policy: '',
     note: ''
@@ -18,9 +22,9 @@ const tourDateData = {
     tour_id: '',
     day: '',
     title: '',
-    body: '',
     food_spot_id: { name: '', code: '' },
-    hotel_spot_id: { name: '', code: '' }
+    hotel_spot_id: { name: '', code: '' },
+    body: ''
 };
 
 export default {
@@ -79,6 +83,24 @@ export default {
             state.dataList.hotelSpotsList = data;
             state.tourDateData.hotel_spot_id.name = data[0].name;
             state.tourDateData.hotel_spot_id.code = data[0].id;
+        },
+        setAdditionalService(state, data) {
+            state.dataList.additionalServicesList = data;
+            state.tourData.additional_services_id.name = data[0].name;
+            state.tourData.additional_services_id.code = data[0].id;
+            console.log(state.dataList.additionalServicesList);
+        },
+        setImagesTourList(state, data) {
+            state.tourData.images = data;
+        },
+        setInitImagesTourList(state) {
+            state.tourData.images = [];
+        },
+        deleteImagesTourList(state, data) {
+            const indexOfObject = state.tourData.images.findIndex((object) => {
+                return object.public_id == data;
+            });
+            state.tourData.images.splice(indexOfObject, 1);
         }
     },
     actions: {
@@ -154,6 +176,18 @@ export default {
                     const { data } = res;
                     if (data.Code == 200) {
                         context.commit('setHotelSpotsList', data.Data ?? '');
+                    }
+                });
+            } catch (e) {
+                console.log('Action login: ' + e.message);
+            }
+        },
+        getAllAdditionalService(context) {
+            try {
+                repository.getAllAdditionalService().then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setAdditionalService', data.Data ?? '');
                     }
                 });
             } catch (e) {

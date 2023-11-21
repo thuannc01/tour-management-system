@@ -49,7 +49,6 @@ class AdditionalServiceController extends Controller
     {
         try {
             $data_res = $this->additionalServiceRepository->getAll();
-
             $response = response()->json([
                 'Code'         => ResponseCodeConstant::OK,
                 'Data'         => $data_res,

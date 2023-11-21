@@ -6,6 +6,7 @@ const resourceTypesTransportation = '/type-transportation';
 const resourceLocation = '/location';
 const resourceFoodSpot = '/food-spot';
 const resourceHotelSpot = '/hotel-spot';
+const resourceAdditionalService = '/additional-service';
 
 export default {
     getAllCategories: () => {
@@ -25,5 +26,8 @@ export default {
     },
     getAllHotelSpots: () => {
         return repository.get(`${resourceHotelSpot}`);
+    },
+    getAllAdditionalService: () => {
+        return repository.get(`${resourceAdditionalService}`);
     }
 };

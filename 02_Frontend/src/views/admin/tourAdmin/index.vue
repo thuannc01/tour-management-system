@@ -44,6 +44,7 @@ var TourAdmin = {
             rows: 10,
             perPage: 3,
             currentPage: 1,
+            component: {},
             selected: { name: 'Javascript', code: 'js' },
             options: [
                 { name: 'Vue.js', code: 'vu' },
@@ -73,14 +74,20 @@ var TourAdmin = {
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
         ]),
-        ...mapMutations('TourAdminStore', ['setBtnUpdateTour']),
+        ...mapMutations('TourAdminStore', [
+            'setBtnUpdateTour',
+            'setImagesTourList',
+            'setInitImagesTourList',
+            'deleteImagesTourList'
+        ]),
         ...mapActions('TourAdminStore', [
             'getAllCategories',
             'getAllSegment',
             'getAllTypesTransportation',
             'getAllLocation',
             'getAllFoodSpots',
-            'getAllHotelSpots'
+            'getAllHotelSpots',
+            'getAllAdditionalService'
         ]),
         switchMode(id) {
             const vm = this;
@@ -114,12 +121,15 @@ var TourAdmin = {
                 this.setPageNameAdmin('Thêm mới tour du lịch');
                 vm.setBtnUpdateTour(statusBtn);
                 //
-                this.getAllCategories();
-                this.getAllSegment();
-                this.getAllTypesTransportation();
-                this.getAllLocation();
-                this.getAllFoodSpots();
-                this.getAllHotelSpots();
+                vm.setInitImagesTourList();
+                //
+                vm.getAllCategories();
+                vm.getAllSegment();
+                vm.getAllTypesTransportation();
+                vm.getAllLocation();
+                vm.getAllFoodSpots();
+                vm.getAllHotelSpots();
+                vm.getAllAdditionalService();
             }
         },
         addDisplayNone(elem) {
@@ -178,7 +188,6 @@ var TourAdmin = {
             const FOLDER_NAME = 'thuan_tourist';
             const urls = [];
             const api = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
-
             for (const file of files) {
                 const formData = new FormData(); // key: value
                 formData.append('upload_preset', PRESET_NAME);
@@ -194,9 +203,18 @@ var TourAdmin = {
                     .catch((error) =>
                         console.error('Error uploading image:', error)
                     );
-                urls.push(response.data.secure_url);
+                let dataSet = {
+                    original_filename: response.data.original_filename,
+                    public_id: response.data.public_id,
+                    secure_url: response.data.secure_url
+                };
+                urls.push(dataSet);
             }
+            this.setImagesTourList(urls);
             return urls;
+        },
+        deleteTourImg(public_id) {
+            this.deleteImagesTourList(public_id);
         }
     }
 };
