@@ -286,6 +286,9 @@ var TourAdmin = {
                     currency: 'VND'
                 });
             }
+        },
+        changeDayTour(i) {
+            console.log(i);
         }
     }
 };
