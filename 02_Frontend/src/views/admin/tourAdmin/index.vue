@@ -61,7 +61,8 @@ var TourAdmin = {
             'tourData',
             'btnUpdateTour',
             'dataList',
-            'tourDateData'
+            'tourDateData',
+            'tourDateDataTemp'
         ])
     },
     methods: {
@@ -84,7 +85,9 @@ var TourAdmin = {
             'setImagesTourList',
             'setInitImagesTourList',
             'deleteImagesTourList',
-            'initScreen'
+            'initScreen',
+            'setTourDateDataTemp',
+            'initTourDateData'
         ]),
         ...mapActions('TourAdminStore', [
             'getAllCategories',
@@ -230,6 +233,14 @@ var TourAdmin = {
             }
             if (result) {
                 this.hideHeaderError();
+                // set btn
+                const statusBtn = {
+                    backDisable: false,
+                    nextDisable: true,
+                    btnList: true,
+                    btnUpdate: false
+                };
+                vm.setBtnUpdateTour(statusBtn);
             }
             return result;
         },
@@ -287,8 +298,76 @@ var TourAdmin = {
                 });
             }
         },
-        changeDayTour(i) {
-            console.log(i);
+        getListIDString(arr) {
+            let str = '';
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].id != '' && arr[i].id != undefined) {
+                    str += String(arr[i].id) + '###';
+                }
+            }
+            return str;
+        },
+        changeDayTour(day) {
+            const vm = this;
+            //
+            const lastDataDay = vm.tourDateDataTemp[
+                vm.tourDateDataTemp.length - 1
+            ]
+                ? vm.tourDateDataTemp[vm.tourDateDataTemp.length - 1].day
+                : 1;
+            if (day != lastDataDay + 1) {
+                this.showHeaderError(['Vui lòng nhập chọn ngày tiếp theo!']);
+                return;
+            }
+            if (vm.tourDateData.title.trim() == '') {
+                this.showHeaderError([
+                    'Vui lòng nhập tiêu đề ngày du lịch này'
+                ]);
+                return;
+            } else if (vm.tourDateData.hotel_spot_id.length == 0) {
+                this.showHeaderError([
+                    'Vui lòng chọn ít nhất một địa điểm lưu trú'
+                ]);
+                return;
+            } else if (vm.tourDateData.food_spot_id.length == 0) {
+                this.showHeaderError([
+                    'Vui lòng chọn ít nhất một địa điểm ăn uống'
+                ]);
+                return;
+            } else if (vm.tourDateData.body.trim() == '') {
+                this.showHeaderError([
+                    'Vui lòng nhập nội dung ngày du lịch này '
+                ]);
+                return;
+            } else {
+                this.hideHeaderError();
+                document
+                    .getElementById(`item-date-tour-${day}`)
+                    .classList.remove('item-not-active');
+                document
+                    .getElementById(`item-date-tour-${day}`)
+                    .classList.add('item-active');
+            }
+            vm.initTourDateData();
+            vm.setTourDateDataTemp({
+                day: day,
+                title: vm.tourDateData.title,
+                food_spot_id: vm.getListIDString(vm.tourDateData.food_spot_id),
+                hotel_spot_id: vm.getListIDString(
+                    vm.tourDateData.hotel_spot_id
+                ),
+                body: vm.tourDateData.body
+            });
+            //
+            if (vm.tourDateDataTemp.length == day) {
+                const statusBtn = {
+                    backDisable: false,
+                    nextDisable: false,
+                    btnList: true,
+                    btnUpdate: false
+                };
+                vm.setBtnUpdateTour(statusBtn);
+            }
         }
     }
 };

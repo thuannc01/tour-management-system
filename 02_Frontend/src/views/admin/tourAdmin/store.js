@@ -2,8 +2,8 @@ import repository from './repository';
 
 const initData = {
     title: '',
-    category_id: { name: '', code: '' },
-    tourist_segment_id: { name: '', code: '' },
+    category_id: [{ name: '', id: '' }],
+    tourist_segment_id: [{ name: '', id: '' }],
     type_transportation_id: 1,
     from_province_id: '1',
     to_province_id: '33',
@@ -11,7 +11,7 @@ const initData = {
     adult_ticket_price: '',
     child_ticket_price: '',
     infant_ticket_price: '',
-    additional_services_id: { name: '', code: '' },
+    additional_services_id: [{ name: '', id: '' }],
     images: [],
     itinerary_highlight: '',
     policy: '',
@@ -22,8 +22,8 @@ const tourDateData = {
     tour_id: '',
     day: '',
     title: '',
-    food_spot_id: { name: '', code: '' },
-    hotel_spot_id: { name: '', code: '' },
+    food_spot_id: [{ name: '', id: '' }],
+    hotel_spot_id: [{ name: '', id: '' }],
     body: ''
 };
 
@@ -46,11 +46,16 @@ export default {
             nextDisable: true,
             btnList: true,
             btnUpdate: false
-        }
+        },
+        tourDateDataTemp: []
     },
     mutations: {
         initScreen(state) {
             state.tourData = { ...initData };
+            state.tourDateData = { ...tourDateData };
+            state.tourDateDataTemp = [];
+        },
+        initTourDateData(state) {
             state.tourDateData = { ...tourDateData };
         },
         setBtnUpdateTour(state, data) {
@@ -61,13 +66,13 @@ export default {
         },
         setCategoriesList(state, data) {
             state.dataList.categoriesList = data;
-            state.tourData.category_id.name = data[0].name;
-            state.tourData.category_id.code = data[0].id;
+            state.tourData.category_id[0].name = data[0].name;
+            state.tourData.category_id[0].id = data[0].id;
         },
         setTouristSegmentsList(state, data) {
             state.dataList.touristSegmentsList = data;
-            state.tourData.tourist_segment_id.name = data[0].name;
-            state.tourData.tourist_segment_id.code = data[0].id;
+            state.tourData.tourist_segment_id[0].name = data[0].name;
+            state.tourData.tourist_segment_id[0].id = data[0].id;
         },
         setTypesTransportationList(state, data) {
             state.dataList.typesTransportationList = data;
@@ -80,18 +85,18 @@ export default {
         },
         setFoodSpotsList(state, data) {
             state.dataList.foodSpotsList = data;
-            state.tourDateData.food_spot_id.name = data[0].name;
-            state.tourDateData.food_spot_id.code = data[0].id;
+            state.tourDateData.food_spot_id[0].name = data[0].name;
+            state.tourDateData.food_spot_id[0].id = data[0].id;
         },
         setHotelSpotsList(state, data) {
             state.dataList.hotelSpotsList = data;
-            state.tourDateData.hotel_spot_id.name = data[0].name;
-            state.tourDateData.hotel_spot_id.code = data[0].id;
+            state.tourDateData.hotel_spot_id[0].name = data[0].name;
+            state.tourDateData.hotel_spot_id[0].id = data[0].id;
         },
         setAdditionalService(state, data) {
             state.dataList.additionalServicesList = data;
-            state.tourData.additional_services_id.name = data[0].name;
-            state.tourData.additional_services_id.code = data[0].id;
+            state.tourData.additional_services_id[0].name = data[0].name;
+            state.tourData.additional_services_id[0].id = data[0].id;
         },
         setImagesTourList(state, data) {
             state.tourData.images = data;
@@ -104,6 +109,19 @@ export default {
                 return object.public_id == data;
             });
             state.tourData.images.splice(indexOfObject, 1);
+        },
+        //
+        setTourDateDataTemp(state, data) {
+            state.tourDateDataTemp.push(data);
+        },
+        initTourDateDataTemp(state) {
+            state.tourDateDataTemp = [];
+        },
+        deleteTourDateDataTemp(state, data) {
+            const indexOfObject = state.tourDateDataTemp.findIndex((object) => {
+                return object.day == data;
+            });
+            state.tourDateDataTemp.splice(indexOfObject, 1);
         }
     },
     actions: {
