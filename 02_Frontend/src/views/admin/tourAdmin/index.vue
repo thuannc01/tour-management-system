@@ -307,7 +307,7 @@ var TourAdmin = {
             }
             return str;
         },
-        changeDayTour(day) {
+        changeDayTour(day, number_of_day) {
             const vm = this;
             //
             const lastDataDay = vm.tourDateDataTemp[
@@ -359,7 +359,11 @@ var TourAdmin = {
                 body: vm.tourDateData.body
             });
             //
-            if (vm.tourDateDataTemp.length == day) {
+            console.log(
+                'vm.tourDateDataTemp.length: ',
+                vm.tourDateDataTemp.length
+            );
+            if (vm.tourDateDataTemp.length + 1 == number_of_day) {
                 const statusBtn = {
                     backDisable: false,
                     nextDisable: false,

@@ -248,7 +248,8 @@
             <div class="row m-auto d-flex justify-content-between">
                 <div class="col-2 left-sidebar-activity d-block text-center py-1">
                     <template v-for="i in +tourData.number_of_day" :key="i">
-                        <div :id="'item-date-tour-' + i" class="d-block w-100" @click="changeDayTour(i)"
+                        <div :id="'item-date-tour-' + i" class="d-block w-100"
+                            @click="changeDayTour(i, tourData.number_of_day)"
                             :class="[i == 1 ? 'item-active' : 'item-not-active']">
                             <p class="m-0 text-center text-uppercase">Ngày</p>
                             <p class="m-0 text-center text-uppercase">{{i}}</p>
