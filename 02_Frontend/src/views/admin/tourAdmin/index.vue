@@ -43,8 +43,8 @@ var TourAdmin = {
     watch: {},
     data() {
         return {
-            rows: 10,
-            perPage: 3,
+            rows: 20,
+            perPage: 5,
             currentPage: 1,
             component: {},
             selected: { name: 'Javascript', code: 'js' },

@@ -150,9 +150,9 @@ CREATE TABLE tours (
 	itinerary_highlight text,
 	policy text,
 	note text,
-	adult_ticket_price numeric(18, 0),
-	child_ticket_price numeric(18, 0),
-	infant_ticket_price numeric(18, 0),
+	adult_ticket_price character varying (30),
+	child_ticket_price character varying (30),
+	infant_ticket_price character varying (30),
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -376,8 +376,12 @@ VALUES
 INSERT INTO hotel_spots (name, address, phone_number, email, type, location_map, province_id, created_at)
 VALUES 
 	('Khách sạn Mường Thanh Luxury Đà Nẵng', '270 Võ Nguyên Giáp Ngu Hanh Son District, My An, Đà Nẵng, Việt Nam', '0543543345', 'muongthanh@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE),
-	('Golden Lotus Grand Da Nang', '86 Lê Quang Đạo, Đà Nẵng, Việt Nam', '0435436685', 'golden@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE);
+	('Golden Lotus Grand Da Nang', '86 Lê Quang Đạo, Đà Nẵng, Việt Nam', '0435436685', 'golden@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE),
+	('InterContinental Danang Sun Peninsula Resort', 'Bai Bac, SonTra Peninsula, Danang', '0876543345', 'sunpeninsula@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE);
 -- Table food_spots
 INSERT INTO food_spots (name, menu, address, phone_number, email, type, location_map, opening_hours, province_id, created_at)
 VALUES 
-	('Bún chả cá bà bé', 'Riêu chả, chả cá, riêu cua, cá ngừ, trứng cá', '120 Trần Cao Vân - TP.Đà Nẵng', '0653653787', 'babe@gmail.com', 'Quán ăn đường phố', 'google.map', '17h - 23h Hằng ngày', 32, CURRENT_DATE);
+	('Bún chả cá bà bé', 'Riêu chả, chả cá, riêu cua, cá ngừ, trứng cá', '120 Trần Cao Vân - TP.Đà Nẵng', '0653653787', 'babe@gmail.com', 'Quán ăn đường phố', 'google.map', '17h - 23h Hằng ngày', 32, CURRENT_DATE),
+	('The Third House', 'Các loại cà phê rang xay', '142/3 Lê Độ Tam Thuận, Thanh Khê, Đà Nẵng', '0654345612', 'capheviet@gmail.com', 'Quán cà phê', 'google.map', '8h00 - 23h Hằng ngày', 33, CURRENT_DATE),
+	('Chả cá Phượng', 'Riêu chả, chả cá, riêu cua', 'Điện Dương - Điện Bàn - Quảng Nam', '0657645764', 'bunphuong@gmail.com', 'Quán ăn đường phố', 'google.map', '5h30 - 10h Sáng Hằng ngày', 33, CURRENT_DATE),
+	('Cá Chuồn Cồ Vietnamese Restaurant', 'Cà phê, Món ăn Kiểu Á, Kiểu Việt, Quốc tế', '99 Võ Nguyên Giáp Mỹ An, Ngũ Hành Sơn, Đà Nẵng', '0765433245', 'cachuon@gmail.com', 'Nhà hàng', 'google.map', '7h30 - 22h Hằng ngày', 32, CURRENT_DATE);

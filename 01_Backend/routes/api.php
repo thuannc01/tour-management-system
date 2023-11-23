@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\AdditionalServiceController;
 use App\Http\Controllers\Api\FoodSpotController;
 use App\Http\Controllers\Api\HotelSpotController;
+use App\Http\Controllers\Api\TourController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,8 @@ Route::group([
     Route::apiResource('/food-spot', FoodSpotController::class);
     // hotel spot
     Route::apiResource('/hotel-spot', HotelSpotController::class);
+    // tour
+    Route::apiResource('/tour', TourController::class);
 });
 
 // No auth

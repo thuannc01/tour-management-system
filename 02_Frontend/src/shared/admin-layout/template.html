@@ -46,13 +46,6 @@
                             <span>Thời gian mở bán tour</span>
                         </a>
                     </li>
-                    <li id="sidebar-item-order" class="sidebar-item"
-                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-card-heading d-flex"></i>
-                            <span>Đơn đặt tour</span>
-                        </a>
-                    </li>
                     <li class="sidebar-item-news" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
                         <a href="#" class='sidebar-link'>
@@ -65,6 +58,13 @@
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-reply-all-fill d-flex"></i>
                             <span>Phản hồi - đánh giá</span>
+                        </a>
+                    </li>
+                    <li id="sidebar-item-order" class="sidebar-item"
+                        :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-card-heading d-flex"></i>
+                            <span>Đơn đặt tour</span>
                         </a>
                     </li>
                     <li id="sidebar-item-transport" class="sidebar-item"

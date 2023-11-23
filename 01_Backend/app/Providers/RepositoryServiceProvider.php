@@ -30,6 +30,9 @@ use App\Repositories\FoodSpot\FoodSpotRepository;
 // hotel spot
 use App\Repositories\HotelSpot\IHotelSpotRepository;
 use App\Repositories\HotelSpot\HotelSpotRepository;
+// tour
+use App\Repositories\Tour\ITourRepository;
+use App\Repositories\Tour\TourRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -59,6 +62,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IFoodSpotRepository::class, FoodSpotRepository::class);
         // hotel spot
         $this->app->bind(IHotelSpotRepository::class, HotelSpotRepository::class);
+        // tour
+        $this->app->bind(ITourRepository::class, TourRepository::class);
     }
 
     /**
