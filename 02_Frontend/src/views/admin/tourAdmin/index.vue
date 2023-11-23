@@ -40,9 +40,12 @@ var TourAdmin = {
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
     },
-    watch: {},
+    watch: {
+        //
+    },
     data() {
         return {
+            showEditor: true,
             rows: 20,
             perPage: 5,
             currentPage: 1,
@@ -264,7 +267,7 @@ var TourAdmin = {
                 formData.append('upload_preset', PRESET_NAME);
                 formData.append('folder', FOLDER_NAME);
                 formData.append('file', file);
-
+                store.commit('app/showLoading');
                 const response = await axios
                     .post(api, formData, {
                         headers: {
@@ -281,6 +284,7 @@ var TourAdmin = {
                 };
                 urls.push(dataSet);
             }
+            store.commit('app/hideLoading');
             this.setImagesTourList(urls);
             return urls;
         },
@@ -348,7 +352,6 @@ var TourAdmin = {
                     .getElementById(`item-date-tour-${day}`)
                     .classList.add('item-active');
             }
-            vm.initTourDateData();
             vm.setTourDateDataTemp({
                 day: day,
                 title: vm.tourDateData.title,
@@ -359,10 +362,8 @@ var TourAdmin = {
                 body: vm.tourDateData.body
             });
             //
-            console.log(
-                'vm.tourDateDataTemp.length: ',
-                vm.tourDateDataTemp.length
-            );
+            console.log('vm.tourDateDataTemp: ', vm.tourDateDataTemp);
+            vm.initTourDateData();
             if (vm.tourDateDataTemp.length + 1 == number_of_day) {
                 const statusBtn = {
                     backDisable: false,
