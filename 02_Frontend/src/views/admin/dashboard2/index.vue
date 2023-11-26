@@ -29,6 +29,7 @@ var Dashboard2 = {
         this.getAllCategories();
         this.getAllSegment();
         this.getAllLocation();
+        this.getDataInit();
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -73,7 +74,8 @@ var Dashboard2 = {
         ...mapActions('Dashboard2Store', [
             'getAllLocation',
             'getAllSegment',
-            'getAllCategories'
+            'getAllCategories',
+            'getDataInit'
         ]),
         handleButtonClick() {
             alert('Button clicked!');

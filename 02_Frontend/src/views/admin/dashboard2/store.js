@@ -4,7 +4,11 @@ const initData = {
     areaList: '',
     provinceIDList: '',
     categoryIDList: '',
-    segmentIDList: ''
+    segmentIDList: '',
+    countTotalTours: 0,
+    countTotalTourDeployed: 0,
+    countTotalCustomer: 0,
+    totalRevenue: 0
 };
 export default {
     namespaced: true,
@@ -23,6 +27,12 @@ export default {
             state.selectOptions.categoryList = [];
             state.selectOptions.segmentList = [];
         },
+        setInitData2(state, data) {
+            state.data.countTotalTours = data.countTotalTours;
+            state.data.countTotalTourDeployed = data.countTotalTourDeployed;
+            state.data.countTotalCustomer = data.countTotalCustomer;
+            state.data.totalRevenue = data.totalRevenue;
+        },
         setProvinceList(state, data) {
             state.selectOptions.provinceList = data;
         },
@@ -34,6 +44,18 @@ export default {
         }
     },
     actions: {
+        getDataInit(context) {
+            try {
+                repository.getDataInit().then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setInitData2', data.Data ?? '');
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
         getAllCategories(context) {
             try {
                 repository.getAllCategories().then((res) => {
