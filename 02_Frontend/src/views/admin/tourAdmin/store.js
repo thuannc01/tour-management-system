@@ -1,6 +1,9 @@
 import repository from './repository';
+import store from '@/store';
+import { MSG_TYPE } from '@/utils/messages';
 
 const initData = {
+    id: '',
     title: '',
     category_id: [{ name: '', id: '' }],
     tourist_segment_id: [{ name: '', id: '' }],
@@ -134,7 +137,7 @@ export default {
                     }
                 });
             } catch (e) {
-                console.log('Action login: ' + e.message);
+                console.log('' + e.message);
             }
         },
         getAllSegment(context) {
@@ -149,7 +152,7 @@ export default {
                     }
                 });
             } catch (e) {
-                console.log('Action login: ' + e.message);
+                console.log('' + e.message);
             }
         },
         getAllTypesTransportation(context) {
@@ -164,7 +167,7 @@ export default {
                     }
                 });
             } catch (e) {
-                console.log('Action login: ' + e.message);
+                console.log('' + e.message);
             }
         },
         getAllLocation(context) {
@@ -176,7 +179,7 @@ export default {
                     }
                 });
             } catch (e) {
-                console.log('Action login: ' + e.message);
+                console.log('' + e.message);
             }
         },
         getAllFoodSpots(context) {
@@ -188,7 +191,7 @@ export default {
                     }
                 });
             } catch (e) {
-                console.log('Action login: ' + e.message);
+                console.log('' + e.message);
             }
         },
         getAllHotelSpots(context) {
@@ -200,7 +203,7 @@ export default {
                     }
                 });
             } catch (e) {
-                console.log('Action login: ' + e.message);
+                console.log('' + e.message);
             }
         },
         getAllAdditionalService(context) {
@@ -212,7 +215,39 @@ export default {
                     }
                 });
             } catch (e) {
-                console.log('Action login: ' + e.message);
+                console.log('' + e.message);
+            }
+        },
+        saveTour(context, conditions) {
+            try {
+                repository.saveTour(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Lưu tour thành công',
+                            content:
+                                'Dữ liệu tour du lịch đã được cập nhật vào cơ sở dữ liệu',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    setTimeout(function () {
+                                        document
+                                            .getElementById('btn-btnUpdate')
+                                            .click();
+                                    }, 300);
+                                    setTimeout(function () {
+                                        document
+                                            .getElementById('btn-btnList')
+                                            .click();
+                                    }, 400);
+                                }
+                            }
+                        });
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
             }
         }
     }

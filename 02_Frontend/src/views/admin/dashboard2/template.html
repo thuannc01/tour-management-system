@@ -85,10 +85,10 @@
             <div class="row mt-2">
                 <div class="col-12 filter-province w-100">
                     <h6 class="text-uppercase">Chọn tỉnh, TP</h6>
-                    <div class="form-check" v-for="i in 20">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <div class="form-check" v-for="(item, index) in selectOptions.provinceList" :key="index">
+                        <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Thành phố Huế
+                            {{item.name}}
                         </label>
                     </div>
                 </div>
@@ -96,28 +96,10 @@
             <div class="row mt-2">
                 <div class="col-12 filter-category w-100">
                     <h6 class="text-uppercase">Chọn loại tour</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <div class="form-check" v-for="(item, index) in selectOptions.categoryList" :key="index">
+                        <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Văn Hóa và Lịch Sử
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Dài ngày
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Ngắn ngày
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Ẩm Thực và Gia Vị
+                            {{item.name}}
                         </label>
                     </div>
                 </div>
@@ -125,16 +107,10 @@
             <div class="row mt-2">
                 <div class="col-12 filter-object w-100">
                     <h6 class="text-uppercase">Chọn đối tượng</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <div class="form-check" v-for="(item, index) in selectOptions.segmentList" :key="index">
+                        <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Khách cá nhân
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
-                            Khách đoàn
+                            {{item.name}}
                         </label>
                     </div>
                 </div>

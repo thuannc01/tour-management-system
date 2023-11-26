@@ -477,6 +477,42 @@
                 ]
             }
         },
+        "/statistical": {
+            "get": {
+                "tags": [
+                    "Statistical"
+                ],
+                "summary": "init data for statistics by revenue",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "f1f59f9027834afc4c6ae16518d52c72",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/tour": {
             "get": {
                 "tags": [
@@ -574,73 +610,14 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "type_transportation_id",
-                                    "from_province_id",
-                                    "to_province_id",
-                                    "title",
-                                    "number_of_day"
-                                ],
                                 "properties": {
-                                    "type_transportation_id": {
-                                        "type": "integer",
-                                        "example": "1"
+                                    "tourData": {
+                                        "type": "object",
+                                        "example": "{...}"
                                     },
-                                    "from_province_id": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    },
-                                    "to_province_id": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "example": "thuannc"
-                                    },
-                                    "number_of_day": {
-                                        "type": "integer",
-                                        "example": "1"
-                                    },
-                                    "itinerary_highlight": {
-                                        "type": "string",
-                                        "example": "itinerary_highlight..."
-                                    },
-                                    "policy": {
-                                        "type": "string",
-                                        "example": "policy..."
-                                    },
-                                    "note": {
-                                        "type": "string",
-                                        "example": "note..."
-                                    },
-                                    "adult_ticket_price": {
-                                        "type": "string",
-                                        "example": "12.000.000đ"
-                                    },
-                                    "child_ticket_price": {
-                                        "type": "string",
-                                        "example": "12.000.000đ"
-                                    },
-                                    "infant_ticket_price": {
-                                        "type": "string",
-                                        "example": "12.000.000đ"
-                                    },
-                                    "category_id": {
+                                    "tourDateData": {
                                         "type": "arr",
-                                        "example": "[1,2,3]"
-                                    },
-                                    "tourist_segment_id": {
-                                        "type": "arr",
-                                        "example": "[1,2,3]"
-                                    },
-                                    "additional_services_id": {
-                                        "type": "arr",
-                                        "example": "[1,2,3]"
-                                    },
-                                    "schedules": {
-                                        "type": "arr",
-                                        "example": "[{}, {}]"
+                                        "example": "[...]"
                                     }
                                 },
                                 "type": "object"

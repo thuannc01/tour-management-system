@@ -41,31 +41,39 @@
                     </li>
                     <li id="sidebar-item-tour-time" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-alarm-fill d-flex"></i>
-                            <span>Thời gian mở bán tour</span>
-                        </a>
+                        <router-link to="/admin/period">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-alarm-fill d-flex"></i>
+                                <span>Thời gian mở bán tour</span>
+                            </a>
+                        </router-link>
                     </li>
-                    <li class="sidebar-item-news" class="sidebar-item"
+                    <li id="sidebar-item-news" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-newspaper d-flex"></i>
-                            <span>Cẩm nang và tin tức</span>
-                        </a>
+                        <router-link to="/admin/news">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-newspaper d-flex"></i>
+                                <span>Cẩm nang và tin tức</span>
+                            </a>
+                        </router-link>
                     </li>
-                    <li class="sidebar-item-rating" class="sidebar-item"
+                    <li id="sidebar-item-rating" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-reply-all-fill d-flex"></i>
-                            <span>Phản hồi - đánh giá</span>
-                        </a>
+                        <router-link to="/admin/feedback">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-reply-all-fill d-flex"></i>
+                                <span>Phản hồi - đánh giá</span>
+                            </a>
+                        </router-link>
                     </li>
                     <li id="sidebar-item-order" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-card-heading d-flex"></i>
-                            <span>Đơn đặt tour</span>
-                        </a>
+                        <router-link to="/admin/order">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-card-heading d-flex"></i>
+                                <span>Đơn đặt tour</span>
+                            </a>
+                        </router-link>
                     </li>
                     <li id="sidebar-item-transport" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">

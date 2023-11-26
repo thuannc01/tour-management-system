@@ -9,7 +9,7 @@
 
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { defineComponent, ref, watch } from '@vue/runtime-core';
+import { defineComponent, ref, watch, watchEffect } from '@vue/runtime-core';
 import axios from 'axios';
 import store from '@/store';
 
@@ -34,17 +34,16 @@ export default defineComponent({
             () => editorData.value,
             (newValue) => {
                 emit('update:modelValue', newValue);
-                if (!newValue.trim()) {
-                    clearEditor();
-                }
             }
         );
 
-        const clearEditor = () => {
-            if (myEditor.value) {
-                myEditor.value.setData('');
+        watchEffect(() => {
+            const newValue = props.modelValue;
+            if (newValue.trim() === '') {
+                editorData.value = '';
+                emit('update:modelValue', newValue);
             }
-        };
+        });
 
         return {
             editor: ClassicEditor,

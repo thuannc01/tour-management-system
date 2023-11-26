@@ -25,6 +25,8 @@ var Dashboard = {
         document
             .getElementById('sidebar-item-statistical-revenue')
             .classList.add('active');
+        // init data
+        this.getDataInit();
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -64,6 +66,8 @@ var Dashboard = {
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
         ]),
+        ...mapActions('DashboardStore', ['getDataInit']),
+        ...mapMutations('DashboardStore', []),
         handleButtonClick() {
             alert('Button clicked!');
         }

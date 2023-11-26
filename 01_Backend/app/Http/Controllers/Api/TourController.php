@@ -119,24 +119,8 @@ class TourController extends Controller
      *      @OA\RequestBody(
      *           description="Start date",
      *           @OA\JsonContent(
-     *               required={"type_transportation_id", "from_province_id", "to_province_id", "title", "number_of_day"},
-     *               @OA\Property(property="type_transportation_id", type="int", example="1"),
-     *               @OA\Property(property="from_province_id", type="int", example="1"),
-     *               @OA\Property(property="to_province_id", type="int", example="1"),
-     *               @OA\Property(property="title", type="string", example="thuannc"),
-     *               @OA\Property(property="number_of_day", type="int", example="1"),
-     *               @OA\Property(property="itinerary_highlight", type="string", example="itinerary_highlight..."),
-     *               @OA\Property(property="policy", type="string", example="policy..."),
-     *               @OA\Property(property="note", type="string", example="note..."),
-     *               @OA\Property(property="adult_ticket_price", type="string", example="12.000.000đ"),
-     *               @OA\Property(property="child_ticket_price", type="string", example="12.000.000đ"),
-     *               @OA\Property(property="infant_ticket_price", type="string", example="12.000.000đ"),
-     * 
-     *               @OA\Property(property="category_id", type="arr", example="[1,2,3]"),
-     *               @OA\Property(property="tourist_segment_id", type="arr", example="[1,2,3]"),
-     *               @OA\Property(property="additional_services_id", type="arr", example="[1,2,3]"),
-     * 
-     *               @OA\Property(property="schedules", type="arr", example="[{}, {}]")
+     *               @OA\Property(property="tourData", type="object", example="{...}"),
+     *               @OA\Property(property="tourDateData", type="arr", example="[...]"),
      *          )
      *      ),
      *      @OA\Response(
@@ -154,6 +138,7 @@ class TourController extends Controller
      */
     public function store(Request $request)
     {
+        $response = null;
         try {
             $data_res = $this->tourRepository->saveData($request->all());
 

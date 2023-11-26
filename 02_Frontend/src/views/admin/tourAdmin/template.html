@@ -4,12 +4,12 @@
         <div class="col-4">
             <div class="row">
                 <div class="col-6">
-                    <thuan-button @click="switchMode(1)" :disabled="btnUpdateTour.btnList" label=" Liệt kê tour"
-                        class="bi bi-list-check" />
+                    <thuan-button @click="switchMode(1)" id="btn-btnList" :disabled="btnUpdateTour.btnList"
+                        label=" Liệt kê tour" class="bi bi-list-check" />
                 </div>
                 <div class="col-5 p-0">
-                    <thuan-button @click="switchMode(2)" :disabled="btnUpdateTour.btnUpdate" label=" Thêm mới"
-                        classBtn="btn-success" class="bi bi-plus-circle-fill" />
+                    <thuan-button @click="switchMode(2)" id="btn-btnUpdate" :disabled="btnUpdateTour.btnUpdate"
+                        label=" Thêm mới" classBtn="btn-success" class="bi bi-plus-circle-fill" />
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@
                         <label for="adult_ticket_price">Giá vé người lớn<span class="text-danger ps-1"><i
                                     class="bi bi-exclamation-circle"></i></span></label>
                         <input class="form-control" id="adult_ticket_price" type="text"
-                            v-model="tourData. adult_ticket_price" maxlength="30" @change="formatMoneyInput"
+                            v-model="tourData.adult_ticket_price" maxlength="30" @change="formatMoneyInput($event,'1')"
                             placeholder="Người từ 12 tuổi trở lên ...">
                     </div>
                 </div>
@@ -173,7 +173,7 @@
                         <label for="child_ticket_price">Giá vé trẻ em<span class="text-danger ps-1"><i
                                     class="bi bi-exclamation-circle"></i></span></label>
                         <input class="form-control" id="child_ticket_price" type="text"
-                            v-model="tourData.child_ticket_price" maxlength="30" @change="formatMoneyInput"
+                            v-model="tourData.child_ticket_price" maxlength="30" @change="formatMoneyInput($event,'2')"
                             placeholder="Người từ 6 đến 12 tuổi ...">
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                         <label for="infant_ticket_price">Giá vé em bé<span class="text-danger ps-1"><i
                                     class="bi bi-exclamation-circle"></i></span></label>
                         <input class="form-control" id="infant_ticket_price" type="text"
-                            v-model="tourData.infant_ticket_price" maxlength="30" @change="formatMoneyInput"
+                            v-model="tourData.infant_ticket_price" maxlength="30" @change="formatMoneyInput($event,'3')"
                             placeholder="Em bé dưới 2 tuổi ...">
                     </div>
                 </div>
@@ -227,20 +227,26 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <thuan-textarea v-model="tourData.itinerary_highlight" type="text" label="Điểm nhấn hành trình"
-                        placeholder="Nhập đặt điểm nổi bậc của tour du lịch này ở đây ..." :rowsArea="5" />
+                    <!-- <thuan-textarea v-model="tourData.itinerary_highlight" type="text" label="Điểm nhấn hành trình"
+                        placeholder="Nhập đặt điểm nổi bậc của tour du lịch này ở đây ..." :rowsArea="5" /> -->
+                    <label class="label-multiple-select">Điểm nhấn hành trình</label>
+                    <CKEditorCustom v-if="showEditor" v-model="tourData.itinerary_highlight" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <thuan-textarea v-model="tourData.policy" type="text" label="Chính sách tour"
-                        placeholder="Nhập chính sách tour du lịch này ở đây ..." :rowsArea="7" />
+                    <!-- <thuan-textarea v-model="tourData.policy" type="text" label="Chính sách tour"
+                        placeholder="Nhập chính sách tour du lịch này ở đây ..." :rowsArea="7" /> -->
+                    <label class="label-multiple-select">Chính sách tour</label>
+                    <CKEditorCustom v-if="showEditor" v-model="tourData.policy" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <thuan-textarea v-model="tourData.note" type="text" label="Ghi chú"
-                        placeholder="Nhập các thông tin cần chú ý ở đây ..." :rowsArea="5" />
+                    <!-- <thuan-textarea v-model="tourData.note" type="text" label="Ghi chú"
+                        placeholder="Nhập các thông tin cần chú ý ở đây ..." :rowsArea="5" /> -->
+                    <label class="label-multiple-select">Ghi chú</label>
+                    <CKEditorCustom v-if="showEditor" v-model="tourData.note" />
                 </div>
             </div>
         </div>

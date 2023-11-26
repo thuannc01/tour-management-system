@@ -7,6 +7,7 @@ const resourceLocation = '/location';
 const resourceFoodSpot = '/food-spot';
 const resourceHotelSpot = '/hotel-spot';
 const resourceAdditionalService = '/additional-service';
+const resourceTour = '/tour';
 
 export default {
     getAllCategories: () => {
@@ -29,5 +30,8 @@ export default {
     },
     getAllAdditionalService: () => {
         return repository.get(`${resourceAdditionalService}`);
+    },
+    saveTour: (data) => {
+        return repository.post(`${resourceTour}`, data);
     }
 };

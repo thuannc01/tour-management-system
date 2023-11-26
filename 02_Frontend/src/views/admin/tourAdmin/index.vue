@@ -99,7 +99,8 @@ var TourAdmin = {
             'getAllLocation',
             'getAllFoodSpots',
             'getAllHotelSpots',
-            'getAllAdditionalService'
+            'getAllAdditionalService',
+            'saveTour'
         ]),
         switchMode(id) {
             const vm = this;
@@ -166,12 +167,29 @@ var TourAdmin = {
                 divBtnNext.innerHTML = 'Tiếp theo';
                 divBtnNext.classList.add('bg-btn-primary-custom');
                 divBtnNext.classList.remove('btn-success');
-                //
+                // //
                 this.removeDisplayNone(divStep1);
                 this.addDisplayNone(divStep2);
+                //
+                const statusBtn = {
+                    backDisable: false,
+                    nextDisable: false,
+                    btnList: true,
+                    btnUpdate: false
+                };
+                this.setBtnUpdateTour(statusBtn);
             } else if (id == 2) {
                 // check data
                 if (this.checkData()) {
+                    // save data
+                    if (divBtnNext.textContent == 'Lưu thay đổi') {
+                        this.changeDayTour(
+                            Number(this.tourData.number_of_day),
+                            Number(this.tourData.number_of_day),
+                            1
+                        );
+                    }
+                    //
                     document
                         .getElementById('step-tour-admin-2')
                         .classList.remove('step-tour-admin-disable');
@@ -192,6 +210,9 @@ var TourAdmin = {
         checkData() {
             const vm = this;
             let result = true;
+            if (vm.tourData.number_of_day == 1) {
+                return true;
+            }
             if (vm.tourData.title.trim() == '') {
                 this.showHeaderError(['Tên tour du lịch không được để trống!']);
                 result = false;
@@ -209,31 +230,23 @@ var TourAdmin = {
                     'Vui lòng nhập thời gian tour diễn ra trong bao nhiêu ngày và nhập đúng định dạng số nguyên'
                 ]);
                 result = false;
-            } else if (
-                vm.tourData.adult_ticket_price == '' ||
-                isNaN(vm.tourData.adult_ticket_price)
-            ) {
+            } else if (vm.tourData.adult_ticket_price == '') {
                 this.showHeaderError([
                     'Vui lòng nhập giá vé người lớn hoặc giá trị nhập vào không đúng định dạng'
                 ]);
                 result = false;
-            } else if (
-                vm.tourData.child_ticket_price == '' ||
-                isNaN(vm.tourData.adult_ticket_price)
-            ) {
+            } else if (vm.tourData.child_ticket_price == '') {
                 this.showHeaderError([
                     'Vui lòng nhập giá vé trẻ em hoặc giá trị nhập vào không đúng định dạng'
                 ]);
                 result = false;
-            } else if (
-                vm.tourData.infant_ticket_price == '' ||
-                isNaN(vm.tourData.adult_ticket_price)
-            ) {
+            } else if (vm.tourData.infant_ticket_price == '') {
                 this.showHeaderError([
                     'Vui lòng nhập giá vé em bé hoặc giá trị nhập vào không đúng định dạng'
                 ]);
                 result = false;
             }
+            //
             if (result) {
                 this.hideHeaderError();
                 // set btn
@@ -291,15 +304,29 @@ var TourAdmin = {
         deleteTourImg(public_id) {
             this.deleteImagesTourList(public_id);
         },
-        formatMoneyInput(event) {
+        formatMoneyInput(event, id) {
             const inputValue = event.target.value;
-
             let numericValue = parseFloat(inputValue.replace(/[^0-9.-]/g, ''));
             if (!isNaN(numericValue)) {
-                event.target.value = numericValue.toLocaleString('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                });
+                if (id == '1') {
+                    this.tourData.adult_ticket_price =
+                        numericValue.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        });
+                } else if (id == '2') {
+                    this.tourData.child_ticket_price =
+                        numericValue.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        });
+                } else if (id == '3') {
+                    this.tourData.infant_ticket_price =
+                        numericValue.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        });
+                }
             }
         },
         getListIDString(arr) {
@@ -311,7 +338,7 @@ var TourAdmin = {
             }
             return str;
         },
-        changeDayTour(day, number_of_day) {
+        changeDayTour(day, number_of_day, mode = 0) {
             const vm = this;
             //
             const lastDataDay = vm.tourDateDataTemp[
@@ -319,7 +346,9 @@ var TourAdmin = {
             ]
                 ? vm.tourDateDataTemp[vm.tourDateDataTemp.length - 1].day
                 : 1;
-            if (day != lastDataDay + 1) {
+            console.log('day: ', day);
+            console.log('last day: ', lastDataDay);
+            if (day != lastDataDay + 1 && mode == 0) {
                 this.showHeaderError(['Vui lòng nhập chọn ngày tiếp theo!']);
                 return;
             }
@@ -372,6 +401,15 @@ var TourAdmin = {
                     btnUpdate: false
                 };
                 vm.setBtnUpdateTour(statusBtn);
+            }
+            // insert with mode = 1
+            if (mode == 1) {
+                const conditions = {
+                    tourData: this.tourData,
+                    tourDateData: this.tourDateDataTemp
+                };
+                console.log('conditions: ', conditions);
+                this.saveTour(conditions);
             }
         }
     }

@@ -33,6 +33,9 @@ use App\Repositories\HotelSpot\HotelSpotRepository;
 // tour
 use App\Repositories\Tour\ITourRepository;
 use App\Repositories\Tour\TourRepository;
+// statistical
+use App\Repositories\Statistical\IStatisticalRepository;
+use App\Repositories\Statistical\StatisticalRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -64,6 +67,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IHotelSpotRepository::class, HotelSpotRepository::class);
         // tour
         $this->app->bind(ITourRepository::class, TourRepository::class);
+        // statistical
+        $this->app->bind(IStatisticalRepository::class, StatisticalRepository::class);
     }
 
     /**

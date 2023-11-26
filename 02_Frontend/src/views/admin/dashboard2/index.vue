@@ -25,6 +25,10 @@ var Dashboard2 = {
         document
             .getElementById('sidebar-item-statistical-tour')
             .classList.add('active');
+        // init data
+        this.getAllCategories();
+        this.getAllSegment();
+        this.getAllLocation();
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -40,6 +44,7 @@ var Dashboard2 = {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
+        this.setDataInit();
     },
     watch: {},
     data() {
@@ -50,7 +55,7 @@ var Dashboard2 = {
         };
     },
     computed: {
-        ...mapState('DashboardStore', ['data', 'selectOptions'])
+        ...mapState('Dashboard2Store', ['data', 'selectOptions'])
     },
     methods: {
         ...mapActions('app', []),
@@ -63,6 +68,12 @@ var Dashboard2 = {
             'setRoutePagePathAdmin2',
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
+        ]),
+        ...mapMutations('Dashboard2Store', ['setDataInit']),
+        ...mapActions('Dashboard2Store', [
+            'getAllLocation',
+            'getAllSegment',
+            'getAllCategories'
         ]),
         handleButtonClick() {
             alert('Button clicked!');

@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\AdditionalServiceController;
 use App\Http\Controllers\Api\FoodSpotController;
 use App\Http\Controllers\Api\HotelSpotController;
 use App\Http\Controllers\Api\TourController;
+use App\Http\Controllers\Api\StatisticalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,8 @@ Route::group([
     Route::apiResource('/hotel-spot', HotelSpotController::class);
     // tour
     Route::apiResource('/tour', TourController::class);
+    // statistical
+    Route::apiResource('/statistical', StatisticalController::class);
 });
 
 // No auth
