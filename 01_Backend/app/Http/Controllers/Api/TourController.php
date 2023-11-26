@@ -57,14 +57,20 @@ class TourController extends Controller
      *          @OA\Schema(type="string")
      *      ),
      *      @OA\Parameter(
-     *          name="offset",
-     *          description="Số lượng hiển thị",
+     *          name="page_size",
+     *          description="Số lượng dòng hiển thị trên mỗi trang của kết quả phân trang",
      *          in="query",
      *          @OA\Schema(type="int")
      *      ),
      *      @OA\Parameter(
-     *          name="currentPage",
-     *          description="Chọn page hiện tại",
+     *          name="page_number",
+     *          description="Trang hiện tại muốn lấy dữ liệu",
+     *          in="query",
+     *          @OA\Schema(type="int")
+     *      ),
+     *      @OA\Parameter(
+     *          name="mode",
+     *          description="0: admin, 1: client",
      *          in="query",
      *          @OA\Schema(type="int")
      *      ),
@@ -141,6 +147,60 @@ class TourController extends Controller
         $response = null;
         try {
             $data_res = $this->tourRepository->saveData($request->all());
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
+        }
+        catch (\Exception $e) {
+            //
+        }
+        return $response;
+    }
+
+    /**
+     * Delete tour
+     *  @OA\Delete(
+     *      path="/tour",
+     *      tags={"Tour"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\Parameter(
+     *          name="Id tour to delete",
+     *          description="Id tour du lịch",
+     *          in="query",
+     *          @OA\Schema(type="int")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result of success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Result of success"
+     *              )
+     *          )
+     *      )
+     *  )
+     */
+    public function destroy(Request $request){
+        $response = null;
+        try {
+            $data_res = $this->tourRepository->deleteTour($request->all());
 
             $response = response()->json([
                 'Code'         => ResponseCodeConstant::OK,

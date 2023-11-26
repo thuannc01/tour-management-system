@@ -56,16 +56,19 @@
                         <p class="m-0">Hiển thị</p>
                     </div>
                     <div class="col-6">
-                        <select class="form-select" disabled aria-label="Default select example">
-                            <option value="0" selected>8 tour du lịch</option>
-                            <option value="1">16 tour du lịch</option>
+                        <select @change="doSearch" class="form-select" aria-label="Default select example"
+                            v-model="conditionSearch.page_size">
+                            <option value="4" selected>4 tour du lịch</option>
+                            <option value="8">8 tour du lịch</option>
+                            <option value="16">16 tour du lịch</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nhập thông tin tìm kiếm tour ...">
+                    <input @change="doSearch" v-model="conditionSearch.title" type="text" class="form-control"
+                        placeholder="Nhập thông tin tìm kiếm tour ...">
                     <span class="input-group-text">
                         <i class="bi bi-search"></i>
                     </span>
@@ -74,10 +77,10 @@
         </div>
         <!-- content -->
         <div class="row">
-            <div class="col-3" v-for="item in 8">
+            <div class="col-3" v-for="(tour, index) in dataTable" :key="index">
                 <div class="project-item mb-4">
                     <div class="position-relative">
-                        <img class="img-fluid" src="/src/assets/images/footer_img2.jpg" alt="">
+                        <img class="img-fluid" :src="tour.img" alt="">
                         <div class="project-overlay">
                             <a class="btn btn-lg-square btn-light rounded-circle m-1" @click="seeDetails"
                                 data-lightbox="project"><i class="bi bi-pencil-square"></i></a>
@@ -85,22 +88,21 @@
                                 data-lightbox="project"><i class="bi bi-trash-fill"></i></a>
                         </div>
                     </div>
-                    <div class="px-4 py-3">
-                        <a class="d-block h5" href="">DU LỊCH HÀ NỘI - NINH BÌNH - HẠ LONG - SAPA - LÀO CAI - PHÚ
-                            THỌ</a>
+                    <div class="px-3 py-3">
+                        <a class="d-block h5" href="">{{tour.title}}</a>
                         <div class="block-desc">
                             <div class="row d-flex justify-content-start">
                                 <div>
                                     <span class="p-600 m-0 p-0">Lịch trình:&ensp;</span>
-                                    <span>6 ngày 5 đêm</span>
+                                    <span>{{tour.number_of_day}} ngày {{tour.number_of_day - 1}} đêm</span>
                                 </div>
                                 <div>
-                                    <span class="p-600 m-0 p-0">Khởi hành:&ensp;</span>
-                                    <span>16/11/2023</span>
+                                    <span class="p-600 m-0 p-0">Giá vé:&ensp;</span>
+                                    <span>{{tour.adult_ticket_price}}</span>
                                 </div>
                                 <div>
                                     <span class="p-600 m-0 p-0">Phương tiện:&ensp;</span>
-                                    <span>Vietnam Airlines</span>
+                                    <span>{{tour.transportation}}</span>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +112,8 @@
         </div>
         <!-- pagination -->
         <div class="row">
-            <b-pagination v-model="currentPage" :total-rows="rows" align="center" :per-page="perPage"></b-pagination>
+            <b-pagination v-model="conditionSearch.page_number" :total-rows="totalRows" align="center"
+                :per-page="conditionSearch.page_size"></b-pagination>
         </div>
     </div>
     <!-- update tour -->

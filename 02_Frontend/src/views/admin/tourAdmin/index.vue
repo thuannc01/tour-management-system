@@ -29,6 +29,7 @@ var TourAdmin = {
         this.setPagePathAdmin1('Cập nhật tour du lịch');
         this.setRoutePagePathAdmin1('/admin/tour');
         document.getElementById('sidebar-item-tour').classList.add('active');
+        this.doSearch();
     },
     beforeRouteLeave(to, from, next) {
         document.getElementById('sidebar-item-tour').classList.remove('active');
@@ -41,14 +42,13 @@ var TourAdmin = {
         this.setRoutePagePathAdmin1('');
     },
     watch: {
-        //
+        'conditionSearch.page_number'() {
+            this.doSearch();
+        }
     },
     data() {
         return {
             showEditor: true,
-            rows: 20,
-            perPage: 5,
-            currentPage: 1,
             component: {},
             selected: { name: 'Javascript', code: 'js' },
             options: [
@@ -65,7 +65,10 @@ var TourAdmin = {
             'btnUpdateTour',
             'dataList',
             'tourDateData',
-            'tourDateDataTemp'
+            'tourDateDataTemp',
+            'conditionSearch',
+            'dataTable',
+            'totalRows'
         ])
     },
     methods: {
@@ -100,7 +103,8 @@ var TourAdmin = {
             'getAllFoodSpots',
             'getAllHotelSpots',
             'getAllAdditionalService',
-            'saveTour'
+            'saveTour',
+            'searchTour'
         ]),
         switchMode(id) {
             const vm = this;
@@ -411,6 +415,19 @@ var TourAdmin = {
                 console.log('conditions: ', conditions);
                 this.saveTour(conditions);
             }
+        },
+        doSearch() {
+            const vm = this;
+            const conditions = {
+                title: vm.conditionSearch.title ?? '',
+                departure_time: vm.conditionSearch.departure_time ?? '',
+                arrival_time: vm.conditionSearch.arrival_time ?? '',
+                adult_ticket_price: vm.conditionSearch.adult_ticket_price ?? '',
+                page_size: vm.conditionSearch.page_size ?? '',
+                page_number: vm.conditionSearch.page_number ?? '',
+                mode: 0
+            };
+            vm.searchTour(conditions);
         }
     }
 };

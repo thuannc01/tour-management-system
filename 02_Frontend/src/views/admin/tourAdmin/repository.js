@@ -33,5 +33,10 @@ export default {
     },
     saveTour: (data) => {
         return repository.post(`${resourceTour}`, data);
+    },
+    searchTour: (data) => {
+        return repository.get(`${resourceTour}`, {
+            params: data
+        });
     }
 };

@@ -555,17 +555,25 @@
                         }
                     },
                     {
-                        "name": "offset",
+                        "name": "page_size",
                         "in": "query",
-                        "description": "Số lượng hiển thị",
+                        "description": "Số lượng dòng hiển thị trên mỗi trang của kết quả phân trang",
                         "schema": {
                             "type": "int"
                         }
                     },
                     {
-                        "name": "currentPage",
+                        "name": "page_number",
                         "in": "query",
-                        "description": "Chọn page hiện tại",
+                        "description": "Trang hiện tại muốn lấy dữ liệu",
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "name": "mode",
+                        "in": "query",
+                        "description": "0: admin, 1: client",
                         "schema": {
                             "type": "int"
                         }
@@ -625,6 +633,50 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Tour"
+                ],
+                "summary": "Delete tour",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "9231c54e54b7d4436d9c909d1a2b200b",
+                "parameters": [
+                    {
+                        "name": "Id tour to delete",
+                        "in": "query",
+                        "description": "Id tour du lịch",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Result of success",

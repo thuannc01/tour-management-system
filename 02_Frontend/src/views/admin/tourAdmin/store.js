@@ -30,6 +30,16 @@ const tourDateData = {
     body: ''
 };
 
+const searchConditionInit = {
+    title: '',
+    departure_time: '',
+    arrival_time: '',
+    adult_ticket_price: '',
+    page_size: 4,
+    page_number: 1,
+    mode: 0
+};
+
 export default {
     namespaced: true,
     state: {
@@ -50,7 +60,10 @@ export default {
             btnList: true,
             btnUpdate: false
         },
-        tourDateDataTemp: []
+        tourDateDataTemp: [],
+        dataTable: [],
+        conditionSearch: { ...searchConditionInit },
+        totalRows: 1
     },
     mutations: {
         initScreen(state) {
@@ -125,6 +138,14 @@ export default {
                 return object.day == data;
             });
             state.tourDateDataTemp.splice(indexOfObject, 1);
+        },
+        // set data search
+        setTotalRows(state, data) {
+            state.totalRows = data;
+        },
+        setDataTable(state, data) {
+            state.dataTable = [];
+            state.dataTable = data;
         }
     },
     actions: {
@@ -240,10 +261,28 @@ export default {
                                         document
                                             .getElementById('btn-btnList')
                                             .click();
+                                        context.dispatch('searchTour');
                                     }, 400);
                                 }
                             }
                         });
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        searchTour(context, conditions) {
+            try {
+                repository.searchTour(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setTotalRows', 1 ?? '');
+                        console.log('setDataTable: ', data.Data.dataSearch);
+                        context.commit(
+                            'setDataTable',
+                            data.Data.dataSearch ?? ''
+                        );
                     }
                 });
             } catch (e) {
