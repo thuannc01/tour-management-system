@@ -1,3 +1,123 @@
 <div id="period">
-    Quản lý thời gian mở bán tour ở đây
+    <!-- step -->
+    <div class="row">
+        <div class="col-7">
+            <div class="row">
+                <div class="col-9">
+                    <thuan-button id="btn-btnList" label=" Liệt kê danh sách các tour du lịch theo thời gian"
+                        class="bi bi-clock" />
+                </div>
+                <div class="col-3 p-0 d-flex justify-content-start">
+                    <button id="btn-btnUpdate" type="button" class="btn btn-success bi bi-plus-circle-fill"
+                        data-bs-toggle="modal" data-bs-target="#updatePeriodModal">&ensp;Thêm
+                        mới</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-5 col-5-flower d-flex justify-content-end align-items-center">
+            <div class="tim-current">
+                <p class="m-0">Ngày giờ hiện tại (GMT+7 - Asia/HCM): <strong>{{ currentDateTime }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- search -->
+    <div class="row mb-2 d-flex justify-content-between">
+        <div class="col-8">
+            <div class="row d-flex">
+                <div class="col-2 d-flex align-items-center">
+                    <p class="m-0">Hiển thị</p>
+                </div>
+                <div class="col-4">
+                    <select class="form-select" aria-label="Default select example" v-model="">
+                        <option value="4" selected>4 dòng dữ liệu</option>
+                        <option value="8">8 dòng dữ liệu</option>
+                        <option value="16">16 dòng dữ liệu</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <input v-model="" type="text" class="form-control" placeholder="Nhập thông tin tìm kiếm ...">
+                <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped mt-1">
+                <thead>
+                    <tr>
+                        <th class="align-middle text-center" scope="col">STT</th>
+                        <th class="align-middle" scope="col">Tên Tour</th>
+                        <th class="align-middle" scope="col">Thời gian Khởi Hành</th>
+                        <th class="align-middle" scope="col">Thời Gian Kết Thúc</th>
+                        <th class="align-middle" scope="col">Số Lượng Đã Đặt</th>
+                        <th class="align-middle" scope="col">Số Lượng Giới Hạn</th>
+                        <th class="align-middle" scope="col">Hướng Dẫn Viên</th>
+                        <th class="align-middle text-center" scope="col">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="i in 5">
+                        <th class="align-middle text-center" scope="row">{{i}}</th>
+                        <td class="align-middle">Mark</td>
+                        <td class="align-middle">Otto</td>
+                        <td class="align-middle">@mdo</td>
+                        <td class="align-middle">Otto</td>
+                        <td class="align-middle">@mdo</td>
+                        <td class="align-middle">@mdo</td>
+                        <td class="align-middle">
+                            <button type="button" class="btn btn-primary btn-sm bi bi-pencil-square me-2"></button>
+                            <button type="button" class="btn btn-danger btn-sm bi bi-trash"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- pagination -->
+            <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+                <b-pagination v-model="currentPage" :total-rows="rows" align="center"
+                    :per-page="perPage"></b-pagination>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+    <div class="modal fade" id="updatePeriodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">Cập nhật thời gian mở bán tour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <thuan-select label="Chọn tour du lịch" :options="" v-model="" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-input label="Thời gian khởi hành" type="date" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-input label="Thời gian kết thúc" type="date" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-input type="number" label="Số lượng người giới hạn"
+                                placeholder="Nhập số lượng ..." />
+                        </div>
+                        <div class="col-12">
+                            <thuan-select label="Chọn hướng dẫn viên du lịch" :options="" v-model="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu thông tin</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

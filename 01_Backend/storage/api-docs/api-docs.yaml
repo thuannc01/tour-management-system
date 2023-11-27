@@ -258,6 +258,29 @@ paths:
       security:
         -
           apiAuth: []
+  /period:
+    get:
+      tags:
+        - Period
+      summary: 'Get data init'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 107fb201a38825ece0cf4d75c77f9e20
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /role:
     get:
       tags:
@@ -435,16 +458,17 @@ paths:
       security:
         -
           apiAuth: []
+  '/tour/{tour}':
     delete:
       tags:
         - Tour
       summary: 'Delete tour'
-      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
-      operationId: 9231c54e54b7d4436d9c909d1a2b200b
+      description: "\n     *          Code\n     *              200 - Success\n     *              400 - Bad request\n     *              401 - Not authentication\n     *              403 - Not access\n     *              422 - Input invalidate\n     *              423 - Have other error\n     *              500 - Server error\n     *      "
+      operationId: ff216518b8a396f48d1fcc238b777a6e
       parameters:
         -
-          name: 'Id tour to delete'
-          in: query
+          name: tour
+          in: path
           description: 'Id tour du lịch'
           schema:
             type: int

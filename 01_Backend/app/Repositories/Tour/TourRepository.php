@@ -156,8 +156,9 @@ class TourRepository extends BaseRepository implements ITourRepository
         return $response;
     }
 
-    public function deleteTour($data){
-        dd($data['id']);
-        // $tour = Tour::find(1);
+    public function deleteTour($tourID){
+        $tour = Tour::find($tourID);
+        $tour->deleted_at = Carbon::now();
+        $tour->save();
     }
 }

@@ -36,6 +36,9 @@ use App\Repositories\Tour\TourRepository;
 // statistical
 use App\Repositories\Statistical\IStatisticalRepository;
 use App\Repositories\Statistical\StatisticalRepository;
+// period
+use App\Repositories\Period\IPeriodRepository;
+use App\Repositories\Period\PeriodRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -69,6 +72,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ITourRepository::class, TourRepository::class);
         // statistical
         $this->app->bind(IStatisticalRepository::class, StatisticalRepository::class);
+        // period
+        $this->app->bind(IPeriodRepository::class, PeriodRepository::class);
     }
 
     /**

@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\FoodSpotController;
 use App\Http\Controllers\Api\HotelSpotController;
 use App\Http\Controllers\Api\TourController;
 use App\Http\Controllers\Api\StatisticalController;
+use App\Http\Controllers\Api\PeriodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,8 @@ Route::group([
     Route::apiResource('/tour', TourController::class);
     // statistical
     Route::apiResource('/statistical', StatisticalController::class);
+    // period
+    Route::apiResource('/period', PeriodController::class);
 });
 
 // No auth

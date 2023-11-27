@@ -38,5 +38,8 @@ export default {
         return repository.get(`${resourceTour}`, {
             params: data
         });
+    },
+    deleteTour: (id) => {
+        return repository.delete(`${resourceTour}/${id}`);
     }
 };

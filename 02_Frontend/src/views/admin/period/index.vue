@@ -6,6 +6,7 @@ import template from './template.html';
 import './style.scss';
 import store from '@/store';
 import PeriodStore from '@/views/admin/period/store';
+import { format } from 'date-fns-tz';
 
 var Period = {
     template: template,
@@ -22,6 +23,11 @@ var Period = {
         document
             .getElementById('sidebar-item-tour-time')
             .classList.add('active');
+        //
+        this.getCurrentDateTime();
+        setInterval(() => {
+            this.getCurrentDateTime();
+        }, 1000);
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -37,7 +43,9 @@ var Period = {
     },
     watch: {},
     data() {
-        return {};
+        return {
+            currentDateTime: ''
+        };
     },
     computed: {
         ...mapState('app', []),
@@ -59,6 +67,13 @@ var Period = {
         ...mapMutations('PeriodStore', []),
         handleButtonClick() {
             alert('Button clicked!');
+        },
+        getCurrentDateTime() {
+            const now = new Date();
+            const vietnameseDateTime = format(now, 'dd/MM/yyyy HH:mm:ss', {
+                timeZone: 'Asia/Ho_Chi_Minh'
+            });
+            this.currentDateTime = vietnameseDateTime;
         }
     }
 };

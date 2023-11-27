@@ -9,6 +9,7 @@ import TourAdminStore from '@/views/admin/tourAdmin/store';
 import VueMultiselect from 'vue-multiselect';
 import CKEditorCustom from './CKEditorCustom.vue';
 import axios from 'axios';
+import { MSG_TYPE } from '@/utils/messages';
 
 var TourAdmin = {
     components: {
@@ -104,7 +105,8 @@ var TourAdmin = {
             'getAllHotelSpots',
             'getAllAdditionalService',
             'saveTour',
-            'searchTour'
+            'searchTour',
+            'deleteTour'
         ]),
         switchMode(id) {
             const vm = this;
@@ -428,6 +430,21 @@ var TourAdmin = {
                 mode: 0
             };
             vm.searchTour(conditions);
+        },
+        deleteATour(title, tourID) {
+            const vm = this;
+            vm.showModalMessage({
+                title: 'Xác nhận xoá',
+                type: MSG_TYPE.CONFIRM,
+                content: `Bạn có chắc chắn muốn xoá tour ${title} không?`,
+                cancelText: 'Huỷ',
+                okText: 'Đồng ý',
+                callback: (ok) => {
+                    if (ok) {
+                        vm.deleteTour(tourID);
+                    }
+                }
+            });
         }
     }
 };

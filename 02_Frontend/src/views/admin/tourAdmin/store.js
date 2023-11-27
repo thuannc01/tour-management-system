@@ -277,12 +277,27 @@ export default {
                 repository.searchTour(conditions).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
-                        context.commit('setTotalRows', 1 ?? '');
+                        context.commit(
+                            'setTotalRows',
+                            data.Data.totalRows ?? 1
+                        );
                         console.log('setDataTable: ', data.Data.dataSearch);
                         context.commit(
                             'setDataTable',
                             data.Data.dataSearch ?? ''
                         );
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        deleteTour(context, tourID) {
+            try {
+                repository.deleteTour(tourID).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.dispatch('searchTour');
                     }
                 });
             } catch (e) {

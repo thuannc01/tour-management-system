@@ -164,24 +164,29 @@ class TourController extends Controller
 
     /**
      * Delete tour
-     *  @OA\Delete(
-     *      path="/tour",
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @OA\Delete(
+     *      path="/tour/{tour}",
      *      tags={"Tour"},
      *      security={{"apiAuth":{}}},
      *      description="
-     *      Code
-     *          200 - Success
-     *          400 - Bad request
-     *          401 - Not authentication
-     *          403 - Not access
-     *          422 - Input invalidate
-     *          423 - Have other error
-     *          500 - Server error
+     *          Code
+     *              200 - Success
+     *              400 - Bad request
+     *              401 - Not authentication
+     *              403 - Not access
+     *              422 - Input invalidate
+     *              423 - Have other error
+     *              500 - Server error
      *      ",
      *      @OA\Parameter(
-     *          name="Id tour to delete",
+     *          name="tour",
      *          description="Id tour du lịch",
-     *          in="query",
+     *          in="path",
      *          @OA\Schema(type="int")
      *      ),
      *      @OA\Response(
@@ -195,12 +200,13 @@ class TourController extends Controller
      *              )
      *          )
      *      )
-     *  )
+     * )
      */
-    public function destroy(Request $request){
+    public function destroy(Request $request, $tour)
+    {
         $response = null;
         try {
-            $data_res = $this->tourRepository->deleteTour($request->all());
+            $data_res = $this->tourRepository->deleteTour($tour);
 
             $response = response()->json([
                 'Code'         => ResponseCodeConstant::OK,
@@ -215,4 +221,5 @@ class TourController extends Controller
         }
         return $response;
     }
+
 }
