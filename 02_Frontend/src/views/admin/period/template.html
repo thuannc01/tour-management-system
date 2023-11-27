@@ -16,7 +16,7 @@
         </div>
         <div class="col-5 col-5-flower d-flex justify-content-end align-items-center">
             <div class="tim-current">
-                <p class="m-0">Ngày giờ hiện tại (GMT+7 - Asia/HCM): <strong>{{ currentDateTime }}</strong></p>
+                <p class="m-0">Ngày giờ hiện tại (GMT+7 Asia/HCM): <strong>{{ currentDateTime }}</strong></p>
             </div>
         </div>
     </div>
@@ -95,27 +95,36 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-6">
-                            <thuan-select label="Chọn tour du lịch" :options="" v-model="" />
-                        </div>
-                        <div class="col-6">
-                            <thuan-input label="Thời gian khởi hành" type="date" />
-                        </div>
-                        <div class="col-6">
-                            <thuan-input label="Thời gian kết thúc" type="date" />
-                        </div>
-                        <div class="col-6">
-                            <thuan-input type="number" label="Số lượng người giới hạn"
-                                placeholder="Nhập số lượng ..." />
-                        </div>
                         <div class="col-12">
-                            <thuan-select label="Chọn hướng dẫn viên du lịch" :options="" v-model="" />
+                            <thuan-select label="Chọn tour du lịch" :options="selectOptions.toursList"
+                                v-model="data.tour_id" :isRequired="true" @change="doSetNumberOfDay(data.tour_id)" />
+                        </div>
+                        <div class="col-12 py-3 d-flex justify-content-center">
+                            <p class="m-0" style="font-size: 110%">Số ngày diễn ra của tour đã chọn: <strong
+                                    class="number-of-day-text">{{numberOfDay}} Ngày {{numberOfDay
+                                    - 1}} Đêm</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <thuan-input label="Thời gian khởi hành" type="date" :isRequired="true"
+                                v-model="data.departure_time" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-input :isDisabled="true" label="Thời gian kết thúc" type="date" :isRequired="true"
+                                v-model="data.arrival_time" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-input type="number" label="Số lượng người giới hạn" placeholder="Nhập số lượng ..."
+                                :isRequired="true" v-model="data.maximum_quantity" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-select label="Chọn hướng dẫn viên du lịch" :options="selectOptions.tourGuideList"
+                                v-model="data.tourist_guide_id" :isRequired="true" />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Lưu thông tin</button>
+                    <button id="btn-close-modal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" @click="onSave">Lưu thông tin</button>
                 </div>
             </div>
         </div>

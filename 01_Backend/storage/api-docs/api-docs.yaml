@@ -281,6 +281,127 @@ paths:
       security:
         -
           apiAuth: []
+    post:
+      tags:
+        - Period
+      summary: 'Save period'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 43b03cbeb51bd709ee7b9e08fce03040
+      requestBody:
+        description: 'Period data'
+        content:
+          application/json:
+            schema:
+              properties:
+                tour_id:
+                  type: integer
+                  example: '1'
+                departure_time:
+                  type: string
+                  example: 01/01/2023
+                arrival_time:
+                  type: string
+                  example: 01/01/2023
+                maximum_quantity:
+                  type: integer
+                  example: '15'
+                tourist_guide_id:
+                  type: integer
+                  example: '1'
+              type: object
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
+  '/period/{id}':
+    get:
+      tags:
+        - Period
+      summary: 'Get data search periods'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: ebeab42185486d33f610d03871736ffb
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID tour du lịch'
+          schema:
+            type: string
+        -
+          name: title
+          in: query
+          description: 'Tên tour du lịch'
+          schema:
+            type: string
+        -
+          name: page_size
+          in: query
+          description: 'Số lượng dòng hiển thị trên mỗi trang của kết quả phân trang'
+          schema:
+            type: int
+        -
+          name: page_number
+          in: query
+          description: 'Trang hiện tại muốn lấy dữ liệu'
+          schema:
+            type: int
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
+    delete:
+      tags:
+        - Period
+      summary: 'Delete period'
+      description: "\n     *          Code\n     *              200 - Success\n     *              400 - Bad request\n     *              401 - Not authentication\n     *              403 - Not access\n     *              422 - Input invalidate\n     *              423 - Have other error\n     *              500 - Server error\n     *      "
+      operationId: 9a8d12818ccf8e628475ea413936b589
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Id period'
+          schema:
+            type: int
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /role:
     get:
       tags:

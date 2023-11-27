@@ -5,7 +5,7 @@
         :disabled="isDisabled" :readonly="isReadonly" ref="select" @focus="focusBtn" @blur="blurBtn"
         @change="updateBtn">
         <option v-for="(option, i) in listOptions" :key="i" :value="option.id" :selected="option.id == vewValue">
-            {{option.name}}
+            {{option.name ?? option.title ?? option.full_name}}
         </option>
     </select>
 </div>

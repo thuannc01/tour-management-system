@@ -7,4 +7,7 @@ use App\Models\Period;
 interface IPeriodRepository
 {
     public function getDataInit();
+    public function saveData($data);
+    public function search($data);
+    public function deletePeriod($data);
 }
