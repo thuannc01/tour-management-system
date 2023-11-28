@@ -125,7 +125,7 @@ class PeriodController extends Controller
     /**
      * Get data search periods
      * @OA\GET(
-     *     path="/period/{id}",
+     *     path="/period/search",
      *     tags={"Period"},
      *     security={{"apiAuth":{}}},
      *     description="
@@ -138,12 +138,6 @@ class PeriodController extends Controller
      *          423 - Have other error
      *          500 - Server error
      *      ",
-     *     @OA\Parameter(
-     *         name="id",
-     *         description="ID tour du lịch",
-     *         in="path",
-     *         @OA\Schema(type="string")
-     *     ),
      *     @OA\Parameter(
      *         name="title",
      *         description="Tên tour du lịch",
@@ -175,7 +169,7 @@ class PeriodController extends Controller
      *     )
      * )
      */
-    public function show($id, Request $request)
+    public function search(Request $request)
     {
         try {
             $data_res = $this->periodRepository->search($request->all());

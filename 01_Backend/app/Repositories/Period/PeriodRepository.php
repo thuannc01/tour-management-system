@@ -56,16 +56,16 @@ class PeriodRepository extends BaseRepository implements IPeriodRepository
         $offset = ($page_number - 1) * $page_size; //số lượng dòng bỏ qua từ đầu kết quả trước khi bắt đầu lấy các dòng
         $totalRows  = Period::whereNull('deleted_at')->count('id');
         // 
-        $sqlString = "select periods.*, tours.title title
+        $sqlString = "select periods.*, tours.title title, users.full_name touristGuide
         from periods
-        join tours on tours.id = periods.tour_id
+        left join tours on tours.id = periods.tour_id
+        left join users on users.id = periods.tourist_guide_id
         where tours.title LIKE '%". $title ."%' and periods.deleted_at is null 
         order by tours.id 
         limit ". $page_size ."
         offset ". $offset;
         // 
         $dataSearch = DB::select($sqlString);
-
         $response = [
             'totalRows' => $totalRows,
             'dataSearch' => $dataSearch,

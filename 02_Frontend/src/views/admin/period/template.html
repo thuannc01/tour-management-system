@@ -29,7 +29,8 @@
                     <p class="m-0">Hiển thị</p>
                 </div>
                 <div class="col-4">
-                    <select class="form-select" aria-label="Default select example" v-model="">
+                    <select v-model="conditions.page_size" class="form-select" @change="doSearch"
+                        aria-label="Default select example" v-model="">
                         <option value="4" selected>4 dòng dữ liệu</option>
                         <option value="8">8 dòng dữ liệu</option>
                         <option value="16">16 dòng dữ liệu</option>
@@ -39,7 +40,8 @@
         </div>
         <div class="col-4">
             <div class="input-group">
-                <input v-model="" type="text" class="form-control" placeholder="Nhập thông tin tìm kiếm ...">
+                <input v-model="conditions.title" @change="doSearch" type="text" class="form-control"
+                    placeholder="Nhập thông tin tìm kiếm ...">
                 <span class="input-group-text">
                     <i class="bi bi-search"></i>
                 </span>
@@ -49,7 +51,7 @@
     <!-- content -->
     <div class="row">
         <div class="col-12">
-            <table class="table table-striped mt-1">
+            <table style="font-size: 90%;" class="table table-striped mt-1">
                 <thead>
                     <tr>
                         <th class="align-middle text-center" scope="col">STT</th>
@@ -59,30 +61,35 @@
                         <th class="align-middle" scope="col">Số Lượng Đã Đặt</th>
                         <th class="align-middle" scope="col">Số Lượng Giới Hạn</th>
                         <th class="align-middle" scope="col">Hướng Dẫn Viên</th>
-                        <th class="align-middle text-center" scope="col">Thao Tác</th>
+                        <th class="align-middle text-center" scope="col" style="width: 15%;">Thao Tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="i in 5">
-                        <th class="align-middle text-center" scope="row">{{i}}</th>
-                        <td class="align-middle">Mark</td>
-                        <td class="align-middle">Otto</td>
-                        <td class="align-middle">@mdo</td>
-                        <td class="align-middle">Otto</td>
-                        <td class="align-middle">@mdo</td>
-                        <td class="align-middle">@mdo</td>
+                    <tr v-for="(period, index) in dataTable" :key="index">
+                        <th class="align-middle text-center" scope="row">{{index + 1}}</th>
+                        <td class="align-middle">{{period.title}}</td>
+                        <td class="align-middle">{{period.departure_time}}</td>
+                        <td class="align-middle">{{period.arrival_time}}</td>
+                        <td class="align-middle">{{period.quantity}}</td>
+                        <td class="align-middle">{{period.maximum_quantity}}</td>
+                        <td class="align-middle">{{period.touristguide}}</td>
                         <td class="align-middle">
                             <button type="button" class="btn btn-primary btn-sm bi bi-pencil-square me-2"></button>
-                            <button type="button" class="btn btn-danger btn-sm bi bi-trash"></button>
+                            <button @click="doDelete(period.title, period.id)" type="button"
+                                class="btn btn-danger btn-sm bi bi-trash"></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <!-- pagination -->
-            <div class="w-100 row m-0 p-0 d-flex justify-content-center">
-                <b-pagination v-model="currentPage" :total-rows="rows" align="center"
-                    :per-page="perPage"></b-pagination>
-            </div>
+            <template v-if="true">
+                <div :key="reloadKey">
+                    <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+                        <b-pagination v-model="conditions.page_number" :total-rows="totalRows" align="center"
+                            :per-page="4"></b-pagination>
+                    </div>
+                </div>
+            </template>
         </div>
     </div>
     <!-- modal -->
@@ -123,7 +130,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btn-close-modal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button id="btn-close-modal" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary" @click="onSave">Lưu thông tin</button>
                 </div>
             </div>

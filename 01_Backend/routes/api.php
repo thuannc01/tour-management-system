@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\HotelSpotController;
 use App\Http\Controllers\Api\TourController;
 use App\Http\Controllers\Api\StatisticalController;
 use App\Http\Controllers\Api\PeriodController;
+use App\Http\Controllers\Api\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +63,10 @@ Route::group([
     // statistical
     Route::apiResource('/statistical', StatisticalController::class);
     // period
-    Route::apiResource('/period', PeriodController::class);
+    Route::apiResource('/period', PeriodController::class)->only(['index', 'store', 'destroy']);
+    Route::get('/period/search', [PeriodController::class, 'search']);
+    // news
+    Route::apiResource('/news', NewsController::class);
 });
 
 // No auth

@@ -32,6 +32,7 @@ var Period = {
         }, 1000);
         // init data
         this.getDataInit();
+        this.doSearch();
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -51,16 +52,29 @@ var Period = {
             let departure_time_ = this.data.departure_time;
             let newDate = moment(departure_time_).add(numberOfDay_, 'days');
             this.setArrivalTime(newDate.format('YYYY-MM-DD'));
-        }
+        },
+        'conditions.page_number'() {
+            this.doSearch();
+        },
+        'conditions.page_size': 'reloadComponent',
+        'conditions.total_rows': 'reloadComponent'
     },
     data() {
         return {
-            currentDateTime: ''
+            currentDateTime: '',
+            reloadKey: 0
         };
     },
     computed: {
         ...mapState('app', []),
-        ...mapState('PeriodStore', ['data', 'selectOptions', 'numberOfDay'])
+        ...mapState('PeriodStore', [
+            'data',
+            'selectOptions',
+            'numberOfDay',
+            'conditions',
+            'dataTable',
+            'totalRows'
+        ])
     },
     methods: {
         ...mapActions('app', []),
@@ -77,8 +91,17 @@ var Period = {
             'showModalMessage',
             'hideHeaderError'
         ]),
-        ...mapMutations('PeriodStore', ['setArrivalTime', 'setNumberOfDay']),
-        ...mapActions('PeriodStore', ['getDataInit', 'savePeriod']),
+        ...mapMutations('PeriodStore', [
+            'setArrivalTime',
+            'setNumberOfDay',
+            'setTotalRows'
+        ]),
+        ...mapActions('PeriodStore', [
+            'getDataInit',
+            'savePeriod',
+            'searchPeriod',
+            'deletePeriod'
+        ]),
         handleButtonClick() {
             alert('Button clicked!');
         },
@@ -111,6 +134,23 @@ var Period = {
                 maximum_quantity: vm.data.maximum_quantity ?? '',
                 tourist_guide_id: vm.data.tourist_guide_id ?? ''
             };
+            //
+            let dataTable = [];
+            dataTable = vm.dataTable;
+            let indexOfObject = dataTable.findIndex((object) => {
+                return (
+                    object.departure_time == vm.data.departure_time &&
+                    object.tour_id === vm.data.tour_id
+                );
+            });
+            if (indexOfObject != -1) {
+                this.showHeaderError([
+                    'Dữ liệu thời gian mở bán với Tour này đã tồn tại thời gian bắt đầu này rồi ^^'
+                ]);
+                return;
+            }
+            //
+            console.log(dataTable);
             vm.savePeriod(conditions);
             const btnCloseModal = document.getElementById('btn-close-modal');
             btnCloseModal.click();
@@ -130,6 +170,34 @@ var Period = {
         },
         doSetNumberOfDay(id) {
             this.setNumberOfDay(id);
+        },
+        doSearch() {
+            const vm = this;
+            const conditions = {
+                title: vm.conditions.title,
+                page_size: vm.conditions.page_size,
+                page_number: vm.conditions.page_number
+            };
+            console.log('conditions: ', conditions);
+            vm.searchPeriod(conditions);
+        },
+        doDelete(title, periodID) {
+            const vm = this;
+            vm.showModalMessage({
+                title: 'Xác nhận xoá',
+                type: MSG_TYPE.CONFIRM,
+                content: `Bạn có chắc chắn muốn xoá thời gian mở bán tour ${title} không?`,
+                cancelText: 'Huỷ',
+                okText: 'Đồng ý',
+                callback: (ok) => {
+                    if (ok) {
+                        vm.deletePeriod(periodID);
+                    }
+                }
+            });
+        },
+        reloadComponent() {
+            this.reloadKey += 1;
         }
     }
 };

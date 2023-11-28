@@ -39,6 +39,9 @@ use App\Repositories\Statistical\StatisticalRepository;
 // period
 use App\Repositories\Period\IPeriodRepository;
 use App\Repositories\Period\PeriodRepository;
+// news
+use App\Repositories\News\INewsRepository;
+use App\Repositories\News\NewsRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -74,6 +77,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IStatisticalRepository::class, StatisticalRepository::class);
         // period
         $this->app->bind(IPeriodRepository::class, PeriodRepository::class);
+        // news
+        $this->app->bind(INewsRepository::class, NewsRepository::class);
     }
 
     /**

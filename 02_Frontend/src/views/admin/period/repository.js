@@ -1,12 +1,20 @@
 import repository from '@/utils/repository';
 
-const periodCategory = '/period';
+const periodResource = '/period';
 
 export default {
     getDataInit: () => {
-        return repository.get(`${periodCategory}`);
+        return repository.get(`${periodResource}`);
     },
     savePeriod: (data) => {
-        return repository.post(`${periodCategory}`, data);
+        return repository.post(`${periodResource}`, data);
+    },
+    searchPeriod: (data) => {
+        return repository.get(`${periodResource}/search`, {
+            params: data
+        });
+    },
+    deletePeriod: (id) => {
+        return repository.delete(`${periodResource}/${id}`);
     }
 };

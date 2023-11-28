@@ -258,6 +258,51 @@ paths:
       security:
         -
           apiAuth: []
+  /news:
+    post:
+      tags:
+        - News
+      summary: 'Save news'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 2a3cd008a3f69680a72ab654c7ad67ab
+      requestBody:
+        description: 'News data'
+        content:
+          application/json:
+            schema:
+              properties:
+                author_id:
+                  type: integer
+                  example: '1'
+                title:
+                  type: string
+                  example: 'Đà Nẵng thành phố biển mưa ngập biến thành sông ...'
+                body:
+                  type: string
+                  example: ...
+                status:
+                  type: string
+                  example: 'Tạm thời ẩn'
+                type:
+                  type: string
+                  example: 'Tin tức'
+              type: object
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /period:
     get:
       tags:
@@ -325,20 +370,14 @@ paths:
       security:
         -
           apiAuth: []
-  '/period/{id}':
+  /period/search:
     get:
       tags:
         - Period
       summary: 'Get data search periods'
       description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
-      operationId: ebeab42185486d33f610d03871736ffb
+      operationId: d7c355e7fdbbf446fe0a7264780fad83
       parameters:
-        -
-          name: id
-          in: path
-          description: 'ID tour du lịch'
-          schema:
-            type: string
         -
           name: title
           in: query
@@ -373,6 +412,7 @@ paths:
       security:
         -
           apiAuth: []
+  '/period/{id}':
     delete:
       tags:
         - Period

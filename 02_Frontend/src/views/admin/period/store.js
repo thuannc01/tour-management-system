@@ -40,6 +40,13 @@ export default {
                 (item) => item.id == data
             );
             state.numberOfDay = numberOfDay.number_of_day;
+        },
+        setDataTable(state, data) {
+            state.dataTable = [];
+            state.dataTable = data;
+        },
+        setTotalRows(state, data) {
+            state.totalRows = data;
         }
     },
     actions: {
@@ -60,8 +67,32 @@ export default {
                 repository.savePeriod(data).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
-                        // context.commit('setDataInit', data.Data ?? 1);
-                        console.log('save ok');
+                        context.dispatch('searchPeriod');
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        searchPeriod(context, conditions) {
+            try {
+                repository.searchPeriod(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setDataTable', data.Data.dataSearch);
+                        context.commit('setTotalRows', data.Data.totalRows);
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        deletePeriod(context, periodID) {
+            try {
+                repository.deletePeriod(periodID).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.dispatch('searchPeriod');
                     }
                 });
             } catch (e) {
