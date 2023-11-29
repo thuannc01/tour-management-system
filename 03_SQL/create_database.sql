@@ -243,6 +243,7 @@ CREATE TABLE images (
 	deleted_at TIMESTAMP
 );
 -- Table ratings
+CREATE TYPE status_rating_type AS ENUM ('Chờ duyệt – Không hiển thị', 'Đã duyệt – Hiển thị');
 CREATE TABLE ratings (
     id serial PRIMARY KEY,
 	reviewer integer REFERENCES users(id),
@@ -250,6 +251,7 @@ CREATE TABLE ratings (
 	tour_id integer REFERENCES tours(id),
 	star_count smallint,
 	message character varying(5000),
+	status status_rating_type,
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP

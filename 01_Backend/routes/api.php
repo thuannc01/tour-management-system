@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\TourController;
 use App\Http\Controllers\Api\StatisticalController;
 use App\Http\Controllers\Api\PeriodController;
 use App\Http\Controllers\Api\NewsController;
+use App\Http\Controllers\Api\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,8 @@ Route::group([
     Route::get('/period/search', [PeriodController::class, 'search']);
     // news
     Route::apiResource('/news', NewsController::class);
+    // rating
+    Route::apiResource('/rating', RatingController::class);
 });
 
 // No auth

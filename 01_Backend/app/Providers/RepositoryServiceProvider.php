@@ -42,6 +42,9 @@ use App\Repositories\Period\PeriodRepository;
 // news
 use App\Repositories\News\INewsRepository;
 use App\Repositories\News\NewsRepository;
+// rating
+use App\Repositories\Rating\IRatingRepository;
+use App\Repositories\Rating\RatingRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -79,6 +82,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IPeriodRepository::class, PeriodRepository::class);
         // news
         $this->app->bind(INewsRepository::class, NewsRepository::class);
+        // rating
+        $this->app->bind(IRatingRepository::class, RatingRepository::class);
     }
 
     /**
