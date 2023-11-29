@@ -1,19 +1,31 @@
 // import repository from './repository';
 
 const initData = {
-    test: '',
-    selectedOption: '2'
+    rating_id: '',
+    tour_name: '',
+    responder: '',
+    message_response: '',
+    status: 'Chờ duyệt – Không hiển thị'
 };
+const conditions = {
+    status: '',
+    star_count: 0,
+    page_size: 4,
+    page_number: 1
+};
+
 export default {
     namespaced: true,
     state: {
         data: { ...initData },
-        selectOptions: [
-            { code: '1', name: 'Option 1' },
-            { code: '2', name: 'Option 2' },
-            { code: '3', name: 'Option 3' }
-        ]
+        dataTable: [],
+        conditions: { ...conditions },
+        totalRows: 0
     },
-    mutations: {},
+    mutations: {
+        setStatusRating(state, data) {
+            state.conditions.status = data;
+        }
+    },
     actions: {}
 };

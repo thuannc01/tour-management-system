@@ -33,13 +33,28 @@ var Feedback = {
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
     },
-    watch: {},
+    watch: {
+        'conditions.status'() {
+            this.doSearch();
+        },
+        'conditions.star_count'() {
+            this.doSearch();
+        },
+        'conditions.page_number'() {
+            this.doSearch();
+        }
+    },
     data() {
         return {};
     },
     computed: {
-        ...mapState('app', []),
-        ...mapState('FeedbackStore', [])
+        ...mapState('app', ['userData']),
+        ...mapState('FeedbackStore', [
+            'data',
+            'dataTable',
+            'conditions',
+            'totalRows'
+        ])
     },
     methods: {
         ...mapActions('app', []),
@@ -54,9 +69,13 @@ var Feedback = {
             'setRoutePagePathAdmin3'
         ]),
         ...mapActions('FeedbackStore', []),
-        ...mapMutations('FeedbackStore', []),
-        handleButtonClick() {
-            alert('Button clicked!');
+        ...mapMutations('FeedbackStore', ['setStatusRating']),
+        doSetStatusRating(status) {
+            const vm = this;
+            vm.setStatusRating(status);
+        },
+        doSearch() {
+            console.log('doSearch');
         }
     }
 };

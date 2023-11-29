@@ -1,3 +1,135 @@
 <div id="feedback">
-    Phản hồi đánh giá tại đây
-</div>
+    <!-- step -->
+    <div class="row m-0">
+        <div class="col-2 p-0 d-flex align-items-center" style="width: 13%;">
+            <label class="label-rating pe-3 pt-1">Chọn trạng thái</label>
+        </div>
+        <div class="col-2" style="width: 9%;">
+            <button @click="doSetStatusRating('')" type="button" class="btn btn-outline-success">Tất cả</button>
+        </div>
+        <div class="col-4" style="width: 25%;">
+            <button type="button" @click="doSetStatusRating('Chờ duyệt - Không hiển thị')"
+                class="btn btn-outline-success">Chờ duyệt - Không hiển thị</button>
+        </div>
+        <div class="col-3" style="width: 19%;">
+            <button type="button" @click="doSetStatusRating('Đã duyệt - Hiển thị')" class="btn btn-outline-success">Đã
+                duyệt - Hiển thị</button>
+        </div>
+        <div class="col-3 d-flex align-items-center justify-content-end" style="width: 34%;">
+            <label class="label-rating pe-3 pt-1">Lọc đánh giá</label>
+            <star-rating v-model:rating="conditions.star_count" v-bind:increment="0.5" inactive-color="gainsboro"
+                active-color="#ff891e" v-bind:star-size="40">
+            </star-rating>
+        </div>
+    </div>
+    <hr>
+    <div id="mode-list">
+        <!-- search -->
+        <div class="row mb-2 d-flex justify-content-between">
+            <div class="col-8">
+                <div class="row d-flex">
+                    <div class="col-2 d-flex align-items-center">
+                        <p class="m-0">Hiển thị</p>
+                    </div>
+                    <div class="col-4">
+                        <select @change="doSearch" v-model="conditions.page_size" class="form-select"
+                            aria-label="Default select example">
+                            <option value="4" selected>4 dòng dữ liệu</option>
+                            <option value="8">8 dòng dữ liệu</option>
+                            <option value="16">16 dòng dữ liệu</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div class="row">
+            <div class="col-12">
+                <table style="font-size: 90%;" class="table table-striped mt-1">
+                    <thead>
+                        <tr>
+                            <th class="align-middle text-center" style="width: 3%;" scope="col">STT</th>
+                            <th class="align-middle" scope="col" style="width: 14%;">Người đánh giá</th>
+                            <th class="align-middle" scope="col" style="width: 20%;">Tour được đánh giá</th>
+                            <th class="align-middle" scope="col" style="width: 9%;">Số sao</th>
+                            <th class="align-middle" scope="col">Nội dung</th>
+                            <th class="align-middle" scope="col" style="width: 16%;">Trạng thái</th>
+                            <th class="align-middle text-center" scope="col" style="width: 10%;">Phản hồi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="align-middle text-center" scope="row">1</th>
+                            <td class="align-middle"></td>
+                            <td class="align-middle"></td>
+                            <td class="align-middle"></td>
+                            <td class="align-middle"></td>
+                            <td class="align-middle">
+                                Chờ duyệt – Không hiển thị
+                            </td>
+                            <td class="align-middle">
+                                <button data-bs-toggle="modal" data-bs-target="#ratingAdminModal" type="button"
+                                    class="btn btn-primary btn-sm bi bi-reply-fill me-2"></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- pagination -->
+                <template v-if="true">
+                    <div>
+                        <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+                            <b-pagination v-model="conditions.page_number" :total-rows="totalRows" align="center"
+                                :per-page="4"></b-pagination>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <!-- modal -->
+        <div class="modal fade" id="ratingAdminModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-uppercase" id="exampleModalLabel">Phản hồi đánh giá tour du lịch
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <thuan-input :isDisabled="true" label="Tên tour du lịch phản hồi đánh giá"
+                                    :isRequired="true" v-model="data.tour_name" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input :isDisabled="true" label="Mã đánh giá" :isRequired="true"
+                                    v-model="data.rating_id" />
+                            </div>
+                            <div class="col-6">
+                                <label class="label-select">Chọn trạng thái<span class="text-danger ps-1"><i
+                                            class="bi bi-exclamation-circle"></i></span></label>
+                                <select v-model="data.status" class="form-select" aria-label="Default select">
+                                    <option value="Chờ duyệt – Không hiển thị" selected>Chờ duyệt – Không hiển thị
+                                    </option>
+                                    <option value="Đã duyệt – Hiển thị">Đã duyệt – Hiển thị</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <thuan-input :isDisabled="true" label="Người phản hồi đánh giá" :isRequired="true"
+                                    v-model="data.rating_id" />
+                            </div>
+                            <div class="col-12">
+                                <thuan-textarea label="Nội dung phản hồi đánh giá" v-model="data.message_response"
+                                    :rowsArea="5" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-close-modal" type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

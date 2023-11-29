@@ -66,14 +66,15 @@
                     <tbody>
                         <tr v-for="(news, index) in dataTable" :key="index">
                             <th class="align-middle text-center" scope="row">{{index + 1}}</th>
-                            <td class="align-middle">{{news.title}}</td>
+                            <td class="align-middle" style="font-size: 95%;">{{news.title}}</td>
                             <td class="align-middle">{{news.author}}</td>
                             <td class="align-middle">{{news.view_count ?? 0}}</td>
                             <td class="align-middle">{{news.status}}</td>
                             <td class="align-middle">{{news.type}}</td>
                             <td class="align-middle" style="width: 15%;">
                                 <button type="button" class="btn btn-primary btn-sm bi bi-pencil-square me-2"></button>
-                                <button @click="doDelete(news.title, news.id)" type="button" class="btn btn-danger btn-sm bi bi-trash"></button>
+                                <button @click="doDelete(news.title, news.id)" type="button"
+                                    class="btn btn-danger btn-sm bi bi-trash"></button>
                             </td>
                         </tr>
                     </tbody>

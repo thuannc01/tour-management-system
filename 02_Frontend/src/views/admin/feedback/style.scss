@@ -1,3 +1,47 @@
 @import '../../../assets/scss/common/var';
 
-#feedback {}
+#feedback {
+
+    // 
+    ul.pagination.pagination-md.justify-content-center {
+        margin-bottom: 0 !important;
+    }
+
+    .pagination {
+        li {
+            margin: 0 !important;
+        }
+    }
+
+    // 
+    table {
+        thead th {
+            text-align: center;
+        }
+
+        tr td,
+        tr th {
+            text-align: center;
+        }
+    }
+
+    // 
+    .label-rating,
+    .label-select {
+        color: rgb(0, 114, 188);
+        font-weight: 600;
+    }
+
+    // 
+    .btn:focus {
+        color: var(--bs-btn-hover-color);
+        background-color: var(--bs-btn-hover-bg);
+        border-color: var(--bs-btn-hover-border-color);
+    }
+
+    .btn:blur {
+        color: unset;
+        background-color: unset;
+        border-color: unset;
+    }
+}
