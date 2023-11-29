@@ -31,6 +31,7 @@ var News = {
             authorName: this.userData.full_name
         };
         this.setAuthor(authorData);
+        this.doSearchNews();
     },
     beforeRouteLeave(to, from, next) {
         document.getElementById('sidebar-item-news').classList.remove('active');
@@ -42,7 +43,11 @@ var News = {
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
     },
-    watch: {},
+    watch: {
+        'conditions.page_number'() {
+            this.doSearchNews();
+        }
+    },
     data() {
         return {
             showEditor: true,
@@ -72,7 +77,7 @@ var News = {
             'setRoutePagePathAdmin3',
             'showModalMessage'
         ]),
-        ...mapActions('NewsStore', ['saveNews']),
+        ...mapActions('NewsStore', ['saveNews', 'searchNews', 'deleteNews']),
         ...mapMutations('NewsStore', ['setAuthor']),
         handleButtonClick() {
             alert('Button clicked!');
@@ -123,6 +128,32 @@ var News = {
                     okText: 'Đồng ý'
                 });
             }, 400);
+        },
+        doSearchNews() {
+            const vm = this;
+            const conditions = {
+                title: vm.conditions.title,
+                type: vm.conditions.type,
+                sort: vm.conditions.sort,
+                page_size: vm.conditions.page_size,
+                page_number: vm.conditions.page_number
+            };
+            this.searchNews(conditions);
+        },
+        doDelete(title, id) {
+            const vm = this;
+            vm.showModalMessage({
+                title: 'Xác nhận xoá',
+                type: MSG_TYPE.CONFIRM,
+                content: `Bạn có chắc chắn muốn xoá tin tức ${title} không?`,
+                cancelText: 'Huỷ',
+                okText: 'Đồng ý',
+                callback: (ok) => {
+                    if (ok) {
+                        vm.deleteNews(id);
+                    }
+                }
+            });
         }
     }
 };

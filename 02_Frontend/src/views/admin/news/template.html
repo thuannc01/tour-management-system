@@ -29,7 +29,8 @@
                         <p class="m-0">Hiển thị</p>
                     </div>
                     <div class="col-4">
-                        <select v-model="conditions.page_size" class="form-select" aria-label="Default select example">
+                        <select @change="doSearchNews" v-model="conditions.page_size" class="form-select"
+                            aria-label="Default select example">
                             <option value="4" selected>4 dòng dữ liệu</option>
                             <option value="8">8 dòng dữ liệu</option>
                             <option value="16">16 dòng dữ liệu</option>
@@ -39,7 +40,7 @@
             </div>
             <div class="col-4">
                 <div class="input-group">
-                    <input v-model="conditions.title" type="text" class="form-control"
+                    <input @change="doSearchNews" v-model="conditions.title" type="text" class="form-control"
                         placeholder="Nhập thông tin tìm kiếm ...">
                     <span class="input-group-text">
                         <i class="bi bi-search"></i>
@@ -53,13 +54,13 @@
                 <table style="font-size: 90%;" class="table table-striped mt-1">
                     <thead>
                         <tr>
-                            <th class="align-middle text-center" scope="col">STT</th>
+                            <th class="align-middle text-center" style="width: 3%;" scope="col">STT</th>
                             <th class="align-middle" scope="col">Tên Bài Viết</th>
-                            <th class="align-middle" scope="col">Tác Giả</th>
-                            <th class="align-middle" scope="col">Lượt Xem</th>
-                            <th class="align-middle" scope="col">Trạng Thái</th>
-                            <th class="align-middle" scope="col">Loại Bài Đăng</th>
-                            <th class="align-middle text-center" scope="col" style="width: 15%;">Thao Tác</th>
+                            <th class="align-middle" scope="col" style="width: 15%;">Tác Giả</th>
+                            <th class="align-middle" scope="col" style="width: 10%;">Lượt Xem</th>
+                            <th class="align-middle" scope="col" style="width: 10%;">Trạng Thái</th>
+                            <th class="align-middle" scope="col" style="width: 15%;">Loại Bài Đăng</th>
+                            <th class="align-middle text-center" scope="col" style="width: 10%;">Thao Tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,12 +68,12 @@
                             <th class="align-middle text-center" scope="row">{{index + 1}}</th>
                             <td class="align-middle">{{news.title}}</td>
                             <td class="align-middle">{{news.author}}</td>
-                            <td class="align-middle">{{news.view_count}}</td>
+                            <td class="align-middle">{{news.view_count ?? 0}}</td>
                             <td class="align-middle">{{news.status}}</td>
                             <td class="align-middle">{{news.type}}</td>
                             <td class="align-middle" style="width: 15%;">
                                 <button type="button" class="btn btn-primary btn-sm bi bi-pencil-square me-2"></button>
-                                <button type="button" class="btn btn-danger btn-sm bi bi-trash"></button>
+                                <button @click="doDelete(news.title, news.id)" type="button" class="btn btn-danger btn-sm bi bi-trash"></button>
                             </td>
                         </tr>
                     </tbody>

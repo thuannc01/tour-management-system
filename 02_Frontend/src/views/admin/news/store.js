@@ -9,6 +9,8 @@ const initData = {
 };
 const conditions = {
     title: '',
+    type: '',
+    sort: '',
     page_size: 4,
     page_number: 1
 };
@@ -40,7 +42,32 @@ export default {
                 repository.saveNews(data).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
-                        // context.dispatch('searchPeriod');
+                        context.dispatch('searchNews');
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        searchNews(context, conditions) {
+            try {
+                repository.searchNews(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setDataTable', data.Data.dataSearch);
+                        context.commit('setTotalRows', data.Data.totalRows);
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        deleteNews(context, id) {
+            try {
+                repository.deleteNews(id).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.dispatch('searchNews');
                     }
                 });
             } catch (e) {
