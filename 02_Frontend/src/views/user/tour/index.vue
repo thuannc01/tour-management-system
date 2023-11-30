@@ -16,8 +16,23 @@ var Tour = {
         }
     },
     created() {},
-    mounted() {},
-    watch: {},
+    mounted() {
+        this.doSearch();
+    },
+    watch: {
+        'conditions.page_number'() {
+            this.doSearch();
+        },
+        'conditions.title'() {
+            this.doSearch();
+        },
+        'conditions.departure_time'() {
+            this.doSearch();
+        },
+        'conditions.arrival_time'() {
+            this.doSearch();
+        }
+    },
     data() {
         return {
             label: label,
@@ -29,16 +44,37 @@ var Tour = {
     computed: {
         // app
         // module
-        ...mapState('TourStore', ['data', 'priceOptions'])
+        ...mapState('app', []),
+        ...mapState('TourStore', [
+            'conditions',
+            'priceOptions',
+            'totalRows',
+            'dataTable',
+            'pageSizeList'
+        ])
     },
     methods: {
         // app
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', ['']),
+        ...mapActions('TourStore', ['searchTour']),
+        ...mapMutations('TourStore', []),
         seeDetails() {
             this.$router.push({ path: `/tour-detail` });
+        },
+        doSearch() {
+            const vm = this;
+            const conditions = {
+                title: vm.conditions.title ?? '',
+                departure_time: vm.conditions.departure_time ?? '',
+                arrival_time: vm.conditions.arrival_time ?? '',
+                adult_ticket_price: vm.conditions.adult_ticket_price ?? '',
+                page_size: vm.conditions.page_size ?? '',
+                page_number: vm.conditions.page_number ?? '',
+                mode: 1
+            };
+            vm.searchTour(conditions);
         }
     }
 };

@@ -1,22 +1,64 @@
-// import repository from './repository';
+import repository from './repository';
 
-const initData = {
-    priceSelected: '1'
+const conditions = {
+    title: '',
+    departure_time: '',
+    arrival_time: '',
+    adult_ticket_price: '',
+    page_size: 6,
+    page_number: 1,
+    mode: 0
 };
 export default {
     namespaced: true,
     state: {
-        data: { ...initData },
+        conditions: { ...conditions },
+        dataTable: [],
         priceOptions: [
-            { code: '1', name: 'Tất cả' },
-            { code: '2', name: 'Dưới 2tr' },
-            { code: '3', name: 'Từ 2tr - 4tr' },
-            { code: '4', name: 'Từ 4tr - 6tr' },
-            { code: '5', name: 'Từ 6tr - 10tr' },
-            { code: '6', name: 'Từ 10tr - 20tr' },
-            { code: '7', name: 'Trên 20tr' }
-        ]
+            { id: '', name: 'Tất cả' },
+            { id: ' < 2000000 ', name: 'Dưới 2tr' },
+            { id: ' BETWEEN 2000000 AND 4000000 ', name: 'Từ 2tr - 4tr' },
+            { id: ' BETWEEN 4000000 AND 6000000 ', name: 'Từ 4tr - 6tr' },
+            { id: ' BETWEEN 6000000 AND 10000000 ', name: 'Từ 6tr - 10tr' },
+            { id: ' BETWEEN 10000000 AND 20000000 ', name: 'Từ 10tr - 20tr' },
+            { id: ' > 20000000 ', name: 'Trên 20tr' }
+        ],
+        pageSizeList: [
+            { id: '6', name: '6 tour du lịch' },
+            { id: '9', name: '9 tour du lịch' },
+            { id: '12', name: '12 tour du lịch' }
+        ],
+        totalRows: 1
     },
-    mutations: {},
-    actions: {}
+    mutations: {
+        setDataTable(state, data) {
+            state.dataTable = [];
+            state.dataTable = data;
+        },
+        setTotalRows(state, data) {
+            state.totalRows = data;
+        }
+    },
+    actions: {
+        searchTour(context, conditions) {
+            try {
+                repository.searchTour(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit(
+                            'setTotalRows',
+                            data.Data.totalRows ?? 1
+                        );
+                        console.log('setDataTable: ', data.Data.dataSearch);
+                        context.commit(
+                            'setDataTable',
+                            data.Data.dataSearch ?? ''
+                        );
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        }
+    }
 };

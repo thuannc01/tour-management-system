@@ -1,5 +1,11 @@
-// import repository from '@/utils/repository';
+import repository from '@/utils/repository';
 
-// const resource = '';
+const resourceTour = '/tour';
 
-export default {};
+export default {
+    searchTour: (data) => {
+        return repository.get(`${resourceTour}`, {
+            params: data
+        });
+    }
+};
