@@ -145,7 +145,10 @@ class TourRepository extends BaseRepository implements ITourRepository
                 ."order by tours.id "
                 ."limit " .$page_size ." "
                 ."offset " .$offset ." ";
-
+        // mode = 1 -- search to client
+        // if($mode ==1 ){
+        //     $sqlString = '';
+        // }
         $dataSearch = DB::select($sqlString);
 
         $response = [

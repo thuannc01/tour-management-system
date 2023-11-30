@@ -15,7 +15,10 @@ var TourDetails = {
             store.registerModule('TourDetailsStore', TourDetailsStore);
         }
     },
-    created() {},
+    created() {
+        // get data detail by tour id
+        console.log('id tour: ', this.$route.params.tourId);
+    },
     mounted() {
         this.widthTourInfo = document.getElementById('info-tour').offsetWidth;
         this.marginRight = this.getMarginRightTourDetail();

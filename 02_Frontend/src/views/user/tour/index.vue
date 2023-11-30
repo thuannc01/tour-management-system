@@ -60,8 +60,8 @@ var Tour = {
         // module
         ...mapActions('TourStore', ['searchTour']),
         ...mapMutations('TourStore', []),
-        seeDetails() {
-            this.$router.push({ path: `/tour-detail` });
+        seeDetails(tourId) {
+            this.$router.push({ path: `/tour-detail/${tourId}` });
         },
         doSearch() {
             const vm = this;

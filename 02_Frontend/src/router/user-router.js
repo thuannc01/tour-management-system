@@ -55,7 +55,7 @@ export default [
         }
     },
     {
-        path: '/tour-detail',
+        path: '/tour-detail/:tourId',
         name: 'TourDetails',
         component: TourDetails,
         meta: {
