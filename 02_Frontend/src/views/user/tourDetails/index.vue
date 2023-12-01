@@ -46,7 +46,11 @@ var TourDetails = {
         ...mapState('TourDetailsStore', [
             'tourData',
             'periodData',
-            'ratingData'
+            'ratingData',
+            'countRatingData',
+            'imgTourData',
+            'scheduleData',
+            'starCountData'
         ])
     },
     methods: {

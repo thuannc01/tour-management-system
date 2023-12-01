@@ -5,7 +5,11 @@ export default {
     state: {
         tourData: [],
         periodData: [],
-        ratingData: []
+        ratingData: [],
+        imgTourData: [],
+        scheduleData: [],
+        countRatingData: 0,
+        starCountData: 0
     },
     mutations: {
         setTourData(state, data) {
@@ -16,6 +20,18 @@ export default {
         },
         setRatingData(state, data) {
             state.ratingData = data;
+        },
+        setCountRatingData(state, data) {
+            state.countRatingData = data;
+        },
+        setImgTourData(state, data) {
+            state.imgTourData = data;
+        },
+        setScheduleData(state, data) {
+            state.scheduleData = data;
+        },
+        setStarCountData(state, data) {
+            state.starCountData = data;
         }
     },
     actions: {
@@ -33,10 +49,24 @@ export default {
                             'setRatingData',
                             data.Data.ratingData ?? ''
                         );
-                        console.log(
-                            'tourData[0].title: ',
-                            context.state.tourData[0].title
+                        context.commit(
+                            'setCountRatingData',
+                            data.Data.countRatingData[0].count ?? 0
                         );
+                        context.commit(
+                            'setImgTourData',
+                            data.Data.imgTourData ?? []
+                        );
+                        context.commit(
+                            'setScheduleData',
+                            data.Data.scheduleData ?? []
+                        );
+                        if (data.Data.starCountData[0]) {
+                            context.commit(
+                                'setStarCountData',
+                                data.Data.starCountData[0].starcount ?? 0
+                            );
+                        }
                     }
                 });
             } catch (e) {

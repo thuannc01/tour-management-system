@@ -27,8 +27,8 @@
 						<div class="d-flex px-0 mx-0">
 							<h5 class=""><i class="bi bi-megaphone-fill pe-2"></i>Điểm nhấn hành trình</h5>
 						</div>
-						<div class="border-top">
-							<p>Điểm nhấn hành trình ghi ở đây</p>
+						<div class="border-top" v-if="tourData[0]?.title">
+							<div style="white-space: pre-line;" v-html="tourData[0].itinerary_highlight"></div>
 						</div>
 					</div>
 					<!-- bang gia -->
@@ -51,21 +51,28 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr v-for="i in 2">
-										<th scope="row">{{i}}</th>
-										<td>09/10/2023<span></span></td>
-										<td>10.979.000<span>đ</span></td>
-										<td>6.885.000<span>đ</span></td>
-										<td>2.790.000<span>đ</span></td>
+									<tr v-for="(tour, index) in periodData" :key="index">
+										<th scope="row">{{index + 1}}</th>
+										<td>{{tour.departure_time}}<span></span></td>
+										<td v-if="tourData[0]?.title">{{tourData[0].adult_ticket_price}}
+										</td>
+										<td v-if="tourData[0]?.title">{{tourData[0].child_ticket_price}}
+										</td>
+										<td v-if="tourData[0]?.title">{{tourData[0].infant_ticket_price}}
+										</td>
 										<td>
 											<thuan-button label="Xem" classBtn="btn-sm btn-success" />
 										</td>
-										<td>8/15</td>
-										<td>
+										<td>{{tour.quantity ?? 0 }}/{{tour.maximum_quantity}}</td>
+										<td v-if="tour.quantity != tour.maximum_quantity">
 											<thuan-button label="Đặt chỗ" :handleClick="bookATour" />
 										</td>
+										<td v-else>
+											<thuan-button aria-disabled="" classBtn="btn btn-danger" :isDisabled="true"
+												label="Hết chỗ" />
+										</td>
 									</tr>
-									<tr v-for="i in 2">
+									<!-- <tr v-for="i in 2">
 										<th scope="row">{{i}}</th>
 										<td>09/10/2023<span></span></td>
 										<td>10.979.000<span>đ</span></td>
@@ -79,7 +86,7 @@
 											<thuan-button aria-disabled="" classBtn="btn btn-danger" :isDisabled="true"
 												label="Hết chỗ" />
 										</td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -90,9 +97,9 @@
 							<h5 class=""><i class="bi bi-image pe-2"></i>Hình ảnh</h5>
 						</div>
 						<div class="row border-top m-0">
-							<div class="col-4 m-0 p-3" v-for="i in 6">
+							<div class="col-4 m-0 p-3" v-for="(tour, index) in imgTourData" :key="index">
 								<div class="team-item rounded overflow-hidden">
-									<img class="img-fluid" src="/src/assets/images/hcmcity.jpg" alt="">
+									<img style="width: 256px; height: 170px;" class="img-fluid" :src="tour.path" alt="">
 									<ul class="team-social">
 										<li><a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a></li>
 										<li><a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a></li>
@@ -109,8 +116,9 @@
 						</div>
 						<div class="none-border-top">
 							<b-tabs content-class="mt-3" fill>
-								<b-tab title="Chương trình Tour" active>
-									<div class="group-5-date d-block" v-for="i in 6">
+								<b-tab title="Chương trình Tour" active v-if="tourData[0]?.title">
+									<div class="group-5-date d-block" v-for="(tour, index) in scheduleData"
+										:key="index">
 										<div class="row m-0 p-0 mt-2">
 											<div class="col-1 m-0 p-0">
 												<div class="title-date-icon me-2 d-flex align-items-center">
@@ -120,24 +128,19 @@
 											</div>
 											<div class="col-11 m-0 p-0">
 												<div class="title-date">
-													NGÀY 01: TP. HỒ CHÍ MINH - PHÚ QUỐC (Ăn trưa)
+													{{tour.title}}
 												</div>
-												<div class="content-date mt-2">
-													Buổi sáng, quý khách tập trung tại ga đi trong nước, sân bay Tân Sơn
-													Nhất. Hướng dẫn viên lữ hành Saigontourist đón quý khách và hỗ trợ
-													làm thủ tục. Quý khách tự túc ăn sáng ,Khởi hành đi Phú Quốc (chuyến
-													bay VN1835 lúc 08h25 hoặc VN1825 lúc 09h00). Đến Phú Quốc, đoàn khởi
-													hành tham quan Dinh Cậu - biểu tượng văn hoá và tín ngưỡng của đảo
-													Phú Quốc, là nơi cầu may mắn, cầu an lành và là nơi ngư dân địa
-													phương gởi gắm niềm tin cho một chuyến ra khơi đánh bắt đầy ắp cá
-													khi trở về.
+												<div class="content-date mt-2" style="max-width: 100%;">
+													<div v-if="tour.title" style="white-space: pre-line;"
+														v-html="tour.body"></div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</b-tab>
 								<b-tab title="Chính sách Tour">
-									<p>I'm the second tab</p>
+									<div v-if="tourData[0]?.title" style="white-space: pre-line;"
+										v-html="tourData[0].policy"></div>
 								</b-tab>
 							</b-tabs>
 						</div>
@@ -148,7 +151,8 @@
 							<h5 class=""><i class="bi bi-journal-bookmark-fill pe-2"></i></i>Ghi chú</h5>
 						</div>
 						<div class="border-top">
-							<p>Ghi chú ...</p>
+							<div v-if="tourData[0]?.title" style="white-space: pre-line;" v-html="tourData[0].note">
+							</div>
 						</div>
 					</div>
 					<!-- danh gia -->
@@ -159,16 +163,17 @@
 						<div class="border-top">
 							<div class="group-6-rating d-flex">
 								<!-- vue-star-rating component -->
-								<star-rating read-only v-model:rating="rating" v-bind:increment="0.5"
+								<star-rating read-only v-model:rating="starCountData" v-bind:increment="0.5"
 									inactive-color="gainsboro" active-color="#ff891e" v-bind:star-size="25">
 								</star-rating>
-								<p class="m-0 pb-0 pt-1 px-2"><span class="p-title p-title-rating">{{rating}}/5</span>
+								<p class="m-0 pb-0 pt-1 px-2"><span
+										class="p-title p-title-rating">{{starCountData}}/5</span>
 									trong
-									<span class="p-title p-title-rating">10</span> đánh giá
+									<span class="p-title p-title-rating">{{countRatingData}}</span> đánh giá
 								</p>
 							</div>
 							<!-- detail rating -->
-							<div class="list-comments" v-for="i in 2">
+							<div class="list-comments" v-for="(tour, index) in ratingData" :key="index">
 								<div class="item-comments">
 									<div class="user-info">
 										<a href="javascript:;" class="img">
@@ -178,14 +183,14 @@
 									<div class="user-comments">
 										<div class="user-rating d-flex mb-2">
 											<b class="user-comment-name m-0 d-flex align-items-center pe-4 pt-2">
-												Nguyễn Văn A
+												{{tour.reviewer}}
 											</b>
 											<star-rating read-only v-model:rating="rating" v-bind:increment="0.5"
 												inactive-color="gainsboro" active-color="#ff891e" v-bind:star-size="20">
 											</star-rating>
 										</div>
 										<p class="user-comment-content">
-											Tour du lịch rất hay
+											{{tour.message}}
 										</p>
 										<div class="box-actions">
 											<a href="javascript:;" class="js-like">
@@ -208,7 +213,7 @@
 										</div>
 
 										<!-- reply bình luận -->
-										<div class="box-reply">
+										<div class="box-reply" v-if="tour.message_response">
 											<div class="user-info">
 												<a href="javascript:;" class="img">
 													<img src="/src/assets/images/avt.png" alt="">
@@ -216,10 +221,10 @@
 											</div>
 											<div class="user-comments">
 												<b class="user-comment-name">
-													Super Admin
+													{{tour.responder}}
 												</b>
 												<p class="user-comment-content">
-													Cảm ơn bạn đã trải nghiệm dịch vụ của chúng tôi.
+													{{tour.message_response}}
 												</p>
 												<div class="box-actions">
 													<a href="javascript:;" class="js-like">
@@ -251,36 +256,38 @@
 				<!-- info tour -->
 				<div id="info-tour" class="col-4">
 					<div class="feature-item border rounded-25 pt-3 px-3">
-						<h6 class="mb-3 text-uppercase">Du lịch Đông Bắc Hà Nội - Hà Giang mùa Thu bay Vietnam Airlines
-							từ
-							Đà Nẵng 2023</h6>
+						<h6 class="mb-3 text-uppercase"><strong v-if="tourData[0]?.title">{{ tourData[0].title
+								}}</strong></h6>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-qr-code-scan pe-2"></i>Mã tour&ensp;</p>
-							<p class="p-0 m-0">TMO0232</p>
+							<p class="p-0 m-0" v-if="tourData[0]?.title">{{ tourData[0].id }}</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-alarm pe-2"></i>Thời gian&ensp;</p>
-							<p class="p-0 m-0">6 ngày 5 đêm</p>
+							<p class="p-0 m-0" v-if="tourData[0]?.title">{{ tourData[0].number_of_day }} ngày {{
+								tourData[0].number_of_day -1}} đêm</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-airplane pe-2"></i>Phương tiện&ensp;</p>
-							<p class="p-0 m-0">Xe du lịch, Máy bay </p>
+							<p class="p-0 m-0" v-if="tourData[0]?.title">{{ tourData[0].transportation }}</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-pin-map pe-2"></i>Điểm xuất phát&ensp;</p>
-							<p class="p-0 m-0">Đà Nẵng </p>
+							<p class="p-0 m-0" v-if="tourData[0]?.title">{{ tourData[0].from_province_name }} </p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-check-circle pe-2"></i>Điểm đến&ensp;</p>
-							<p class="p-0 m-0">Hà Nội </p>
+							<p class="p-0 m-0" v-if="tourData[0]?.title">{{ tourData[0].to_province_name }} </p>
 						</div>
 						<div class="d-flex border-top justify-content-center">
 							<!-- vue-star-rating component -->
-							<star-rating read-only v-model:rating="rating" v-bind:increment="0.5"
+							<star-rating read-only v-model:rating="starCountData" v-bind:increment="0.5"
 								inactive-color="gainsboro" active-color="#ff891e" v-bind:star-size="25">
 							</star-rating>
-							<p class="m-0 pb-0 pt-1 px-2"><span class="p-title p-title-rating">{{rating}}/5</span> trong
-								<span class="p-title p-title-rating">10</span> đánh giá
+							<p class="m-0 pb-0 pt-1 px-2"><span
+									class="p-title p-title-rating">{{starCountData}}/5</span> trong
+								<span class="p-title p-title-rating">{{ countRatingData }}</span>
+								đánh giá
 							</p>
 						</div>
 					</div>

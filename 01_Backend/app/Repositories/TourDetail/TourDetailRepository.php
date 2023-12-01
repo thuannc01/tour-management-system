@@ -28,14 +28,35 @@ class TourDetailRepository extends BaseRepository implements ITourDetailReposito
         // get period data
         $sqlPeriodData = "Select * from periods where tour_id = " .$id;
         $periodData = DB::select($sqlPeriodData);
+        // get img tour
+        $sqlImgTourData = "select * from images where foreign_key_1 =" .$id;
+        $imgTourData = DB::select($sqlImgTourData);
         // get rating data
-        $sqlRatingData = "Select * from ratings where tour_id = " .$id;
+        $sqlRatingData = "
+        Select ratings.*, reviewer.full_name reviewer, responder.full_name responder
+        from ratings 
+        JOIN users AS reviewer ON reviewer.id = ratings.reviewer
+        JOIN users AS responder ON responder.id = ratings.responder
+        where tour_id = " .$id;
         $ratingData = DB::select($sqlRatingData);
+        // countRating
+        $sqlRatingData = "Select count(*) from ratings where tour_id = " .$id;
+        $countRatingData = DB::select($sqlRatingData);
+        // schedules
+        $sqlScheduleData = "select * from schedules where tour_id = " .$id;
+        $scheduleData = DB::select($sqlScheduleData);
+        // star count data
+        $sqlStarCount = "select ROUND(AVG(star_count), 1) starCount from ratings where tour_id = " .$id. " group by tour_id; ";
+        $starCountData = DB::select($sqlStarCount);
 
         $response = [
             'tourData'  => $tourData,
+            'imgTourData'   => $imgTourData,
             'periodData'    => $periodData,
-            'ratingData'   => $ratingData
+            'ratingData'   => $ratingData,
+            'countRatingData'   => $countRatingData,
+            'scheduleData' => $scheduleData,
+            'starCountData' => $starCountData
         ];
 
         return $response;
