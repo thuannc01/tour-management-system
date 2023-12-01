@@ -781,6 +781,36 @@ paths:
       security:
         -
           apiAuth: []
+  /tour-detail:
+    get:
+      tags:
+        - 'Tour detail'
+      summary: 'Get tour detail'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 349bee63293da32d5167d20388920d8c
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'id tour du lịch'
+          schema:
+            type: int
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /type-transportation:
     get:
       tags:

@@ -15,10 +15,7 @@ var TourDetails = {
             store.registerModule('TourDetailsStore', TourDetailsStore);
         }
     },
-    created() {
-        // get data detail by tour id
-        console.log('id tour: ', this.$route.params.tourId);
-    },
+    created() {},
     mounted() {
         this.widthTourInfo = document.getElementById('info-tour').offsetWidth;
         this.marginRight = this.getMarginRightTourDetail();
@@ -26,6 +23,8 @@ var TourDetails = {
         this.setPositionInfoTour();
         window.addEventListener('resize', this.setPositionInfoTour);
         window.addEventListener('scroll', this.setPositionInfoTour);
+        //
+        this.getDataDetail();
     },
     unmounted() {
         window.removeEventListener('resize', this.setPositionInfoTour);
@@ -44,14 +43,19 @@ var TourDetails = {
     computed: {
         // app
         // module
-        ...mapState('TourDetailsStore', [''])
+        ...mapState('TourDetailsStore', [
+            'tourData',
+            'periodData',
+            'ratingData'
+        ])
     },
     methods: {
         // app
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', ['']),
+        ...mapMutations('TourDetailsStore', []),
+        ...mapActions('TourDetailsStore', ['getTourDetail']),
         setPositionInfoTour() {
             const widthTourInfo_ = this.widthTourInfo;
             const marginRight_ = parseFloat(this.marginRight);
@@ -101,6 +105,13 @@ var TourDetails = {
         },
         bookATour() {
             this.$router.push({ path: `/book-a-tour` });
+        },
+        getDataDetail() {
+            // get data detail by tour id
+            const condition = {
+                id: this.$route.params.tourId
+            };
+            this.getTourDetail(condition);
         }
     }
 };

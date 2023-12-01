@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\StatisticalController;
 use App\Http\Controllers\Api\PeriodController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\TourDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,8 @@ Route::group([
     Route::apiResource('/news', NewsController::class);
     // rating
     Route::apiResource('/rating', RatingController::class);
+    // tour detail
+    Route::apiResource('/tour-detail', TourDetailController::class);
 });
 
 // No auth
