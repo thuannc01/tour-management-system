@@ -7,4 +7,5 @@ use App\Models\Rating;
 interface IRatingRepository
 {
     public function search($data);
+    public function response($data);
 }
