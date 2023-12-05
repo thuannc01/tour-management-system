@@ -6,6 +6,7 @@ const NewsAdmin = () => import('@/views/admin/news');
 const FeedbackAdmin = () => import('@/views/admin/feedback');
 const PeriodAdmin = () => import('@/views/admin/period');
 const OrderAdmin = () => import('@/views/admin/order');
+const TransportationAdmin = () => import('@/views/admin/transportation');
 
 export default [
     {
@@ -77,6 +78,15 @@ export default [
         component: OrderAdmin,
         meta: {
             title: 'Đơn đặt tour',
+            layout: 'AdminLayout'
+        }
+    },
+    {
+        path: '/admin/transportation',
+        name: 'TransportationAdmin',
+        component: TransportationAdmin,
+        meta: {
+            title: 'Phương tiện liên kết',
             layout: 'AdminLayout'
         }
     }

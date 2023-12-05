@@ -130,7 +130,6 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        $response = null;
         try {
             $data_res = $this->ratingRepository->response($request->all());
             $response = response()->json([

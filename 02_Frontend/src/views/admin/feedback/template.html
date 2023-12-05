@@ -8,16 +8,16 @@
             <button @click="doSetStatusRating('')" type="button" class="btn btn-outline-success">Tất cả</button>
         </div>
         <div class="col-4" style="width: 25%;">
-            <button type="button" @click="doSetStatusRating('Chờ duyệt - Không hiển thị')"
+            <button type="button" @click="doSetStatusRating('Chờ duyệt – Không hiển thị')"
                 class="btn btn-outline-success">Chờ duyệt - Không hiển thị</button>
         </div>
         <div class="col-3" style="width: 19%;">
-            <button type="button" @click="doSetStatusRating('Đã duyệt - Hiển thị')" class="btn btn-outline-success">Đã
+            <button type="button" @click="doSetStatusRating('Đã duyệt – Hiển thị')" class="btn btn-outline-success">Đã
                 duyệt - Hiển thị</button>
         </div>
         <div class="col-3 d-flex align-items-center justify-content-end" style="width: 34%;">
             <label class="label-rating pe-3 pt-1">Lọc đánh giá</label>
-            <star-rating v-model:rating="conditions.star_count" v-bind:increment="0.5" inactive-color="gainsboro"
+            <star-rating v-model:rating="conditions.star_count" v-bind:increment="1" inactive-color="gainsboro"
                 active-color="#ff891e" v-bind:star-size="40">
             </star-rating>
         </div>
@@ -49,26 +49,30 @@
                     <thead>
                         <tr>
                             <th class="align-middle text-center" style="width: 3%;" scope="col">STT</th>
-                            <th class="align-middle" scope="col" style="width: 14%;">Người đánh giá</th>
-                            <th class="align-middle" scope="col" style="width: 20%;">Tour được đánh giá</th>
+                            <th class="align-middle" scope="col" style="width: 15%;">Người đánh giá</th>
+                            <th class="align-middle" scope="col" style="width: 25%;">Tour được đánh giá</th>
                             <th class="align-middle" scope="col" style="width: 9%;">Số sao</th>
-                            <th class="align-middle" scope="col">Nội dung</th>
-                            <th class="align-middle" scope="col" style="width: 16%;">Trạng thái</th>
+                            <th class="align-middle" scope="col">N.dung đánh giá</th>
+                            <th class="align-middle" scope="col">N.dung phản hồi</th>
+                            <th class="align-middle" scope="col" style="width: 10%;">Trạng thái</th>
                             <th class="align-middle text-center" scope="col" style="width: 10%;">Phản hồi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="align-middle text-center" scope="row">1</th>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
+                        <tr v-for="(rating, index) in dataTable" :key="index">
+                            <th class="align-middle text-center" scope="row">{{ index+1 }}</th>
+                            <td class="align-middle">{{rating.full_name}}</td>
+                            <td class="align-middle">{{rating.title}}</td>
+                            <td class="align-middle">{{rating.star_count}}</td>
+                            <td class="align-middle">{{rating.message}}</td>
+                            <td class="align-middle">{{rating.message_response}}</td>
                             <td class="align-middle">
-                                Chờ duyệt – Không hiển thị
+                                {{formatStatus(rating.status)}}
                             </td>
                             <td class="align-middle">
-                                <button data-bs-toggle="modal" data-bs-target="#ratingAdminModal" type="button"
+                                <button
+                                    @click="responseRating(rating.tour_id, rating.title, rating.id, rating.status, rating.message_response)"
+                                    data-bs-toggle="modal" data-bs-target="#ratingAdminModal" type="button"
                                     class="btn btn-primary btn-sm bi bi-reply-fill me-2"></button>
                             </td>
                         </tr>
@@ -103,7 +107,7 @@
                             </div>
                             <div class="col-6">
                                 <thuan-input :isDisabled="true" label="Mã đánh giá" :isRequired="true"
-                                    v-model="data.rating_id" />
+                                    v-model="data.id" />
                             </div>
                             <div class="col-6">
                                 <label class="label-select">Chọn trạng thái<span class="text-danger ps-1"><i
@@ -116,7 +120,7 @@
                             </div>
                             <div class="col-12">
                                 <thuan-input :isDisabled="true" label="Người phản hồi đánh giá" :isRequired="true"
-                                    v-model="data.rating_id" />
+                                    v-model="data.responder_name" />
                             </div>
                             <div class="col-12">
                                 <thuan-textarea label="Nội dung phản hồi đánh giá" v-model="data.message_response"
@@ -127,7 +131,7 @@
                     <div class="modal-footer">
                         <button id="btn-close-modal" type="button" class="btn btn-secondary"
                             data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                        <button @click="onSaveResponse" type="button" class="btn btn-primary">Lưu thay đổi</button>
                     </div>
                 </div>
             </div>

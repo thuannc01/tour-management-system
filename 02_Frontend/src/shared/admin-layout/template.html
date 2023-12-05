@@ -77,10 +77,12 @@
                     </li>
                     <li id="sidebar-item-transport" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-car-front d-flex"></i>
-                            <span>Phương tiện liên kết</span>
-                        </a>
+                        <router-link to="/admin/transportation">
+                            <a class='sidebar-link'>
+                                <i class="bi bi-car-front d-flex"></i>
+                                <span>Phương tiện liên kết</span>
+                            </a>
+                        </router-link>
                     </li>
                     <li id="sidebar-item-food" class="sidebar-item"
                         :class="[userData.role_id == 4 || userData.role_id == 2 ? '' : 'd-none']">
