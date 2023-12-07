@@ -17,7 +17,7 @@ var NewsDetails = {
     },
     created() {},
     mounted() {
-        this.getDataDetail();
+        this.dataDetail();
     },
     watch: {},
     data() {
@@ -28,20 +28,33 @@ var NewsDetails = {
     computed: {
         // app
         // module
-        ...mapState('NewsDetailsStore', [''])
+        ...mapState('NewsDetailsStore', ['data'])
     },
     methods: {
         // app
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', ['']),
-        getDataDetail() {
-            // get data detail by tour id
+        ...mapActions('NewsDetailsStore', ['getNewsDetail']),
+        ...mapMutations('NewsDetailsStore', []),
+        //
+        dataDetail() {
+            const vm = this;
             const condition = {
                 id: this.$route.params.newsId
             };
-            console.log('condition: ', condition);
+            vm.getNewsDetail(condition);
+        },
+        formatDateString(dateString) {
+            const date = new Date(dateString);
+
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+
+            const formattedDate = `${day}/${month}/${year}`;
+
+            return formattedDate;
         }
     }
 };

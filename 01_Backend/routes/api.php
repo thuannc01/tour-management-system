@@ -72,6 +72,7 @@ Route::group([
     // news
     Route::apiResource('/news', NewsController::class)->only(['index', 'store', 'destroy']);
     Route::get('/news/home', [NewsController::class, 'getNewsHome']);
+    Route::get('/news/detail', [NewsController::class, 'getDetail']);
     // rating
     Route::apiResource('/rating', RatingController::class);
     // tour detail

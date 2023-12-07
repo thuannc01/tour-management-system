@@ -260,4 +260,58 @@ class NewsController extends Controller
         }
         return $response;
     }
+
+    /**
+     * Get news detail
+     *  @OA\GET(
+     *      path="/news/detail",
+     *      tags={"News"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id tin tức",
+     *          in="query",
+     *          @OA\Schema(type="int")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result of success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Result of success"
+     *              )
+     *          )
+     *      )
+     *  )
+     */
+    public function getDetail(Request $request)
+    {
+        try {
+            $data_res = $this->newsRepository->getDetail($request->all());
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
+        }
+        catch (\Exception $e) {
+            //
+        }
+        return $response;
+    }
 }

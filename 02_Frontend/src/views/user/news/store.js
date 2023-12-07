@@ -7,7 +7,7 @@ const conditions = {
     title: '',
     type: '',
     sort: 'DESC',
-    page_size: 4,
+    page_size: 6,
     page_number: 1
 };
 

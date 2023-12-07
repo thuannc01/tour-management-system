@@ -401,7 +401,7 @@
                     "News"
                 ],
                 "summary": "Get data search news",
-                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "description": "\r\n     *      Code\r\n     *          200 - Success\r\n     *          400 - Bad request\r\n     *          401 - Not authentication\r\n     *          403 - Not access\r\n     *          422 - Input invalidate\r\n     *          423 - Have other error\r\n     *          500 - Server error\r\n     *      ",
                 "operationId": "b83ff020eb45141b07c365e50a4b27bd",
                 "parameters": [
                     {
@@ -477,7 +477,7 @@
                     "News"
                 ],
                 "summary": "Save news",
-                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "description": "\r\n     *      Code\r\n     *          200 - Success\r\n     *          400 - Bad request\r\n     *          401 - Not authentication\r\n     *          403 - Not access\r\n     *          422 - Input invalidate\r\n     *          423 - Have other error\r\n     *          500 - Server error\r\n     *      ",
                 "operationId": "2a3cd008a3f69680a72ab654c7ad67ab",
                 "requestBody": {
                     "description": "News data",
@@ -545,7 +545,7 @@
                     "News"
                 ],
                 "summary": "Delete news",
-                "description": "\n     *          Code\n     *              200 - Success\n     *              400 - Bad request\n     *              401 - Not authentication\n     *              403 - Not access\n     *              422 - Input invalidate\n     *              423 - Have other error\n     *              500 - Server error\n     *      ",
+                "description": "\r\n     *          Code\r\n     *              200 - Success\r\n     *              400 - Bad request\r\n     *              401 - Not authentication\r\n     *              403 - Not access\r\n     *              422 - Input invalidate\r\n     *              423 - Have other error\r\n     *              500 - Server error\r\n     *      ",
                 "operationId": "9aa64a7959e1011d5cd8c10eb33acb7f",
                 "parameters": [
                     {
@@ -591,8 +591,54 @@
                     "News"
                 ],
                 "summary": "Get news home",
-                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "description": "\r\n     *      Code\r\n     *          200 - Success\r\n     *          400 - Bad request\r\n     *          401 - Not authentication\r\n     *          403 - Not access\r\n     *          422 - Input invalidate\r\n     *          423 - Have other error\r\n     *          500 - Server error\r\n     *      ",
                 "operationId": "c28ac1168034f4eec604dc9af8dd8358",
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/news/detail": {
+            "get": {
+                "tags": [
+                    "News"
+                ],
+                "summary": "Get news detail",
+                "description": "\r\n     *      Code\r\n     *          200 - Success\r\n     *          400 - Bad request\r\n     *          401 - Not authentication\r\n     *          403 - Not access\r\n     *          422 - Input invalidate\r\n     *          423 - Have other error\r\n     *          500 - Server error\r\n     *      ",
+                "operationId": "33cacca2711f146d7becaa615312477e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id tin tức",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Result of success",

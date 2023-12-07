@@ -37,7 +37,7 @@ class NewsRepository extends BaseRepository implements INewsRepository
     public function search($data){
         $title = $data['title'] ?? '';
         $type = $data['type'] ?? '';
-        $sort = $data['sort'] ?? '';
+        $sort = trim($data['sort']) ?? '';
         $page_size = $data['page_size'] ?? '4';
         $page_number = $data['page_number'] ?? '1';
          // cal
@@ -53,6 +53,8 @@ class NewsRepository extends BaseRepository implements INewsRepository
         }
         if(trim($sort) != ''){
             $sqlString = $sqlString . " order by created_at " . $sort . "  ";
+        } else {
+            $sqlString = $sqlString . " order by created_at ASC ";
         }
         $sqlString = $sqlString  . " limit " .$page_size. " offset " .$offset;
         // 
@@ -79,5 +81,20 @@ class NewsRepository extends BaseRepository implements INewsRepository
         $newsHome = DB::select($sqlString);
         
         return $newsHome;
+    }
+
+    public function getDetail($data){
+        $newsId = $data['id'];
+        $newsData = News::where('id', '=', $newsId)->get();
+        // 
+        $news = News::firstOrNew(['id' => $newsId]);
+        if ($news->view_count !== null) {
+            $news->increment('view_count');
+        } else {
+            $news->view_count = 1;
+            $news->save();
+        }
+        // 
+        return $newsData;
     }
 }

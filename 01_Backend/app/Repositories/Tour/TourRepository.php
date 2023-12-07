@@ -113,18 +113,18 @@ class TourRepository extends BaseRepository implements ITourRepository
         $departure_time = $data['departure_time'] ?? '';
         $arrival_time = $data['arrival_time'] ?? '';
         $adult_ticket_price = $data['adult_ticket_price'] ?? '';
-        $page_size = empty($data['page_size']) ? 9 : $data['page_size'];
+        $page_size = empty($data['page_size']) ? 6 : $data['page_size'];
         $page_number = $data['page_number'] ?? 1;
         $mode = $data['mode'] ?? 0;
         // cal
         $offset = ($page_number - 1) * $page_size; //số lượng dòng bỏ qua từ đầu kết quả trước khi bắt đầu lấy các dòng
         $totalRows  = Tour::whereNull('deleted_at')->count('id');
 
-        $sqlString = $sqlString. "Select tours.*, types_transportation.name transportation, images.path AS img "
+        $sqlString = $sqlString. "Select tours.*, types_transportation.name transportation, images.path AS img, periods.departure_time departure_time "
                 ."from tours ";
-        if($mode != 0) {
-            $sqlString = $sqlString ."inner join periods on tours.id = periods.tour_id ";
-        }
+        // 
+        $sqlString = $sqlString ."inner join periods on tours.id = periods.tour_id ";
+        // 
         $sqlString = $sqlString ."inner join types_transportation on types_transportation.id = tours.type_transportation_id "
                 ."LEFT JOIN (
                     SELECT
@@ -135,22 +135,33 @@ class TourRepository extends BaseRepository implements ITourRepository
                         images
                 ) images ON images.foreign_key_1 = tours.id AND images.row_num = 1 "
                 ."where tours.title LIKE '%". $title ."%' ";
-        if($mode != 0){
-            $sqlString = $sqlString ."and periods.departure_time LIKE '%". $departure_time ."%' "
-                ."and periods.arrival_time LIKE '%". $arrival_time ."%' ";
+        // 
+        $sqlString = $sqlString ."and periods.departure_time LIKE '%". $departure_time ."%' "
+        ."and periods.arrival_time LIKE '%". $arrival_time ."%' ";
+        //
+        if($mode == 1 && trim($adult_ticket_price) != ''){
+            $sqlString = $sqlString ."
+             and (SELECT
+             REPLACE(
+                 REPLACE(
+                     REPLACE(
+                         REPLACE(TRIM(BOTH ' ' FROM tours.adult_ticket_price), '₫', ''),
+                         '.',
+                         ''
+                     ),
+                     ',',
+                     '.'),
+                 ' ', ''
+             )::INTEGER) ".  $adult_ticket_price;
         }
-        $sqlString = $sqlString ."and tours.adult_ticket_price LIKE '%". $adult_ticket_price ."%' "
-                ."and tours.deleted_at is null "
-                ."group by tours.id, tours.title, types_transportation.id, images.path "
+        $sqlString = $sqlString ." and tours.deleted_at is null "
+                ."group by tours.id, tours.title, types_transportation.id, images.path, periods.departure_time "
                 ."order by tours.id "
                 ."limit " .$page_size ." "
                 ."offset " .$offset ." ";
-        // mode = 1 -- search to client
-        // if($mode ==1 ){
-        //     $sqlString = '';
-        // }
-        $dataSearch = DB::select($sqlString);
 
+        $dataSearch = DB::select($sqlString);
+ 
         $response = [
             'totalRows' => $totalRows,
             'dataSearch' => $dataSearch,

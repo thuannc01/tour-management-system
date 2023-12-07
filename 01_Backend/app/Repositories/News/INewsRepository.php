@@ -10,4 +10,5 @@ interface INewsRepository
     public function search($data);
     public function deleteNews($data);
     public function getNewsHome();
+    public function getDetail($data);
 }

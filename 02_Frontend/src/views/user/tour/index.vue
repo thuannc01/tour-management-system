@@ -77,7 +77,22 @@ var Tour = {
                 page_number: vm.conditions.page_number ?? '',
                 mode: 1
             };
+            console.log('conditions: ', conditions);
             vm.searchTour(conditions);
+        },
+        formatDateString(inputDateString) {
+            const parts = inputDateString.split('-');
+            if (parts.length !== 3) {
+                console.error('Invalid date format');
+                return null;
+            }
+
+            const year = parts[0];
+            const month = parts[1];
+            const day = parts[2].substring(0, 2);
+            const formattedDate = `${day}/${month}/${year}`;
+
+            return formattedDate;
         }
     }
 };
