@@ -5,14 +5,16 @@
             <label class="label-rating pe-3 pt-1">Chọn trạng thái</label>
         </div>
         <div class="col-2" style="width: 9%;">
-            <button @click="doSetStatusRating('')" type="button" class="btn btn-outline-success">Tất cả</button>
+            <button @click="doSetStatusRating('')" type="button" class="btn btn-success">Tất cả</button>
         </div>
         <div class="col-4" style="width: 25%;">
             <button type="button" @click="doSetStatusRating('Chờ duyệt – Không hiển thị')"
-                class="btn btn-outline-success">Chờ duyệt - Không hiển thị</button>
+                class="btn btn-primary bg-btn-primary-custom">Chờ
+                duyệt - Không hiển thị</button>
         </div>
         <div class="col-3" style="width: 19%;">
-            <button type="button" @click="doSetStatusRating('Đã duyệt – Hiển thị')" class="btn btn-outline-success">Đã
+            <button type="button" @click="doSetStatusRating('Đã duyệt – Hiển thị')"
+                class="btn btn-primary bg-btn-primary-custom">Đã
                 duyệt - Hiển thị</button>
         </div>
         <div class="col-3 d-flex align-items-center justify-content-end" style="width: 34%;">
@@ -137,3 +139,4 @@
             </div>
         </div>
     </div>
+</div>

@@ -22,6 +22,8 @@ var Transportation = {
         document
             .getElementById('sidebar-item-transport')
             .classList.add('active');
+        //
+        this.doSearch();
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -35,13 +37,29 @@ var Transportation = {
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
     },
-    watch: {},
+    watch: {
+        'conditions.page_number'() {
+            this.doSearch();
+        },
+        'conditions.parent_id'() {
+            this.doSearch();
+        },
+        'conditions.page_size': 'reloadComponent',
+        'conditions.total_rows': 'reloadComponent'
+    },
     data() {
-        return {};
+        return {
+            reloadKey: 0
+        };
     },
     computed: {
         ...mapState('app', ['userData']),
-        ...mapState('TransportationStore', ['data', 'dataTable'])
+        ...mapState('TransportationStore', [
+            'totalRows',
+            'dataTable',
+            'data',
+            'conditions'
+        ])
     },
     methods: {
         ...mapActions('app', []),
@@ -59,9 +77,37 @@ var Transportation = {
             'hideHeaderError'
         ]),
         //
-        ...mapActions('TransportationStore', []),
-        ...mapMutations('TransportationStore', [])
+        ...mapActions('TransportationStore', ['searchTransportation']),
+        ...mapMutations('TransportationStore', ['setParentId']),
         //
+        doSearch() {
+            const vm = this;
+            const conditions = {
+                parent_id: vm.conditions.parent_id,
+                name: vm.conditions.name,
+                page_size: vm.conditions.page_size,
+                page_number: vm.conditions.page_number
+            };
+            vm.searchTransportation(conditions);
+        },
+        setType(id) {
+            const vm = this;
+            vm.setParentId(id);
+        },
+        reloadComponent() {
+            this.reloadKey += 1;
+        },
+        formatCurrency(number) {
+            let numericValue = parseFloat(number.replace(/[^0-9.-]/g, ''));
+            return numericValue.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            });
+        },
+        linkTo() {
+            // this.$router.push('');
+            window.open('https://www.trip.com/?locale=en-xx', '_blank');
+        }
     }
 };
 

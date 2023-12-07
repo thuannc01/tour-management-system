@@ -33,13 +33,31 @@ var Order = {
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
     },
-    watch: {},
+    watch: {
+        'conditions.page_number'() {
+            this.doSearch();
+        },
+        'conditions.status'() {
+            this.doSearch();
+        },
+        'conditions.page_size': 'reloadComponent',
+        'conditions.total_rows': 'reloadComponent'
+    },
     data() {
-        return {};
+        return {
+            currentDateTime: '',
+            reloadKey: 0
+        };
     },
     computed: {
         ...mapState('app', []),
-        ...mapState('OrderStore', [])
+        ...mapState('OrderStore', [
+            'totalRows',
+            'dataTable',
+            'data',
+            'conditions',
+            'selectOptions'
+        ])
     },
     methods: {
         ...mapActions('app', []),
@@ -54,9 +72,26 @@ var Order = {
             'setRoutePagePathAdmin3'
         ]),
         ...mapActions('OrderStore', []),
-        ...mapMutations('OrderStore', []),
+        ...mapMutations('OrderStore', ['setStatusOrder']),
         handleButtonClick() {
             alert('Button clicked!');
+        },
+        reloadComponent() {
+            this.reloadKey += 1;
+        },
+        doSearch() {
+            const vm = this;
+            const conditions = {
+                status: vm.conditions.status ?? '',
+                title: vm.conditions.title ?? '',
+                page_size: vm.conditions.page_size,
+                page_number: vm.conditions.page_number
+            };
+            console.log('conditions: ', conditions);
+        },
+        setStatus(status) {
+            const vm = this;
+            vm.setStatusOrder(status);
         }
     }
 };

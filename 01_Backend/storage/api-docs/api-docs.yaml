@@ -855,6 +855,54 @@ paths:
       security:
         -
           apiAuth: []
+  /transportation:
+    get:
+      tags:
+        - Transportation
+      summary: 'Get transportation detail'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: c2d6f035cea68e5cec71882b9535103e
+      parameters:
+        -
+          name: parent_id
+          in: query
+          description: 'Id loại phương tiện'
+          schema:
+            type: int
+        -
+          name: name
+          in: query
+          description: 'Tên phương tiện'
+          schema:
+            type: string
+        -
+          name: page_size
+          in: query
+          description: 'Số dữ liệu trên trang'
+          schema:
+            type: int
+        -
+          name: page_number
+          in: query
+          description: 'Trang hiện tại'
+          schema:
+            type: int
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /type-transportation:
     get:
       tags:

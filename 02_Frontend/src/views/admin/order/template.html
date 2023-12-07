@@ -1,3 +1,327 @@
 <div id="order">
-    Quản lý đơn đặt tour ở đây
+    <!-- step -->
+    <div class="row m-0">
+        <div class="col-2 p-0 d-flex align-items-center" style="width: 13%;">
+            <label class="label-rating pe-3 pt-1">Chọn trạng thái</label>
+        </div>
+        <div class="col-2" style="width: 9%;">
+            <button @click="setStatus('')" type="button" class="btn btn-success">Tất cả</button>
+        </div>
+        <div class="col-2" style="width: 18%;">
+            <button @click="setStatus('Chờ thanh toán')" type="button"
+                class="btn btn-primary bg-btn-primary-custom">1.Chờ thanh toán</button>
+        </div>
+        <div class="col-2" style="width: 16%;">
+            <button @click="setStatus('Chờ xác nhận')" type="button" class="btn btn-primary bg-btn-primary-custom">2.Chờ
+                xác nhận</button>
+        </div>
+        <div class="col-2" style="width: 22%;">
+            <button @click="setStatus('Chờ đặt phương tiện')" type="button"
+                class="btn btn-primary bg-btn-primary-custom">3.Chờ đặt phương tiện</button>
+        </div>
+        <div class="col-2" style="width: 22%;">
+            <button @click="setStatus('Hoàn thành')" type="button" class="btn btn-primary bg-btn-primary-custom">4.Tour
+                đã hoàn thành</button>
+        </div>
+    </div>
+    <hr>
+    <!-- search -->
+    <div class="row mb-2 d-flex justify-content-between">
+        <div class="col-8">
+            <div class="row d-flex">
+                <div class="col-2 d-flex align-items-center">
+                    <p class="m-0">Hiển thị</p>
+                </div>
+                <div class="col-4">
+                    <select @change="doSearch" v-model="conditions.page_size" class="form-select"
+                        aria-label="Default select example" v-model="">
+                        <option value="4" selected>4 dòng dữ liệu</option>
+                        <option value="8">8 dòng dữ liệu</option>
+                        <option value="16">16 dòng dữ liệu</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <input v-model="conditions.title" @change="doSearch" type="text" class="form-control"
+                    placeholder="Nhập thông tin tìm kiếm ...">
+                <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="row">
+        <div class="col-12">
+            <table style="font-size: 80%;" class="table table-striped mt-1">
+                <thead>
+                    <tr>
+                        <th class="align-middle text-center" style="width: 3%;" scope="col">STT</th>
+                        <th class="align-middle" scope="col" style="width: 6%;">Mã đơn</th>
+                        <th class="align-middle" scope="col">Tour đã đặt</th>
+                        <th class="align-middle" scope="col" style="width: 9%;">Khách hàng</th>
+                        <th class="align-middle" scope="col" style="width: 9%;">Ngày đặt</th>
+                        <th class="align-middle" scope="col" style="width: 9%;">Tổng S.Lượng khách</th>
+                        <th class="align-middle" scope="col" style="width: 10%;">Tổng tiền</th>
+                        <th class="align-middle" scope="col" style="width: 10%;">Trạng thái</th>
+                        <th class="align-middle" scope="col" style="width: 10%;">Đặt phương tiện</th>
+                        <th class="align-middle text-center" scope="col" style="width: 10%;">Chi tiết & Xác nhận</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="align-middle text-center" scope="row"></th>
+                        <td class="align-middle" style="font-size: 95%;"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle"></td>
+                        <td class="align-middle">
+                            <button data-bs-toggle="modal" data-bs-target="#orderTransportationModal" type="button"
+                                class="btn btn-success btn-sm bi bi-scooter me-2"></button>
+                        </td>
+                        <td class="align-middle">
+                            <button data-bs-toggle="modal" data-bs-target="#orderDetailModal" type="button"
+                                class="btn btn-primary btn-sm bi bi-three-dots me-2"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- pagination -->
+            <template v-if="true">
+                <div :key="reloadKey">
+                    <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+                        <b-pagination v-model="conditions.page_number" :total-rows="totalRows" align="center"
+                            :per-page="4"></b-pagination>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- modal detail -->
+    <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">Tất cả thông tin chi tiết - Ngày đặt
+                        tour này: 11/12/2023</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="customer-info" class="mb-2">
+                        <h6 class="text-uppercase" style="color: black;">Thông tin khách hàng đặt tour - No.1</h6>
+                        <hr class="p-0 m-0 pb-2">
+                        <div class="row">
+                            <div class="col-6">
+                                <thuan-input label="Khách hàng" :isRequired="true" :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Số điện thoại" :isRequired="true" :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Email" :isRequired="true" :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Địa chỉ" :isRequired="true" :isDisabled="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="service-tour" class="mb-2">
+                        <h6 class="text-uppercase" style="color: black;">Thông tin về dịch vụ kèm tour - No.1</h6>
+                        <hr class="p-0 m-0 pb-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <thuan-input label="Dịch vụ kèm tour và số lượng (Số lượng dịch vụ x Giá tiền)"
+                                    :isDisabled="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tour-info" class="mb-2">
+                        <h6 class="text-uppercase" style="color: black;">Thông tin về Tour du lịch đã đặt</h6>
+                        <hr class="p-0 m-0 pb-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <thuan-input label="Tên Tour du lịch" :isRequired="true" :isDisabled="true" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <thuan-input label="Thời gian khởi hành" :isRequired="true" :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Thời gian kết thúc" :isRequired="true" :isDisabled="true" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <thuan-input label="Địa điểm khởi hành" :isRequired="true" :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Địa điểm đến" :isRequired="true" :isDisabled="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="transportation-info">
+                        <h6 class="text-uppercase" style="color: black;">Thông tin về phương tiện đã đặt (Nếu có)</h6>
+                        <hr class="p-0 m-0 pb-2">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-6">
+                                    <thuan-input label="Mã phương tiện" :isRequired="true" :isDisabled="true" />
+                                </div>
+                                <div class="col-6">
+                                    <thuan-input label="Tên phương tiện" :isRequired="true" :isDisabled="true" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <thuan-input label="Thời gian xuất phát" :isRequired="true" :isDisabled="true" />
+                                </div>
+                                <div class="col-6">
+                                    <thuan-input label="Thời gian về" :isRequired="true" :isDisabled="true" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <thuan-input label="Số lượng đặt" :isRequired="true" :isDisabled="true" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <thuan-input label="Giá vé tại thời điểm đặt" :isRequired="true"
+                                        :isDisabled="true" />
+                                </div>
+                                <div class="col-6">
+                                    <thuan-input label="Giá vé khi có sự thay đổi ở bên thứ 3" :isRequired="true"
+                                        :isDisabled="true" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <thuan-input label="Giá chênh lệch vượt quá ~ ngưỡng chênh lệch đặt ra (Nếu có)"
+                                        :isRequired="true" :isDisabled="true" />
+                                </div>
+                            </div>
+                            <p class="my-0 py-0">>>> Chính sách: Ngưỡng chênh lệch giá đặt phương tiện đặt ra là: 50%.
+                            </p>
+                            <p class="my-0 py-0">>>>> Ví dụ giá vé đặt xe
+                                khách hiện tại là 380.000đ đi từ Đà Nẵng vào Vũng Tàu. Nếu giá tăng lên bất thường từ
+                                570.000đ trở lên thì phải tính toán lại.</p>
+                            <p class="my-0 py-0">>>>> Cách tính toán lại: Tổng tiền = Tổng tiền trước đó + Giá
+                                chênh
+                                lệch phương tiện</p>
+                            <p class="my-0 py-0">>>>> Sau đó báo ngay cho khách hàng biết thông qua việc gởi mail hoặc
+                                gọi điện, phải nêu
+                                rõ lý
+                                do và xác nhận xem khách hàng có muốn tiếp tục đặt tour này hay không.</p>
+                            <p>>>>> Cuối cùng thiết lập trạng thái đơn hàng về chờ thanh toán</p>
+                            <p>>>> Lưu ý: Địa điểm xuất phát của phương tiện này trùng với địa điểm xuất phát ghi ở
+                                tour du lịch</p>
+                        </div>
+                    </div>
+                    <div id="general-info" class="mb-2">
+                        <h6 class="text-uppercase" style="color: black;">Thông tin chung về đơn đặt tour du lịch</h6>
+                        <hr class="p-0 m-0 pb-2">
+                        <div class="row">
+                            <div class="col-4">
+                                <thuan-input label="Mã đơn hàng" :isRequired="true" :isDisabled="true" />
+                            </div>
+                            <div class="col-4">
+                                <thuan-input label="Thời gian đặt tour" :isRequired="true" :isRequired="true"
+                                    :isDisabled="true" />
+                            </div>
+                            <div class="col-4">
+                                <thuan-input label="Phương tiện di chuyển" :isRequired="true" :isRequired="true"
+                                    :isDisabled="true" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <thuan-input label="Ngân hàng thanh toán" :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Ngày thanh toán" :isDisabled="true" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <thuan-input label="Số lượng người lớn (SL x Giá tiền)" :isRequired="true"
+                                    :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Số lượng trẻ em (SL x Giá tiền)" :isDisabled="true" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <thuan-input label="Số lượng em bé (SL x Giá tiền)" :isDisabled="true" />
+                            </div>
+                            <div class="col-6">
+                                <thuan-input label="Tổng tiền" :isRequired="true" :isDisabled="true" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <thuan-select label="Trạng thái" :options="selectOptions.statusOrder"
+                                    v-model="data.status" :isRequired="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-close-modal" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary">Lưu thông tin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal confirm -->
+    <div class="modal fade" id="orderConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">Xác nhận thông tin tour du lịch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        Xác nhận thông tin tour du lịch ở đây
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-close-modal" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" @click="onSave">Lưu thông tin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal transportation -->
+    <div class="modal fade" id="orderTransportationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">Đặt phương tiện di chuyển</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        Đặt phương tiện di chuyển ở đây
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-close-modal" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" @click="onSave">Lưu thông tin</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

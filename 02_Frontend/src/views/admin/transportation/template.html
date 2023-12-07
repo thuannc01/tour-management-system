@@ -1,3 +1,95 @@
 <div id="transportation">
-    Phương tiện liên kết ở đây
+    <!-- step -->
+    <div class="row m-0">
+        <div class="col-2 p-0 d-flex align-items-center" style="width: 13%;">
+            <label class="label-rating pe-3 pt-1">Chọn trạng thái</label>
+        </div>
+        <div class="col-2" style="width: 9%;">
+            <button @click="setType(0)" type="button" class="btn btn-success">Tất cả</button>
+        </div>
+        <div class="col-2" style="width: 14%;">
+            <button @click="setType(1)" type="button" class="btn btn-primary bg-btn-primary-custom">Hàng không</button>
+        </div>
+        <div class="col-2" style="width: 12%;">
+            <button @click="setType(2)" type="button" class="btn btn-primary bg-btn-primary-custom">Xe
+                khách</button>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <button @click="doSearch" type="button" class="btn btn-warning bi-arrow-repeat">&nbsp;&nbsp;Đồng bộ
+                dữ liệu với bên thứ 3</button>
+        </div>
+    </div>
+    <hr>
+    <!-- search -->
+    <div class="row mb-2 d-flex justify-content-between">
+        <div class="col-8">
+            <div class="row d-flex">
+                <div class="col-2 d-flex align-items-center">
+                    <p class="m-0">Hiển thị</p>
+                </div>
+                <div class="col-4">
+                    <select @change="doSearch" v-model="conditions.page_size" class="form-select"
+                        aria-label="Default select example" v-model="">
+                        <option value="4" selected>4 dòng dữ liệu</option>
+                        <option value="8">8 dòng dữ liệu</option>
+                        <option value="16">16 dòng dữ liệu</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="input-group">
+                <input v-model="conditions.name" @change="doSearch" type="text" class="form-control"
+                    placeholder="Nhập thông tin tìm kiếm ...">
+                <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <div class="row">
+        <div class="col-12">
+            <table style="font-size: 80%;" class="table table-striped mt-1">
+                <thead>
+                    <tr>
+                        <th class="align-middle text-center" style="width: 3%;" scope="col">STT</th>
+                        <th class="align-middle" scope="col">Tên phương tiện</th>
+                        <th class="align-middle" scope="col" style="width: 13%;">Thời gian khởi hành</th>
+                        <th class="align-middle" scope="col" style="width: 13%;">Thời gian về</th>
+                        <th class="align-middle" scope="col" style="width: 13%;">Địa điểm khởi hành</th>
+                        <th class="align-middle" scope="col" style="width: 13%;">Giá vé</th>
+                        <th class="align-middle" scope="col" style="width: 10%;">SL còn</th>
+                        <th class="align-middle" scope="col" style="width: 10%;">SL giới hạn</th>
+                        <th class="align-middle text-center" scope="col" style="width: 12%;">Liên kết bên thứ 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(trans, index) in dataTable" :key="index">
+                        <th class="align-middle text-center" scope="row">{{index + 1}}</th>
+                        <td class="align-middle">{{trans.name}}</td>
+                        <td class="align-middle">{{trans.departure_time}}</td>
+                        <td class="align-middle">{{trans.arrival_time}}</td>
+                        <td class="align-middle">{{trans.from_location}}</td>
+                        <td class="align-middle">{{formatCurrency(trans.price)}}</td>
+                        <td class="align-middle">{{trans.quantity}}</td>
+                        <td class="align-middle">{{trans.maximum_quantity}}</td>
+                        <td class="align-middle">
+                            <button @click="linkTo" type="button"
+                                class="btn btn-success btn-sm bi bi-compass me-2"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- pagination -->
+            <template v-if="true">
+                <div :key="reloadKey">
+                    <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+                        <b-pagination v-model="conditions.page_number" :total-rows="totalRows" align="center"
+                            :per-page="4"></b-pagination>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
 </div>

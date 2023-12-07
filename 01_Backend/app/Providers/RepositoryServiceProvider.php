@@ -48,6 +48,9 @@ use App\Repositories\Rating\RatingRepository;
 // tour detail
 use App\Repositories\TourDetail\ITourDetailRepository;
 use App\Repositories\TourDetail\TourDetailRepository;
+// transportation
+use App\Repositories\Transportation\ITransportationRepository;
+use App\Repositories\Transportation\TransportationRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -89,6 +92,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IRatingRepository::class, RatingRepository::class);
         // tour detail
         $this->app->bind(ITourDetailRepository::class, TourDetailRepository::class);
+        // transportation
+        $this->app->bind(ITransportationRepository::class, TransportationRepository::class);
     }
 
     /**
