@@ -1,5 +1,11 @@
-// import repository from '@/utils/repository';
+import repository from '@/utils/repository';
 
-// const resource = '';
+const newsResource = '/news';
 
-export default {};
+export default {
+    searchNews: (data) => {
+        return repository.get(`${newsResource}`, {
+            params: data
+        });
+    }
+};

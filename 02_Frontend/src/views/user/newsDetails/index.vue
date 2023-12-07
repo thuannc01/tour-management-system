@@ -16,7 +16,9 @@ var NewsDetails = {
         }
     },
     created() {},
-    mounted() {},
+    mounted() {
+        this.getDataDetail();
+    },
     watch: {},
     data() {
         return {
@@ -33,7 +35,14 @@ var NewsDetails = {
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', [''])
+        ...mapActions('', ['']),
+        getDataDetail() {
+            // get data detail by tour id
+            const condition = {
+                id: this.$route.params.newsId
+            };
+            console.log('condition: ', condition);
+        }
     }
 };
 export default NewsDetails;

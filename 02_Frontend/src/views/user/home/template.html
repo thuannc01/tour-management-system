@@ -73,20 +73,19 @@
 					<swiper :modules="modules" :slides-per-view="3" :space-between="50" navigation
 						:pagination="{ clickable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
 						:autoplay="autoplay">
-						<swiper-slide v-for="i in 5">
+						<swiper-slide v-for="(tour, index) in newToursList" :key="index">
 							<div class="project-item mb-5">
 								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/dalat.jpg" alt="">
+									<img class="img-fluid" :src="tour.img" alt="">
 									<div class="project-overlay">
 										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
+											@click="seeDetailTour(tour.id)" data-lightbox="project"><i
 												class="fa fa-eye"></i></a>
 									</div>
 								</div>
 								<div class="p-4">
-									<a class="d-block h5">Du lịch vườn quốc gia Nam Cát Tiên</a>
-									<span>“Check-in hồ bơi vô cực” giữa không gian núi rừng thoáng đãng, trong lành
-										...</span>
+									<a class="d-block h5">{{tour.title}}</a>
+									<span>{{getFirst200Characters(tour.itinerary_highlight)}}</span>
 								</div>
 							</div>
 						</swiper-slide>
@@ -100,10 +99,10 @@
 		<div class="container-xxl py-4">
 			<div class="container">
 				<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-					<h3 class="mb-4">CẨM NANG DU LỊCH</h3>
+					<h3 class="mb-4">CẨM NANG & TIN TỨC DU LỊCH</h3>
 				</div>
 				<div class="row g-4">
-					<div class="col-lg-4 col-md-6 wow">
+					<div class="col-lg-4 col-md-6" v-for="(news, index) in newsHomeList" :key="index">
 						<div class="service-item position-relative h-100">
 							<div class="service-text rounded p-5">
 								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
@@ -111,97 +110,8 @@
 									<img class="img-fluid rounded-circle" style="width: 64px; height: 64px;"
 										src="/src/assets/images/ninhBinh_CN.jpg" alt="Icon">
 								</div>
-								<h5 class="mb-3">Bỏ Túi 7 Địa Điểm Du Lịch Ninh Bình Đẹp Nổi Tiếng</h5>
-								<p class="mb-3">Địa điểm du lịch Ninh Bình nổi tiếng khi được nhắc đến người ta thường
-									...</p>
-							</div>
-							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Đọc thêm<i
-										class="bi bi-chevron-double-right ms-2"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="service-item position-relative h-100">
-							<div class="service-text rounded p-5">
-								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-									style="width: 64px; height: 64px;">
-									<img class="img-fluid rounded-circle " style="width: 64px; height: 64px;"
-										src="/src/assets/images/Hue_CN.jpg" alt="Icon">
-								</div>
-								<h5 class="mb-3">Khám Phá 6 Nét Đẹp Văn Hóa Huế Đặc Trưng</h5>
-								<p class="mb-3">Ai đã từng Du lịch Huế một lần đều thương nhớ khôn nguôi mảnh đất ...
-								</p>
-							</div>
-							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Đọc thêm<i
-										class="bi bi-chevron-double-right ms-2"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="service-item position-relative h-100">
-							<div class="service-text rounded p-5">
-								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-									style="width: 64px; height: 64px;">
-									<img class="img-fluid rounded-circle " style="width: 64px; height: 64px;"
-										src="/src/assets/images/HaNoi_CN.jpg" alt="Icon">
-								</div>
-								<h5 class="mb-3">Top 5 Thức Quà Đặc Trưng Mùa Hè Hà Nội</h5>
-								<p class="mb-3">Có vô vàn những món ngon mùa hè ưu ái ban tặng cho Hà Nội ...</p>
-							</div>
-							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Đọc thêm<i
-										class="bi bi-chevron-double-right ms-2"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="service-item position-relative h-100">
-							<div class="service-text rounded p-5">
-								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-									style="width: 64px; height: 64px;">
-									<img class="img-fluid rounded-circle " style="width: 64px; height: 64px;"
-										src="/src/assets/images/DaLat_CN.jpg" alt="Icon">
-								</div>
-								<h5 class="mb-3">Tổng hợp 42 địa chỉ mua đặc sản Đà Lạt làm quà chất lượng</h5>
-								<p class="mb-3">Bạn yêu Đà Lạt bởi cảnh đẹp thiên nhiên thơ mộng hay những món đặc ...
-								</p>
-							</div>
-							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Đọc thêm<i
-										class="bi bi-chevron-double-right ms-2"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="service-item position-relative h-100">
-							<div class="service-text rounded p-5">
-								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-									style="width: 64px; height: 64px;">
-									<img class="img-fluid rounded-circle " style="width: 64px; height: 64px;"
-										src="/src/assets/images/HoiAn_CN.jpg" alt="Icon">
-								</div>
-								<h5 class="mb-3">Tổng hợp kinh nghiệm du lịch Hội An</h5>
-								<p class="mb-3">Bạn muốn chọn Hội An làm điểm dừng chân cho chuyến nghỉ ngơi của mình
-									...</p>
-							</div>
-							<div class="service-btn rounded-0 rounded-bottom">
-								<a class="text-primary fw-medium" href="">Đọc thêm<i
-										class="bi bi-chevron-double-right ms-2"></i></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="service-item position-relative h-100">
-							<div class="service-text rounded p-5">
-								<div class="btn-square bg-light rounded-circle mx-auto mb-4"
-									style="width: 64px; height: 64px;">
-									<img class="img-fluid rounded-circle " style="width: 64px; height: 64px;"
-										src="/src/assets/images/DaNang_CN.jpg" alt="Icon">
-								</div>
-								<h5 class="mb-3">Tổng hợp kinh nghiệm du lịch Bà Nà Hills Đà Nẵng từ A – Z </h5>
-								<p class="mb-3">Bạn đã từng một lần nghe tới Bà Nà Hill chưa? Bạn có biết tại ...</p>
+								<h5 class="mb-3">{{news.title}}</h5>
+								<p class="mb-3">{{getFirst200Characters(news.body ?? '')}}</p>
 							</div>
 							<div class="service-btn rounded-0 rounded-bottom">
 								<a class="text-primary fw-medium" href="">Đọc thêm<i
@@ -224,20 +134,19 @@
 					<swiper :modules="modules" :slides-per-view="3" :space-between="50" navigation
 						:pagination="{ clickable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
 						:autoplay="autoplay">
-						<swiper-slide v-for="i in 7">
+						<swiper-slide v-for="(tour, index) in hotToursList" :key="index">
 							<div class="project-item mb-5">
 								<div class="position-relative">
-									<img class="img-fluid" src="/src/assets/images/danang.jpg" alt="">
+									<img class="img-fluid" :src="tour.img" alt="">
 									<div class="project-overlay">
 										<a class="btn btn-lg-square btn-light rounded-circle m-1"
-											href="img/project-1.jpg" data-lightbox="project"><i
+											@click="seeDetailTour(tour.id)" data-lightbox="project"><i
 												class="fa fa-eye"></i></a>
 									</div>
 								</div>
 								<div class="p-4">
-									<a class="d-block h5">Du lịch tại Đà Nẵng - Khu du lịch Bà Nà</a>
-									<span>Tham quan Bảo tàng tranh 3D Art In Paradise Đà Nẵng, du khách sẽ hoá thân
-										...</span>
+									<a class="d-block h5">{{tour.title}}</a>
+									<span>{{getFirst200Characters(tour.itinerary_highlight)}}</span>
 								</div>
 							</div>
 						</swiper-slide>
@@ -263,7 +172,8 @@
 					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
 						<div class="feature-item border h-100 p-5">
 							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-								<img class="img-fluid secure-payment-icon" src="/src/assets/images/icon-10.png" alt="Icon">
+								<img class="img-fluid secure-payment-icon" src="/src/assets/images/icon-10.png"
+									alt="Icon">
 							</div>
 							<h5 class="mb-3">Thanh toán an toàn</h5>
 							<p class="mb-0">Được bảo mật bởi tổ chức một thành viên ThuanNC</p>
@@ -272,7 +182,8 @@
 					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
 						<div class="feature-item border h-100 p-5">
 							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-								<img class="img-fluid free-consultation-icon" src="/src/assets/images/icon-10.png" alt="Icon">
+								<img class="img-fluid free-consultation-icon" src="/src/assets/images/icon-10.png"
+									alt="Icon">
 							</div>
 							<h5 class="mb-3">Tư vấn miễn phí</h5>
 							<p class="mb-0">Hỗ trợ tư vấn online miễn phí</p>
@@ -281,7 +192,8 @@
 					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
 						<div class="feature-item border h-100 p-5">
 							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-								<img class="img-fluid reputable-brand-icon" src="/src/assets/images/icon-10.png" alt="Icon">
+								<img class="img-fluid reputable-brand-icon" src="/src/assets/images/icon-10.png"
+									alt="Icon">
 							</div>
 							<h5 class="mb-3">Thương hiệu uy tín</h5>
 							<p class="mb-0">Thương hiệu lữ hành hàng đầu Việt Nam</p>

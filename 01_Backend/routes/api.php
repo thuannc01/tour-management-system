@@ -62,14 +62,16 @@ Route::group([
     // hotel spot
     Route::apiResource('/hotel-spot', HotelSpotController::class);
     // tour
-    Route::apiResource('/tour', TourController::class);
+    Route::apiResource('/tour', TourController::class)->only(['index', 'store', 'destroy']);
+    Route::get('/tour/home', [TourController::class, 'getTourHome']);
     // statistical
     Route::apiResource('/statistical', StatisticalController::class);
     // period
     Route::apiResource('/period', PeriodController::class)->only(['index', 'store', 'destroy']);
     Route::get('/period/search', [PeriodController::class, 'search']);
     // news
-    Route::apiResource('/news', NewsController::class);
+    Route::apiResource('/news', NewsController::class)->only(['index', 'store', 'destroy']);
+    Route::get('/news/home', [NewsController::class, 'getNewsHome']);
     // rating
     Route::apiResource('/rating', RatingController::class);
     // tour detail

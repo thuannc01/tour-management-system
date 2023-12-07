@@ -164,4 +164,48 @@ class TourRepository extends BaseRepository implements ITourRepository
         $tour->deleted_at = Carbon::now();
         $tour->save();
     }
+
+    public function getTourHome(){
+        $sqlString1 = "
+         SELECT tours.*, images.path AS img FROM tours
+         LEFT JOIN (
+            SELECT
+                foreign_key_1,
+                path,
+                ROW_NUMBER() OVER (PARTITION BY foreign_key_1 ORDER BY id) AS row_num
+            FROM
+                images
+        ) images ON images.foreign_key_1 = tours.id AND images.row_num = 1 
+        ORDER BY created_at DESC
+        LIMIT 8; ";
+        $newTours = DB::select($sqlString1);
+        //
+        $sqlString2 = "
+         SELECT t.*, images.path AS img
+        FROM tours t
+        JOIN (
+            SELECT tour_id, AVG(star_count) AS avg_rating
+            FROM ratings
+            GROUP BY tour_id
+            ORDER BY avg_rating DESC
+            LIMIT 1
+        ) r ON t.id = r.tour_id
+         LEFT JOIN (
+            SELECT
+                foreign_key_1,
+                path,
+                ROW_NUMBER() OVER (PARTITION BY foreign_key_1 ORDER BY id) AS row_num
+            FROM
+                images
+        ) images ON images.foreign_key_1 = t.id AND images.row_num = 1 
+        LIMIT 8; ";
+        $hotTours = DB::select($sqlString2);
+        // 
+        $response = [
+            'newTours' => $newTours,
+            'hotTours' => $hotTours
+        ];  
+
+        return $response;
+    }
 }

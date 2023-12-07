@@ -23,9 +23,12 @@ var Tour = {
         'conditions.page_number'() {
             this.doSearch();
         },
-        'conditions.title'() {
+        'conditions.page_size'() {
             this.doSearch();
         },
+        // 'conditions.title'() {
+        //     this.doSearch();
+        // },
         'conditions.departure_time'() {
             this.doSearch();
         },

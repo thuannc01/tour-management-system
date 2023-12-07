@@ -82,7 +82,7 @@ export default [
         }
     },
     {
-        path: '/news-detail',
+        path: '/news-detail/:newsId',
         name: 'NewsDetails',
         component: NewsDetails,
         meta: {

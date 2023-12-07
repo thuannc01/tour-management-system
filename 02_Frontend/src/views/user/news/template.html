@@ -17,50 +17,48 @@
 		<div class="container">
 			<div class="row p-3 bg-search-tour">
 				<div class="col-4">
-					<thuan-input type="text" label="Nhập để tìm kiếm tin tức" placeholder="Nhập để tìm kiếm ..." />
+					<thuan-input :onchange="doSearch" v-model="conditions.title" type="text"
+						label="Nhập để tìm kiếm tin tức" placeholder="Nhập để tìm kiếm ..." />
 				</div>
 				<div class="col-3">
-					<thuan-select label="Chọn loại tin tức" :options="newsTypeList" v-model="data.newsType" />
+					<thuan-select label="Chọn loại tin tức" :options="newsTypeList" v-model="conditions.type" />
 				</div>
 				<div class="col-3">
-					<thuan-select label="Sắp xếp" :options="sortList" v-model="data.sort" />
+					<thuan-select label="Sắp xếp" :options="sortList" v-model="conditions.sort" />
 				</div>
-				<div class="col-2 d-flex align-items-center justify-content-end pt-3">
-					<thuan-button label="Tìm kiếm" />
+				<div class="col-2">
+					<thuan-select label="Hiển thị" :options="pageSizeList" v-model="conditions.page_size" />
 				</div>
 			</div>
 			<div class="row mt-4">
-				<div class="col-4" v-for="item in 9">
-					<div class="project-item mb-4" @click="navNewsDetail">
+				<div class="col-4" v-for="(news, index) in dataTable" :key="index">
+					<div class="project-item mb-4">
 						<div class="position-relative">
-							<img class="img-fluid" src="/src/assets/images/hcmcity.jpg" alt="">
+							<img class="img-fluid w-100" :src="getRandomItem()" alt="">
 							<div class="project-overlay">
-								<a class="btn btn-lg-square btn-light rounded-circle m-1" @click="seeDetails"
+								<a class="btn btn-lg-square btn-light rounded-circle m-1" @click="seeDetails(news.id)"
 									data-lightbox="project"><i class="fa fa-eye"></i></a>
 							</div>
 						</div>
 						<div class="px-4 py-3">
-							<a class="d-block h4" href="">Review kinh nghiệm du lịch Bảo tàng Khmer - Sóc Trăng cực chi
-								tiết</a>
+							<a class="d-block h4">{{news.title}}</a>
 							<div class="block-desc">
 								<div class="row d-flex justify-content-start">
 									<div class="col-5">
 										<div class="d-flex date-post">
 											<i class="bi bi-calendar-check pe-2"></i>
-											<p class="m-0 p-0">28/09/2023</p>
+											<p class="m-0 p-0">{{formatDate(news.created_at)}}</p>
 										</div>
 									</div>
 									<div class="col-6">
 										<div class="d-flex view-post">
 											<i class="bi bi-eye pe-2 d-flex align-items-center"></i>
-											<p class="m-0 p-0">2001</p>
+											<p class="m-0 p-0">{{news.view_count ?? 0}}</p>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<p class="m-0 pt-1">Bảo tàng Khmer - Sóc Trăng có gì thú vị? Lưu lại ngay bí kíp du
-										lịch Sóc Trăng,
-										...</p>
+									<p class="m-0 pt-1">{{getFirst130Characters(news.body)}}</p>
 								</div>
 							</div>
 						</div>
@@ -68,8 +66,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<b-pagination v-model="currentPage" :total-rows="rows" align="center"
-					:per-page="perPage"></b-pagination>
+				<b-pagination v-model="conditions.page_number" :total-rows="totalRows" align="center"
+					:per-page="4"></b-pagination>
 			</div>
 		</div>
 	</div>

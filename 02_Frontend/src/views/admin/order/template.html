@@ -65,6 +65,7 @@
                         <th class="align-middle" scope="col" style="width: 9%;">Ngày đặt</th>
                         <th class="align-middle" scope="col" style="width: 9%;">Tổng S.Lượng khách</th>
                         <th class="align-middle" scope="col" style="width: 10%;">Tổng tiền</th>
+                        <th class="align-middle" scope="col" style="width: 10%;">Ngày khởi hành</th>
                         <th class="align-middle" scope="col" style="width: 10%;">Trạng thái</th>
                         <th class="align-middle" scope="col" style="width: 10%;">Đặt phương tiện</th>
                         <th class="align-middle text-center" scope="col" style="width: 10%;">Chi tiết & Xác nhận</th>
@@ -74,6 +75,7 @@
                     <tr>
                         <th class="align-middle text-center" scope="row"></th>
                         <td class="align-middle" style="font-size: 95%;"></td>
+                        <td class="align-middle"></td>
                         <td class="align-middle"></td>
                         <td class="align-middle"></td>
                         <td class="align-middle"></td>
@@ -114,7 +116,8 @@
                 </div>
                 <div class="modal-body">
                     <div id="customer-info" class="mb-2">
-                        <h6 class="text-uppercase" style="color: black;">Thông tin khách hàng đặt tour - No.1</h6>
+                        <h6 class="text-uppercase book-trans" style="color: black;">Thông tin <strong>khách
+                                hàng</strong> đặt tour - No.1</h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="col-6">
@@ -132,7 +135,8 @@
                         </div>
                     </div>
                     <div id="service-tour" class="mb-2">
-                        <h6 class="text-uppercase" style="color: black;">Thông tin về dịch vụ kèm tour - No.1</h6>
+                        <h6 class="text-uppercase book-trans" style="color: black;">Thông tin về <strong>dịch vụ kèm
+                                tour</strong> - No.1</h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="col-12">
@@ -142,7 +146,8 @@
                         </div>
                     </div>
                     <div id="tour-info" class="mb-2">
-                        <h6 class="text-uppercase" style="color: black;">Thông tin về Tour du lịch đã đặt</h6>
+                        <h6 class="text-uppercase book-trans" style="color: black;">Thông tin về <strong>Tour du
+                                lịch</strong> đã đặt</h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="col-12">
@@ -167,7 +172,8 @@
                         </div>
                     </div>
                     <div id="transportation-info">
-                        <h6 class="text-uppercase" style="color: black;">Thông tin về phương tiện đã đặt (Nếu có)</h6>
+                        <h6 class="text-uppercase book-trans" style="color: black;">Thông tin về <strong>phương tiện đã
+                                đặt</strong> (Nếu có)</h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="row">
@@ -207,7 +213,8 @@
                                         :isRequired="true" :isDisabled="true" />
                                 </div>
                             </div>
-                            <p class="my-0 py-0">>>> Chính sách: Ngưỡng chênh lệch giá đặt phương tiện đặt ra là: 50%.
+                            <p class="my-0 py-0">>>> Chính sách: Ngưỡng chênh lệch giá đặt phương tiện đặt ra là: 50%/1
+                                vé.
                             </p>
                             <p class="my-0 py-0">>>>> Ví dụ giá vé đặt xe
                                 khách hiện tại là 380.000đ đi từ Đà Nẵng vào Vũng Tàu. Nếu giá tăng lên bất thường từ
@@ -225,7 +232,8 @@
                         </div>
                     </div>
                     <div id="general-info" class="mb-2">
-                        <h6 class="text-uppercase" style="color: black;">Thông tin chung về đơn đặt tour du lịch</h6>
+                        <h6 class="text-uppercase book-trans" style="color: black;">Thông tin chung về <strong>đơn đặt
+                                tour</strong> du lịch</h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="col-4">
@@ -305,7 +313,7 @@
     <!-- modal transportation -->
     <div class="modal fade" id="orderTransportationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-uppercase" id="exampleModalLabel">Đặt phương tiện di chuyển</h5>
@@ -313,13 +321,57 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        Đặt phương tiện di chuyển ở đây
+                        <h6 class="text-uppercase book-trans text-center">DANH SÁCH PHƯƠNG TIỆN LIÊN KẾT VỚI BÊN THỨ 3
+                            CÓ NGÀY KHỞI HÀNH
+                            <strong>2023/12/12</strong>
+                            VÀ LOẠI PHƯƠNG
+                            TIỆN <strong>HÀNG KHÔNG</strong> và
+                            số lượng chỗ cần đặt là <strong>4</strong>
+                        </h6>
+                        <p class="text-center" style="font-style: italic;">(Đối tượng là trẻ em dưới 2 tuổi, được miễn
+                            phí khi đặt phương tiện nên
+                            không được tính vào
+                            số lượng cần đặt ở trên)</p>
+                    </div>
+                    <!-- table -->
+                    <div class="row">
+                        <table style="font-size: 80%;" class="table table-striped mt-1">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle text-center" style="width: 3%;" scope="col">STT</th>
+                                    <th class="align-middle" scope="col">Tên phương tiện</th>
+                                    <th class="align-middle" scope="col" style="width: 15%;">Thời gian khởi hành</th>
+                                    <th class="align-middle" scope="col" style="width: 15%;">Địa điểm khởi hành</th>
+                                    <th class="align-middle" scope="col" style="width: 9%;">Nơi đến</th>
+                                    <th class="align-middle" scope="col" style="width: 10%;">SL hiện tại</th>
+                                    <th class="align-middle" scope="col" style="width: 10%;">SL Giới hạn</th>
+                                    <th class="align-middle" scope="col" style="width: 10%;">Giá vé</th>
+                                    <th class="align-middle" scope="col" style="width: 10%;">Đặt chỗ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="align-middle text-center" scope="row"></th>
+                                    <td class="align-middle" style="font-size: 95%;"></td>
+                                    <td class="align-middle"></td>
+                                    <td class="align-middle"></td>
+                                    <td class="align-middle"></td>
+                                    <td class="align-middle"></td>
+                                    <td class="align-middle"></td>
+                                    <td class="align-middle"></td>
+                                    <td class="align-middle">
+                                        <button data-bs-toggle="modal" data-bs-target="#orderTransportationModal"
+                                            type="button"
+                                            class="btn btn-success btn-sm bi bi-bag-heart-fill me-2"></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button id="btn-close-modal" type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" @click="onSave">Lưu thông tin</button>
                 </div>
             </div>
         </div>

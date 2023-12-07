@@ -36,7 +36,10 @@ var Home = {
         }
     },
     created() {},
-    mounted() {},
+    mounted() {
+        this.getToursHome();
+        this.getNewsHome();
+    },
     watch: {},
     data() {
         return {
@@ -50,15 +53,22 @@ var Home = {
     },
     computed: {
         // app
+        ...mapState('app', []),
         // module
-        ...mapState('HomeStore', [''])
+        ...mapState('HomeStore', [
+            'newsHomeList',
+            'hotToursList',
+            'newToursList'
+        ])
     },
     methods: {
         // app
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', ['']),
+        ...mapActions('HomeStore', ['getToursHome', 'getNewsHome']),
+        ...mapMutations('HomeStore', []),
+        //
         onSwiper(swiper) {
             console.log(swiper);
         },
@@ -67,6 +77,17 @@ var Home = {
         },
         clickSearch() {
             document.getElementById('search-global-home').click();
+        },
+        getFirst200Characters(str) {
+            return this.removeHtmlTags(str.slice(0, 130) + ' ...')
+                .replace(/&nbsp;/g, '')
+                .replace(/<a\b[^>]*>(.*?)<\/a>/g, '');
+        },
+        removeHtmlTags(input) {
+            return input.replace(/<[^>]*>/g, '');
+        },
+        seeDetailTour(tourId) {
+            this.$router.push({ path: `/tour-detail/${tourId}` });
         }
     }
 };

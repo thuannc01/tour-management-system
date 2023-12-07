@@ -70,4 +70,14 @@ class NewsRepository extends BaseRepository implements INewsRepository
         $news->deleted_at = Carbon::now();
         $news->save();
     }
+
+    public function getNewsHome(){
+        $sqlString = "
+         SELECT * FROM news
+        ORDER BY created_at DESC
+        LIMIT 6; ";
+        $newsHome = DB::select($sqlString);
+        
+        return $newsHome;
+    }
 }

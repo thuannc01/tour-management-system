@@ -9,4 +9,5 @@ interface ITourRepository
     public function saveData($data);
     public function search($data);
     public function deleteTour($data);
+    public function getTourHome();
 }

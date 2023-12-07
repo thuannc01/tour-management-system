@@ -24,4 +24,10 @@
             margin: 0 !important;
         }
     }
+
+    .book-trans {
+        strong {
+            color: $orange-price;
+        }
+    }
 }

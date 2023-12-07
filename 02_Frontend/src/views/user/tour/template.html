@@ -17,7 +17,7 @@
 		<div class="container">
 			<div class="row p-3 bg-search-tour">
 				<div class="col-3">
-					<thuan-input @change="doSearch" v-model="conditions.title" type="text" label="Tìm kiếm tour"
+					<thuan-input :onchange="doSearch" v-model="conditions.title" type="text" label="Tìm kiếm tour"
 						placeholder="Nhập để tìm kiếm ..." />
 				</div>
 				<div class="col-2">
