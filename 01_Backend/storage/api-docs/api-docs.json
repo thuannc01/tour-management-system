@@ -1549,6 +1549,86 @@
                     }
                 ]
             }
+        },
+        "/user": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Save/Update data user info",
+                "description": "\r\n     *      Code\r\n     *          200 - Success\r\n     *          400 - Bad request\r\n     *          401 - Not authentication\r\n     *          403 - Not access\r\n     *          422 - Input invalidate\r\n     *          423 - Have other error\r\n     *          500 - Server error\r\n     *      ",
+                "operationId": "9bbd0f3a2d2f2379dc77b4d83fe28ef0",
+                "requestBody": {
+                    "description": "User info data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "full_name": {
+                                        "type": "string",
+                                        "example": "Nguyễn Công Thuận"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "x@gmail.com"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "example": "0..."
+                                    },
+                                    "province_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "example": "Nam"
+                                    },
+                                    "avatar_path": {
+                                        "type": "string",
+                                        "example": "...."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {

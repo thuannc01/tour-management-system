@@ -3,6 +3,7 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 import store from '@/store';
 import ProfileStore from '@/views/user/profile/store';
 import label from './label';
+import axios from 'axios';
 
 import template from './template.html';
 import './style.scss';
@@ -16,7 +17,10 @@ var Profile = {
         }
     },
     created() {},
-    mounted() {},
+    mounted() {
+        this.setUserData();
+        this.getAllLocation();
+    },
     watch: {},
     data() {
         return {
@@ -27,15 +31,22 @@ var Profile = {
     },
     computed: {
         // app
+        ...mapState('app', ['userData']),
         // module
-        ...mapState('ProfileStore', [''])
+        ...mapState('ProfileStore', [
+            'userDataUpdate',
+            'genderList',
+            'locationList'
+        ])
     },
     methods: {
         // app
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('', ['']),
+        ...mapActions('ProfileStore', ['getAllLocation', 'updateInfoUser']),
+        ...mapMutations('ProfileStore', ['setUserDataUpdate', 'setAvatarImg']),
+        //
         handelNavSidebar(code) {
             const userInfo = document.getElementById('user-info');
             const waitForPay = document.getElementById('wait-for-pay');
@@ -130,6 +141,67 @@ var Profile = {
         },
         removeDisplayNone(elem) {
             elem.classList.remove('d-none');
+        },
+        setUserData() {
+            const vm = this;
+            vm.setUserDataUpdate(vm.userData);
+        },
+        addAvatar() {
+            const divAvatar = document.getElementById('avt-user-image');
+            divAvatar.click();
+            // divAvatar.addEventListener('click', this.uploadImg.bind(this));
+        },
+        async uploadImg(event) {
+            const files = event.target.files;
+            if (!files) {
+                return;
+            }
+            // call api
+            const CLOUD_NAME = 'dih79o7tn';
+            const PRESET_NAME = 'thuan_tourist';
+            const FOLDER_NAME = 'thuan_tourist';
+            const urls = [];
+            const api = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+            for (const file of files) {
+                const formData = new FormData(); // key: value
+                formData.append('upload_preset', PRESET_NAME);
+                formData.append('folder', FOLDER_NAME);
+                formData.append('file', file);
+                store.commit('app/showLoading');
+                const response = await axios
+                    .post(api, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .catch((error) =>
+                        console.error('Error uploading image:', error)
+                    );
+                let dataSet = {
+                    original_filename: response.data.original_filename,
+                    public_id: response.data.public_id,
+                    secure_url: response.data.secure_url
+                };
+                urls.push(dataSet);
+            }
+            store.commit('app/hideLoading');
+            this.setAvatarImg(urls[0].secure_url);
+            return urls;
+        },
+        onUpdateInfoUser() {
+            const vm = this;
+            const dataUpdate = {
+                id: vm.userDataUpdate.id ?? '',
+                full_name: vm.userDataUpdate.full_name ?? '',
+                email: vm.userDataUpdate.email ?? '',
+                phone_number: vm.userDataUpdate.phone_number ?? '',
+                province_id: vm.userDataUpdate.province_id ?? '',
+                address: vm.userDataUpdate.province_id ?? '',
+                gender: vm.userDataUpdate.gender ?? '',
+                avatar_path: vm.userDataUpdate.avatar_path
+            };
+            console.log('dataUpdate: ', dataUpdate);
+            vm.updateInfoUser(dataUpdate);
         }
     }
 };

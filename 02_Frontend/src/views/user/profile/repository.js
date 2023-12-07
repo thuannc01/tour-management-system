@@ -1,5 +1,13 @@
-// import repository from '@/utils/repository';
+import repository from '@/utils/repository';
 
-// const resource = '';
+const resourceLocation = '/location';
+const resourceUser = '/user';
 
-export default {};
+export default {
+    getAllLocation: () => {
+        return repository.get(`${resourceLocation}`);
+    },
+    updateInfoUser: (data) => {
+        return repository.post(`${resourceUser}`, data);
+    }
+};

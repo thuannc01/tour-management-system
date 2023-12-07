@@ -81,12 +81,15 @@
 									<div class="card-body d-flex">
 										<div class="col-lg-4">
 											<div class="card-body text-center">
-												<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-													alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
-												<h5 class="mt-3 font-weight-600">Nguyễn Công Thuận</h5>
+												<img @click="addAvatar" :src="userDataUpdate.avatar_path" alt="avatar"
+													class="rounded-circle img-fluid img-avt-user"
+													style="width: 160px; height: 150px;">
+												<input type="file" @change="uploadImg" id="avt-user-image"
+													class="form-control d-none" />
+												<h5 class="mt-3 font-weight-600">{{userDataUpdate.full_name}}</h5>
 												<p class="text-muted mb-3">Khách hàng kim cương</p>
 												<div class="d-flex justify-content-center">
-													<thuan-button label="Cập nhật" classBtn="btn btn-success" />
+													<thuan-button @click="onUpdateInfoUser" label="Cập nhật" classBtn="btn btn-success" />
 												</div>
 											</div>
 										</div>
@@ -94,39 +97,50 @@
 											<div class="card-body">
 												<div class="row">
 													<div class="col-6">
-														<thuan-input type="text" id="fullName" :maxLength="50"
-															:isRequired="true" label="Họ và tên"
-															placeholder="Nhập họ và tên ..." />
+														<thuan-input v-model="userDataUpdate.full_name" type="text"
+															id="fullName" :maxLength="50" :isRequired="true"
+															label="Họ và tên" placeholder="Nhập họ và tên ..." />
 													</div>
 													<div class="col-6">
-														<thuan-input type="text" id="email" :maxLength="50"
-															:isRequired="true" label="Email"
+														<thuan-input v-model="userDataUpdate.email" type="text"
+															id="email" :maxLength="50" :isRequired="true" label="Email"
 															placeholder="Nhập email ..." />
 													</div>
 												</div>
 
 												<div class="row">
 													<div class="col-6">
-														<thuan-input type="text" id="phoneNumber" :maxLength="50"
-															:isRequired="true" label="Số điện thoại"
+														<thuan-input type="text" v-model="userDataUpdate.phone_number"
+															id="phoneNumber" :maxLength="50" :isRequired="true"
+															label="Số điện thoại"
 															placeholder="Nhập số điện thoại ..." />
 													</div>
 													<div class="col-6">
-														<thuan-select label="Tỉnh / Thành phố" />
+														<thuan-select v-model="userDataUpdate.gender"
+															:options="genderList" type="text" id="gender"
+															label="Chọn giới tính" />
 													</div>
 												</div>
-												<div class="row">
+												<!-- <div class="row">
 													<div class="col-6">
 														<thuan-select label="Quận / Huyện" />
 													</div>
 													<div class="col-6">
 														<thuan-select label="Phường / Xã" />
 													</div>
+												</div> -->
+												<div class="row">
+													<div class="col-12">
+														<thuan-select :options="locationList"
+															v-model="userDataUpdate.province_id" :isRequired="true"
+															label="Tỉnh / Thành phố" />
+													</div>
 												</div>
 												<div class="row">
 													<div class="col-12">
-														<thuan-input type="text" id="address" :maxLength="50"
-															label="Địa chỉ" placeholder="Nhập địa chỉ ..." />
+														<thuan-input v-model="userDataUpdate.address" type="text"
+															id="address" :maxLength="50" label="Địa chỉ"
+															placeholder="Nhập địa chỉ ..." />
 													</div>
 												</div>
 											</div>

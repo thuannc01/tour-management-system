@@ -47,6 +47,8 @@ Route::group([
 ], function () {
     // role
     Route::apiResource('/role', RoleController::class);
+    // user
+    Route::apiResource('/user', UserController::class);
     // category
     Route::apiResource('/category', CategoryController::class);
     // segment
