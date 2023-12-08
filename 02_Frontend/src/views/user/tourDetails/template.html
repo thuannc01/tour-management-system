@@ -65,7 +65,7 @@
 										</td>
 										<td>{{tour.quantity ?? 0 }}/{{tour.maximum_quantity}}</td>
 										<td v-if="tour.quantity != tour.maximum_quantity">
-											<thuan-button label="Đặt chỗ" :handleClick="bookATour" />
+											<thuan-button label="Đặt chỗ" @click="bookATour(tour.id)" />
 										</td>
 										<td v-else>
 											<thuan-button aria-disabled="" classBtn="btn btn-danger" :isDisabled="true"

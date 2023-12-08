@@ -107,8 +107,8 @@ var TourDetails = {
                 .replace(/[^\d.]/g, '');
             return paddingLeft;
         },
-        bookATour() {
-            this.$router.push({ path: `/book-a-tour` });
+        bookATour(tourPeriodId) {
+            this.$router.push({ path: `/book-a-tour/${tourPeriodId}` });
         },
         getDataDetail() {
             // get data detail by tour id

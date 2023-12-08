@@ -23,6 +23,8 @@ var BookATour = {
         this.setPositionInfoTour();
         window.addEventListener('resize', this.setPositionInfoTour);
         window.addEventListener('scroll', this.setPositionInfoTour);
+        //
+        this.getDataTourPeriodId();
     },
     unmounted() {
         window.removeEventListener('resize', this.setPositionInfoTour);
@@ -225,6 +227,12 @@ var BookATour = {
         clickImgBank() {
             const vm = this;
             vm.showModalBankAccount();
+        },
+        getDataTourPeriodId() {
+            const condition = {
+                id: this.$route.params.tourPeriodId
+            };
+            console.log('getDataTourPeriodId: ', condition);
         }
     }
 };

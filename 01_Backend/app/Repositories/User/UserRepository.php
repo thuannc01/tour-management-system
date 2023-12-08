@@ -19,8 +19,7 @@ class UserRepository extends BaseRepository implements IUserRepository
             $id = $data['id'];
             // 
             $user = User::find($id);
-            // 
-            $user->update([
+            $data = [
                 'full_name' => $data['full_name'],
                 'email' => $data['email'],
                 'phone_number' => $data['phone_number'],
@@ -28,7 +27,9 @@ class UserRepository extends BaseRepository implements IUserRepository
                 'address' => $data['address'],
                 'gender' => $data['gender'],
                 'avatar_path' => $data['avatar_path']
-            ]);
+            ];
+            // 
+            $user->update($data);
 
             return 'Ok';
 

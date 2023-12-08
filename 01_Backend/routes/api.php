@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\TourDetailController;
 use App\Http\Controllers\Api\TransportationController;
+use App\Http\Controllers\Api\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +82,9 @@ Route::group([
     Route::apiResource('/tour-detail', TourDetailController::class);
     // transportation
     Route::apiResource('/transportation', TransportationController::class);
+    // reservation
+    Route::apiResource('/reservation', ReservationController::class)->only(['index']);
+    Route::get('/reservation/get-data-period', [ReservationController::class, 'getDataPeriod']);
 });
 
 // No auth

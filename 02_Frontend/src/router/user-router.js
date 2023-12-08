@@ -73,7 +73,7 @@ export default [
         }
     },
     {
-        path: '/book-a-tour',
+        path: '/book-a-tour/:tourPeriodId',
         name: 'BookATour',
         component: BookATour,
         meta: {

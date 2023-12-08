@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import template from './template.html';
 import './style.scss';
+import { MSG_TYPE } from '@/utils/messages';
 
 var Profile = {
     template: template,
@@ -41,7 +42,7 @@ var Profile = {
     },
     methods: {
         // app
-        ...mapActions('app', []),
+        ...mapActions('app', ['getUserInfoAction']),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
         ...mapActions('ProfileStore', ['getAllLocation', 'updateInfoUser']),
@@ -72,6 +73,9 @@ var Profile = {
                 navCancelTour.classList.remove('active');
                 navUserInfo.classList.add('active');
                 navHistoryTour.classList.remove('active');
+                // init
+                this.setUserData();
+                this.getAllLocation();
             } else {
                 if (code == 6) {
                     this.addDisplayNone(userInfo);
@@ -196,12 +200,20 @@ var Profile = {
                 email: vm.userDataUpdate.email ?? '',
                 phone_number: vm.userDataUpdate.phone_number ?? '',
                 province_id: vm.userDataUpdate.province_id ?? '',
-                address: vm.userDataUpdate.province_id ?? '',
+                address: vm.userDataUpdate.address ?? '',
                 gender: vm.userDataUpdate.gender ?? '',
                 avatar_path: vm.userDataUpdate.avatar_path
             };
-            console.log('dataUpdate: ', dataUpdate);
             vm.updateInfoUser(dataUpdate);
+            //
+            setTimeout(function () {
+                vm.showModalMessage({
+                    title: 'Lưu thành công',
+                    type: MSG_TYPE.SUCCESS,
+                    content: `Thông tin về người dùng này đã được cập nhật thành công!`,
+                    okText: 'Đồng ý'
+                });
+            }, 300);
         }
     }
 };

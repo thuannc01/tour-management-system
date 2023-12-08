@@ -17,7 +17,7 @@ const userInfo = {
     full_name: '',
     email: '',
     phone_number: '',
-    avatar_url: '',
+    avatar_path: '',
     province_id: '',
     district_id: '',
     ward_id: '',
@@ -63,7 +63,7 @@ export default {
             state.userData.full_name = data.full_name ?? '';
             state.userData.email = data.email ?? '';
             state.userData.phone_number = data.phone_number ?? '';
-            state.userData.avatar_url = data.avatar_url ?? '';
+            state.userData.avatar_path = data.avatar_path ?? '';
             state.userData.province_id = data.province_id ?? '';
             state.userData.district_id = data.district_id ?? '';
             state.userData.ward_id = data.ward_id ?? '';

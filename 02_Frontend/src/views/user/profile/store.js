@@ -67,7 +67,7 @@ export default {
                 repository.updateInfoUser(data).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
-                        context.dispatch('searchNews');
+                        //
                     }
                 });
             } catch (e) {

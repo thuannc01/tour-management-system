@@ -671,6 +671,66 @@ paths:
       security:
         -
           apiAuth: []
+  /reservation:
+    get:
+      tags:
+        - Reservation
+      summary: 'Get order by status'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 01cc000ab103b171dcdad4ac780585b2
+      parameters:
+        -
+          name: status
+          in: query
+          description: 'Status order'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
+  /reservation/get-data-period:
+    get:
+      tags:
+        - Reservation
+      summary: 'Get data period'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 1fdbc60d06e3e21b43e85ea326b2cad6
+      parameters:
+        -
+          name: tour_period_id
+          in: query
+          description: 'tour period id'
+          schema:
+            type: int
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /role:
     get:
       tags:
