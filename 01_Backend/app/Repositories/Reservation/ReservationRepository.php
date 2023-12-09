@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Reservation;
 
+use Illuminate\Support\Facades\DB;
 use App\Repositories\Reservation\IReservationRepository;
 use App\Repositories\BaseRepository;
 use App\Models\Rating;
@@ -23,16 +24,24 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         $tour_period_id = $data['tour_period_id'];
         // 
         $periodData = Period::where('id', '=', $tour_period_id)->get();
-        dd($periodData['tour_id']);
         // 
-        // $tourData = 
+        $tour_id = $periodData[0]->tour_id;
+        $tourData = Tour::where('id', '=', $tour_id)->get();
         // 
-        // $response = [
-        //     'periodData' => $periodData,
-        //     'tourData' => $tourData,
-        //     'serviceData' => $serviceData
-        // ];
+        $sqlString = "
+         SELECT s.*
+        FROM tours t
+        JOIN service_details sd ON t.id = sd.tour_id
+        JOIN additional_services s ON s.id = sd.additional_services_id
+        WHERE t.id = " . $tour_id;
+        $serviceData =  DB::select($sqlString);
+        // 
+        $response = [
+            'periodData' => $periodData,
+            'tourData' => $tourData,
+            'serviceData' => $serviceData
+        ];
 
-        // return $response;
+        return $response;
     }
 }

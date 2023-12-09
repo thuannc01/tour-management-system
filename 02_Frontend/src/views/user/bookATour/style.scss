@@ -72,7 +72,7 @@
 
     .p-title {
         font-weight: 550;
-        width: 45%;
+        min-width: 50%;
 
         &.p-title-rating {
             color: $orange-price;
@@ -162,5 +162,11 @@
     .line {
         border-top: 1px solid #a9a9a9;
         margin: 10px 0;
+    }
+
+    // 
+    .disabled-img {
+        opacity: 0.5;
+        pointer-events: none;
     }
 }

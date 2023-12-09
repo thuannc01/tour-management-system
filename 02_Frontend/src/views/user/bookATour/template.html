@@ -46,7 +46,8 @@
 						<div class="quantity-customer">
 							<div class="row d-flex align-items-center">
 								<div class="col-5">
-									<thuan-input type="number" :isRequired="true" label="Số lượng người lớn" />
+									<thuan-input :onchange="calculateTotalAmount" v-model="data.adult_ticket_quantity"
+										type="number" :isRequired="true" label="Số lượng người lớn" />
 								</div>
 								<div class="col-7">
 									<p class="m-0 p-0 pt-3">Người từ 12 tuổi trở lên và số lượng người đặt không được
@@ -56,7 +57,8 @@
 							</div>
 							<div class="row d-flex align-items-center">
 								<div class="col-5">
-									<thuan-input type="number" label="Số lượng trẻ em" />
+									<thuan-input :onchange="calculateTotalAmount" v-model="data.child_ticket_quantity"
+										type="number" label="Số lượng trẻ em" />
 								</div>
 								<div class="col-7">
 									<p class="m-0 p-0 pt-3">Người từ 6 đến 12 tuổi</p>
@@ -64,7 +66,8 @@
 							</div>
 							<div class="row d-flex align-items-center">
 								<div class="col-5">
-									<thuan-input type="number" label="Số lượng em bé" />
+									<thuan-input :onchange="calculateTotalAmount" v-model="data.infant_ticket_quantity"
+										type="number" label="Số lượng em bé" />
 								</div>
 								<div class="col-7">
 									<p class="m-0 p-0 pt-3">Em bé dưới 2 tuổi</p>
@@ -74,28 +77,29 @@
 						<div class="additional-service">
 							<h5 class="py-2 text-uppercase">Dịch vụ cộng thêm</h5>
 							<div class="additional-service-item">
-								<div class="row">
+								<div class="row mb-3" v-for="(service, index) in serviceData" :key="index">
 									<div class="col-4">
-										<img class="img-additional-service" src="/src/assets/images/add-service.jpeg"
-											alt="">
+										<img class="img-additional-service w-100 h-100" :src="service.img_path" alt="">
 									</div>
 									<div class="col-8">
 										<div class="row">
 											<div class="col-7">
-												<h6 class="text-uppercase">PHỤ THU PHÒNG ĐƠN</h6>
+												<h6 class="text-uppercase">{{service.name}}</h6>
 											</div>
 											<div class="col-5 d-flex">
 												<h6 class="text-uppercase pe-2">Giá: </h6>
-												<h6 class="font-weight-600 h6-title-add-service">1.200.000</h6>
+												<h6 class="font-weight-600 h6-title-add-service">
+													{{formatNumber(service.price)}}</h6>
 												<h6>đ/Khách</h6>
 											</div>
 										</div>
 										<div class="row d-flex align-items-center mt-1">
 											<div class="col-7 mt-4">
-												<p>- Áp dụng cho khách ngủ 1 mình 1 phòng.</p>
+												<p>{{service.desc}}</p>
 											</div>
 											<div class="col-5 d-flex">
-												<thuan-input label="Chọn số lượng" type="number" />
+												<thuan-input :onchange="calculateTotalAmount"
+													v-model="serviceList[index]" label="Chọn số lượng" type="number" />
 											</div>
 										</div>
 									</div>
@@ -119,30 +123,35 @@
 						</div>
 					</div>
 					<div id="input-info-book-tour" class="d-none">
-						<template v-for="i in 2">
+						<template v-for="i in customerCount">
 							<div class="input-info-group" v-if="i === 1">
 								<h6 class="font-weight-600 pb-2">Nhập thông tin hành khách No.{{i}}</h6>
 								<!-- first -->
 								<div class="info-group">
 									<div class="row">
 										<div class="col-6">
-											<thuan-input label="Họ và tên" :isRequired="true" />
+											<thuan-input v-model="customerInfo[0].full_name" label="Họ và tên"
+												:isRequired="true" :isDisabled="true" />
 										</div>
 										<div class="col-6">
-											<thuan-input label="Số điện thoại" :isRequired="true" />
+											<thuan-input v-model="customerInfo[0].phone_number" label="Số điện thoại"
+												:isRequired="true" :isDisabled="true" />
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-6">
-											<thuan-input label="Email" :isRequired="true" />
+											<thuan-input v-model="customerInfo[0].email" label="Email"
+												:isRequired="true" :isDisabled="true" />
 										</div>
 										<div class="col-6">
-											<thuan-select label="Tỉnh/Thành phố" />
+											<thuan-select v-model="customerInfo[0].province_id" :isDisabled="true"
+												:options="locationList" label="Tỉnh/Thành phố" />
 										</div>
 									</div>
 									<div class="ror">
 										<div class="col-12">
-											<thuan-input label="Địa chỉ" :isRequired="true" />
+											<thuan-input v-model="customerInfo[0].address" :isDisabled="statusAddress"
+												label="Địa chỉ" :isRequired="true" />
 										</div>
 									</div>
 								</div>
@@ -153,23 +162,24 @@
 								<div class="info-group">
 									<div class="row">
 										<div class="col-6">
-											<thuan-input label="Họ và tên" />
+											<thuan-input v-model="customerInfo[i].full_name" label="Họ và tên" />
 										</div>
 										<div class="col-6">
-											<thuan-input label="Số điện thoại" />
+											<thuan-input v-model="customerInfo[i].phone_number" label="Số điện thoại" />
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-6">
-											<thuan-input label="Email" />
+											<thuan-input v-model="customerInfo[i].email" label="Email" />
 										</div>
 										<div class="col-6">
-											<thuan-select label="Tỉnh/Thành phố" />
+											<thuan-select v-model="customerInfo[i].province_id" :options="locationList"
+												label="Tỉnh/Thành phố" />
 										</div>
 									</div>
 									<div class="ror">
 										<div class="col-12">
-											<thuan-input label="Địa chỉ" />
+											<thuan-input v-model="customerInfo[i].address" label="Địa chỉ" />
 										</div>
 									</div>
 								</div>
@@ -195,8 +205,8 @@
 						<h6 class="font-weight-600 pb-2">Chọn phương thức thanh toán</h6>
 						<div class="row payment-cash m-0 mb-3">
 							<div class="form-check m-0 d-flex align-items-center">
-								<input class="form-check-input me-2" type="radio" name="flexRadioDefault"
-									id="paymentCash">
+								<input checked class="form-check-input me-2" type="radio" name="flexRadioDefault"
+									id="paymentCash" v-model="data.payment_method" value="Tiền mặt">
 								<label class="form-check-label mt-1 font-weight-500" for="paymentCash">
 									Thanh toán bằng tiền mặt (Tại quầy giao dịch số 48 Cao Thắng - TP.Đà Nẵng)
 								</label>
@@ -206,39 +216,46 @@
 							<div class="col-12 m-0 p-0">
 								<div class="form-check m-0 d-flex align-items-center">
 									<input class="form-check-input me-2" type="radio" name="flexRadioDefault"
-										id="creditCard">
+										id="creditCard" v-model="data.payment_method" value="Ngân hàng">
 									<label class="form-check-label mt-1 font-weight-500" for="creditCard">
-										Chuyển qua thẻ ATM hoặc Internet banking (Vui lòng chọn ngân hàng thanh toán)
+										Chuyển qua thẻ ATM nội địa (NAPAS) hoặc Internet banking (Vui lòng chọn ngân
+										hàng thanh toán)
 									</label>
 								</div>
 							</div>
 							<div class="col-12 m-0 px-0 py-3">
 								<div class="row">
 									<div class="col-3 p-2 d-flex justify-content-center align-items-center">
-										<img @click="clickImgBank" class="img rounded bank-img"
+										<img :class="{ 'disabled-img': (data.payment_method != 'Ngân hàng') }"
+											@click="clickImgBank('VietcomBank')" class="img rounded bank-img"
 											style="width: 160px; height: 65px;"
 											src="/src/assets/images/vietcom_logo.jpg">
 									</div>
 									<div class="col-3 p-2 d-flex justify-content-center align-items-center">
-										<img @click="clickImgBank" class="img rounded bank-img"
+										<img :class="{ 'disabled-img': (data.payment_method != 'Ngân hàng') }"
+											@click="clickImgBank('Techcombank')" class="img rounded bank-img"
 											style="width: 160px; height: 65px;"
 											src="/src/assets/images/techcom_logo.jpg">
 									</div>
 									<div class="col-3 p-2 d-flex justify-content-center align-items-center">
-										<img @click="clickImgBank" class="img rounded bank-img"
+										<img :class="{ 'disabled-img': (data.payment_method != 'Ngân hàng') }"
+											@click="clickImgBank('Vietinbank')" class="img rounded bank-img"
 											style="width: 160px; height: 65px;"
 											src="/src/assets/images/vietin_logo.jpg">
 									</div>
 									<div class="col-3 p-2 d-flex justify-content-center align-items-center">
-										<img @click="clickImgBank" class="img rounded bank-img"
+										<img :class="{ 'disabled-img': (data.payment_method != 'Ngân hàng') }"
+											@click="clickImgBank('MB')" class="img rounded bank-img"
 											style="width: 160px; height: 65px;" src="/src/assets/images/mb_logo.png">
 									</div>
 									<div class="col-3 p-2 d-flex justify-content-center align-items-center">
-										<img @click="clickImgBank" class="img rounded bank-img"
+										<img :class="{ 'disabled-img': (data.payment_method != 'Ngân hàng') }"
+											@click="clickImgBank('Agribank')" class="img rounded bank-img"
 											style="width: 160px; height: 65px;" src="/src/assets/images/agri_logo.jpg">
 									</div>
 									<div class="col-3 p-2 d-flex justify-content-center align-items-center">
-										<img @click="clickImgBank" class="img rounded bank-img"
+										<img :class="{ 'disabled-img': (data.payment_method != 'Ngân hàng') }"
+											@click="clickImgBank('ACB')" class="img rounded bank-img"
 											style="width: 160px; height: 65px;" src="/src/assets/images/acb_logo.png">
 									</div>
 									<!-- <div class="col-3 p-2 d-flex justify-content-center align-items-center">
@@ -282,7 +299,9 @@
 							<div class="title d-flex p-0 m-0">
 								<h6 class="font-weight-600 pe-2 m-0">Tổng số tiền thanh toán:</h6>
 								<h6 class="font-weight-600 m-0 p-0">
-									<p class="p-0 m-0 p-price-sum">12.000.999<span>đ</span></p>
+									<p class="p-0 m-0 p-price-sum">{{formatNumber(data.payment_amount)}}<span>đ</span>
+										<strong>&nbsp;/&nbsp;{{formatNumber(data.total_amount)}}đ</strong>
+									</p>
 								</h6>
 							</div>
 							<div class="line"></div>
@@ -291,23 +310,23 @@
 								<div class="row ps-4">
 									<div class="flex">
 										<i class="bi bi-person pe-2"></i>
-										<p class="m-0">Họ tên: &emsp;</p><span class="font-weight-500">Nguyễn Công
-											Thuận</span>
+										<p class="m-0">Họ tên: &emsp;</p><span v-if="customerInfo[0]"
+											class="font-weight-500">{{customerInfo[0].full_name}}</span>
 									</div>
 									<div class="flex">
 										<i class="bi bi-geo pe-2"></i>
-										<p class="m-0">Địa chỉ: &emsp;</p><span class="font-weight-500">Điện Bàn - Quảng
-											Nam</span>
+										<p class="m-0">Địa chỉ: &emsp;</p><span v-if="customerInfo[0]"
+											class="font-weight-500">{{customerInfo[0].address}}</span>
 									</div>
 									<div class="flex">
 										<i class="bi bi-envelope pe-2"></i>
-										<p class="m-0">Email: &emsp;</p><span
-											class="font-weight-500">congthuan701@gmail.com</span>
+										<p class="m-0">Email: &emsp;</p><span v-if="customerInfo[0]"
+											class="font-weight-500">{{customerInfo[0].email}}</span>
 									</div>
 									<div class="flex">
 										<i class="bi bi-telephone-inbound pe-2"></i>
-										<p class="m-0">Số điện thoại: &emsp;</p><span
-											class="font-weight-500">0943203212</span>
+										<p class="m-0">Số điện thoại: &emsp;</p><span v-if="customerInfo[0]"
+											class="font-weight-500">{{customerInfo[0].phone_number}}</span>
 									</div>
 								</div>
 							</div>
@@ -317,8 +336,8 @@
 								<div class="row ps-4">
 									<div class="flex">
 										<i class="bi bi-airplane pe-2"></i>
-										<p class="m-0">Điểm đi: &emsp;</p><span class="font-weight-500">Thành phố Đà
-											Nẵng</span>
+										<p class="m-0">Điểm đi: &emsp;</p><span
+											class="font-weight-500">{{fromProvinceName}}</span>
 									</div>
 									<div class="flex">
 										<i class="bi bi-calendar2-check pe-2"></i>
@@ -372,36 +391,43 @@
 						<h6 class="mb-3 text-uppercase">Du lịch Đông Bắc Hà Nội - Hà Giang</h6>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-qr-code-scan pe-2"></i>Mã tour&ensp;</p>
-							<p class="p-0 m-0">TMO0232</p>
+							<p class="p-0 m-0" v-if="tourData[0]">{{tourData[0].id}}</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-calendar2-check pe-2"></i>Ngày đi&ensp;</p>
-							<p class="p-0 m-0">18/12/2023</p>
+							<p class="p-0 m-0" v-if="periodData[0]">{{formatDate(periodData[0].departure_time)}}</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-calendar2-check pe-2"></i>Ngày về&ensp;</p>
-							<p class="p-0 m-0">23/12/2023</p>
+							<p class="p-0 m-0" v-if="periodData[0]">{{formatDate(periodData[0].arrival_time)}}</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-alarm pe-2"></i>Thời gian&ensp;</p>
-							<p class="p-0 m-0">6 ngày 5 đêm</p>
+							<p class="p-0 m-0" v-if="tourData[0]">{{tourData[0].number_of_day}} ngày
+								{{tourData[0].number_of_day - 1}} đêm
+							</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-piggy-bank pe-2"></i></i>Giá người lớn&ensp;
 							</p>
-							<p class="p-0 m-0">0<span>đ</span> </p>
+							<p class="p-0 m-0">{{priceOrder.adult}}</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-piggy-bank pe-2"></i></i>Giá trẻ em&ensp;</p>
-							<p class="p-0 m-0">0<span>đ</span> </p>
+							<p class="p-0 m-0">{{priceOrder.child}}</p>
 						</div>
 						<div class="d-flex border-top">
 							<p class="m-0 p-0 p-title"><i class="bi bi-piggy-bank pe-2"></i></i>Giá em bé&ensp;</p>
-							<p class="p-0 m-0">0<span>đ</span> </p>
+							<p class="p-0 m-0">{{priceOrder.infant}}</p>
+						</div>
+						<div class="d-flex border-top">
+							<p class="m-0 p-0 p-title"><i class="bi bi-currency-yen pe-2"></i></i>Phí thêm dịch vụ&ensp;
+							</p>
+							<p class="p-0 m-0">{{priceOrder.service}}</p>
 						</div>
 						<div class="d-flex border-top d-flex justify-content-center">
 							<p class="m-0 p-0 p-title-sum"><i class="bi bi-coin pe-2"></i></i>TỔNG:&ensp;</p>
-							<p class="p-0 m-0 p-price-sum">12.000.999<span>đ</span></p>
+							<p class="p-0 m-0 p-price-sum">{{formatNumber(priceOrder.sum)}}đ</p>
 						</div>
 					</div>
 				</div>
@@ -423,42 +449,84 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-6">
-							<thuan-input type="text" label="Tên ngân hàng" :isDisabled="true" :isRequired="true" />
+							<thuan-input v-model="bankData.bank_name" type="text" label="Tên ngân hàng"
+								:isDisabled="true" :isRequired="true" />
 						</div>
 						<div class="col-6">
-							<thuan-input label="Số thẻ ATM" placeholder="Nhập số thẻ ATM ..." :isRequired="true" />
+							<thuan-input v-model="bankData.atm_card_number" label="Số thẻ ATM"
+								placeholder="Số thẻ ATM được in trên thẻ..." :isRequired="true" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-6">
+						<!-- <div class="col-6">
 							<thuan-input type="password" label="Mã PIN tài khoản ATM"
 								placeholder="Nhập mã pin tài khoản ATM" :isRequired="true" />
-						</div>
-						<div class="col-6">
-							<thuan-input label="Số tiền thanh toán" :isDisabled="true" :isRequired="true" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-6">
-							<thuan-input type="text" label="Tên chủ thẻ" placeholder="Tên in trên thẻ không dấu"
-								:isRequired="true" />
-						</div>
-						<div class="col-6">
-							<thuan-input label="Email" placeholder="Nhập email đăng ký thẻ" :isRequired="true" />
+						</div> -->
+						<div class="col-12 d-flex justify-content-center align-items-center pt-1 pb-2">
+							<div class="total-amount-payment-block d-flex justify-content-center align-items-center pt-2"
+								style="font-weight: 600;">
+								<p class="m-0 p-0">TỔNG SỐ TIỀN CỦA ĐƠN HÀNG: </p>&nbsp;&nbsp;
+								<p style="color: #ff891e;" class="m-0 p-0">{{formatNumber(data.total_amount)}}đ</p>
+							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-6">
-							<thuan-input label="Số thẻ hết hạn" placeholder="Tháng và năm hết hạn" :isRequired="true" />
+							<thuan-input v-model="bankData.cardholder_name" type="text" label="Tên chủ thẻ"
+								placeholder="Tên in trên thẻ không dấu" :isRequired="true" />
 						</div>
 						<div class="col-6">
-							<thuan-input label="Nội dung thanh toán" placeholder="Nhập nội dung" />
+							<thuan-input v-model="customerInfo[0].email" :isDisabled="true" label="Email"
+								placeholder="Nhập email đăng ký thẻ" :isRequired="true" />
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<thuan-input type="month" v-model="bankData.expiry_date" label="Thời gian hết hạn"
+								placeholder="Tháng và năm hết hạn" :isRequired="true" />
+						</div>
+						<div class="col-6">
+							<thuan-input v-model="data.payment_detail" label="Nội dung thanh toán"
+								placeholder="Nhập nội dung" />
+						</div>
+					</div>
+					<div class="row d-flex align-items-center justify-content-center ps-5 py-2"
+						style="font-weight: 550;">
+						<div class="form-check w-50">
+							<input v-model="data.advance_payment" checked class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault1" value="true">
+							<label class="form-check-label" for="flexRadioDefault1">
+								Thanh toán trước 50% hoá đơn
+							</label>
+						</div>
+						<div class="form-check w-50">
+							<input v-model="data.advance_payment" class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" value="false">
+							<label class="form-check-label" for="flexRadioDefault2">
+								Thanh toán toàn bộ 100% hoá đơn
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 d-flex justify-content-center align-items-center">
+							<div class="total-amount-payment-block d-flex justify-content-center align-items-center pt-2"
+								style="font-weight: 600;">
+								<p class="m-0 p-0">SỐ TIỀN CẦN THANH TOÁN: </p>&nbsp;&nbsp;
+								<h5 style="color: #ff891e;" class="m-0 p-0">{{formatNumber(data.payment_amount)}}đ</h5>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-2" style="font-style: italic; font-weight: 500;">
+						<p>Lưu ý: Sau khi nhập đầy đủ thông tin, dữ liệu này sẽ được chuyển qua bên thứ 3 (là ngân hàng)
+							để tiến hành
+							xác nhận thanh toán.</p>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-					<button type="button" class="btn btn-primary bg-btn-primary-custom">Lưu & Tiếp theo</button>
+					<button id="hideModalBankAccount" type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Huỷ</button>
+					<button @click="saveBankInfo" type="button" class="btn btn-primary bg-btn-primary-custom">Lưu & Tiếp
+						theo</button>
 				</div>
 			</div>
 		</div>

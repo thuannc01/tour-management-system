@@ -291,7 +291,9 @@ CREATE TABLE transportation (
 	deleted_at TIMESTAMP
 );
 -- Table reservations
+-- Drop table reservations CASCADE
 CREATE TYPE status_reservation_type AS ENUM ('Chờ thanh toán', 'Chờ xác nhận', 'Chờ đặt phương tiện', 'Hoàn thành');
+CREATE TYPE payment_method_type AS ENUM ('Tiền mặt', 'Ngân hàng');
 CREATE TABLE reservations (
     id serial PRIMARY KEY,
 	tour_period_id integer REFERENCES periods(id),
@@ -301,12 +303,20 @@ CREATE TABLE reservations (
 	adult_ticket_quantity smallint,
 	child_ticket_quantity smallint,
 	infant_ticket_quantity smallint,
-	additional_service_id integer REFERENCES additional_services (id),
-	additional_service_quantity smallint,
+	additional_service_id_list character varying(300),
+	additional_service_quantity_list character varying(300),
 	total_amount numeric(18, 0),
 	status status_reservation_type,
-	order_date character varying(30),
 	otp_code character varying(20),
+	transportation_ticket_price numeric(18, 0),
+	transportation_quantity integer,
+	--
+	payment_method payment_method_type,
+	payment_amount numeric(18, 0),
+	payment_date character varying(40),
+	advance_payment BOOLEAN,
+	payment_detail character varying(1000),
+	--
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -372,9 +382,12 @@ VALUES
 -- Table additional_services
 INSERT INTO additional_services (name, "desc", price, img_path, created_at)
 VALUES 
-	('Phụ thu phòng đơn', '- Áp dụng cho khách ngủ 1 mình 1 phòng.', 1200000, '/src/assets/images/add-service.jpeg', CURRENT_DATE),
-	('Thẻ SIM và Internet', '- Cung cấp SIM điện thoại di động hoặc dịch vụ internet để du khách có thể liên lạc và truy cập thông tin dễ dàng hơn.', 250000, '/src/assets/images/add-service.jpeg', CURRENT_DATE),
-	('Dịch Vụ Spa và Wellness', '- Dịch vụ tập trung vào thư giãn và sức khỏe, bao gồm liệu pháp spa, yoga.', 890000, '/src/assets/images/add-service.jpeg', CURRENT_DATE);
+	('Phụ thu phòng đơn', '- Áp dụng cho khách ngủ 1 mình 1 phòng.', 1200000, 'https://res.cloudinary.com/dih79o7tn/image/upload/v1702105145/services/phongDon_d3vdbe.jpg', CURRENT_DATE),
+	('Thẻ SIM và Internet', '- Cung cấp SIM điện thoại di động hoặc dịch vụ internet để du khách có thể liên lạc và truy cập thông tin dễ dàng hơn.', 250000, 'https://res.cloudinary.com/dih79o7tn/image/upload/v1702105145/services/theSim_mym2js.jpg', CURRENT_DATE),
+	('Dịch Vụ Spa và Wellness', '- Dịch vụ tập trung vào thư giãn và sức khỏe, bao gồm liệu pháp spa, yoga.', 890000, 'https://res.cloudinary.com/dih79o7tn/image/upload/v1702105145/services/spa_v1ad8k.jpg', CURRENT_DATE),
+	('Bữa ăn địa phương', 'Bao gồm một bữa ăn địa phương miễn phí trong gói tour, giúp du khách trải nghiệm ẩm thực địa phương một cách thoải mái.', 0, 'https://res.cloudinary.com/dih79o7tn/image/upload/v1702105145/services/buaAnDiaPhuong_wxwnui.jpg', CURRENT_DATE),
+	('Chương trình giáo dục', 'Tổ chức các buổi học hoặc chương trình giáo dục miễn phí liên quan đến địa điểm du lịch.', 0, 'https://res.cloudinary.com/dih79o7tn/image/upload/v1702105144/services/chuongTrinhGiaoDuc_t3e0p0.jpg', CURRENT_DATE),
+	('Bản đồ và tài liệu du lịch', 'Cung cấp bản đồ và tài liệu hướng dẫn miễn phí về các địa điểm du lịch và hoạt động.', 0, 'https://res.cloudinary.com/dih79o7tn/image/upload/v1702105145/services/bangDoDuLich_btzjij.jpg', CURRENT_DATE);
 -- Table hotel_spots
 INSERT INTO hotel_spots (name, address, phone_number, email, type, location_map, province_id, created_at)
 VALUES 

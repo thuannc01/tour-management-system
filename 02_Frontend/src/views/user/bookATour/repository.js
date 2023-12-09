@@ -1,5 +1,15 @@
-// import repository from '@/utils/repository';
+import repository from '@/utils/repository';
 
-// const resource = '';
+const reservationResource = '/reservation';
+const resourceLocation = '/location';
 
-export default {};
+export default {
+    getDataPeriod: (data) => {
+        return repository.get(`${reservationResource}/get-data-period`, {
+            params: data
+        });
+    },
+    getAllLocation: () => {
+        return repository.get(`${resourceLocation}`);
+    }
+};
