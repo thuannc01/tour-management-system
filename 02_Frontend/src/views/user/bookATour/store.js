@@ -1,5 +1,7 @@
 import repository from './repository';
 import moment from 'moment';
+import store from '@/store';
+import { MSG_TYPE } from '@/utils/messages';
 
 const priceOrder = {
     adult: 0,
@@ -10,7 +12,7 @@ const priceOrder = {
 };
 const data = {
     tour_period_id: 0,
-    bank_account_id: 0,
+    // bank_account_id: 0,
     user_id: 0,
     adult_ticket_quantity: 0,
     child_ticket_quantity: 0,
@@ -19,7 +21,7 @@ const data = {
     additional_service_quantity_list: '',
     total_amount: 0,
     status: 'Chờ thanh toán',
-    otp_code: 0,
+    otp_code: '',
     payment_method: '',
     //
     payment_amount: 0,
@@ -56,7 +58,8 @@ export default {
         customerCount: 0,
         statusAddress: true,
         bankData: { ...bankData },
-        fromProvinceName: ''
+        fromProvinceName: '',
+        isDirectProfile: false
     },
     mutations: {
         setDataPeriod(state, data) {
@@ -135,6 +138,9 @@ export default {
         },
         setUserBank(state, data) {
             state.bankData.user_id = data;
+        },
+        setIsDirectProfile(state) {
+            state.isDirectProfile = !state.isDirectProfile;
         }
     },
     actions: {
@@ -157,6 +163,29 @@ export default {
                     const { data } = res;
                     if (data.Code == 200) {
                         context.commit('setLocationList', data.Data ?? '');
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        saveReservation(context, conditions) {
+            try {
+                repository.saveReservation(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Đã đặt tour thành công',
+                            content:
+                                'Dữ liệu đặt tour du lịch đã được cập nhật vào cơ sở dữ liệu. Về lại trang quản lý đơn hàng của bạn!',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    context.commit('setIsDirectProfile');
+                                }
+                            }
+                        });
                     }
                 });
             } catch (e) {

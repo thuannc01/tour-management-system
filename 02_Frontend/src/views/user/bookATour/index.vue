@@ -3,6 +3,7 @@ import { mapActions, mapMutations, mapState } from 'vuex';
 import store from '@/store';
 import BookATourStore from '@/views/user/bookATour/store';
 import label from './label';
+import { MSG_TYPE } from '@/utils/messages';
 
 import template from './template.html';
 import './style.scss';
@@ -46,6 +47,9 @@ var BookATour = {
             } else {
                 this.setPaymentAmount(this.data.total_amount);
             }
+        },
+        isDirectProfile() {
+            this.directProfile();
         }
     },
     data() {
@@ -73,7 +77,8 @@ var BookATour = {
             'customerCount',
             'statusAddress',
             'bankData',
-            'fromProvinceName'
+            'fromProvinceName',
+            'isDirectProfile'
         ])
     },
     methods: {
@@ -85,7 +90,11 @@ var BookATour = {
             'hideHeaderError'
         ]),
         // module
-        ...mapActions('BookATourStore', ['getDataPeriod', 'getAllLocation']),
+        ...mapActions('BookATourStore', [
+            'getDataPeriod',
+            'getAllLocation',
+            'saveReservation'
+        ]),
         ...mapMutations('BookATourStore', [
             'setPriceOrder',
             'setDataInit',
@@ -198,6 +207,8 @@ var BookATour = {
                     return;
                 }
                 this.setStatusAddress(true);
+                //
+                this.getFromProvinceName();
                 //nav
                 // navChooseService.classList.remove('active');
                 // navInputInfo.classList.remove('active');
@@ -228,7 +239,25 @@ var BookATour = {
                 this.addDisplayNone(bodyPayment);
                 this.removeDisplayNone(bodyConfirm);
             } else {
-                console.log('đặt tour');
+                const vm = this;
+                //
+                if (vm.data.otp_code.trim() == '') {
+                    this.showHeaderError(['Vui lòng nhập mã OTP. Cảm ơn!']);
+                    return;
+                }
+                //
+                vm.showModalMessage({
+                    title: 'Xác nhận đặt tour',
+                    type: MSG_TYPE.CONFIRM,
+                    content: `Đơn hàng của bạn sẽ được đặt thành công khi bạn Click vào [Đồng Ý]`,
+                    cancelText: 'Huỷ',
+                    okText: 'Đồng ý',
+                    callback: (ok) => {
+                        if (ok) {
+                            vm.saveData();
+                        }
+                    }
+                });
             }
         },
         addDisplayNone(elem) {
@@ -465,11 +494,22 @@ var BookATour = {
         },
         getFromProvinceName() {
             const vm = this;
-            let province = vm.locationList.find(
-                (item) => item.id === vm.tourData[0].from_province_id
-            );
-            console.log(province.name);
-            vm.setFromProvinceName(province.name);
+            let province =
+                vm.locationList.find(
+                    (item) => item.id === vm.tourData[0].from_province_id
+                ) ?? '';
+            vm.setFromProvinceName(province.name ?? '');
+        },
+        saveData() {
+            const vm = this;
+            const conditions = {
+                bankAccountData: vm.bankData,
+                reservationData: vm.data
+            };
+            vm.saveReservation(conditions);
+        },
+        directProfile() {
+            this.$router.push('/profile');
         }
     }
 };

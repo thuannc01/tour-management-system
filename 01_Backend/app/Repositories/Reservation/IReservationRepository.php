@@ -8,4 +8,5 @@ interface IReservationRepository
 {
     public function getOrderByStatus($data);
     public function getDataPeriod($data);
+    public function saveData($data);
 }

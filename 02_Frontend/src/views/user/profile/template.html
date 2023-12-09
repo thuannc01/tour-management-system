@@ -161,31 +161,40 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
+										<div v-if="dataTable.length == 0" class="text-center" style="font-weight: 500;">
+											<h5>Bạn chưa có đơn hàng nào ^-^</h5>
+										</div>
 										<!-- <thuan-input label="Tìm kiếm" class="col-4" /> -->
 										<table class="table table-striped" style="font-size: 90%;">
 											<thead>
 												<tr>
 													<th class="align-middle text-center" scope="col">STT</th>
 													<th class="align-middle" scope="col">Tên Tour</th>
-													<th class="align-middle" scope="col">Ngày Đặt</th>
+													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
+													</th>
 													<th class="align-middle" scope="col">Người Lớn</th>
 													<th class="align-middle" scope="col">Trẻ Em</th>
 													<th class="align-middle" scope="col">Em Bé</th>
+													<th class="align-middle" scope="col">Đã thanh toán</th>
 													<th class="align-middle" scope="col">Tổng Tiền</th>
 													<th class="align-middle" scope="col">Trạng Thái</th>
 													<th class="align-middle text-center" scope="col">Huỷ Đơn</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr v-for="i in 3">
-													<th class="align-middle text-center" scope="row">1</th>
-													<td class="align-middle">Mark</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">Đang xử lý</td>
+												<tr v-for="(order, index) in dataTable" :key="index">
+													<th class="align-middle text-center" scope="row">{{index + 1}}</th>
+													<td class="align-middle">{{order.title}}</td>
+													<td class="align-middle">{{convertDateTime(order.payment_date)}}
+													</td>
+													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
+													<td class="align-middle">{{order.child_ticket_quantity}}</td>
+													<td class="align-middle">{{order.infant_ticket_quantity}}</td>
+													<td class="align-middle">{{formatCurrency(order.payment_amount)}}đ
+													</td>
+													<td class="align-middle">{{formatCurrency(order.total_amount)}}đ
+													</td>
+													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button class="border-0" type="button"
 															class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -211,31 +220,40 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
+										<div v-if="dataTable.length == 0" class="text-center" style="font-weight: 500;">
+											<h5>Bạn chưa có đơn hàng nào ^-^</h5>
+										</div>
 										<!-- <thuan-input label="Tìm kiếm" class="col-4" /> -->
 										<table class="table table-striped" style="font-size: 90%;">
 											<thead>
 												<tr>
 													<th class="align-middle text-center" scope="col">STT</th>
 													<th class="align-middle" scope="col">Tên Tour</th>
-													<th class="align-middle" scope="col">Ngày Đặt</th>
+													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
+													</th>
 													<th class="align-middle" scope="col">Người Lớn</th>
 													<th class="align-middle" scope="col">Trẻ Em</th>
 													<th class="align-middle" scope="col">Em Bé</th>
+													<th class="align-middle" scope="col">Đã thanh toán</th>
 													<th class="align-middle" scope="col">Tổng Tiền</th>
 													<th class="align-middle" scope="col">Trạng Thái</th>
 													<th class="align-middle text-center" scope="col">Huỷ Đơn</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr v-for="i in 4">
-													<th class="align-middle text-center" scope="row">1</th>
-													<td class="align-middle">Mark</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">Đang xử lý</td>
+												<tr v-for="(order, index) in dataTable" :key="index">
+													<th class="align-middle text-center" scope="row">{{index + 1}}</th>
+													<td class="align-middle">{{order.title}}</td>
+													<td class="align-middle">{{convertDateTime(order.payment_date)}}
+													</td>
+													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
+													<td class="align-middle">{{order.child_ticket_quantity}}</td>
+													<td class="align-middle">{{order.infant_ticket_quantity}}</td>
+													<td class="align-middle">{{formatCurrency(order.payment_amount)}}đ
+													</td>
+													<td class="align-middle">{{formatCurrency(order.total_amount)}}đ
+													</td>
+													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button class="border-0" type="button"
 															class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -261,29 +279,40 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
+										<div v-if="dataTable.length == 0" class="text-center" style="font-weight: 500;">
+											<h5>Bạn chưa có đơn hàng nào ^-^</h5>
+										</div>
 										<!-- <thuan-input label="Tìm kiếm" class="col-4" /> -->
 										<table class="table table-striped" style="font-size: 90%;">
 											<thead>
-												<th class="align-middle text-center" scope="col">STT</th>
-												<th class="align-middle" scope="col">Tên Tour</th>
-												<th class="align-middle" scope="col">Ngày Đặt</th>
-												<th class="align-middle" scope="col">Người Lớn</th>
-												<th class="align-middle" scope="col">Trẻ Em</th>
-												<th class="align-middle" scope="col">Em Bé</th>
-												<th class="align-middle" scope="col">Tổng Tiền</th>
-												<th class="align-middle" scope="col">Trạng Thái</th>
-												<th class="align-middle text-center" scope="col">Huỷ Đơn</th>
+												<tr>
+													<th class="align-middle text-center" scope="col">STT</th>
+													<th class="align-middle" scope="col">Tên Tour</th>
+													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
+													</th>
+													<th class="align-middle" scope="col">Người Lớn</th>
+													<th class="align-middle" scope="col">Trẻ Em</th>
+													<th class="align-middle" scope="col">Em Bé</th>
+													<th class="align-middle" scope="col">Đã thanh toán</th>
+													<th class="align-middle" scope="col">Tổng Tiền</th>
+													<th class="align-middle" scope="col">Trạng Thái</th>
+													<th class="align-middle text-center" scope="col">Huỷ Đơn</th>
+												</tr>
 											</thead>
 											<tbody>
-												<tr v-for="i in 2">
-													<th class="align-middle text-center" scope="row">1</th>
-													<td class="align-middle">Mark</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">Đang đặt vé máy bay</td>
+												<tr v-for="(order, index) in dataTable" :key="index">
+													<th class="align-middle text-center" scope="row">{{index + 1}}</th>
+													<td class="align-middle">{{order.title}}</td>
+													<td class="align-middle">{{convertDateTime(order.payment_date)}}
+													</td>
+													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
+													<td class="align-middle">{{order.child_ticket_quantity}}</td>
+													<td class="align-middle">{{order.infant_ticket_quantity}}</td>
+													<td class="align-middle">{{formatCurrency(order.payment_amount)}}đ
+													</td>
+													<td class="align-middle">{{formatCurrency(order.total_amount)}}đ
+													</td>
+													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button class="border-0" type="button"
 															class="btn btn-danger btn-sm" data-bs-toggle="modal"
@@ -309,31 +338,43 @@
 							<section class="section">
 								<div class="card">
 									<div class="card-body">
+										<div v-if="dataTable.length == 0" class="text-center" style="font-weight: 500;">
+											<h5>Bạn chưa có đơn hàng nào ^-^</h5>
+										</div>
 										<!-- <thuan-input label="Tìm kiếm" class="col-4" /> -->
 										<table class="table table-striped" style="font-size: 90%;">
 											<thead>
 												<tr>
 													<th class="align-middle text-center" scope="col">STT</th>
 													<th class="align-middle" scope="col">Tên Tour</th>
-													<th class="align-middle" scope="col">Ngày Đặt</th>
+													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
+													</th>
 													<th class="align-middle" scope="col">Người Lớn</th>
 													<th class="align-middle" scope="col">Trẻ Em</th>
 													<th class="align-middle" scope="col">Em Bé</th>
+													<th class="align-middle" scope="col">Đã thanh toán</th>
 													<th class="align-middle" scope="col">Tổng Tiền</th>
-													<th class="align-middle text-center" scope="col">Đánh giá</th>
+													<th class="align-middle" scope="col">Trạng Thái</th>
+													<th class="align-middle text-center" scope="col">Huỷ Đơn</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr v-for="i in 3">
-													<th class="align-middle text-center" scope="row">1</th>
-													<td class="align-middle">Mark</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">Otto</td>
-													<td class="align-middle">@mdo</td>
-													<td class="align-middle">@mdo</td>
+												<tr v-for="(order, index) in dataTable" :key="index">
+													<th class="align-middle text-center" scope="row">{{index + 1}}</th>
+													<td class="align-middle">{{order.title}}</td>
+													<td class="align-middle">{{convertDateTime(order.payment_date)}}
+													</td>
+													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
+													<td class="align-middle">{{order.child_ticket_quantity}}</td>
+													<td class="align-middle">{{order.infant_ticket_quantity}}</td>
+													<td class="align-middle">{{formatCurrency(order.payment_amount)}}đ
+													</td>
+													<td class="align-middle">{{formatCurrency(order.total_amount)}}đ
+													</td>
+													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
-														<button class="border-0" type="button"
+														<button @click="showModalRating(order.title, order.id)"
+															class="border-0" type="button"
 															class="btn btn-success btn-sm" data-bs-toggle="modal"
 															data-bs-target="#RatingGlobal">
 															<i class=" bi bi-chat-heart"></i>
@@ -429,24 +470,26 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<h6 class="modal-title text-center mb-2 text-uppercase font-weight-600" id="exampleModalLabel">Tour
-						mùa đông 2023 - Khám phá Hạ
-						Long Bay</h6>
+					<h6 class="modal-title text-center mb-2 text-uppercase font-weight-600" id="exampleModalLabel">
+						{{ratingData.title}}</h6>
 					<div class="rating-tour d-flex justify-content-center my-3">
-						<star-rating v-model:rating="rating" v-bind:increment="1" inactive-color="gainsboro"
-							active-color="#ff891e" v-bind:star-size="40">
+						<star-rating v-model:rating="ratingData.star_count" v-bind:increment="1"
+							inactive-color="gainsboro" active-color="#ff891e" v-bind:star-size="40">
 						</star-rating>
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<thuan-input label="Người đánh giá" :isDisabled="true" :isRequired="true" />
+							<thuan-input v-model="ratingData.reviewerName" label="Người đánh giá" :isDisabled="true"
+								:isRequired="true" />
 						</div>
 					</div>
-					<thuan-textarea label="Nội dung đánh giá" :rowsArea="3" />
+					<thuan-textarea v-model="ratingData.message" label="Nội dung đánh giá" :rowsArea="3" />
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-					<button type="button" class="btn btn-primary bg-btn-primary-custom">Lưu đánh giá</button>
+					<button id="hideModalRating" type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Huỷ</button>
+					<button @click="saveRating" type="button" class="btn btn-primary bg-btn-primary-custom">Lưu đánh
+						giá</button>
 				</div>
 			</div>
 		</div>

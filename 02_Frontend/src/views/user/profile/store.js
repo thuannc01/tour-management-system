@@ -1,4 +1,6 @@
 import repository from './repository';
+import store from '@/store';
+import { MSG_TYPE } from '@/utils/messages';
 
 const userDataUpdate = {
     id: '',
@@ -11,6 +13,16 @@ const userDataUpdate = {
     address: '',
     gender: 'Nam',
     avatar_path: ''
+};
+
+const ratingData = {
+    title: '',
+    tour_id: 0,
+    reviewerName: '',
+    reviewer: 0,
+    star_count: 5,
+    message: '',
+    status: 'Chờ duyệt – Không hiển thị'
 };
 
 export default {
@@ -27,7 +39,9 @@ export default {
                 name: 'Nữ'
             }
         ],
-        locationList: []
+        locationList: [],
+        dataTable: [],
+        ratingData: { ...ratingData }
     },
     mutations: {
         setUserDataUpdate(state, data) {
@@ -42,11 +56,26 @@ export default {
             state.userDataUpdate.gender = data.gender ?? '';
             state.userDataUpdate.avatar_path = data.avatar_path;
         },
+        setRatingData(state, data) {
+            state.ratingData.title = data.title ?? state.ratingData.title;
+            state.ratingData.tour_id = data.tour_id ?? state.ratingData.tour_id;
+            state.ratingData.reviewerName =
+                data.reviewerName ?? state.ratingData.reviewerName;
+            state.ratingData.reviewer =
+                data.reviewer ?? state.ratingData.reviewer;
+            state.ratingData.star_count =
+                data.star_count ?? state.ratingData.star_count;
+            state.ratingData.message = data.message ?? state.ratingData.message;
+        },
         setLocationList(state, data) {
             state.locationList = data;
         },
         setAvatarImg(state, data) {
             state.userDataUpdate.avatar_path = data;
+        },
+        setDataTable(state, data) {
+            state.dataTable = [];
+            state.dataTable = data;
         }
     },
     actions: {
@@ -68,6 +97,43 @@ export default {
                     const { data } = res;
                     if (data.Code == 200) {
                         //
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        getOrderByStatus(context, conditions) {
+            try {
+                repository.getOrderByStatus(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setDataTable', data.Data ?? []);
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        review(context, data) {
+            try {
+                repository.review(data).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Đã đánh giá thành công',
+                            content:
+                                'Cảm ơn bạn đã đánh giá tour du lịch này. Chúc bạn một ngày tốt lành!',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    document
+                                        .getElementById('hideModalRating')
+                                        .click();
+                                }
+                            }
+                        });
                     }
                 });
             } catch (e) {

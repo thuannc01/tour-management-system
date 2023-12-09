@@ -11,5 +11,8 @@ export default {
     },
     getAllLocation: () => {
         return repository.get(`${resourceLocation}`);
+    },
+    saveReservation: (data) => {
+        return repository.post(`${reservationResource}`, data);
     }
 };

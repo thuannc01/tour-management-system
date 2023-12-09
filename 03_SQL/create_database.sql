@@ -125,16 +125,16 @@ CREATE TABLE news (
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
-);
+); 
 -- Table bank_accounts
 CREATE TYPE bank_name AS ENUM ('VietcomBank', 'Techcombank', 'Vietinbank', 'MB', 'Agribank', 'ACB');
 CREATE TABLE bank_accounts (
     id serial PRIMARY KEY,
     bank_name bank_name,
 	atm_card_number character varying (30),
-	pin character varying (50),
 	cardholder_name character varying (100),
 	expiry_date character varying (20),
+	user_id integer REFERENCES users(id), 
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -292,7 +292,8 @@ CREATE TABLE transportation (
 );
 -- Table reservations
 -- Drop table reservations CASCADE
-CREATE TYPE status_reservation_type AS ENUM ('Chờ thanh toán', 'Chờ xác nhận', 'Chờ đặt phương tiện', 'Hoàn thành');
+-- DROP TYPE IF EXISTS status_reservation_type
+CREATE TYPE status_reservation_type AS ENUM ('Chờ thanh toán', 'Chờ xác nhận', 'Chờ đặt phương tiện', 'Đã đặt phương tiện thành công', 'Hoàn thành');
 CREATE TYPE payment_method_type AS ENUM ('Tiền mặt', 'Ngân hàng');
 CREATE TABLE reservations (
     id serial PRIMARY KEY,

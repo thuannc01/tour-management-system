@@ -21,6 +21,8 @@ var Profile = {
     mounted() {
         this.setUserData();
         this.getAllLocation();
+        //
+        this.gettingOrderByStatus('Chờ thanh toán');
     },
     watch: {},
     data() {
@@ -37,7 +39,9 @@ var Profile = {
         ...mapState('ProfileStore', [
             'userDataUpdate',
             'genderList',
-            'locationList'
+            'locationList',
+            'dataTable',
+            'ratingData'
         ])
     },
     methods: {
@@ -45,8 +49,17 @@ var Profile = {
         ...mapActions('app', ['getUserInfoAction']),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('ProfileStore', ['getAllLocation', 'updateInfoUser']),
-        ...mapMutations('ProfileStore', ['setUserDataUpdate', 'setAvatarImg']),
+        ...mapActions('ProfileStore', [
+            'getAllLocation',
+            'updateInfoUser',
+            'getOrderByStatus',
+            'review'
+        ]),
+        ...mapMutations('ProfileStore', [
+            'setUserDataUpdate',
+            'setAvatarImg',
+            'setRatingData'
+        ]),
         //
         handelNavSidebar(code) {
             const userInfo = document.getElementById('user-info');
@@ -100,6 +113,8 @@ var Profile = {
                         this.addDisplayNone(cancelTour);
                         this.addDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
+                        //
+                        this.gettingOrderByStatus('Chờ thanh toán');
                     } else if (code == 3) {
                         this.addDisplayNone(userInfo);
                         this.addDisplayNone(waitForPay);
@@ -109,6 +124,8 @@ var Profile = {
                         this.addDisplayNone(cancelTour);
                         this.addDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
+                        //
+                        this.gettingOrderByStatus('Chờ xác nhận');
                     } else if (code == 4) {
                         this.addDisplayNone(userInfo);
                         this.addDisplayNone(waitForPay);
@@ -118,6 +135,8 @@ var Profile = {
                         this.addDisplayNone(cancelTour);
                         this.addDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
+                        //
+                        this.gettingOrderByStatus('Hoàn thành');
                     } else if (code == 7) {
                         this.addDisplayNone(userInfo);
                         this.addDisplayNone(waitForPay);
@@ -127,6 +146,8 @@ var Profile = {
                         this.addDisplayNone(cancelTour);
                         this.removeDisplayNone(waitVehicle);
                         navCancelTour.classList.remove('active');
+                        //
+                        this.gettingOrderByStatus('Chờ đặt phương tiện');
                     } else {
                         this.addDisplayNone(userInfo);
                         this.addDisplayNone(waitForPay);
@@ -214,6 +235,58 @@ var Profile = {
                     okText: 'Đồng ý'
                 });
             }, 300);
+        },
+        gettingOrderByStatus(status) {
+            const conditions = {
+                status: status,
+                user_id: this.userData.id
+            };
+            this.getOrderByStatus(conditions);
+        },
+        convertDateTime(inputDateTime) {
+            var dateTime = new Date(inputDateTime);
+
+            var day = dateTime.getDate();
+            var month = dateTime.getMonth() + 1;
+            var year = dateTime.getFullYear();
+
+            var formattedDate = `${day}/${month}/${year}`;
+
+            return formattedDate;
+        },
+        formatCurrency(number) {
+            let numStr = number.toString();
+
+            let result = [];
+
+            for (let i = numStr.length - 1, j = 0; i >= 0; i--, j++) {
+                if (j > 0 && j % 3 === 0) {
+                    result.unshift('.');
+                }
+                result.unshift(numStr[i]);
+            }
+            return result.join('');
+        },
+        showModalRating(title, id) {
+            console.log(title, id);
+            const dataSet = {
+                title: title,
+                tour_id: id,
+                reviewerName: this.userData.full_name,
+                reviewer: this.userData.id
+            };
+            this.setRatingData(dataSet);
+        },
+        saveRating() {
+            const vm = this;
+            const conditions = {
+                tour_id: vm.ratingData.tour_id,
+                reviewer: vm.ratingData.reviewer,
+                star_count: vm.ratingData.star_count,
+                message: vm.ratingData.message,
+                status: vm.ratingData.status
+            };
+            vm.review(conditions);
         }
     }
 };

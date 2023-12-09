@@ -56,4 +56,18 @@ class RatingRepository extends BaseRepository implements IRatingRepository
         $rating->save();
         return 'Ok';
     }
+
+    public function review($data){
+        $dataSave = [
+            'tour_id'   => $data['tour_id'],
+            'reviewer'   => $data['reviewer'],
+            'star_count'   => $data['star_count'],
+            'message'   => $data['message'],
+            'status'   => $data['status']
+        ];
+        // 
+        Rating::insert($dataSave);
+        // 
+        return 'Ok';
+    }
 }

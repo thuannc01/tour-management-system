@@ -671,6 +671,51 @@ paths:
       security:
         -
           apiAuth: []
+  /rating/review:
+    post:
+      tags:
+        - Rating
+      summary: 'Review rating'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 37f94bef9478444a2d2db5b285cdd5f6
+      requestBody:
+        description: 'Response data'
+        content:
+          application/json:
+            schema:
+              properties:
+                tour_id:
+                  type: integer
+                  example: '1'
+                reviewer:
+                  type: integer
+                  example: '1'
+                star_count:
+                  type: integer
+                  example: '1'
+                message:
+                  type: string
+                  example: 'Cảm ơn bạn.'
+                status:
+                  type: string
+                  example: 'Đã duyệt – Hiển thị'
+              type: object
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /reservation:
     get:
       tags:
@@ -685,6 +730,47 @@ paths:
           description: 'Status order'
           schema:
             type: string
+        -
+          name: user_id
+          in: query
+          description: 'user id'
+          schema:
+            type: int
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
+    post:
+      tags:
+        - Reservation
+      summary: 'Save reservation'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 4e0c2bdfcf0cf7b01658820b8c16b726
+      requestBody:
+        description: 'Start date'
+        content:
+          application/json:
+            schema:
+              properties:
+                bankAccountData:
+                  type: object
+                  example: '{...}'
+                reservationData:
+                  type: object
+                  example: '{...}'
+              type: object
       responses:
         200:
           description: 'Result of success'

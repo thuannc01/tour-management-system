@@ -77,13 +77,14 @@ Route::group([
     Route::get('/news/home', [NewsController::class, 'getNewsHome']);
     Route::get('/news/detail', [NewsController::class, 'getDetail']);
     // rating
-    Route::apiResource('/rating', RatingController::class);
+    Route::apiResource('/rating', RatingController::class)->only(['index', 'store']);
+    Route::post('/rating/review', [RatingController::class, 'review']);
     // tour detail
     Route::apiResource('/tour-detail', TourDetailController::class);
     // transportation
     Route::apiResource('/transportation', TransportationController::class);
     // reservation
-    Route::apiResource('/reservation', ReservationController::class)->only(['index']);
+    Route::apiResource('/reservation', ReservationController::class)->only(['index', 'store']);
     Route::get('/reservation/get-data-period', [ReservationController::class, 'getDataPeriod']);
 });
 
