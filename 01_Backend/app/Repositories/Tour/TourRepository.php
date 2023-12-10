@@ -96,8 +96,8 @@ class TourRepository extends BaseRepository implements ITourRepository
                     'day' => (int)$day['day'] - 1 ?? '',
                     'title' => $day['title'] ?? '',
                     'body' => $day['body'] ?? '',
-                    'food_spot_id' => $day['food_spot_id'] ?? '',
-                    'hotel_spot_id' => $day['hotel_spot_id'] ?? '',
+                    'food_spot_id_list' => $day['food_spot_id'] ?? '',
+                    'hotel_spot_id_list' => $day['hotel_spot_id'] ?? '',
                     'created_at' => Carbon::now()
                 ];
                 Schedule::insert($dayData);

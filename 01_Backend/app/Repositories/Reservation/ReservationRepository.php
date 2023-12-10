@@ -110,4 +110,54 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
 
         return 'ok';
     }
+
+    public function getDataReservation($data){
+        $status = $data['status'] ?? '';
+        $title = $data['title'] ?? '';
+        $page_size = $data['page_size'];
+        $page_number = $data['page_number'];
+        // 
+        $offset = ($page_number - 1) * $page_size;
+        $totalRows  = Reservation::whereNull('deleted_at')->count('id');
+        // 
+        $sqlString = "
+        select reservations.* , tours.*, periods.*, users.* ,  reservations.created_at reservation_date, reservations.status reservations_status
+        from reservations
+        join users on users.id = reservations.user_id
+        join periods on periods.id = reservations.tour_period_id
+        join tours on tours.id = periods.tour_id
+        where reservations.status = '" .$status ."' and tours.title LIKE '%" .$title. "%' 
+        order by reservations.id limit ". $page_size ." offset ". $offset;
+
+        if($status  == 'Chờ đặt phương tiện'){
+            $sqlString = "
+            select reservations.* , tours.*, periods.* , users.* ,  reservations.created_at reservation_date, reservations.status reservations_status
+            from reservations
+            join users on users.id = reservations.user_id
+            join periods on periods.id = reservations.tour_period_id
+            join tours on tours.id = periods.tour_id
+            where reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công' 
+            and tours.title LIKE '%" .$title. "%' 
+            order by reservations.id limit ". $page_size ." offset ". $offset;
+        }
+        if(trim($status) == ''){
+            $sqlString = "
+            select reservations.* , tours.*, periods.*  , users.* , reservations.created_at reservation_date, reservations.status reservations_status
+            from reservations
+            join users on users.id = reservations.user_id
+            join periods on periods.id = reservations.tour_period_id
+            join tours on tours.id = periods.tour_id
+            where tours.title LIKE '%" .$title. "%' 
+            order by reservations.id limit ". $page_size ." offset ". $offset;
+        }
+        //
+        $dataSearch = DB::select($sqlString);
+        // 
+        $response = [
+            'totalRows' => $totalRows,
+            'dataSearch' => $dataSearch,
+        ];
+
+        return $response;
+    }
 }

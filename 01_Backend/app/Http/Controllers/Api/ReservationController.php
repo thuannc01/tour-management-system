@@ -185,4 +185,76 @@ class ReservationController extends Controller
         }
         return $response;
     }
+
+    /**
+     * Get data reservation for admin page
+     *  @OA\GET(
+     *      path="/reservation/get-data-reservation",
+     *      tags={"Reservation"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\Parameter(
+     *          name="status",
+     *          description="status reservation",
+     *          in="query",
+     *          @OA\Schema(type="string")
+     *      ),
+     *      @OA\Parameter(
+     *          name="title",
+     *          description="tour name",
+     *          in="query",
+     *          @OA\Schema(type="string")
+     *      ),
+     *     @OA\Parameter(
+     *         name="page_size",
+     *         description="Số lượng dòng hiển thị trên mỗi trang của kết quả phân trang",
+     *         in="query",
+     *         @OA\Schema(type="int")
+     *     ),
+     *     @OA\Parameter(
+     *         name="page_number",
+     *         description="Trang hiện tại muốn lấy dữ liệu",
+     *         in="query",
+     *         @OA\Schema(type="int")
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result of success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Result of success"
+     *              )
+     *          )
+     *      )
+     *  )
+     */
+    public function getDataReservation(Request $request)
+    {
+        try {
+            $data_res = $this->reservationRepository->getDataReservation($request->all());
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
+        }
+        catch (\Exception $e) {
+            //
+        }
+        return $response;
+    }
 }

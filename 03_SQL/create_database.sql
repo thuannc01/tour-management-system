@@ -217,14 +217,15 @@ CREATE TABLE hotel_spots (
 	deleted_at TIMESTAMP
 );
 -- Table schedules
+-- DROP table schedules
 CREATE TABLE schedules (
     id serial PRIMARY KEY,
 	tour_id integer REFERENCES tours(id),
 	day	smallint,
 	title character varying(200),
 	body text,
-	food_spot_id character varying(300),
-	hotel_spot_id character varying(300),
+	food_spot_id_list character varying(300),
+	hotel_spot_id_list character varying(300),
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,
 	deleted_at TIMESTAMP
@@ -371,15 +372,6 @@ VALUES
 	('Cặp đôi', null, CURRENT_DATE),
 	('Gia đình', 2, CURRENT_DATE),
 	('Doanh nghiệp - Hội nghị', 2, CURRENT_DATE);
--- Table types_transportation
-INSERT INTO types_transportation (name, parent_id, created_at)
-VALUES 
-	('Hàng không', null, CURRENT_DATE),
-	('Xe khách', null, CURRENT_DATE),
-	('Hàng không Vietnam Airlines', 1, CURRENT_DATE),
-	('Hàng không Vietnam Vietjet Air', 1, CURRENT_DATE),
-	('Xe khách Thành Bưởi', 2, CURRENT_DATE),
-	('Xe khách phương trang', 2, CURRENT_DATE);
 -- Table additional_services
 INSERT INTO additional_services (name, "desc", price, img_path, created_at)
 VALUES 
@@ -402,3 +394,21 @@ VALUES
 	('The Third House', 'Các loại cà phê rang xay', '142/3 Lê Độ Tam Thuận, Thanh Khê, Đà Nẵng', '0654345612', 'capheviet@gmail.com', 'Quán cà phê', 'google.map', '8h00 - 23h Hằng ngày', 33, CURRENT_DATE),
 	('Chả cá Phượng', 'Riêu chả, chả cá, riêu cua', 'Điện Dương - Điện Bàn - Quảng Nam', '0657645764', 'bunphuong@gmail.com', 'Quán ăn đường phố', 'google.map', '5h30 - 10h Sáng Hằng ngày', 33, CURRENT_DATE),
 	('Cá Chuồn Cồ Vietnamese Restaurant', 'Cà phê, Món ăn Kiểu Á, Kiểu Việt, Quốc tế', '99 Võ Nguyên Giáp Mỹ An, Ngũ Hành Sơn, Đà Nẵng', '0765433245', 'cachuon@gmail.com', 'Nhà hàng', 'google.map', '7h30 - 22h Hằng ngày', 32, CURRENT_DATE);
+-- Table types_transportation
+INSERT INTO types_transportation (name, parent_id, created_at)
+VALUES 
+	('Hàng không', null, CURRENT_DATE),
+	('Xe khách', null, CURRENT_DATE),
+	('Hàng không Vietnam Airlines', 1, CURRENT_DATE),
+	('Hàng không Vietnam Vietjet Air', 1, CURRENT_DATE),
+	('Xe khách Thành Bưởi', 2, CURRENT_DATE),
+	('Xe khách Phương Trang', 2, CURRENT_DATE);
+-- Table transportation
+-- Select * from transportation
+INSERT INTO transportation (type_transportation_id, name, departure_time, arrival_time, from_location, to_location, quantity, maximum_quantity, price, created_at)
+VALUES 
+	(3, 'Vietnam Airlines', '10/12/2023', '11/12/2023', 'Đà Nẵng', 'Hồ Chí Minh', 67, 180, 1578999, CURRENT_DATE),
+	(5, 'Xe khách Thành Bưởi - TP. HỒ CHÍ MINH - ĐÀ LẠT', '10/12/2023', '11/12/2023', 'Hồ Chí Minh', 'Đà Lạt', 11, 16, 589231, CURRENT_DATE),
+	(6, 'Xe khách Phành Trang - Tuyến QUẢNG NAM - HÀ Nội', '10/12/2023', '11/12/2023', 'Quảng Nam', 'Hà Nội', 7, 28, 810999, CURRENT_DATE),
+	(6, 'Vietjet Air - Tuyến HCM - HÀ Nội', '10/12/2023', '11/12/2023', 'Hồ Chí Minh', 'Hà Nội', 58, 120, 2189991, CURRENT_DATE),
+	(6, 'Vietjet Air - Tuyến ĐÀ NẴNG - PHÚ QUỐC', '10/12/2023', '11/12/2023', 'Đà Nẵng', 'Phú Quốc', 95, 150, 5143981, CURRENT_DATE);

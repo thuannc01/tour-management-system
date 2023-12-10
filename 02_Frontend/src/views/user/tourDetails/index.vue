@@ -116,6 +116,20 @@ var TourDetails = {
                 id: this.$route.params.tourId
             };
             this.getTourDetail(condition);
+        },
+        convertDateTime(inputDateTime) {
+            var dateTime = new Date(inputDateTime);
+
+            var day = dateTime.getDate();
+            var month = dateTime.getMonth() + 1;
+            var year = dateTime.getFullYear();
+
+            var formattedDate = `${day}/${month}/${year}`;
+
+            return formattedDate;
+        },
+        seeWeather() {
+            window.open('https://www.nchmf.gov.vn/kttv/', '_blank');
         }
     }
 };

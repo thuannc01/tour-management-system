@@ -59,11 +59,11 @@
                 <thead>
                     <tr>
                         <th class="align-middle text-center" style="width: 3%;" scope="col">STT</th>
-                        <th class="align-middle" scope="col" style="width: 6%;">Mã đơn</th>
                         <th class="align-middle" scope="col">Tour đã đặt</th>
                         <th class="align-middle" scope="col" style="width: 9%;">Khách hàng</th>
                         <th class="align-middle" scope="col" style="width: 9%;">Ngày đặt</th>
                         <th class="align-middle" scope="col" style="width: 9%;">Tổng S.Lượng khách</th>
+                        <th class="align-middle" scope="col" style="width: 10%;">Đã thanh toán</th>
                         <th class="align-middle" scope="col" style="width: 10%;">Tổng tiền</th>
                         <th class="align-middle" scope="col" style="width: 10%;">Ngày khởi hành</th>
                         <th class="align-middle" scope="col" style="width: 10%;">Trạng thái</th>
@@ -72,18 +72,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th class="align-middle text-center" scope="row"></th>
-                        <td class="align-middle" style="font-size: 95%;"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
-                        <td class="align-middle"></td>
+                    <tr style="font-weight: 500;" v-for="(order, index) in dataTable" :key="index">
+                        <th class="align-middle text-center" scope="row">{{index + 1}}</th>
+                        <td class="align-middle">{{order.title}}</td>
+                        <td class="align-middle">{{order.full_name}}</td>
+                        <td class="align-middle">{{formatDate2(order.reservation_date)}}</td>
+                        <td class="align-middle">{{sumQuantity(order.adult_ticket_quantity, order.child_ticket_quantity,
+                            order.infant_ticket_quantity)}}</td>
+                        <td class="align-middle">{{formatNumber(order.payment_amount)}} đ</td>
+                        <td class="align-middle">{{formatNumber(order.total_amount)}} đ</td>
+                        <td class="align-middle">{{formatDate(order.departure_time)}}</td>
+                        <td class="align-middle">{{order.reservations_status}}</td>
                         <td class="align-middle">
-                            <button data-bs-toggle="modal" data-bs-target="#orderTransportationModal" type="button"
+                            <button :class="[order.reservations_status != 'Chờ đặt phương tiện' ? 'btn-disabled' : '']"
+                                data-bs-toggle="modal" data-bs-target="#orderTransportationModal" type="button"
                                 class="btn btn-success btn-sm bi bi-scooter me-2"></button>
                         </td>
                         <td class="align-middle">
@@ -316,7 +318,8 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">Đặt phương tiện di chuyển</h5>
+                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">Đặt phương tiện di chuyển - 2 chiều
+                        bao gồm cả đi & về</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -351,7 +354,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th class="align-middle text-center" scope="row"></th>
+                                    <th class="align-middle text-center" scope="row">{{index+1}}</th>
                                     <td class="align-middle" style="font-size: 95%;"></td>
                                     <td class="align-middle"></td>
                                     <td class="align-middle"></td>

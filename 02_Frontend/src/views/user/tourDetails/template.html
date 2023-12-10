@@ -53,7 +53,7 @@
 								<tbody>
 									<tr v-for="(tour, index) in periodData" :key="index">
 										<th scope="row">{{index + 1}}</th>
-										<td>{{tour.departure_time}}<span></span></td>
+										<td>{{convertDateTime(tour.departure_time)}}<span></span></td>
 										<td v-if="tourData[0]?.title">{{tourData[0].adult_ticket_price}}
 										</td>
 										<td v-if="tourData[0]?.title">{{tourData[0].child_ticket_price}}
@@ -61,7 +61,7 @@
 										<td v-if="tourData[0]?.title">{{tourData[0].infant_ticket_price}}
 										</td>
 										<td>
-											<thuan-button label="Xem" classBtn="btn-sm btn-success" />
+											<thuan-button @click="seeWeather" label="Xem" classBtn="btn-sm btn-success" />
 										</td>
 										<td>{{tour.quantity ?? 0 }}/{{tour.maximum_quantity}}</td>
 										<td v-if="tour.quantity != tour.maximum_quantity">
