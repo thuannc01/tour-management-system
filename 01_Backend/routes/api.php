@@ -82,7 +82,8 @@ Route::group([
     // tour detail
     Route::apiResource('/tour-detail', TourDetailController::class);
     // transportation
-    Route::apiResource('/transportation', TransportationController::class);
+    Route::apiResource('/transportation', TransportationController::class)->only(['index', 'store']);
+    Route::get('/transportation/get-data-to-book-trans', [TransportationController::class, 'getDataToBookTrans']);
     // reservation
     Route::apiResource('/reservation', ReservationController::class)->only(['index', 'store']);
     Route::get('/reservation/get-data-period', [ReservationController::class, 'getDataPeriod']);

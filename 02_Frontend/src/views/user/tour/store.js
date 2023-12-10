@@ -4,7 +4,7 @@ const conditions = {
     title: '',
     departure_time: '',
     arrival_time: '',
-    adult_ticket_price: '',
+    adult_ticket_price: ' > 0 ',
     page_size: 6,
     page_number: 1,
     mode: 0
@@ -15,7 +15,7 @@ export default {
         conditions: { ...conditions },
         dataTable: [],
         priceOptions: [
-            { id: '', name: 'Tất cả' },
+            { id: ' > 0 ', name: 'Tất cả' },
             { id: ' < 2000000 ', name: 'Dưới 2tr' },
             { id: ' BETWEEN 2000000 AND 4000000 ', name: 'Từ 2tr - 4tr' },
             { id: ' BETWEEN 4000000 AND 6000000 ', name: 'Từ 4tr - 6tr' },

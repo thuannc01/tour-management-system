@@ -386,7 +386,10 @@ INSERT INTO hotel_spots (name, address, phone_number, email, type, location_map,
 VALUES 
 	('Khách sạn Mường Thanh Luxury Đà Nẵng', '270 Võ Nguyên Giáp Ngu Hanh Son District, My An, Đà Nẵng, Việt Nam', '0543543345', 'muongthanh@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE),
 	('Golden Lotus Grand Da Nang', '86 Lê Quang Đạo, Đà Nẵng, Việt Nam', '0435436685', 'golden@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE),
-	('InterContinental Danang Sun Peninsula Resort', 'Bai Bac, SonTra Peninsula, Danang', '0876543345', 'sunpeninsula@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE);
+	('InterContinental Danang Sun Peninsula Resort', 'Bai Bac, SonTra Peninsula, Danang', '0876543345', 'sunpeninsula@gmail.com', 'Khách sạn', 'google.map', 32, CURRENT_DATE),
+	('December Hoi An Villa', 'Tân An - Hội An', '0436511114', 'december@gmail.com', 'Khu nghỉ dưỡng', 'google.map', 33, CURRENT_DATE),
+	('Crony Villa - STAY 24H', 'Cẩm Thanh - Hội An', '099653212', 'crony@gmail.com', 'Khu nghỉ dưỡng', 'google.map', 33, CURRENT_DATE),
+	('Hue Serene Palace Hotel', 'Thừa Thiên Huế', '099653332', 'hueserene@gmail.com', 'Khách sạn', 'google.map', 31, CURRENT_DATE);
 -- Table food_spots
 INSERT INTO food_spots (name, menu, address, phone_number, email, type, location_map, opening_hours, province_id, created_at)
 VALUES 
@@ -407,8 +410,13 @@ VALUES
 -- Select * from transportation
 INSERT INTO transportation (type_transportation_id, name, departure_time, arrival_time, from_location, to_location, quantity, maximum_quantity, price, created_at)
 VALUES 
-	(3, 'Vietnam Airlines', '10/12/2023', '11/12/2023', 'Đà Nẵng', 'Hồ Chí Minh', 67, 180, 1578999, CURRENT_DATE),
-	(5, 'Xe khách Thành Bưởi - TP. HỒ CHÍ MINH - ĐÀ LẠT', '10/12/2023', '11/12/2023', 'Hồ Chí Minh', 'Đà Lạt', 11, 16, 589231, CURRENT_DATE),
-	(6, 'Xe khách Phành Trang - Tuyến QUẢNG NAM - HÀ Nội', '10/12/2023', '11/12/2023', 'Quảng Nam', 'Hà Nội', 7, 28, 810999, CURRENT_DATE),
-	(6, 'Vietjet Air - Tuyến HCM - HÀ Nội', '10/12/2023', '11/12/2023', 'Hồ Chí Minh', 'Hà Nội', 58, 120, 2189991, CURRENT_DATE),
-	(6, 'Vietjet Air - Tuyến ĐÀ NẴNG - PHÚ QUỐC', '10/12/2023', '11/12/2023', 'Đà Nẵng', 'Phú Quốc', 95, 150, 5143981, CURRENT_DATE);
+	(3, 'Vietnam Airlines', '2023-12-11', '2023-12-11', 'Đà Nẵng', 'Hồ Chí Minh', 67, 180, 1578999, CURRENT_DATE),
+	(5, 'Xe khách Thành Bưởi - TP. HỒ CHÍ MINH - ĐÀ LẠT', '2023-12-11', '2023-12-11', 'Hồ Chí Minh', 'Đà Lạt', 11, 16, 589231, CURRENT_DATE),
+	(6, 'Xe khách Phành Trang - Tuyến QUẢNG NAM - HÀ Nội', '2023-12-11', '2023-12-11', 'Quảng Nam', 'Hà Nội', 7, 28, 810999, CURRENT_DATE),
+	(4, 'Vietjet Air - Tuyến HCM - HÀ Nội', '2023-12-11', '2023-12-11', 'Hồ Chí Minh', 'Hà Nội', 58, 120, 2189991, CURRENT_DATE),
+	(4, 'Vietjet Air - Tuyến ĐÀ NẴNG - PHÚ QUỐC', '2023-12-11', '2023-12-11', 'Đà Nẵng', 'Kiên Giang - Phú Quốc', 95, 150, 5143981, CURRENT_DATE),
+	(4, 'Vietjet Air - Tuyến HỒ CHÍ MINH - PHÚ QUỐC', '2023-12-11', '2023-12-11', 'Hồ Chí Minh', 'Kiên Giang - Phú Quốc', 32, 180, 2143981, CURRENT_DATE),
+	(5, 'Xe khách Thành Bưởi - Tuyến ĐÀ NẴNG - ĐỒNG HỚI QUẢNG BÌNH', '2023-12-11', '2023-12-11', 'Đà Nẵng', 'Quảng Bình', 95, 150, 879111, CURRENT_DATE),
+	(3, 'Vietnam Airlines - ĐÀ NẴNG - Tuy Hòa', '2023-12-11', '2023-12-11', 'Đà Nẵng', 'Phú Yên', 59, 150, 2098117, CURRENT_DATE),
+	(4, 'Vietjet Air - ĐÀ NẴNG - ĐÀ LẠT', '2023-12-11', '2023-12-11', 'Đà Nẵng', 'Đà Lạt', 28, 150, 2353174, CURRENT_DATE),
+	(4, 'Vietjet Air - ĐÀ NẴNG - CÀ MAU', '2023-12-11', '2023-12-11', 'Đà Nẵng', 'Cà Mau', 76, 120, 5373154, CURRENT_DATE);

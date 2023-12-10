@@ -86,7 +86,8 @@
                         <td class="align-middle">
                             <button :class="[order.reservations_status != 'Chờ đặt phương tiện' ? 'btn-disabled' : '']"
                                 data-bs-toggle="modal" data-bs-target="#orderTransportationModal" type="button"
-                                class="btn btn-success btn-sm bi bi-scooter me-2"></button>
+                                class="btn btn-success btn-sm bi bi-scooter me-2"
+                                @click="showModalTrans(order.departure_time, order.type_transportation_id,(order.adult_ticket_quantity + order.child_ticket_quantity), order.from_province_name, order.to_province_name, order.type_transportation, order.id)"></button>
                         </td>
                         <td class="align-middle">
                             <button data-bs-toggle="modal" data-bs-target="#orderDetailModal" type="button"
@@ -324,12 +325,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <h6 class="text-uppercase book-trans text-center">DANH SÁCH PHƯƠNG TIỆN LIÊN KẾT VỚI BÊN THỨ 3
+                        <h6 style="line-height: 1.5;" class="text-uppercase book-trans text-center">DANH SÁCH PHƯƠNG
+                            TIỆN LIÊN KẾT VỚI BÊN THỨ 3
                             CÓ NGÀY KHỞI HÀNH
-                            <strong>2023/12/12</strong>
-                            VÀ LOẠI PHƯƠNG
-                            TIỆN <strong>HÀNG KHÔNG</strong> và
-                            số lượng chỗ cần đặt là <strong>4</strong>
+                            <strong>{{formatDate(bookTransCondition.departure_time)}}</strong>
+                            - LOẠI PHƯƠNG
+                            TIỆN <strong>{{bookTransCondition.type_transportation_name}}</strong> -
+                            số lượng chỗ cần đặt là <strong>{{bookTransCondition.quantity}}</strong> - Nơi khởi hành
+                            <strong>{{bookTransCondition.from_location}}</strong> - Nơi đến
+                            <strong>{{bookTransCondition.to_location}}</strong>
                         </h6>
                         <p class="text-center" style="font-style: italic;">(Đối tượng là trẻ em dưới 2 tuổi, được miễn
                             phí khi đặt phương tiện nên
@@ -353,18 +357,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="(trans, index) in bookTransData" :key="index">
                                     <th class="align-middle text-center" scope="row">{{index+1}}</th>
-                                    <td class="align-middle" style="font-size: 95%;"></td>
-                                    <td class="align-middle"></td>
-                                    <td class="align-middle"></td>
-                                    <td class="align-middle"></td>
-                                    <td class="align-middle"></td>
-                                    <td class="align-middle"></td>
-                                    <td class="align-middle"></td>
+                                    <td class="align-middle" style="font-size: 95%;">{{trans.name}}</td>
+                                    <td class="align-middle">{{formatDate(trans.departure_time)}}</td>
+                                    <td class="align-middle">{{trans.from_location}}</td>
+                                    <td class="align-middle">{{trans.to_location}}</td>
+                                    <td class="align-middle">{{trans.quantity}}</td>
+                                    <td class="align-middle">{{trans.maximum_quantity}}</td>
+                                    <td class="align-middle">{{formatNumber(trans.price)}} đ</td>
                                     <td class="align-middle">
                                         <button data-bs-toggle="modal" data-bs-target="#orderTransportationModal"
-                                            type="button"
+                                            type="button" @click="bookingTrans(trans.price)"
                                             class="btn btn-success btn-sm bi bi-bag-heart-fill me-2"></button>
                                     </td>
                                 </tr>
@@ -373,7 +377,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="btn-close-modal" type="button" class="btn btn-secondary"
+                    <button id="btn-close-modal-book-trans" type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">Đóng</button>
                 </div>
             </div>

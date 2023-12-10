@@ -101,12 +101,20 @@
             width: fit-content;
         }
     }
+
     // 
-    .date-post, .view-post{
+    .date-post,
+    .view-post {
         font-size: 90%;
         color: rgb(118, 118, 118);
     }
-    .project-item.mb-4{
+
+    .project-item.mb-4 {
         cursor: pointer;
+    }
+
+    // 
+    .project-item.mb-4 {
+        height: 460px !important;
     }
 }

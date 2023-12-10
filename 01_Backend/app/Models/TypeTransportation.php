@@ -12,12 +12,12 @@ class TypeTransportation extends Model
     protected $table = 'types_transportation';
 
     protected $fillable = [
-        'id'
-        , 'name'
-        , 'parent_id'
-        , 'created_at'
-        , 'updated_at'
-        , 'deleted_at'
+        // 'id'
+        // , 'name'
+        // , 'parent_id'
+        // , 'created_at'
+        // , 'updated_at'
+        // , 'deleted_at'
     ];
 
     public $timestamps = true;

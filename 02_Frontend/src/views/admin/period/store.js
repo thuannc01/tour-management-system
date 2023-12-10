@@ -27,10 +27,12 @@ export default {
     },
     mutations: {
         setDataInit(state, data) {
-            state.selectOptions.toursList = data.allTours;
-            state.data.tour_id = data.allTours[0].id;
-            state.numberOfDay = data.allTours[0].number_of_day;
-            state.selectOptions.tourGuideList = data.allTourGuide;
+            state.selectOptions.toursList = data.allTours ?? '';
+            if (data.allTours[0]) {
+                state.data.tour_id = data.allTours[0].id ?? '';
+                state.numberOfDay = data.allTours[0].number_of_day ?? '';
+                state.selectOptions.tourGuideList = data.allTourGuide ?? '';
+            }
         },
         setArrivalTime(state, data) {
             state.data.arrival_time = data;

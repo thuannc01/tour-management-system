@@ -79,7 +79,8 @@ var Home = {
             document.getElementById('search-global-home').click();
         },
         getFirst200Characters(str) {
-            return this.removeHtmlTags(str.slice(0, 130) + ' ...')
+            let text = str ?? '';
+            return this.removeHtmlTags(text.slice(0, 130) + ' ...')
                 .replace(/&nbsp;/g, '')
                 .replace(/<a\b[^>]*>(.*?)<\/a>/g, '');
         },

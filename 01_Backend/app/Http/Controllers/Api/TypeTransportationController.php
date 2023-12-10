@@ -47,9 +47,10 @@ class TypeTransportationController extends Controller
      */
     public function index()
     {
+        $response = null;
         try {
-            $data_res = $this->typeTransportationRepository->getAll();
-
+            $data_res = $this->typeTransportationRepository->getData();
+            
             $response = response()->json([
                 'Code'         => ResponseCodeConstant::OK,
                 'Data'         => $data_res,

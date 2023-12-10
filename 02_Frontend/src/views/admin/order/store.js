@@ -1,4 +1,6 @@
 import repository from './repository';
+import store from '@/store';
+import { MSG_TYPE } from '@/utils/messages';
 
 const initData = {
     status: 'Chờ xác nhận'
@@ -36,6 +38,16 @@ export default {
                     name: 'Hoàn thành'
                 }
             ]
+        },
+        bookTransData: [],
+        bookTransCondition: {
+            reservationID: '',
+            departure_time: '',
+            type_transportation: '',
+            quantity: '',
+            from_location: '',
+            to_location: '',
+            type_transportation_name: ''
         }
     },
     mutations: {
@@ -48,6 +60,20 @@ export default {
         },
         setTotalRows(state, data) {
             state.totalRows = data;
+        },
+        setBookTransData(state, data) {
+            state.bookTransData = data;
+        },
+        setBookTransCondition(state, data) {
+            state.bookTransCondition.reservationID = data.reservationID ?? null;
+            state.bookTransCondition.departure_time = data.departure_time;
+            state.bookTransCondition.type_transportation =
+                data.type_transportation;
+            state.bookTransCondition.quantity = data.quantity;
+            state.bookTransCondition.from_location = data.from_location;
+            state.bookTransCondition.to_location = data.to_location;
+            state.bookTransCondition.type_transportation_name =
+                data.type_transportation_name;
         }
     },
     actions: {
@@ -58,6 +84,46 @@ export default {
                     if (data.Code == 200) {
                         context.commit('setDataTable', data.Data.dataSearch);
                         context.commit('setTotalRows', data.Data.totalRows);
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        getDataToBookTrans(context, conditions) {
+            try {
+                repository.getDataToBookTrans(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setBookTransData', data.Data);
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        bookTrans(context, { conditions, anotherCallback }) {
+            try {
+                repository.bookTrans(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Đặt phương tiện thành công',
+                            content:
+                                'Bạn đã đặt phương tiện thành công. Click vào [Tiếp tục] để trở lại màn hình chính!',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    document
+                                        .getElementById(
+                                            'btn-close-modal-book-trans'
+                                        )
+                                        .click();
+                                }
+                            }
+                        });
+                        if (anotherCallback) anotherCallback();
                     }
                 });
             } catch (e) {

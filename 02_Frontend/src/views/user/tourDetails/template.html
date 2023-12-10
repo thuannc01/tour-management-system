@@ -61,7 +61,8 @@
 										<td v-if="tourData[0]?.title">{{tourData[0].infant_ticket_price}}
 										</td>
 										<td>
-											<thuan-button @click="seeWeather" label="Xem" classBtn="btn-sm btn-success" />
+											<thuan-button @click="seeWeather" label="Xem"
+												classBtn="btn-sm btn-success" />
 										</td>
 										<td>{{tour.quantity ?? 0 }}/{{tour.maximum_quantity}}</td>
 										<td v-if="tour.quantity != tour.maximum_quantity">
@@ -185,7 +186,7 @@
 											<b class="user-comment-name m-0 d-flex align-items-center pe-4 pt-2">
 												{{tour.reviewer}}
 											</b>
-											<star-rating read-only v-model:rating="rating" v-bind:increment="0.5"
+											<star-rating read-only v-model:rating="tour.star_count" v-bind:increment="1"
 												inactive-color="gainsboro" active-color="#ff891e" v-bind:star-size="20">
 											</star-rating>
 										</div>

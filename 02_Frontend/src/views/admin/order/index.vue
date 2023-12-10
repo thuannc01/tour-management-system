@@ -58,7 +58,9 @@ var Order = {
             'dataTable',
             'data',
             'conditions',
-            'selectOptions'
+            'selectOptions',
+            'bookTransData',
+            'bookTransCondition'
         ])
     },
     methods: {
@@ -73,8 +75,17 @@ var Order = {
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
         ]),
-        ...mapActions('OrderStore', ['getDataReservation']),
-        ...mapMutations('OrderStore', ['setStatusOrder', 'setIsOrderTrans']),
+        ...mapActions('OrderStore', [
+            'getDataReservation',
+            'getDataToBookTrans',
+            'bookTrans'
+        ]),
+        ...mapMutations('OrderStore', [
+            'setStatusOrder',
+            'setIsOrderTrans',
+            'setBookTransData',
+            'setBookTransCondition'
+        ]),
         handleButtonClick() {
             alert('Button clicked!');
         },
@@ -146,6 +157,42 @@ var Order = {
                 result.unshift(numStr[i]);
             }
             return result.join('');
+        },
+        showModalTrans(
+            departure_time,
+            type_transportation,
+            quantity,
+            from_location,
+            to_location,
+            type_transportation_name,
+            reservationID
+        ) {
+            const conditions = {
+                reservationID: reservationID,
+                departure_time: departure_time,
+                type_transportation: type_transportation,
+                quantity: quantity,
+                from_location: from_location,
+                to_location: to_location,
+                type_transportation_name: type_transportation_name
+            };
+            this.setBookTransCondition(conditions);
+            console.log('conditions showModalTrans: ', conditions);
+            this.getDataToBookTrans(conditions);
+        },
+        bookingTrans(transportation_quantity) {
+            const vm = this;
+            const conditions = {
+                id: vm.bookTransCondition.reservationID,
+                transportation_id: vm.bookTransCondition.type_transportation,
+                transportation_ticket_price: transportation_quantity,
+                transportation_quantity: vm.bookTransCondition.quantity
+            };
+            console.log('conditions: ', {
+                conditions: conditions,
+                anotherCallback: vm.doSearch()
+            });
+            vm.bookTrans(conditions);
         }
     }
 };

@@ -90,7 +90,7 @@ var News = {
             return formattedDate;
         },
         getFirst130Characters(str) {
-            return this.removeHtmlTags(str.slice(0, 130) + ' ...')
+            return this.removeHtmlTags(str.slice(0, 110) + ' ...')
                 .replace(/&nbsp;/g, '')
                 .replace(/<a\b[^>]*>(.*?)<\/a>/g, '');
         },
