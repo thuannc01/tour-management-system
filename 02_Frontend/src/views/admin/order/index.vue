@@ -188,11 +188,10 @@ var Order = {
                 transportation_ticket_price: transportation_quantity,
                 transportation_quantity: vm.bookTransCondition.quantity
             };
-            console.log('conditions: ', {
+            vm.bookTrans({
                 conditions: conditions,
-                anotherCallback: vm.doSearch()
+                anotherCallback: vm.doSearch
             });
-            vm.bookTrans(conditions);
         }
     }
 };
