@@ -3,7 +3,8 @@ import store from '@/store';
 import { MSG_TYPE } from '@/utils/messages';
 
 const initData = {
-    status: 'Chờ xác nhận'
+    status: 'Chờ xác nhận',
+    reservation_id: ''
 };
 const conditions = {
     status: '',
@@ -32,6 +33,10 @@ export default {
                 {
                     id: 'Chờ đặt phương tiện',
                     name: 'Chờ đặt phương tiện'
+                },
+                {
+                    id: 'Đã đặt phương tiện thành công',
+                    name: 'Đã đặt phương tiện thành công'
                 },
                 {
                     id: 'Hoàn thành',
@@ -100,6 +105,9 @@ export default {
             state.bookTransCondition.to_location = data.to_location;
             state.bookTransCondition.type_transportation_name =
                 data.type_transportation_name;
+        },
+        setReservationId(state, data) {
+            state.data.reservation_id = data;
         }
     },
     actions: {
@@ -179,6 +187,34 @@ export default {
                             'setBankAccountData',
                             data.Data.bankAccountData
                         );
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        updateStatus(context, { conditions, anotherCallback }) {
+            try {
+                repository.updateStatus(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Trạng thái đơn hàng đã cập nhật thành công',
+                            content:
+                                'Đơn hàng đã được cập nhật thành công, click vào [Tiếp tục] để quay lại trang chính',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    document
+                                        .getElementById(
+                                            'btn-close-modal-detail'
+                                        )
+                                        .click();
+                                }
+                            }
+                        });
+                        if (anotherCallback) anotherCallback();
                     }
                 });
             } catch (e) {

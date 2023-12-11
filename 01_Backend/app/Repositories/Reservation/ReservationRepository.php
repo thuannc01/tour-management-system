@@ -254,4 +254,11 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         // 
         return $response; 
     }
+
+    public function updateStatus($data){
+        $reservation = Reservation::find($data['id']);
+        $reservation->status = $data['status'] ?? null;
+        $reservation->updated_at = Carbon::now();
+        $reservation->save();
+    }
 }

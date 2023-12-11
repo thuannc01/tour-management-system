@@ -11,4 +11,5 @@ interface IReservationRepository
     public function saveData($data);
     public function getDataReservation($data);
     public function getOrderByIdReservation($data);
+    public function updateStatus($data);
 }

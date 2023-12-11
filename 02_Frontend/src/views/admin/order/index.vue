@@ -87,13 +87,15 @@ var Order = {
             'getDataReservation',
             'getDataToBookTrans',
             'bookTrans',
-            'getDetailOrderData'
+            'getDetailOrderData',
+            'updateStatus'
         ]),
         ...mapMutations('OrderStore', [
             'setStatusOrder',
             'setIsOrderTrans',
             'setBookTransData',
-            'setBookTransCondition'
+            'setBookTransCondition',
+            'setReservationId'
         ]),
         handleButtonClick() {
             alert('Button clicked!');
@@ -204,6 +206,7 @@ var Order = {
         },
         showModalDetailOrder(reservation_id) {
             const vm = this;
+            vm.setReservationId(reservation_id);
             const conditions = {
                 id: reservation_id
             };
@@ -213,6 +216,17 @@ var Order = {
             const inputMoment = moment(date);
 
             return inputMoment.format('DD/MM/YYYY HH:mm:ss');
+        },
+        saveStatusOrder() {
+            const vm = this;
+            const conditions = {
+                id: vm.data.reservation_id,
+                status: vm.data.status
+            };
+            vm.updateStatus({
+                conditions: conditions,
+                anotherCallback: vm.doSearch
+            });
         }
     }
 };

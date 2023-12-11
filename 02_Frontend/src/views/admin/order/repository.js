@@ -27,5 +27,8 @@ export default {
                 params: data
             }
         );
+    },
+    updateStatus: (data) => {
+        return repository.post(`${reservationResource}/update-status`, data);
     }
 };
