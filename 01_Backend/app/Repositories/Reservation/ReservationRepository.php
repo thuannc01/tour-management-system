@@ -240,12 +240,16 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         where reservations.id = " . $id_reservation;
         $transportationData = DB::select($transportationData);
         // 
+        $bankAccountData = " select * from bank_accounts where id = ". $reservationData->bank_account_id;
+        $bankAccountData = DB::select($bankAccountData);
+        // 
         $response = [
             'reservationData' => $reservationData,
             'customerDetail'  => $customerDetail,
             'serviceData'     => $serviceData,
             'tourData'        => $tourData,
-            'transportationData'    => $transportationData
+            'transportationData'    => $transportationData,
+            'bankAccountData'       => $bankAccountData
         ];
         // 
         return $response; 

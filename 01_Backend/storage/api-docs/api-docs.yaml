@@ -770,6 +770,9 @@ paths:
                 reservationData:
                   type: object
                   example: '{...}'
+                customerInfo:
+                  type: arr
+                  example: '[]'
               type: object
       responses:
         200:

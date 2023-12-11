@@ -54,7 +54,9 @@ export default {
         customerDetail: [],
         serviceData: [],
         tourData: [],
-        transportationData: []
+        transportationData: [],
+        bankAccountData: [],
+        priceSpread: 0
     },
     mutations: {
         setReservationData(state, data) {
@@ -71,6 +73,9 @@ export default {
         },
         setTransportationData(state, data) {
             state.transportationData = data;
+        },
+        setBankAccountData(state, data) {
+            state.bankAccountData = data;
         },
         setStatusOrder(state, data) {
             state.conditions.status = data;
@@ -169,6 +174,10 @@ export default {
                         context.commit(
                             'setTransportationData',
                             data.Data.transportationData
+                        );
+                        context.commit(
+                            'setBankAccountData',
+                            data.Data.bankAccountData
                         );
                     }
                 });

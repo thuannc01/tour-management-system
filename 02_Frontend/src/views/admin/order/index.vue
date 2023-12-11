@@ -6,6 +6,7 @@ import template from './template.html';
 import './style.scss';
 import store from '@/store';
 import OrderStore from '@/views/admin/order/store';
+import moment from 'moment';
 
 var Order = {
     template: template,
@@ -65,7 +66,9 @@ var Order = {
             'customerDetail',
             'serviceData',
             'tourData',
-            'transportationData'
+            'transportationData',
+            'bankAccountData',
+            'priceSpread'
         ])
     },
     methods: {
@@ -205,6 +208,11 @@ var Order = {
                 id: reservation_id
             };
             vm.getDetailOrderData(conditions);
+        },
+        formatDate3(date) {
+            const inputMoment = moment(date);
+
+            return inputMoment.format('DD/MM/YYYY HH:mm:ss');
         }
     }
 };

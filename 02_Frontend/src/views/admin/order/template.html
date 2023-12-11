@@ -144,11 +144,11 @@
                     </div>
                     <div id="service-tour" class="mb-2">
                         <h6 class="text-uppercase book-trans" style="color: black;">Thông tin về <strong>dịch vụ kèm
-                                tour</strong> - No.1</h6>
+                                tour</strong></h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="col-12 d-flex" v-for="(service, index) in serviceData" :key="index">
-                                <p style="width: 30%">Dịch vụ số {{index + 1}}: <strong>{{service.name}}</strong></p>
+                                <p style="width: 30%">Dịch vụ No.{{index + 1}}: <strong>{{service.name}}</strong></p>
                                 <p style="width: 30%">Đơn giá: <strong>{{formatNumber(service.price)}}đ/1 dịch
                                         vụ</strong></p>
                                 <p class="">Số lượng đã đặt mua: <strong>{{service.quantity}}</strong></p>
@@ -161,23 +161,28 @@
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="col-12">
-                                <thuan-input label="Tên Tour du lịch" :isRequired="true" :isDisabled="true" />
+                                <thuan-input v-if="tourData[0]" v-model="tourData[0].title" label="Tên Tour du lịch"
+                                    :isRequired="true" :isDisabled="true" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <thuan-input label="Thời gian khởi hành" :isRequired="true" :isDisabled="true" />
+                                <thuan-input type="date" v-if="tourData[0]" v-model="tourData[0].departure_time"
+                                    label="Thời gian khởi hành" :isRequired="true" :isDisabled="true" />
                             </div>
                             <div class="col-6">
-                                <thuan-input label="Thời gian kết thúc" :isRequired="true" :isDisabled="true" />
+                                <thuan-input type="date" v-if="tourData[0]" v-model="tourData[0].arrival_time"
+                                    label="Thời gian kết thúc" :isRequired="true" :isDisabled="true" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <thuan-input label="Địa điểm khởi hành" :isRequired="true" :isDisabled="true" />
+                                <thuan-input v-if="tourData[0]" v-model="tourData[0].from_province_name"
+                                    label="Địa điểm khởi hành" :isRequired="true" :isDisabled="true" />
                             </div>
                             <div class="col-6">
-                                <thuan-input label="Địa điểm đến" :isRequired="true" :isDisabled="true" />
+                                <thuan-input v-if="tourData[0]" v-model="tourData[0].to_province_name"
+                                    label="Địa điểm đến" :isRequired="true" :isDisabled="true" />
                             </div>
                         </div>
                     </div>
@@ -188,39 +193,64 @@
                         <div class="row">
                             <div class="row">
                                 <div class="col-6">
-                                    <thuan-input label="Mã phương tiện" :isRequired="true" :isDisabled="true" />
+                                    <thuan-input v-if="transportationData[0]" v-model="transportationData[0].id"
+                                        label="Mã phương tiện" :isRequired="true" :isDisabled="true" />
                                 </div>
                                 <div class="col-6">
-                                    <thuan-input label="Tên phương tiện" :isRequired="true" :isDisabled="true" />
+                                    <thuan-input v-if="transportationData[0]" v-model="transportationData[0].name"
+                                        label="Tên phương tiện" :isRequired="true" :isDisabled="true" />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <thuan-input label="Thời gian xuất phát" :isRequired="true" :isDisabled="true" />
-                                </div>
-                                <div class="col-6">
-                                    <thuan-input label="Thời gian về" :isRequired="true" :isDisabled="true" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <thuan-input label="Số lượng đặt" :isRequired="true" :isDisabled="true" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <thuan-input label="Giá vé tại thời điểm đặt" :isRequired="true"
-                                        :isDisabled="true" />
-                                </div>
-                                <div class="col-6">
-                                    <thuan-input label="Giá vé khi có sự thay đổi ở bên thứ 3" :isRequired="true"
-                                        :isDisabled="true" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <thuan-input label="Giá chênh lệch vượt quá ~ ngưỡng chênh lệch đặt ra (Nếu có)"
+                                    <thuan-input type="date" v-if="transportationData[0]"
+                                        v-model="transportationData[0].departure_time" label="Thời gian xuất phát"
                                         :isRequired="true" :isDisabled="true" />
+                                </div>
+                                <div class="col-6">
+                                    <thuan-input v-if="transportationData[0]" type="date"
+                                        v-model="transportationData[0].arrival_time" label="Thời gian về"
+                                        :isRequired="true" :isDisabled="true" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <thuan-input v-model="reservationData.transportation_quantity" label="Số lượng đặt"
+                                        :isRequired="true" :isDisabled="true" />
+                                </div>
+                            </div>
+                            <div class="text-center py-3"
+                                style="width:90%; background: rgb(242, 242, 242); border-radius: 10px; margin-left: 3.7rem; margin-bottom: 1rem;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>Giá vé phương tiện tại thời điểm đặt:
+                                            <strong
+                                                style="color: #ff891e;">{{formatNumber(reservationData.transportation_ticket_price
+                                                ??
+                                                0)}}đ</strong>
+                                        </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Giá vé phương tiện bên thứ 3 hiện tại: <strong style="color: #ff891e;"
+                                                v-if="transportationData[0]">{{formatNumber(transportationData[0].price)}}đ</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <p>Giá chênh lệch vượt quá ~ ngưỡng chênh lệch đặt ra (Nếu có): <strong
+                                                style="color: #ff891e;">{{priceSpread}}đ</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 text-center">
+                                        <button :disabled="priceSpread == 0" type="button"
+                                            class="btn btn-danger bi bi-bell-fill pe-2">&ensp;Tính lại tổng
+                                            tiền & Gởi thông báo
+                                            cho khách hàng & Xét lại trạng thái đơn hàng</button>
+                                    </div>
                                 </div>
                             </div>
                             <p class="my-0 py-0">>>> Chính sách: Ngưỡng chênh lệch giá đặt phương tiện đặt ra là: 50%/1
@@ -237,52 +267,78 @@
                                 rõ lý
                                 do và xác nhận xem khách hàng có muốn tiếp tục đặt tour này hay không.</p>
                             <p>>>>> Cuối cùng thiết lập trạng thái đơn hàng về chờ thanh toán</p>
-                            <p>>>> Lưu ý: Địa điểm xuất phát của phương tiện này trùng với địa điểm xuất phát ghi ở
-                                tour du lịch</p>
                         </div>
                     </div>
                     <div id="general-info" class="mb-2">
                         <h6 class="text-uppercase book-trans" style="color: black;">Thông tin chung về <strong>đơn đặt
                                 tour</strong> du lịch</h6>
                         <hr class="p-0 m-0 pb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <thuan-input label="Mã đơn hàng" :isRequired="true" :isDisabled="true" />
+                        <!--  -->
+                        <div class="row d-flex justify-content-center p-4 m-3"
+                            style="background: rgb(242, 242, 242); border-radius: 10px;">
+                            <div class="col-6">
+                                <div class="row">
+                                    <p>Mã đơn hàng: <strong>{{reservationData.id}}</strong></p>
+                                </div>
+                                <div class="row">
+                                    <p>Thời gian đặt tour: <strong>{{formatDate3(reservationData.created_at)}}</strong>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p>Phương tiện di chuyển:
+                                        <strong>{{formatDate3(reservationData.type_transportation)}}</strong>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p>Ngân hàng thanh toán: <strong
+                                            v-if="bankAccountData[0]">{{bankAccountData[0].bank_name}}</strong></p>
+                                </div>
+                                <div class="row">
+                                    <p>Phương thức thanh toán: <strong>{{reservationData.payment_method}}</strong>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <thuan-input label="Thời gian đặt tour" :isRequired="true" :isRequired="true"
-                                    :isDisabled="true" />
+                            <!--  -->
+                            <div class="col-6">
+                                <div class="row">
+                                    <p>Thời gian thanh toán:
+                                        <strong>{{formatDate3(reservationData.payment_date)}}</strong>
+                                </div>
+                                <div class="row">
+                                    <p v-if="tourData[0]">Số lượng người lớn:
+                                        <strong>{{reservationData.adult_ticket_quantity}} x
+                                            {{tourData[0].adult_ticket_price}}</strong>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p v-if="tourData[0]">Số lượng trẻ em:
+                                        <strong>{{reservationData.child_ticket_quantity}} x
+                                            {{tourData[0].child_ticket_price}}</strong>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p v-if="tourData[0]">Số lượng em bé:
+                                        <strong>{{reservationData.infant_ticket_quantity}} x
+                                            {{tourData[0].infant_ticket_price}}</strong>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p v-if="tourData[0]">Số tiền đã thanh toán:
+                                        <strong>{{formatNumber(reservationData.payment_amount)}}</strong>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-4">
-                                <thuan-input label="Phương tiện di chuyển" :isRequired="true" :isRequired="true"
-                                    :isDisabled="true" />
+                            <div class="row d-flex justify-content-center m-0 p-0">
+                                <h5 style="color: black; font-weight: 500;" v-if="tourData[0]" class="text-center m-0">
+                                    Tổng
+                                    hoá
+                                    đơn:
+                                    <strong
+                                        style="color: #ff891e;">{{formatNumber(reservationData.total_amount)}}</strong>
+                                </h5>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <thuan-input label="Ngân hàng thanh toán" :isDisabled="true" />
-                            </div>
-                            <div class="col-6">
-                                <thuan-input label="Ngày thanh toán" :isDisabled="true" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <thuan-input label="Số lượng người lớn (SL x Giá tiền)" :isRequired="true"
-                                    :isDisabled="true" />
-                            </div>
-                            <div class="col-6">
-                                <thuan-input label="Số lượng trẻ em (SL x Giá tiền)" :isDisabled="true" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <thuan-input label="Số lượng em bé (SL x Giá tiền)" :isDisabled="true" />
-                            </div>
-                            <div class="col-6">
-                                <thuan-input label="Tổng tiền" :isRequired="true" :isDisabled="true" />
-                            </div>
-                        </div>
+                        <!--  -->
                         <div class="row mb-3">
                             <div class="col-12">
                                 <thuan-select label="Trạng thái" :options="selectOptions.statusOrder"
