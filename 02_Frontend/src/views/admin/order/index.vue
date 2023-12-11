@@ -60,7 +60,12 @@ var Order = {
             'conditions',
             'selectOptions',
             'bookTransData',
-            'bookTransCondition'
+            'bookTransCondition',
+            'reservationData',
+            'customerDetail',
+            'serviceData',
+            'tourData',
+            'transportationData'
         ])
     },
     methods: {
@@ -78,7 +83,8 @@ var Order = {
         ...mapActions('OrderStore', [
             'getDataReservation',
             'getDataToBookTrans',
-            'bookTrans'
+            'bookTrans',
+            'getDetailOrderData'
         ]),
         ...mapMutations('OrderStore', [
             'setStatusOrder',
@@ -192,6 +198,13 @@ var Order = {
                 conditions: conditions,
                 anotherCallback: vm.doSearch
             });
+        },
+        showModalDetailOrder(reservation_id) {
+            const vm = this;
+            const conditions = {
+                id: reservation_id
+            };
+            vm.getDetailOrderData(conditions);
         }
     }
 };

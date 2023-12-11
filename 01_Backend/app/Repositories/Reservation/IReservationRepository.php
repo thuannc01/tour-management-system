@@ -10,4 +10,5 @@ interface IReservationRepository
     public function getDataPeriod($data);
     public function saveData($data);
     public function getDataReservation($data);
+    public function getOrderByIdReservation($data);
 }

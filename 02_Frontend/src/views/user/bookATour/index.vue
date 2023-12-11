@@ -504,8 +504,12 @@ var BookATour = {
             const vm = this;
             const conditions = {
                 bankAccountData: vm.bankData,
-                reservationData: vm.data
+                reservationData: vm.data,
+                customerInfo: vm.customerInfo.filter(
+                    (obj) => obj.full_name !== '' && obj.phone_number !== ''
+                )
             };
+            console.log('conditions saveData: ', conditions);
             vm.saveReservation(conditions);
         },
         directProfile() {

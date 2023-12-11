@@ -48,9 +48,30 @@ export default {
             from_location: '',
             to_location: '',
             type_transportation_name: ''
-        }
+        },
+        //
+        reservationData: [],
+        customerDetail: [],
+        serviceData: [],
+        tourData: [],
+        transportationData: []
     },
     mutations: {
+        setReservationData(state, data) {
+            state.reservationData = data;
+        },
+        setCustomerDetail(state, data) {
+            state.customerDetail = data;
+        },
+        setServiceData(state, data) {
+            state.serviceData = data;
+        },
+        setTourData(state, data) {
+            state.tourData = data;
+        },
+        setTransportationData(state, data) {
+            state.transportationData = data;
+        },
         setStatusOrder(state, data) {
             state.conditions.status = data;
         },
@@ -124,6 +145,31 @@ export default {
                             }
                         });
                         if (anotherCallback) anotherCallback();
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        getDetailOrderData(context, conditions) {
+            try {
+                repository.getDetailOrderData(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit(
+                            'setReservationData',
+                            data.Data.reservationData
+                        );
+                        context.commit(
+                            'setCustomerDetail',
+                            data.Data.customerDetail
+                        );
+                        context.commit('setServiceData', data.Data.serviceData);
+                        context.commit('setTourData', data.Data.tourData);
+                        context.commit(
+                            'setTransportationData',
+                            data.Data.transportationData
+                        );
                     }
                 });
             } catch (e) {

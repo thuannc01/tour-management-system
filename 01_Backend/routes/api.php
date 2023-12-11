@@ -88,6 +88,7 @@ Route::group([
     Route::apiResource('/reservation', ReservationController::class)->only(['index', 'store']);
     Route::get('/reservation/get-data-period', [ReservationController::class, 'getDataPeriod']);
     Route::get('/reservation/get-data-reservation', [ReservationController::class, 'getDataReservation']);
+    Route::get('/reservation/get-order-by-id-reservation', [ReservationController::class, 'getOrderByIdReservation']);
 });
 
 // No auth

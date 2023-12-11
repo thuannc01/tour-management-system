@@ -87,10 +87,11 @@
                             <button :class="[order.reservations_status != 'Chờ đặt phương tiện' ? 'btn-disabled' : '']"
                                 data-bs-toggle="modal" data-bs-target="#orderTransportationModal" type="button"
                                 class="btn btn-success btn-sm bi bi-scooter me-2"
-                                @click="showModalTrans(order.departure_time, order.type_transportation_id,(order.adult_ticket_quantity + order.child_ticket_quantity), order.from_province_name, order.to_province_name, order.type_transportation, order.id)"></button>
+                                @click="showModalTrans(order.departure_time, order.type_transportation_id,(order.adult_ticket_quantity + order.child_ticket_quantity), order.from_province_name, order.to_province_name, order.type_transportation, order.reservation_id)"></button>
                         </td>
                         <td class="align-middle">
-                            <button data-bs-toggle="modal" data-bs-target="#orderDetailModal" type="button"
+                            <button @click="showModalDetailOrder(order.reservation_id)" data-bs-toggle="modal"
+                                data-bs-target="#orderDetailModal" type="button"
                                 class="btn btn-primary btn-sm bi bi-three-dots me-2"></button>
                         </td>
                     </tr>
@@ -118,22 +119,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="customer-info" class="mb-2">
+                    <div id="customer-info" class="mb-2" v-for="(customer, index) in customerDetail" :key="index">
                         <h6 class="text-uppercase book-trans" style="color: black;">Thông tin <strong>khách
-                                hàng</strong> đặt tour - No.1</h6>
+                                hàng</strong> đặt tour - No.{{index + 1}}</h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
                             <div class="col-6">
-                                <thuan-input label="Khách hàng" :isRequired="true" :isDisabled="true" />
+                                <thuan-input v-model="customer.full_name" label="Khách hàng" :isRequired="true"
+                                    :isDisabled="true" />
                             </div>
                             <div class="col-6">
-                                <thuan-input label="Số điện thoại" :isRequired="true" :isDisabled="true" />
+                                <thuan-input v-model="customer.phone_number" label="Số điện thoại" :isRequired="true"
+                                    :isDisabled="true" />
                             </div>
                             <div class="col-6">
-                                <thuan-input label="Email" :isRequired="true" :isDisabled="true" />
+                                <thuan-input v-model="customer.email" label="Email" :isRequired="true"
+                                    :isDisabled="true" />
                             </div>
                             <div class="col-6">
-                                <thuan-input label="Địa chỉ" :isRequired="true" :isDisabled="true" />
+                                <thuan-input v-model="customer.address" label="Địa chỉ" :isRequired="true"
+                                    :isDisabled="true" />
                             </div>
                         </div>
                     </div>
@@ -142,9 +147,11 @@
                                 tour</strong> - No.1</h6>
                         <hr class="p-0 m-0 pb-2">
                         <div class="row">
-                            <div class="col-12">
-                                <thuan-input label="Dịch vụ kèm tour và số lượng (Số lượng dịch vụ x Giá tiền)"
-                                    :isDisabled="true" />
+                            <div class="col-12 d-flex" v-for="(service, index) in serviceData" :key="index">
+                                <p style="width: 30%">Dịch vụ số {{index + 1}}: <strong>{{service.name}}</strong></p>
+                                <p style="width: 30%">Đơn giá: <strong>{{formatNumber(service.price)}}đ/1 dịch
+                                        vụ</strong></p>
+                                <p class="">Số lượng đã đặt mua: <strong>{{service.quantity}}</strong></p>
                             </div>
                         </div>
                     </div>

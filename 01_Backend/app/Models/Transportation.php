@@ -11,7 +11,26 @@ class Transportation extends Model
 
     protected $table = 'transportation';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'id',
+        'type_transportation_id',
+        'name',
+        'distance',
+        'departure_time', 
+        'arrival_time',
+        'from_location',
+        'to_location',
+        'quantity',
+        'maximum_quantity',
+        'ticket_class',
+        'seat',
+        'price',
+        'desc',
+
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     public $timestamps = true;
 }

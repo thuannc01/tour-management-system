@@ -19,5 +19,13 @@ export default {
     },
     bookTrans: (data) => {
         return repository.post(`${transportationResource}`, data);
+    },
+    getDetailOrderData: (data) => {
+        return repository.get(
+            `${reservationResource}/get-order-by-id-reservation`,
+            {
+                params: data
+            }
+        );
     }
 };

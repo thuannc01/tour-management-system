@@ -130,8 +130,8 @@
 								<div class="info-group">
 									<div class="row">
 										<div class="col-6">
-											<thuan-input v-model="customerInfo[0].full_name" label="Họ và tên"
-												:isRequired="true" :isDisabled="true" />
+											<thuan-input max-length="100" v-model="customerInfo[0].full_name"
+												label="Họ và tên" :isRequired="true" :isDisabled="true" />
 										</div>
 										<div class="col-6">
 											<thuan-input v-model="customerInfo[0].phone_number" label="Số điện thoại"
@@ -162,15 +162,18 @@
 								<div class="info-group">
 									<div class="row">
 										<div class="col-6">
-											<thuan-input v-model="customerInfo[i].full_name" label="Họ và tên" />
+											<thuan-input max-length="100" v-model="customerInfo[i].full_name"
+												label="Họ và tên" />
 										</div>
 										<div class="col-6">
-											<thuan-input v-model="customerInfo[i].phone_number" label="Số điện thoại" />
+											<thuan-input max-length="10" v-model="customerInfo[i].phone_number"
+												label="Số điện thoại" />
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-6">
-											<thuan-input v-model="customerInfo[i].email" label="Email" />
+											<thuan-input max-length="20" v-model="customerInfo[i].email"
+												label="Email" />
 										</div>
 										<div class="col-6">
 											<thuan-select v-model="customerInfo[i].province_id" :options="locationList"

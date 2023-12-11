@@ -10,6 +10,7 @@ use App\Models\Period;
 use App\Models\Tour;
 use App\Models\BankAccount;
 use App\Models\Reservation;
+use App\Models\CustomerDetail;
 use Carbon\Carbon;
 
 class ReservationRepository extends BaseRepository implements IReservationRepository
@@ -107,7 +108,26 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
             'created_at' => Carbon::now()
         ];
         Reservation::insert($dataSetReservation);
-
+        // 
+        $maxIdReservation = Reservation::max('id');
+        // update quantity
+        $tour_period_id = $reservationData['tour_period_id'];
+        Period::where('id', $tour_period_id)->increment('quantity');
+        // save reservation
+        $customerInfoList = $data['customerInfo'];
+        foreach ($customerInfoList as $user) {
+            $customerDetailData = [
+                'reservation_id' => $maxIdReservation ?? 1,
+                'full_name' => $user['full_name'] ?? null,
+                'phone_number' => $user['phone_number'] ?? null,
+                'email' => $user['email'] ?? null,
+                'province_id' => $user['province_id'] ?? null,
+                'address' => $user['address'] ?? null,
+                'created_at' => Carbon::now()
+            ];
+            CustomerDetail::insert($customerDetailData);
+        }
+        // 
         return 'ok';
     }
 
@@ -121,7 +141,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         $totalRows  = Reservation::whereNull('deleted_at')->count('id');
         // 
         $sqlString = "
-        select reservations.* , tours.*, periods.*, users.* ,  reservations.created_at reservation_date, reservations.status reservations_status, 
+        select reservations.id reservation_id, reservations.* , tours.*, periods.*, users.* ,  reservations.created_at reservation_date, reservations.status reservations_status, 
         from_province.name AS from_province_name, to_province.name AS to_province_name, types_transportation.name type_transportation 
         from reservations
         join users on users.id = reservations.user_id
@@ -137,7 +157,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
 
         if($status  == 'Chờ đặt phương tiện'){
             $sqlString = "
-            select reservations.* , tours.*, periods.* , users.* ,  reservations.created_at reservation_date, reservations.status reservations_status, 
+            select reservations.id reservation_id, reservations.* , tours.*, periods.* , users.* ,  reservations.created_at reservation_date, reservations.status reservations_status, 
             from_province.name AS from_province_name, to_province.name AS to_province_name, types_transportation.name type_transportation 
             from reservations
             join users on users.id = reservations.user_id
@@ -154,7 +174,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         }
         if(trim($status) == ''){
             $sqlString = "
-            select reservations.* , tours.*, periods.*  , users.* , reservations.created_at reservation_date, reservations.status reservations_status, 
+            select reservations.id reservation_id, reservations.* , tours.*, periods.*  , users.* , reservations.created_at reservation_date, reservations.status reservations_status, 
             from_province.name AS from_province_name, to_province.name AS to_province_name, types_transportation.name type_transportation
             from reservations
             join users on users.id = reservations.user_id
@@ -177,5 +197,57 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         ];
 
         return $response;
+    }
+
+    public function getOrderByIdReservation($data){
+        $id_reservation = $data['id'];
+        $reservationData = Reservation::find($id_reservation);
+        // 
+        $customerDetail = CustomerDetail::where('reservation_id', '=', $id_reservation)->get();
+        // 
+        $idServiceList = " select rtrim(regexp_replace(additional_service_id_list, '###', ',', 'g'), ',')
+         from reservations where id = ".$id_reservation;
+        $idServiceList = DB::select($idServiceList)[0]->rtrim;
+        $serviceData = " select * from additional_services where id in (". $idServiceList .") ";
+        $serviceData = DB::select($serviceData);
+        $arrQuantity = " select rtrim(regexp_replace(additional_service_quantity_list, '###', ',', 'g'), ',')
+        from reservations where id = ".$id_reservation;
+        $arrQuantity = DB::select($arrQuantity)[0]->rtrim;
+        $arrQuantity = explode(",", $arrQuantity);
+        $i = 0;
+        foreach ($serviceData as $object) {
+            $object->quantity = $arrQuantity[$i];
+            $i ++;
+        }
+        // 
+        $tourData = " 
+        select reservations.* , tours.*, periods.*, users.* ,  reservations.created_at reservation_date, reservations.status reservations_status, 
+        from_province.name AS from_province_name, to_province.name AS to_province_name, types_transportation.name type_transportation 
+        from reservations
+        join users on users.id = reservations.user_id
+        join periods on periods.id = reservations.tour_period_id
+        join tours on tours.id = periods.tour_id
+
+        JOIN province AS from_province ON from_province.id = tours.from_province_id
+        JOIN province AS to_province ON to_province.id = tours.to_province_id
+        JOIN types_transportation ON types_transportation.id = tours.type_transportation_id
+        where reservations.id = " . $id_reservation;
+        $tourData = DB::select($tourData);
+        // 
+        $transportationData = " select transportation.* 
+        from transportation
+        join reservations on reservations.transportation_id  = transportation.id 
+        where reservations.id = " . $id_reservation;
+        $transportationData = DB::select($transportationData);
+        // 
+        $response = [
+            'reservationData' => $reservationData,
+            'customerDetail'  => $customerDetail,
+            'serviceData'     => $serviceData,
+            'tourData'        => $tourData,
+            'transportationData'    => $transportationData
+        ];
+        // 
+        return $response; 
     }
 }
