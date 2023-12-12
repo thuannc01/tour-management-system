@@ -240,33 +240,45 @@
                                 <div class="row">
                                     <div class="col-12 text-center">
                                         <p>Giá chênh lệch vượt quá ~ ngưỡng chênh lệch đặt ra (Nếu có): <strong
-                                                style="color: #ff891e;">{{priceSpread}}đ</strong>
+                                                style="color: #ff891e;">{{formatNumber(priceSpread)}}đ</strong>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 text-center">
-                                        <button :disabled="priceSpread == 0" type="button"
+                                        <button @click="calAndNotification(reservationData.user_id)"
+                                            :disabled="priceSpread == 0" type="button"
                                             class="btn btn-danger bi bi-bell-fill pe-2">&ensp;Tính lại tổng
                                             tiền & Gởi thông báo
                                             cho khách hàng & Xét lại trạng thái đơn hàng</button>
                                     </div>
                                 </div>
                             </div>
-                            <p class="my-0 py-0">>>> Chính sách: Ngưỡng chênh lệch giá đặt phương tiện đặt ra là: 50%/1
-                                vé.
+                            <p class="my-0 py-0"><strong>Chính sách:</strong> Ngưỡng chênh lệch giá đặt phương tiện đặt
+                                ra là: 30%
+                                trên 1 vé, so với vé tại thời điểm đặt phương tiện hoàn thành lần trước đó.
                             </p>
-                            <p class="my-0 py-0">>>>> Ví dụ giá vé đặt xe
-                                khách hiện tại là 380.000đ đi từ Đà Nẵng vào Vũng Tàu. Nếu giá tăng lên bất thường từ
-                                570.000đ trở lên thì phải tính toán lại.</p>
-                            <p class="my-0 py-0">>>>> Cách tính toán lại: Tổng tiền = Tổng tiền trước đó + Giá
+                            <p class="my-0 py-0" style="font-style: italic; color: blue;">>>>> Ví dụ giá vé đã đặt xe
+                                khách tại thời điểm trước khi tour du lịch diễn ra (Tức là đơn hàng
+                                chưa ở trạng thái hoàn thành) là 380.000đ đi từ Đà Nẵng vào Vũng Tàu. Nếu giá tăng lên
+                                bất thường trong khoảng thời gian này từ
+                                494.000đ trở lên thì phải tính toán lại.</p>
+                            <p class="my-0 py-0"><strong>1.</strong> Cách tính toán lại: Tổng tiền = Tổng tiền trước đó
+                                + Giá
                                 chênh
                                 lệch phương tiện</p>
-                            <p class="my-0 py-0">>>>> Sau đó báo ngay cho khách hàng biết thông qua việc gởi mail hoặc
+                            <p class="my-0 py-0"><strong>2.</strong> Sau đó báo ngay cho khách hàng biết thông qua việc
+                                gởi thông báo qua
+                                hệ thống, gởi mail cá nhân cho khách hàng hoặc
                                 gọi điện, phải nêu
                                 rõ lý
                                 do và xác nhận xem khách hàng có muốn tiếp tục đặt tour này hay không.</p>
-                            <p>>>>> Cuối cùng thiết lập trạng thái đơn hàng về chờ thanh toán</p>
+                            <p class="my-0 py-0"><strong>3.</strong> Cuối cùng thiết lập trạng thái đơn hàng về chờ
+                                thanh toán. Quay lại quy trình xử lý
+                                đơn hàng ban đầu.</p>
+                            <p><strong>4.</strong> Quy trình xử lý đơn hàng: Chờ thanh toán => Xác nhận => Đặt phương
+                                tiện =>
+                                Hoàn thành tour</p>
                         </div>
                     </div>
                     <div id="general-info" class="mb-2">

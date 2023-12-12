@@ -53,7 +53,7 @@ var Order = {
         };
     },
     computed: {
-        ...mapState('app', []),
+        ...mapState('app', ['userData']),
         ...mapState('OrderStore', [
             'totalRows',
             'dataTable',
@@ -68,7 +68,9 @@ var Order = {
             'tourData',
             'transportationData',
             'bankAccountData',
-            'priceSpread'
+            'priceSpread',
+            'total_amount',
+            'receiver_id'
         ])
     },
     methods: {
@@ -95,7 +97,10 @@ var Order = {
             'setIsOrderTrans',
             'setBookTransData',
             'setBookTransCondition',
-            'setReservationId'
+            'setReservationId',
+            'setPriceSpread',
+            'setTotalAmount',
+            'setReceiverId'
         ]),
         handleButtonClick() {
             alert('Button clicked!');
@@ -211,6 +216,33 @@ var Order = {
                 id: reservation_id
             };
             vm.getDetailOrderData(conditions);
+            //
+            setTimeout(() => {
+                let cal30Percent = Math.round(
+                    Number(vm.reservationData.transportation_ticket_price) * 0.3
+                );
+                let priceSpread = Math.round(
+                    Number(vm.reservationData.transportation_ticket_price) +
+                        Number(cal30Percent)
+                );
+                if (
+                    Number(vm.transportationData[0].price) >=
+                    Number(priceSpread)
+                ) {
+                    let extraPrice =
+                        Number(vm.transportationData[0].price) -
+                        Number(priceSpread);
+                    vm.setPriceSpread(Math.round(extraPrice));
+                    //
+                    let total_amount =
+                        Number(vm.reservationData.total_amount) +
+                        Math.round(extraPrice);
+                    vm.setTotalAmount(total_amount);
+                } else {
+                    vm.setPriceSpread(0);
+                }
+                //
+            }, 1000);
         },
         formatDate3(date) {
             const inputMoment = moment(date);
@@ -227,6 +259,26 @@ var Order = {
                 conditions: conditions,
                 anotherCallback: vm.doSearch
             });
+        },
+        calAndNotification(user_id) {
+            const vm = this;
+            const conditions = {
+                id: vm.data.reservation_id,
+                status: 'Chờ thanh toán'
+            };
+            vm.updateStatus({
+                conditions: conditions,
+                anotherCallback: vm.doSearch
+            });
+            // send notification
+            const notificationConditions = {
+                title: 'THÔNG BÁO SỰ THAY ĐỔI VỀ GIÁ PHƯƠNG TIỆN ĐÃ ĐẶT TRONG TOUR DU LỊCH CỦA QUÝ KHÁCH',
+                message:
+                    'Chúng tôi xin chân thành xin lỗi vì sự bất tiện mà Quý khách hàng có thể đã phải đối mặt gần đây liên quan đến việc thay đổi giá đặt phương tiện của chúng tôi, chúng tôi đã gởi thông báo qua mail của quý khách và bộ phận chăm sóc khách hàng sẽ gọi điện trực tiếp đến bạn trong 24h tới. Hoá đơn tour du lịch đã được cập nhật lại. Vui lòng xác nhận cho chúng tôi biết nếu bạn đã nhận được thông báo này. Cảm ơn!',
+                sender_id: vm.userData.id,
+                receiver_id: user_id
+            };
+            console.log('notificationConditions: ', notificationConditions);
         }
     }
 };

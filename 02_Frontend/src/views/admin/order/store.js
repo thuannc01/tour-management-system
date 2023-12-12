@@ -61,9 +61,20 @@ export default {
         tourData: [],
         transportationData: [],
         bankAccountData: [],
-        priceSpread: 0
+        priceSpread: 0,
+        total_amount: 0,
+        receiver_id: 0
     },
     mutations: {
+        setReceiverId(state, data) {
+            state.receiver_id = data;
+        },
+        setTotalAmount(state, data) {
+            state.total_amount = data;
+        },
+        setPriceSpread(state, data) {
+            state.priceSpread = data;
+        },
         setReservationData(state, data) {
             state.reservationData = data;
         },
