@@ -30,5 +30,11 @@ export default {
     },
     updateStatus: (data) => {
         return repository.post(`${reservationResource}/update-status`, data);
+    },
+    saveNotification: (data) => {
+        return repository.post(
+            `${reservationResource}/save-notification`,
+            data
+        );
     }
 };

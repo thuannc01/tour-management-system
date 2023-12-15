@@ -39,7 +39,10 @@ var Home = {
     mounted() {
         this.getToursHome();
         this.getNewsHome();
+        //
+        this.gettingNotification();
     },
+    unmounted() {},
     watch: {},
     data() {
         return {
@@ -53,12 +56,13 @@ var Home = {
     },
     computed: {
         // app
-        ...mapState('app', []),
+        ...mapState('app', ['userData']),
         // module
         ...mapState('HomeStore', [
             'newsHomeList',
             'hotToursList',
-            'newToursList'
+            'newToursList',
+            'notificationData'
         ])
     },
     methods: {
@@ -66,7 +70,11 @@ var Home = {
         ...mapActions('app', []),
         ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
         // module
-        ...mapActions('HomeStore', ['getToursHome', 'getNewsHome']),
+        ...mapActions('HomeStore', [
+            'getToursHome',
+            'getNewsHome',
+            'getNotification'
+        ]),
         ...mapMutations('HomeStore', []),
         //
         onSwiper(swiper) {
@@ -89,6 +97,13 @@ var Home = {
         },
         seeDetailTour(tourId) {
             this.$router.push({ path: `/tour-detail/${tourId}` });
+        },
+        gettingNotification() {
+            const vm = this;
+            const conditions = {
+                id: vm.userData.id
+            };
+            vm.getNotification(conditions);
         }
     }
 };

@@ -23,6 +23,7 @@ import ThuanDoughnutChart from '@/components/thuanDoughnutChart';
 const app = createApp(App);
 app.use(vClickOutside);
 app.use(BootstrapVueNext);
+//
 app.use(VueCookies, {
     expireTimes: '30d',
     path: '/'

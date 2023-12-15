@@ -368,4 +368,116 @@ class ReservationController extends Controller
         }
         return $response;
     }
+
+    /**
+     * save reservations
+     *  @OA\POST(
+     *      path="/reservation/save-notification",
+     *      tags={"Reservation"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\RequestBody(
+     *           description="Notification data",
+     *           @OA\JsonContent(
+     *               @OA\Property(property="title", type="string", example="..."),
+     *               @OA\Property(property="message", type="string", example="..."),
+     *               @OA\Property(property="sender_id", type="int", example="1"),
+     *               @OA\Property(property="receiver_id", type="int", example="1")
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result of success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Result of success"
+     *              )
+     *          )
+     *      )
+     *  )
+     */
+    public function saveNotification(Request $request)
+    {
+        $response = null;
+        try {
+            $data_res = $this->reservationRepository->saveNotification($request->all());
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
+        }
+        catch (\Exception $e) {
+            //
+        }
+        return $response;
+    }
+
+     /**
+     * Get notification by user id
+     *  @OA\GET(
+     *      path="/reservation/get-notification",
+     *      tags={"Reservation"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="user id",
+     *          in="query",
+     *          @OA\Schema(type="int")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result of success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Result of success"
+     *              )
+     *          )
+     *      )
+     *  )
+     */
+    public function getNotificationByUser(Request $request){
+        $response = null;
+        try {
+            $data_res = $this->reservationRepository->getNotificationByUser($request->all());
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
+        }
+        catch (\Exception $e) {
+            //
+        }
+        return $response;
+    }
 }

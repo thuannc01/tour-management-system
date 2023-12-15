@@ -934,6 +934,78 @@ paths:
       security:
         -
           apiAuth: []
+  /reservation/save-notification:
+    post:
+      tags:
+        - Reservation
+      summary: 'save reservations'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 0e36688ea7bb0b3f0d2282353a87a943
+      requestBody:
+        description: 'Notification data'
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  example: ...
+                message:
+                  type: string
+                  example: ...
+                sender_id:
+                  type: integer
+                  example: '1'
+                receiver_id:
+                  type: integer
+                  example: '1'
+              type: object
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
+  /reservation/get-notification:
+    get:
+      tags:
+        - Reservation
+      summary: 'Get notification by user id'
+      description: "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      "
+      operationId: 5b78d4df4ab92b2388996c75beddba3d
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'user id'
+          schema:
+            type: int
+      responses:
+        200:
+          description: 'Result of success'
+          content:
+            application/json:
+              schema:
+                properties:
+                  Code:
+                    type: integer
+                    example: '200'
+                  Data:
+                    description: 'Result of success'
+                type: object
+      security:
+        -
+          apiAuth: []
   /role:
     get:
       tags:

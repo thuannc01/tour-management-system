@@ -90,6 +90,8 @@ Route::group([
     Route::get('/reservation/get-data-reservation', [ReservationController::class, 'getDataReservation']);
     Route::get('/reservation/get-order-by-id-reservation', [ReservationController::class, 'getOrderByIdReservation']);
     Route::post('/reservation/update-status', [ReservationController::class, 'updateStatus']);
+    Route::post('/reservation/save-notification', [ReservationController::class, 'saveNotification']);
+    Route::get('/reservation/get-notification', [ReservationController::class, 'getNotificationByUser']);
 });
 
 // No auth

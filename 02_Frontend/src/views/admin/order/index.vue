@@ -90,7 +90,8 @@ var Order = {
             'getDataToBookTrans',
             'bookTrans',
             'getDetailOrderData',
-            'updateStatus'
+            'updateStatus',
+            'saveNotification'
         ]),
         ...mapMutations('OrderStore', [
             'setStatusOrder',
@@ -278,7 +279,9 @@ var Order = {
                 sender_id: vm.userData.id,
                 receiver_id: user_id
             };
-            console.log('notificationConditions: ', notificationConditions);
+            setTimeout(function () {
+                vm.saveNotification(notificationConditions);
+            }, 500);
         }
     }
 };

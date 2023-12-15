@@ -231,6 +231,29 @@ export default {
             } catch (e) {
                 console.log('' + e.message);
             }
+        },
+        saveNotification(context, conditions) {
+            try {
+                repository.saveNotification(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Đã gởi thông báo thành công',
+                            content:
+                                'Sự thay đổi về giá đã được gởi thông báo đến khách hàng, bạn vui lòng gọi điện thoại cho khách hàng để tiến hành xác nhận.',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    //
+                                }
+                            }
+                        });
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
         }
     }
 };

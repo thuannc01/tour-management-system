@@ -12,6 +12,7 @@ use App\Models\BankAccount;
 use App\Models\Reservation;
 use App\Models\CustomerDetail;
 use Carbon\Carbon;
+use App\Models\Notification;
 
 class ReservationRepository extends BaseRepository implements IReservationRepository
 {
@@ -260,5 +261,25 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         $reservation->status = $data['status'] ?? null;
         $reservation->updated_at = Carbon::now();
         $reservation->save();
+    }
+
+    public function saveNotification($data){
+        $dataInsert = [
+            'title'         => $data['title'] ?? '', 
+            'message'       => $data['message'] ?? '', 
+            'sender_id'     => $data['sender_id'] ?? 1, 
+            'receiver_id'   => $data['receiver_id'] ?? 1,
+            'created_at' => Carbon::now()
+        ];
+        Notification::insert($dataInsert);
+
+        return 'Ok';
+    }
+
+    public function getNotificationByUser($data){
+        $notification = Notification::where('receiver_id', $data['id'])
+        ->orderBy('created_at', 'desc')
+        ->first();
+        return $notification;
     }
 }
