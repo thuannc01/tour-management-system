@@ -41,7 +41,8 @@ var Profile = {
             'genderList',
             'locationList',
             'dataTable',
-            'ratingData'
+            'ratingData',
+            'refundData'
         ])
     },
     methods: {
@@ -53,12 +54,14 @@ var Profile = {
             'getAllLocation',
             'updateInfoUser',
             'getOrderByStatus',
-            'review'
+            'review',
+            'updateRefund'
         ]),
         ...mapMutations('ProfileStore', [
             'setUserDataUpdate',
             'setAvatarImg',
-            'setRatingData'
+            'setRatingData',
+            'setRefundData'
         ]),
         //
         handelNavSidebar(code) {
@@ -287,6 +290,41 @@ var Profile = {
                 status: vm.ratingData.status
             };
             vm.review(conditions);
+        },
+        cancelOrderTour(reservationId, title, payment_amount) {
+            const vm = this;
+            const data = {
+                reservationID: reservationId,
+                title: title,
+                paymentAmount: `${vm.formatNumber(payment_amount)} đ`,
+                cancellationReason: 'Lý do ...',
+                refundAmount: 0,
+                refundMethod: ''
+            };
+            vm.setRefundData(data);
+        },
+        formatNumber(number) {
+            let numStr = number.toString();
+
+            let result = [];
+
+            for (let i = numStr.length - 1, j = 0; i >= 0; i--, j++) {
+                if (j > 0 && j % 3 === 0) {
+                    result.unshift('.');
+                }
+                result.unshift(numStr[i]);
+            }
+            return result.join('');
+        },
+        saveRefund() {
+            const vm = this;
+            const conditions = {
+                reservationID: vm.refundData.reservationID,
+                cancellationReason: vm.refundData.cancellationReason ?? '',
+                refundAmount: vm.refundData.refundAmount ?? 0,
+                refundMethod: vm.refundData.refundMethod ?? ''
+            };
+            vm.updateRefund(conditions);
         }
     }
 };

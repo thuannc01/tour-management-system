@@ -25,6 +25,15 @@ const ratingData = {
     status: 'Chờ duyệt – Không hiển thị'
 };
 
+const refundData = {
+    reservationID: 0,
+    title: '',
+    paymentAmount: 0,
+    cancellationReason: '',
+    refundAmount: 0,
+    refundMethod: 'Chuyển vào tài khoản thanh toán'
+};
+
 export default {
     namespaced: true,
     state: {
@@ -41,9 +50,23 @@ export default {
         ],
         locationList: [],
         dataTable: [],
-        ratingData: { ...ratingData }
+        ratingData: { ...ratingData },
+        refundData: { ...refundData }
     },
     mutations: {
+        setRefundData(state, data) {
+            state.refundData.reservationID =
+                data.reservationID ?? state.refundData.reservationID;
+            state.refundData.title = data.title ?? state.refundData.title;
+            state.refundData.paymentAmount =
+                data.paymentAmount ?? state.refundData.paymentAmount;
+            state.refundData.cancellationReason =
+                data.cancellationReason ?? state.refundData.cancellationReason;
+            state.refundData.refundAmount =
+                data.refundAmount ?? state.refundData.refundAmount;
+            state.refundData.refundMethod =
+                data.refundMethod ?? state.refundData.refundMethod;
+        },
         setUserDataUpdate(state, data) {
             state.userDataUpdate.id = data.id;
             state.userDataUpdate.full_name = data.full_name;
@@ -122,15 +145,40 @@ export default {
                     if (data.Code == 200) {
                         store.commit('app/showModalMessage', {
                             type: MSG_TYPE.SUCCESS,
-                            title: 'Đã đánh giá thành công',
+                            title: 'Đã huỷ tour thành công',
                             content:
-                                'Cảm ơn bạn đã đánh giá tour du lịch này. Chúc bạn một ngày tốt lành!',
-                            okText: 'Tiếp tục',
+                                'Bạn đã huỷ tour du lịch này thành công. Click vào [Ok] để tiếp tục!',
+                            okText: 'OK',
                             callback: (ok) => {
                                 if (ok) {
                                     document
-                                        .getElementById('hideModalRating')
+                                        .getElementById(
+                                            'cancel-order-modal-hide'
+                                        )
                                         .click();
+                                }
+                            }
+                        });
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        updateRefund(context, data) {
+            try {
+                repository.updateRefund(data).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Đã đặt tour thành công',
+                            content:
+                                'Dữ liệu đặt tour du lịch đã được cập nhật vào cơ sở dữ liệu. Về lại trang quản lý đơn hàng của bạn!',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    context.commit('setIsDirectProfile');
                                 }
                             }
                         });

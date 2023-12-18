@@ -296,6 +296,7 @@ CREATE TABLE transportation (
 -- DROP TYPE IF EXISTS status_reservation_type
 CREATE TYPE status_reservation_type AS ENUM ('Chờ thanh toán', 'Chờ xác nhận', 'Chờ đặt phương tiện', 'Đã đặt phương tiện thành công', 'Hoàn thành');
 CREATE TYPE payment_method_type AS ENUM ('Tiền mặt', 'Ngân hàng');
+CREATE TYPE refund_method_type AS ENUM ('Nhận tiền tại quầy giao dịch', 'Chuyển vào tài khoản thanh toán');
 CREATE TABLE reservations (
     id serial PRIMARY KEY,
 	tour_period_id integer REFERENCES periods(id),
@@ -318,6 +319,9 @@ CREATE TABLE reservations (
 	payment_date character varying(40),
 	advance_payment BOOLEAN,
 	payment_detail character varying(1000),
+	--
+	refund_amount numeric(18, 0),
+	refund_method refund_method_type,
 	--
     created_at TIMESTAMP,
 	updated_at TIMESTAMP,

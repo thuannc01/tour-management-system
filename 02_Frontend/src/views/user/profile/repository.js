@@ -19,5 +19,8 @@ export default {
     },
     review: (data) => {
         return repository.post(`${ratingResource}/review`, data);
+    },
+    updateRefund: (data) => {
+        return repository.post(`${orderResource}/update-refund`, data);
     }
 };

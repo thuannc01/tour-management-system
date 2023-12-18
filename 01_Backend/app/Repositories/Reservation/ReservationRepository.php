@@ -26,22 +26,21 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         $user_id = $data['user_id'];
         // 
         $sqlString = "
-        select * , tours.*
+        select reservations.id reservationID, * , tours.*
         from reservations
         join periods on periods.id = reservations.tour_period_id
         join tours on tours.id = periods.tour_id
-        where reservations.status = '" .$status ."' and user_id = " .$user_id;
+        where reservations.status = '" .$status ."' and reservations.user_id = " .$user_id;
 
         if($status  == 'Chờ đặt phương tiện'){
             $sqlString = "
-            select * , tours.*
+            select reservations.id reservationID, * , tours.*
             from reservations
             join periods on periods.id = reservations.tour_period_id
             join tours on tours.id = periods.tour_id
-            where reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công' 
-            and user_id = " .$user_id;
+            where (reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công')
+            and reservations.user_id = " .$user_id;
         }
-
         $orderData = DB::select($sqlString);
         return $orderData;
     }

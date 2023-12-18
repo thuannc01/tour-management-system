@@ -196,9 +196,10 @@
 													</td>
 													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
-														<button class="border-0" type="button"
-															class="btn btn-danger btn-sm" data-bs-toggle="modal"
-															data-bs-target="#CancelOrderTour">
+														<button
+															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount)"
+															class="border-0" type="button" class="btn btn-danger btn-sm"
+															data-bs-toggle="modal" data-bs-target="#CancelOrderTour">
 															<i class="btn-sm bi bi-x-circle"></i>
 														</button>
 													</td>
@@ -256,6 +257,7 @@
 													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button class="border-0" type="button"
+															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount)"
 															class="btn btn-danger btn-sm" data-bs-toggle="modal"
 															data-bs-target="#CancelOrderTour">
 															<i class="btn-sm bi bi-x-circle"></i>
@@ -315,6 +317,7 @@
 													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button class="border-0" type="button"
+															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount)"
 															class="btn btn-danger btn-sm" data-bs-toggle="modal"
 															data-bs-target="#CancelOrderTour">
 															<i class="btn-sm bi bi-x-circle"></i>
@@ -503,26 +506,27 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<h6 class="modal-title text-center mb-2 text-uppercase font-weight-600" id="exampleModalLabel">Tour
-						mùa đông 2023 - Khám phá Hạ
-						Long Bay</h6>
+					<h6 class="modal-title text-center mb-2 text-uppercase font-weight-600" id="exampleModalLabel">
+						{{refundData.title}}</h6>
 					<div class="cancel-order-tour my-3">
 						<div class="row">
 							<div class="col-12">
-								<thuan-input label="Số tiền bạn đã thanh toán" :isDisabled="true" v-model="money" />
+								<thuan-input label="Số tiền bạn đã thanh toán" :isDisabled="true"
+									v-model="refundData.paymentAmount" />
 							</div>
 						</div>
 						<div class="row mt-2">
 							<div class="col-12 m-0">
 								<h6>Dựa theo chính sách huỷ Tour của công ty chúng tôi, số tiền hoàn của bạn được tính
 									vì lý do</h6>
-								<p class=" text-reason-cancel-order-tour">- Huỷ tour 3 – 2 ngày trước ngày khởi hành:
-									phí huỷ 30% tiền tour.</p>
+								<p style="font-weight: 500;" class="text-reason-cancel-order-tour text-center">
+									{{refundData.cancellationReason}}</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-12 m-0">
-								<thuan-input label="Số tiền cần hoàn lại" :isDisabled="true" v-model="money" />
+								<thuan-input label="Số tiền cần hoàn lại" :isDisabled="true"
+									v-model="refundData.refundAmount" />
 							</div>
 						</div>
 						<div class="row pt-1">
@@ -531,15 +535,17 @@
 							</div>
 							<div class="col-7 d-flex">
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault"
-										id="flexRadioDefault1">
+									<input v-model="refundData.refundMethod" class="form-check-input" type="radio"
+										name="flexRadioDefault" id="flexRadioDefault1"
+										value="Nhận tiền tại quầy giao dịch">
 									<label class="form-check-label" for="flexRadioDefault1">
 										Nhận tiền tại quầy giao dịch
 									</label>
 								</div>
 								<div class="form-check">
-									<input class="form-check-input" type="radio" name="flexRadioDefault"
-										id="flexRadioDefault2" checked>
+									<input v-model="refundData.refundMethod" class="form-check-input" type="radio"
+										name="flexRadioDefault" id="flexRadioDefault2" checked
+										value="Chuyển vào tài khoản thanh toán">
 									<label class="form-check-label" for="flexRadioDefault2">
 										Chuyển ngược vào tài khoản thanh toán
 									</label>
@@ -550,7 +556,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-					<button type="button" class="btn btn-primary bg-btn-primary-custom">Huỷ đơn</button>
+					<button type="button" id="cancel-order-modal-hide" class="btn btn-primary bg-btn-primary-custom">Huỷ đơn</button>
 				</div>
 			</div>
 		</div>
