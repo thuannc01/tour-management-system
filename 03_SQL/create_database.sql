@@ -295,6 +295,7 @@ CREATE TABLE transportation (
 -- Drop table reservations CASCADE
 -- DROP TYPE IF EXISTS status_reservation_type
 CREATE TYPE status_reservation_type AS ENUM ('Chờ thanh toán', 'Chờ xác nhận', 'Chờ đặt phương tiện', 'Đã đặt phương tiện thành công', 'Hoàn thành');
+ALTER TYPE status_reservation_type ADD VALUE 'Huỷ đơn';
 CREATE TYPE payment_method_type AS ENUM ('Tiền mặt', 'Ngân hàng');
 CREATE TYPE refund_method_type AS ENUM ('Nhận tiền tại quầy giao dịch', 'Chuyển vào tài khoản thanh toán');
 CREATE TABLE reservations (

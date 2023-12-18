@@ -14,4 +14,5 @@ interface IReservationRepository
     public function updateStatus($data);
     public function saveNotification($data);
     public function getNotificationByUser($data);
+    public function updateRefund($data);
 }

@@ -81,8 +81,12 @@
 									<div class="card-body d-flex">
 										<div class="col-lg-4">
 											<div class="card-body text-center">
-												<img @click="addAvatar" :src="userDataUpdate.avatar_path" alt="avatar"
+												<img v-if="userDataUpdate.avatar_path" @click="addAvatar"
+													:src="userDataUpdate.avatar_path" alt="avatar"
 													class="rounded-circle img-fluid img-avt-user"
+													style="width: 160px; height: 150px;">
+												<img v-else @click="addAvatar" src="/src/assets/images/avt_default.png"
+													alt="avatar" class="rounded-circle img-fluid img-avt-user"
 													style="width: 160px; height: 150px;">
 												<input type="file" @change="uploadImg" id="avt-user-image"
 													class="form-control d-none" />
@@ -556,7 +560,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-					<button type="button" id="cancel-order-modal-hide" class="btn btn-primary bg-btn-primary-custom">Huỷ đơn</button>
+					<button @click="saveRefund" type="button" id="cancel-order-modal-hide" class="btn btn-primary bg-btn-primary-custom">Huỷ
+						đơn</button>
 				</div>
 			</div>
 		</div>

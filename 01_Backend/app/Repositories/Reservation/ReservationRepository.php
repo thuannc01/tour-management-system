@@ -281,4 +281,19 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         ->first();
         return $notification;
     }
+
+    public function updateRefund($data){
+        try {
+            $reservation = Reservation::find($data['reservationID']);
+            $reservation->status = 'Huỷ đơn';
+            $reservation->refund_amount = $data['refundAmount'];
+            $reservation->refund_method = $data['refundMethod'];
+            $reservation->updated_at = Carbon::now();
+            $reservation->save();
+            return 'Ok';
+        }
+        catch (\Exception $e) {
+            dd($e);
+        }
+    }
 }

@@ -1522,6 +1522,66 @@
                 ]
             }
         },
+        "/reservation/update-refund": {
+            "post": {
+                "tags": [
+                    "Reservation"
+                ],
+                "summary": "Update refund",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "45b5f6ca84298ef4a13f84630fd5751f",
+                "requestBody": {
+                    "description": "Start date",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "reservationID": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "refundAmount": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "refundMethod": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/role": {
             "get": {
                 "tags": [

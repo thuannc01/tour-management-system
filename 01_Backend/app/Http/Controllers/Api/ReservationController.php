@@ -480,4 +480,61 @@ class ReservationController extends Controller
         }
         return $response;
     }
+
+    /**
+     * Update refund
+     *  @OA\POST(
+     *      path="/reservation/update-refund",
+     *      tags={"Reservation"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\RequestBody(
+     *           description="Start date",
+     *           @OA\JsonContent(
+     *               @OA\Property(property="reservationID", type="int", example="1"),
+     *               @OA\Property(property="refundAmount", type="int", example="1"),
+     *               @OA\Property(property="refundMethod", type="int", example="Nhận tiền tại quầy giao dịch"),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result of success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Result of success"
+     *              )
+     *          )
+     *      )
+     *  )
+     */
+    public function updateRefund(Request $request)
+    {
+        $response = null;
+        try {
+            $data_res = $this->reservationRepository->updateRefund($request->all());
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
+        }
+        catch (\Exception $e) {
+            //
+        }
+        return $response;
+    }
 }

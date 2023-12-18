@@ -31,7 +31,7 @@ const refundData = {
     paymentAmount: 0,
     cancellationReason: '',
     refundAmount: 0,
-    refundMethod: 'Chuyển vào tài khoản thanh toán'
+    refundMethod: ''
 };
 
 export default {
@@ -145,9 +145,9 @@ export default {
                     if (data.Code == 200) {
                         store.commit('app/showModalMessage', {
                             type: MSG_TYPE.SUCCESS,
-                            title: 'Đã huỷ tour thành công',
+                            title: 'Đã gởi đánh giá thành công',
                             content:
-                                'Bạn đã huỷ tour du lịch này thành công. Click vào [Ok] để tiếp tục!',
+                                'Đánh giá của bạn sẽ được hiển thị và phản hồi sau khi được duyệt. Click vào [Ok] để tiếp tục!',
                             okText: 'OK',
                             callback: (ok) => {
                                 if (ok) {
@@ -172,9 +172,9 @@ export default {
                     if (data.Code == 200) {
                         store.commit('app/showModalMessage', {
                             type: MSG_TYPE.SUCCESS,
-                            title: 'Đã đặt tour thành công',
+                            title: 'Đã huỷ tour thành công',
                             content:
-                                'Dữ liệu đặt tour du lịch đã được cập nhật vào cơ sở dữ liệu. Về lại trang quản lý đơn hàng của bạn!',
+                                'Bạn đã huỷ tour du lịch này thành công. Click vào [Ok] để tiếp tục!',
                             okText: 'Tiếp tục',
                             callback: (ok) => {
                                 if (ok) {

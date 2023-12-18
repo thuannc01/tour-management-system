@@ -320,9 +320,11 @@ var Profile = {
             const vm = this;
             const conditions = {
                 reservationID: vm.refundData.reservationID,
-                cancellationReason: vm.refundData.cancellationReason ?? '',
                 refundAmount: vm.refundData.refundAmount ?? 0,
-                refundMethod: vm.refundData.refundMethod ?? ''
+                refundMethod:
+                    vm.refundData.refundMethod.trim() == ''
+                        ? 'Chuyển vào tài khoản thanh toán'
+                        : vm.refundData.refundMethod
             };
             vm.updateRefund(conditions);
         }

@@ -92,6 +92,7 @@ Route::group([
     Route::post('/reservation/update-status', [ReservationController::class, 'updateStatus']);
     Route::post('/reservation/save-notification', [ReservationController::class, 'saveNotification']);
     Route::get('/reservation/get-notification', [ReservationController::class, 'getNotificationByUser']);
+    Route::post('/reservation/update-refund', [ReservationController::class, 'updateRefund']);
 });
 
 // No auth
