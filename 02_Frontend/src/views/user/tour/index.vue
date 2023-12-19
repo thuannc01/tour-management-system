@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex';
 import store from '@/store';
 import TourStore from '@/views/user/tour/store';
 import label from './label';
@@ -54,7 +54,8 @@ var Tour = {
             'totalRows',
             'dataTable',
             'pageSizeList'
-        ])
+        ]),
+        ...mapGetters([''])
     },
     methods: {
         // app

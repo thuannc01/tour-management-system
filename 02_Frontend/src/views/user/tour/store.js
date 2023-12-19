@@ -33,7 +33,16 @@ export default {
     mutations: {
         setDataTable(state, data) {
             state.dataTable = [];
-            state.dataTable = data;
+            //
+            const moment = require('moment');
+            const currentDate = moment();
+            for (let i = 0; i < data.length; i++) {
+                if (
+                    !currentDate.isSameOrAfter(moment(data[i].departure_time))
+                ) {
+                    state.dataTable.push(data[i]);
+                }
+            }
         },
         setTotalRows(state, data) {
             state.totalRows = data;

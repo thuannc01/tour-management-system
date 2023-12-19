@@ -128,6 +128,7 @@ var TourAdmin = {
                 vm.setBtnUpdateTour(statusBtn);
                 this.setPageNameAdmin('Liệt kê tất cả tour du lịch');
             } else if (id == 2) {
+                this.initScreen();
                 vm.addDisplayNone(divListTour);
                 vm.removeDisplayNone(divUpdateTour);
                 divProcessing.classList.remove('blur-background');

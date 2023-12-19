@@ -243,7 +243,7 @@ var Order = {
                     vm.setPriceSpread(0);
                 }
                 //
-            }, 1000);
+            }, 2000);
         },
         formatDate3(date) {
             const inputMoment = moment(date);
