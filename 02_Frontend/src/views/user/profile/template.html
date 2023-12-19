@@ -176,6 +176,9 @@
 													<th class="align-middle" scope="col">Tên Tour</th>
 													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
 													</th>
+													<th class="align-middle" scope="col" style="width: 15%;">Ngày Khời
+														Hành
+													</th>
 													<th class="align-middle" scope="col">Người Lớn</th>
 													<th class="align-middle" scope="col">Trẻ Em</th>
 													<th class="align-middle" scope="col">Em Bé</th>
@@ -191,6 +194,8 @@
 													<td class="align-middle">{{order.title}}</td>
 													<td class="align-middle">{{convertDateTime(order.payment_date)}}
 													</td>
+													<td class="align-middle">{{convertDateTime(order.departure_time)}}
+													</td>
 													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
 													<td class="align-middle">{{order.child_ticket_quantity}}</td>
 													<td class="align-middle">{{order.infant_ticket_quantity}}</td>
@@ -201,7 +206,7 @@
 													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button
-															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount)"
+															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount, order.departure_time, order.status)"
 															class="border-0" type="button" class="btn btn-danger btn-sm"
 															data-bs-toggle="modal" data-bs-target="#CancelOrderTour">
 															<i class="btn-sm bi bi-x-circle"></i>
@@ -236,6 +241,9 @@
 													<th class="align-middle" scope="col">Tên Tour</th>
 													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
 													</th>
+													<th class="align-middle" scope="col" style="width: 15%;">Ngày Khời
+														Hành
+													</th>
 													<th class="align-middle" scope="col">Người Lớn</th>
 													<th class="align-middle" scope="col">Trẻ Em</th>
 													<th class="align-middle" scope="col">Em Bé</th>
@@ -251,6 +259,8 @@
 													<td class="align-middle">{{order.title}}</td>
 													<td class="align-middle">{{convertDateTime(order.payment_date)}}
 													</td>
+													<td class="align-middle">{{convertDateTime(order.departure_time)}}
+													</td>
 													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
 													<td class="align-middle">{{order.child_ticket_quantity}}</td>
 													<td class="align-middle">{{order.infant_ticket_quantity}}</td>
@@ -261,7 +271,7 @@
 													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button class="border-0" type="button"
-															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount)"
+															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount, order.departure_time, order.status)"
 															class="btn btn-danger btn-sm" data-bs-toggle="modal"
 															data-bs-target="#CancelOrderTour">
 															<i class="btn-sm bi bi-x-circle"></i>
@@ -296,6 +306,9 @@
 													<th class="align-middle" scope="col">Tên Tour</th>
 													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
 													</th>
+													<th class="align-middle" scope="col" style="width: 15%;">Ngày Khời
+														Hành
+													</th>
 													<th class="align-middle" scope="col">Người Lớn</th>
 													<th class="align-middle" scope="col">Trẻ Em</th>
 													<th class="align-middle" scope="col">Em Bé</th>
@@ -311,6 +324,8 @@
 													<td class="align-middle">{{order.title}}</td>
 													<td class="align-middle">{{convertDateTime(order.payment_date)}}
 													</td>
+													<td class="align-middle">{{convertDateTime(order.departure_time)}}
+													</td>
 													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
 													<td class="align-middle">{{order.child_ticket_quantity}}</td>
 													<td class="align-middle">{{order.infant_ticket_quantity}}</td>
@@ -321,7 +336,7 @@
 													<td class="align-middle">{{order.status}}</td>
 													<td class="align-middle text-center">
 														<button class="border-0" type="button"
-															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount)"
+															@click="cancelOrderTour(order.reservationid, order.title, order.payment_amount, order.departure_time, order.status)"
 															class="btn btn-danger btn-sm" data-bs-toggle="modal"
 															data-bs-target="#CancelOrderTour">
 															<i class="btn-sm bi bi-x-circle"></i>
@@ -356,6 +371,9 @@
 													<th class="align-middle" scope="col">Tên Tour</th>
 													<th class="align-middle" scope="col" style="width: 10%;">Ngày Đặt
 													</th>
+													<th class="align-middle" scope="col" style="width: 15%;">Ngày Khời
+														Hành
+													</th>
 													<th class="align-middle" scope="col">Người Lớn</th>
 													<th class="align-middle" scope="col">Trẻ Em</th>
 													<th class="align-middle" scope="col">Em Bé</th>
@@ -370,6 +388,8 @@
 													<th class="align-middle text-center" scope="row">{{index + 1}}</th>
 													<td class="align-middle">{{order.title}}</td>
 													<td class="align-middle">{{convertDateTime(order.payment_date)}}
+													</td>
+													<td class="align-middle">{{convertDateTime(order.departure_time)}}
 													</td>
 													<td class="align-middle">{{order.adult_ticket_quantity}}</td>
 													<td class="align-middle">{{order.child_ticket_quantity}}</td>
@@ -435,7 +455,8 @@
 												20% tiền tour.</p>
 											<p class="m-0">- Huỷ tour 3 – 2 ngày trước ngày khởi hành: phí huỷ 30% tiền
 												tour.</p>
-											<p class="m-0">- Huỷ tour 24 tiếng trước ngày khởi hành: phí huỷ 50% tiền
+											<p class="m-0">- Huỷ tour 24 tiếng trước ngày khởi hành và khi tour đã đặt
+												phương tiện thành công: phí huỷ 50% tiền
 												tour.</p>
 											<p class="m-0">- Huỷ tour ngay trong ngày khởi hành: phí huỷ 100% tiền tour.
 											</p>
@@ -523,8 +544,29 @@
 							<div class="col-12 m-0">
 								<h6>Dựa theo chính sách huỷ Tour của công ty chúng tôi, số tiền hoàn của bạn được tính
 									vì lý do</h6>
-								<p style="font-weight: 500;" class="text-reason-cancel-order-tour text-center">
-									{{refundData.cancellationReason}}</p>
+								<div class="d-flex justify-content-center">
+									<p class="m-0" style="font-weight: 600;">
+										Ngày hiện tại:</p>&nbsp<p class="m-0" style="font-weight: 600;"
+										class="text-reason-cancel-order-tour text-center">
+										{{convertDateTime(currentDate)}}</p>
+									<p class="m-0" style="width: 50px;"></p>
+									<p class="m-0" style="font-weight: 600;">
+										Ngày khởi hành:</p>&nbsp<p class="m-0" style="font-weight: 600;"
+										class="text-reason-cancel-order-tour text-center">
+										{{convertDateTime(refundData.departure_time)}}</p>
+								</div>
+								<div class="d-flex justify-content-center">
+									<p class="m-0" style="font-weight: 600;">
+										Trạng thái đơn hàng:</p>&nbsp<p class="m-0" style="font-weight: 600;"
+										class="text-reason-cancel-order-tour text-center">
+										{{refundData.status}}</p>
+								</div>
+								<div class="d-flex justify-content-center">
+									<p class="m-0" style="font-weight: 600;">
+										Lý do:</p>&nbsp<p class="m-0" style="font-weight: 600;"
+										class="text-reason-cancel-order-tour text-center">
+										{{refundData.cancellationReason}}</p>
+								</div>
 							</div>
 						</div>
 						<div class="row">
@@ -559,8 +601,9 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-					<button @click="saveRefund" type="button" id="cancel-order-modal-hide" class="btn btn-primary bg-btn-primary-custom">Huỷ
+					<button id="cancel-order-modal-hide" type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Huỷ</button>
+					<button @click="saveRefund" type="button" class="btn btn-primary bg-btn-primary-custom">Huỷ
 						đơn</button>
 				</div>
 			</div>

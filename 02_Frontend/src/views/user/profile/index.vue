@@ -4,6 +4,7 @@ import store from '@/store';
 import ProfileStore from '@/views/user/profile/store';
 import label from './label';
 import axios from 'axios';
+import moment from 'moment';
 
 import template from './template.html';
 import './style.scss';
@@ -29,7 +30,8 @@ var Profile = {
         return {
             label: label,
             money: '3.123.654 đ',
-            rating: 3.5
+            rating: 3.5,
+            currentDate: moment().format('YYYY-MM-DD')
         };
     },
     computed: {
@@ -241,7 +243,7 @@ var Profile = {
         },
         gettingOrderByStatus(status) {
             const conditions = {
-                status: status,
+                status: status ?? 'Chờ đặt phương tiện',
                 user_id: this.userData.id
             };
             this.getOrderByStatus(conditions);
@@ -291,15 +293,54 @@ var Profile = {
             };
             vm.review(conditions);
         },
-        cancelOrderTour(reservationId, title, payment_amount) {
+        cancelOrderTour(
+            reservationId,
+            title,
+            payment_amount,
+            departure_time,
+            status
+        ) {
             const vm = this;
+            let refundAmount = 0;
+            let cancellationReason = '';
+            // reason
+            let currentDate = moment();
+            let departureTime = moment(departure_time, 'YYYY-MM-DD');
+            if (status.trim() == 'Đã đặt phương tiện thành công') {
+                refundAmount = Number(payment_amount) * 0.5;
+                cancellationReason =
+                    'Huỷ tour khi tour đã đặt phương tiện thành công: phí huỷ 50% tiền tour.';
+            } else if (departureTime.diff(currentDate, 'days') > 3) {
+                refundAmount = Number(payment_amount) * 0.2;
+                cancellationReason =
+                    'Sau khi đặt cọc đến 3 ngày trước ngày khởi hành: phí huỷ 20% tiền tour.';
+            } else if (
+                departureTime.diff(currentDate, 'days') <= 3 &&
+                departureTime.diff(currentDate, 'days') >= 2
+            ) {
+                refundAmount = Number(payment_amount) * 0.3;
+                cancellationReason =
+                    'Huỷ tour 3 – 2 ngày trước ngày khởi hành: phí huỷ 30% tiền tour.';
+            } else if (departureTime.diff(currentDate, 'days') >= 1) {
+                refundAmount = Number(payment_amount) * 0.5;
+                cancellationReason =
+                    'Huỷ tour 24 tiếng trước ngày khởi hành, phí huỷ 50% tiền tour.';
+            } else {
+                refundAmount = Number(payment_amount) * 0;
+                cancellationReason =
+                    'Huỷ tour ngay trong ngày khởi hành: phí huỷ 100% tiền tour.';
+            }
+            refundAmount = Math.round(refundAmount);
+            //
             const data = {
                 reservationID: reservationId,
                 title: title,
                 paymentAmount: `${vm.formatNumber(payment_amount)} đ`,
-                cancellationReason: 'Lý do ...',
-                refundAmount: 0,
-                refundMethod: ''
+                cancellationReason: cancellationReason,
+                refundAmount: `${vm.formatNumber(refundAmount)} đ`,
+                refundMethod: '',
+                departure_time: departure_time,
+                status: status
             };
             vm.setRefundData(data);
         },
@@ -320,13 +361,22 @@ var Profile = {
             const vm = this;
             const conditions = {
                 reservationID: vm.refundData.reservationID,
-                refundAmount: vm.refundData.refundAmount ?? 0,
+                refundAmount:
+                    this.convertTextToInteger(vm.refundData.refundAmount) ?? 0,
                 refundMethod:
                     vm.refundData.refundMethod.trim() == ''
                         ? 'Chuyển vào tài khoản thanh toán'
                         : vm.refundData.refundMethod
             };
-            vm.updateRefund(conditions);
+            vm.updateRefund({
+                data: conditions,
+                callback: vm.gettingOrderByStatus
+            });
+        },
+        convertTextToInteger(text) {
+            const numericString = text.replace(/[^\d]/g, '');
+            const integerValue = parseInt(numericString, 10);
+            return integerValue;
         }
     }
 };

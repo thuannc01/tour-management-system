@@ -1546,7 +1546,7 @@
                                     },
                                     "refundMethod": {
                                         "type": "integer",
-                                        "example": "1"
+                                        "example": "Nhận tiền tại quầy giao dịch"
                                     }
                                 },
                                 "type": "object"

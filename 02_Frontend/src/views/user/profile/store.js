@@ -31,7 +31,9 @@ const refundData = {
     paymentAmount: 0,
     cancellationReason: '',
     refundAmount: 0,
-    refundMethod: ''
+    refundMethod: '',
+    departure_time: '',
+    status: ''
 };
 
 export default {
@@ -66,6 +68,9 @@ export default {
                 data.refundAmount ?? state.refundData.refundAmount;
             state.refundData.refundMethod =
                 data.refundMethod ?? state.refundData.refundMethod;
+            state.refundData.departure_time =
+                data.departure_time ?? state.refundData.departure_time;
+            state.refundData.status = data.status ?? state.refundData.status;
         },
         setUserDataUpdate(state, data) {
             state.userDataUpdate.id = data.id;
@@ -152,9 +157,7 @@ export default {
                             callback: (ok) => {
                                 if (ok) {
                                     document
-                                        .getElementById(
-                                            'cancel-order-modal-hide'
-                                        )
+                                        .getElementById('hideModalRating')
                                         .click();
                                 }
                             }
@@ -165,7 +168,7 @@ export default {
                 console.log('' + e.message);
             }
         },
-        updateRefund(context, data) {
+        updateRefund(context, { data, callback }) {
             try {
                 repository.updateRefund(data).then((res) => {
                     const { data } = res;
@@ -178,7 +181,13 @@ export default {
                             okText: 'Tiếp tục',
                             callback: (ok) => {
                                 if (ok) {
-                                    context.commit('setIsDirectProfile');
+                                    // context.commit('setIsDirectProfile');
+                                    document
+                                        .getElementById(
+                                            'cancel-order-modal-hide'
+                                        )
+                                        .click();
+                                    if (callback) callback();
                                 }
                             }
                         });
