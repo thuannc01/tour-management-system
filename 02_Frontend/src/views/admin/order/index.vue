@@ -197,12 +197,12 @@ var Order = {
             console.log('conditions showModalTrans: ', conditions);
             this.getDataToBookTrans(conditions);
         },
-        bookingTrans(transportation_quantity) {
+        bookingTrans(trans_price, trans_id) {
             const vm = this;
             const conditions = {
                 id: vm.bookTransCondition.reservationID,
-                transportation_id: vm.bookTransCondition.type_transportation,
-                transportation_ticket_price: transportation_quantity,
+                transportation_id: trans_id,
+                transportation_ticket_price: trans_price,
                 transportation_quantity: vm.bookTransCondition.quantity
             };
             vm.bookTrans({
@@ -219,31 +219,34 @@ var Order = {
             vm.getDetailOrderData(conditions);
             //
             setTimeout(() => {
-                let cal30Percent = Math.round(
-                    Number(vm.reservationData.transportation_ticket_price) * 0.3
-                );
-                let priceSpread = Math.round(
-                    Number(vm.reservationData.transportation_ticket_price) +
-                        Number(cal30Percent)
-                );
-                if (
-                    Number(vm.transportationData[0].price) >=
-                    Number(priceSpread)
-                ) {
-                    let extraPrice =
-                        Number(vm.transportationData[0].price) -
-                        Number(priceSpread);
-                    vm.setPriceSpread(Math.round(extraPrice));
-                    //
-                    let total_amount =
-                        Number(vm.reservationData.total_amount) +
-                        Math.round(extraPrice);
-                    vm.setTotalAmount(total_amount);
-                } else {
-                    vm.setPriceSpread(0);
+                if (vm.transportationData[0]) {
+                    let cal30Percent = Math.round(
+                        Number(vm.reservationData.transportation_ticket_price) *
+                            0.3
+                    );
+                    let priceSpread = Math.round(
+                        Number(vm.reservationData.transportation_ticket_price) +
+                            Number(cal30Percent)
+                    );
+                    if (
+                        Number(vm.transportationData[0].price) >=
+                        Number(priceSpread)
+                    ) {
+                        let extraPrice =
+                            Number(vm.transportationData[0].price) -
+                            Number(priceSpread);
+                        vm.setPriceSpread(Math.round(extraPrice));
+                        //
+                        let total_amount =
+                            Number(vm.reservationData.total_amount) +
+                            Math.round(extraPrice);
+                        vm.setTotalAmount(total_amount);
+                    } else {
+                        vm.setPriceSpread(0);
+                    }
                 }
                 //
-            }, 2000);
+            }, 1000);
         },
         formatDate3(date) {
             const inputMoment = moment(date);

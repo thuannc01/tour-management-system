@@ -154,7 +154,7 @@ class TourRepository extends BaseRepository implements ITourRepository
              )::INTEGER) ".  $adult_ticket_price . " 
              and tours.deleted_at is null 
              group by tours.id, tours.title, types_transportation.id, images.path, periods.departure_time 
-             order by tours.id 
+             order by tours.id desc 
              limit " .$page_size ." 
              offset " .$offset ." ";
         } else {
@@ -171,7 +171,7 @@ class TourRepository extends BaseRepository implements ITourRepository
              where tours.title LIKE '%". $title ."%' 
              and tours.deleted_at is null 
              group by tours.id, tours.title, types_transportation.id, images.path
-             order by tours.id 
+             order by tours.id desc 
              limit " .$page_size ." 
              offset " .$offset ." ";
         }

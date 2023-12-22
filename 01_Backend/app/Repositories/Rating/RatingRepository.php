@@ -34,7 +34,7 @@ class RatingRepository extends BaseRepository implements IRatingRepository
         if($star_count != -1){
             $sqlString = $sqlString . " ratings.star_count = " .$star_count;
         }
-        $sqlString = $sqlString . " order by ratings.id limit ". $page_size ." offset ". $offset;
+        $sqlString = $sqlString . " order by ratings.id desc limit ". $page_size ." offset ". $offset;
         //
         $dataSearch = DB::select($sqlString);
         $response = [

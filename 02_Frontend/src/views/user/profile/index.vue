@@ -307,22 +307,26 @@ var Profile = {
             let currentDate = moment();
             let departureTime = moment(departure_time, 'YYYY-MM-DD');
             if (status.trim() == 'Đã đặt phương tiện thành công') {
-                refundAmount = Number(payment_amount) * 0.5;
+                refundAmount =
+                    Number(payment_amount) - Number(payment_amount) * 0.5;
                 cancellationReason =
                     'Huỷ tour khi tour đã đặt phương tiện thành công: phí huỷ 50% tiền tour.';
             } else if (departureTime.diff(currentDate, 'days') > 3) {
-                refundAmount = Number(payment_amount) * 0.2;
+                refundAmount =
+                    Number(payment_amount) - Number(payment_amount) * 0.2;
                 cancellationReason =
                     'Sau khi đặt cọc đến 3 ngày trước ngày khởi hành: phí huỷ 20% tiền tour.';
             } else if (
                 departureTime.diff(currentDate, 'days') <= 3 &&
                 departureTime.diff(currentDate, 'days') >= 2
             ) {
-                refundAmount = Number(payment_amount) * 0.3;
+                refundAmount =
+                    Number(payment_amount) - Number(payment_amount) * 0.3;
                 cancellationReason =
                     'Huỷ tour 3 – 2 ngày trước ngày khởi hành: phí huỷ 30% tiền tour.';
             } else if (departureTime.diff(currentDate, 'days') >= 1) {
-                refundAmount = Number(payment_amount) * 0.5;
+                refundAmount =
+                    Number(payment_amount) - Number(payment_amount) * 0.5;
                 cancellationReason =
                     'Huỷ tour 24 tiếng trước ngày khởi hành, phí huỷ 50% tiền tour.';
             } else {

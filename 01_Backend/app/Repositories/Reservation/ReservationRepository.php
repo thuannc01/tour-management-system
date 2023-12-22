@@ -153,7 +153,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         JOIN types_transportation ON types_transportation.id = tours.type_transportation_id
 
         where reservations.status = '" .$status ."' and tours.title LIKE '%" .$title. "%' 
-        order by reservations.id limit ". $page_size ." offset ". $offset;
+        order by reservations.id desc limit ". $page_size ." offset ". $offset;
 
         if($status  == 'Chờ đặt phương tiện'){
             $sqlString = "
@@ -170,7 +170,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
 
             where reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công' 
             and tours.title LIKE '%" .$title. "%' 
-            order by reservations.id limit ". $page_size ." offset ". $offset;
+            order by reservations.id desc limit ". $page_size ." offset ". $offset;
         }
         if(trim($status) == ''){
             $sqlString = "
@@ -186,7 +186,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
             JOIN types_transportation ON types_transportation.id = tours.type_transportation_id
 
             where tours.title LIKE '%" .$title. "%' 
-            order by reservations.id limit ". $page_size ." offset ". $offset;
+            order by reservations.id desc limit ". $page_size ." offset ". $offset;
         }
         //
         $dataSearch = DB::select($sqlString);

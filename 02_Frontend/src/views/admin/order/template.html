@@ -443,7 +443,7 @@
                                     <td class="align-middle">{{formatNumber(trans.price)}} đ</td>
                                     <td class="align-middle">
                                         <button data-bs-toggle="modal" data-bs-target="#orderTransportationModal"
-                                            type="button" @click="bookingTrans(trans.price)"
+                                            type="button" @click="bookingTrans(trans.price, trans.id)"
                                             class="btn btn-success btn-sm bi bi-bag-heart-fill me-2"></button>
                                     </td>
                                 </tr>
