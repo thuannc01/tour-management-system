@@ -16,7 +16,17 @@ export default {
             state.tourData = data;
         },
         setPeriodData(state, data) {
-            state.periodData = data;
+            state.periodData = [];
+            //
+            const moment = require('moment');
+            const currentDate = moment();
+            for (let i = 0; i < data.length; i++) {
+                if (
+                    !currentDate.isSameOrAfter(moment(data[i].departure_time))
+                ) {
+                    state.periodData.push(data[i]);
+                }
+            }
         },
         setRatingData(state, data) {
             state.ratingData = data;

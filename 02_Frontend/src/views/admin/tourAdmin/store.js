@@ -35,7 +35,7 @@ const searchConditionInit = {
     departure_time: '',
     arrival_time: '',
     adult_ticket_price: '',
-    page_size: 4,
+    page_size: 8,
     page_number: 1,
     mode: 0
 };
