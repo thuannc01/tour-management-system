@@ -28615,6 +28615,24 @@
 					]
 				}
 			]
+		},
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAGMu4PK5+uRxtc=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Class Diagram",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAGMu4PK5+uS7BY=",
+					"_parent": {
+						"$ref": "AAAAAAGMu4PK5+uRxtc="
+					},
+					"name": "ClassDiagram1"
+				}
+			]
 		}
 	]
 }
