@@ -6,6 +6,7 @@ import label from './label';
 
 import template from './template.html';
 import './style.scss';
+import moment from 'moment';
 
 var Tour = {
     template: template,
@@ -30,10 +31,50 @@ var Tour = {
         //     this.doSearch();
         // },
         'conditions.departure_time'() {
-            this.doSearch();
+            if (
+                this.conditions.arrival_time.trim() != '' &&
+                this.conditions.departure_time.trim() != ''
+            ) {
+                let arrival_time = moment(
+                    this.conditions.arrival_time,
+                    'YYYY-MM-DD'
+                );
+                let departure_time = moment(this.conditions.departure_time);
+
+                if (departure_time.isAfter(arrival_time)) {
+                    this.showHeaderError([
+                        'Ngày bắt đầu không được lớn hơn ngày kết thúc'
+                    ]);
+                } else {
+                    this.doSearch();
+                    this.hideHeaderError();
+                }
+            } else {
+                this.doSearch();
+            }
         },
         'conditions.arrival_time'() {
-            this.doSearch();
+            if (
+                this.conditions.arrival_time.trim() != '' &&
+                this.conditions.departure_time.trim() != ''
+            ) {
+                let arrival_time = moment(
+                    this.conditions.arrival_time,
+                    'YYYY-MM-DD'
+                );
+                let departure_time = moment(this.conditions.departure_time);
+
+                if (departure_time.isAfter(arrival_time)) {
+                    this.showHeaderError([
+                        'Ngày bắt đầu không được lớn hơn ngày kết thúc'
+                    ]);
+                } else {
+                    this.doSearch();
+                    this.hideHeaderError();
+                }
+            } else {
+                this.doSearch();
+            }
         }
     },
     data() {
@@ -60,7 +101,11 @@ var Tour = {
     methods: {
         // app
         ...mapActions('app', []),
-        ...mapMutations('app', ['showHeaderError', 'showModalMessage']),
+        ...mapMutations('app', [
+            'showHeaderError',
+            'showModalMessage',
+            'hideHeaderError'
+        ]),
         // module
         ...mapActions('TourStore', ['searchTour']),
         ...mapMutations('TourStore', []),
