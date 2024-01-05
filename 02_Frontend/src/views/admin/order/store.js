@@ -127,8 +127,14 @@ export default {
                 repository.getDataReservation(conditions).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
-                        context.commit('setDataTable', data.Data.dataSearch);
-                        context.commit('setTotalRows', data.Data.totalRows);
+                        context.commit(
+                            'setDataTable',
+                            data.Data.dataSearch ?? []
+                        );
+                        context.commit(
+                            'setTotalRows',
+                            data.Data.totalRows ?? []
+                        );
                     }
                 });
             } catch (e) {

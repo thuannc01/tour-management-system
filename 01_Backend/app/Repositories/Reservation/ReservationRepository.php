@@ -30,7 +30,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         from reservations
         join periods on periods.id = reservations.tour_period_id
         join tours on tours.id = periods.tour_id
-        where reservations.status = '" .$status ."' and reservations.user_id = " .$user_id;
+        where reservations.deleted_at is null and reservations.status = '" .$status ."' and reservations.user_id = " .$user_id;
 
         if($status  == 'Chờ đặt phương tiện'){
             $sqlString = "
@@ -38,7 +38,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
             from reservations
             join periods on periods.id = reservations.tour_period_id
             join tours on tours.id = periods.tour_id
-            where (reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công')
+            where reservations.deleted_at is null and (reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công')
             and reservations.user_id = " .$user_id;
         }
         $orderData = DB::select($sqlString);
@@ -112,7 +112,9 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         $maxIdReservation = Reservation::max('id');
         // update quantity
         $tour_period_id = $reservationData['tour_period_id'];
-        Period::where('id', $tour_period_id)->increment('quantity');
+        $totalQuantity = ((int) $reservationData['adult_ticket_quantity'] ?? 0) + ((int) $reservationData['child_ticket_quantity'] ?? 0) + ((int) $reservationData['infant_ticket_quantity'] ?? 0);
+        $amountToAdd = (int) $totalQuantity;
+        Period::where('id', $tour_period_id)->update(['quantity' => DB::raw("quantity + $amountToAdd")]);
         // save reservation
         $customerInfoList = $data['customerInfo'];
         foreach ($customerInfoList as $user) {
@@ -152,7 +154,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
         JOIN province AS to_province ON to_province.id = tours.to_province_id
         JOIN types_transportation ON types_transportation.id = tours.type_transportation_id
 
-        where reservations.status = '" .$status ."' and tours.title LIKE '%" .$title. "%' 
+        where reservations.deleted_at is null and reservations.status = '" .$status ."' and tours.title LIKE '%" .$title. "%' 
         order by reservations.id desc limit ". $page_size ." offset ". $offset;
 
         if($status  == 'Chờ đặt phương tiện'){
@@ -168,7 +170,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
             JOIN province AS to_province ON to_province.id = tours.to_province_id
             JOIN types_transportation ON types_transportation.id = tours.type_transportation_id
 
-            where reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công' 
+            where reservations.deleted_at is null and reservations.status = '" .$status ."' or reservations.status = 'Đã đặt phương tiện thành công' 
             and tours.title LIKE '%" .$title. "%' 
             order by reservations.id desc limit ". $page_size ." offset ". $offset;
         }
@@ -185,7 +187,7 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
             JOIN province AS to_province ON to_province.id = tours.to_province_id
             JOIN types_transportation ON types_transportation.id = tours.type_transportation_id
 
-            where tours.title LIKE '%" .$title. "%' 
+            where reservations.deleted_at is null and tours.title LIKE '%" .$title. "%' 
             order by reservations.id desc limit ". $page_size ." offset ". $offset;
         }
         //
@@ -290,6 +292,12 @@ class ReservationRepository extends BaseRepository implements IReservationReposi
             $reservation->refund_method = $data['refundMethod'];
             $reservation->updated_at = Carbon::now();
             $reservation->save();
+            // update quantity
+            $tour_period_id = $reservation->tour_period_id;
+            $totalQuantity = ((int) $reservation->adult_ticket_quantity ?? 0) + ((int) $reservation->child_ticket_quantity ?? 0) + ((int) $reservation->infant_ticket_quantity ?? 0);
+            $amountToAdd = (int) $totalQuantity;
+            Period::where('id', $tour_period_id)->update(['quantity' => DB::raw("quantity - $amountToAdd")]);
+            // 
             return 'Ok';
         }
         catch (\Exception $e) {

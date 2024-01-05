@@ -247,7 +247,7 @@ class ReservationController extends Controller
 
             $response = response()->json([
                 'Code'         => ResponseCodeConstant::OK,
-                'Data'         => $data_res,
+                'Data'         => $data_res ?? [],
                 'MessageNo'    => "",
                 'Message'      => "",
                 'DataErrors'   => []
