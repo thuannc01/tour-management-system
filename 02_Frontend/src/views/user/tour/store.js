@@ -5,7 +5,7 @@ const conditions = {
     departure_time: '',
     arrival_time: '',
     adult_ticket_price: ' > 0 ',
-    page_size: 12,
+    page_size: 9,
     page_number: 1,
     mode: 0
 };

@@ -126,7 +126,7 @@ class TourRepository extends BaseRepository implements ITourRepository
         $totalRows  = Tour::whereNull('deleted_at')->count('id');
         // 
         if($mode == 1){
-            $sqlString = "Select tours.*, types_transportation.name transportation, images.path AS img, periods.departure_time departure_time "
+            $sqlString = "Select DISTINCT ON (tours.id) tours.id, tours.*, types_transportation.name transportation, images.path AS img, periods.departure_time departure_time "
             ." from tours inner join periods on tours.id = periods.tour_id  
             inner join types_transportation on types_transportation.id = tours.type_transportation_id 
             LEFT JOIN (
@@ -137,7 +137,7 @@ class TourRepository extends BaseRepository implements ITourRepository
                 FROM
                     images
             ) images ON images.foreign_key_1 = tours.id AND images.row_num = 1 
-             where tours.title LIKE '%". $title ."%' 
+             where periods.departure_time::date > NOW() and tours.title LIKE '%". $title ."%' 
              and periods.departure_time LIKE '%". $departure_time ."%' 
              and periods.arrival_time LIKE '%". $arrival_time ."%' 
              and (SELECT
@@ -157,6 +157,7 @@ class TourRepository extends BaseRepository implements ITourRepository
              order by tours.id desc 
              limit " .$page_size ." 
              offset " .$offset ." ";
+            //  dd($sqlString);
         } else {
             $sqlString = "Select tours.*, types_transportation.name transportation, images.path AS img from tours 
              inner join types_transportation on types_transportation.id = tours.type_transportation_id 
