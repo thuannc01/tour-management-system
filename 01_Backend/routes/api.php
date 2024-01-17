@@ -70,8 +70,9 @@ Route::group([
     // statistical
     Route::apiResource('/statistical', StatisticalController::class);
     // period
-    Route::apiResource('/period', PeriodController::class)->only(['index', 'store', 'destroy']);
-    Route::get('/period/search', [PeriodController::class, 'search']);
+    Route::apiResource('/period', PeriodController::class)->only(['index', 'store', 'destroy', 'show']);
+    Route::post('/period/search', [PeriodController::class, 'search']);
+    Route::post('/period/update', [PeriodController::class, 'update']);
     // news
     Route::apiResource('/news', NewsController::class)->only(['index', 'store', 'destroy']);
     Route::get('/news/home', [NewsController::class, 'getNewsHome']);

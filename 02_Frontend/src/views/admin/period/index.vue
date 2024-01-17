@@ -100,7 +100,9 @@ var Period = {
             'getDataInit',
             'savePeriod',
             'searchPeriod',
-            'deletePeriod'
+            'deletePeriod',
+            'getPeriodByID',
+            'updatePeriod'
         ]),
         handleButtonClick() {
             alert('Button clicked!');
@@ -198,6 +200,14 @@ var Period = {
         },
         reloadComponent() {
             this.reloadKey += 1;
+        },
+        getPeriod(id) {
+            const vm = this;
+            vm.getPeriodByID(id);
+        },
+        onUpdate() {
+            const vm = this;
+            vm.updatePeriod(vm.data);
         }
     }
 };

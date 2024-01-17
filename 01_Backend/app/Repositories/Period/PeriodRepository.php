@@ -79,4 +79,21 @@ class PeriodRepository extends BaseRepository implements IPeriodRepository
         $period->deleted_at = Carbon::now();
         $period->save();
     }
+
+    public function getPeriodByID($data){
+        $period = Period::find($data);
+        return $period;
+    }
+
+    public function updatePeriod($data){
+        $period = Period::find($data['period_id']);
+        $period->tour_id = $data['tour_id'];
+        $period->departure_time = $data['departure_time'];
+        $period->arrival_time = $data['arrival_time'];
+        $period->maximum_quantity = $data['maximum_quantity'];
+        $period->tourist_guide_id = $data['tourist_guide_id'];
+        $period->updated_at = Carbon::now();
+        $period->save();
+        return 'OK';
+    }
 }

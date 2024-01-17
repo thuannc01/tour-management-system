@@ -74,7 +74,8 @@
                         <td class="align-middle">{{period.maximum_quantity}}</td>
                         <td class="align-middle">{{period.touristguide}}</td>
                         <td class="align-middle">
-                            <button type="button" class="btn btn-primary btn-sm bi bi-pencil-square me-2"></button>
+                            <button @click="getPeriod(period.id)" type="button" class="btn btn-primary btn-sm bi bi-pencil-square me-2"
+                                data-bs-toggle="modal" data-bs-target="#editPeriodModal"></button>
                             <button @click="doDelete(period.title, period.id)" type="button"
                                 class="btn btn-danger btn-sm bi bi-trash"></button>
                         </td>
@@ -133,6 +134,52 @@
                     <button id="btn-close-modal" type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary" @click="onSave">Lưu thông tin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit period tour -->
+    <!-- modal -->
+    <div class="modal fade" id="editPeriodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-uppercase" id="exampleModalLabel">Sửa thời gian mở bán tour</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <thuan-select isDisabled="true" label="Chọn tour du lịch" :options="selectOptions.toursList"
+                                v-model="data.tour_id" :isRequired="true" @change="doSetNumberOfDay(data.tour_id)" />
+                        </div>
+                        <div class="col-12 py-3 d-flex justify-content-center">
+                            <p class="m-0" style="font-size: 110%">Số ngày diễn ra của tour đã chọn: <strong
+                                    class="number-of-day-text">{{numberOfDay}} Ngày {{numberOfDay
+                                    - 1}} Đêm</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <thuan-input label="Thời gian khởi hành" type="date" :isRequired="true"
+                                v-model="data.departure_time" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-input :isDisabled="true" label="Thời gian kết thúc" type="date" :isRequired="true"
+                                v-model="data.arrival_time" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-input type="number" label="Số lượng người giới hạn" placeholder="Nhập số lượng ..."
+                                :isRequired="true" v-model="data.maximum_quantity" />
+                        </div>
+                        <div class="col-6">
+                            <thuan-select label="Chọn hướng dẫn viên du lịch" :options="selectOptions.tourGuideList"
+                                v-model="data.tourist_guide_id" :isRequired="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btn-close-modal" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" @click="onUpdate">Lưu thông tin</button>
                 </div>
             </div>
         </div>

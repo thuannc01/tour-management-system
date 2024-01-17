@@ -10,4 +10,6 @@ interface IPeriodRepository
     public function saveData($data);
     public function search($data);
     public function deletePeriod($data);
+    public function getPeriodByID($data);
+    public function updatePeriod($data);
 }

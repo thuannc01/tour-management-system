@@ -1,12 +1,16 @@
 import repository from './repository';
+import store from '@/store';
+import { MSG_TYPE } from '@/utils/messages';
 
 const initData = {
+    period_id: 0,
     tour_id: 0,
     departure_time: '',
     arrival_time: '',
     maximum_quantity: 0,
     tourist_guide_id: 1
 };
+
 const conditions = {
     title: '',
     page_size: 4,
@@ -49,6 +53,14 @@ export default {
         },
         setTotalRows(state, data) {
             state.totalRows = data;
+        },
+        setDataPeriod(state, data) {
+            state.data.period_id = data.id;
+            state.data.tour_id = data.tour_id;
+            state.data.departure_time = data.departure_time;
+            state.data.arrival_time = data.arrival_time;
+            state.data.maximum_quantity = data.maximum_quantity;
+            state.data.tourist_guide_id = data.tourist_guide_id;
         }
     },
     actions: {
@@ -95,6 +107,35 @@ export default {
                     const { data } = res;
                     if (data.Code == 200) {
                         context.dispatch('searchPeriod');
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        getPeriodByID(context, id) {
+            try {
+                repository.getPeriodByID(id).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setDataPeriod', data.Data);
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        updatePeriod(context, data) {
+            try {
+                repository.updatePeriod(data).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.dispatch('searchPeriod');
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Thành Công',
+                            content: 'Dữ liệu đã được cập nhật'
+                        });
                     }
                 });
             } catch (e) {

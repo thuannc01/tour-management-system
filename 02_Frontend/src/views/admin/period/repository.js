@@ -10,11 +10,17 @@ export default {
         return repository.post(`${periodResource}`, data);
     },
     searchPeriod: (data) => {
-        return repository.get(`${periodResource}/search`, {
+        return repository.post(`${periodResource}/search`, {
             params: data
         });
     },
     deletePeriod: (id) => {
         return repository.delete(`${periodResource}/${id}`);
+    },
+    getPeriodByID: (id) => {
+        return repository.get(`${periodResource}/${id}`);
+    },
+    updatePeriod: (data) => {
+        return repository.post(`${periodResource}/update`, data);
     }
 };
