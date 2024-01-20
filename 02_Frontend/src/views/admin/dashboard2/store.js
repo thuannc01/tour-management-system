@@ -10,6 +10,19 @@ const initData = {
     countTotalCustomer: 0,
     totalRevenue: 0
 };
+
+const statisticalConditions = {
+    area: 'Miền Bắc',
+    province: [1, 2, 3, 4, 5, 6, 30, 32, 33, 34, 35],
+    category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    segment: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    hasTourist: ' >= 0 ',
+    order: ' tours.created_at desc ',
+    tour: 0
+    // page_size: 5,
+    // page_number: 1
+};
+
 export default {
     namespaced: true,
     state: {
@@ -18,7 +31,11 @@ export default {
             provinceList: [],
             categoryList: [],
             segmentList: []
-        }
+        },
+        statisticalConditions: { ...statisticalConditions },
+        // totalRows: 0,
+        tourData: [],
+        periodData: []
     },
     mutations: {
         setDataInit(state) {
@@ -80,12 +97,24 @@ export default {
                 console.log('' + e.message);
             }
         },
-        getAllLocation(context) {
+        getProvinceByArea(context, conditions) {
             try {
-                repository.getAllLocation().then((res) => {
+                repository.getProvinceByArea(conditions).then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
                         context.commit('setProvinceList', data.Data ?? '');
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+        statisticalByTour(context, conditions) {
+            try {
+                repository.statisticalByTour(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        console.log('statisticalByTour: ', data.Data);
                     }
                 });
             } catch (e) {

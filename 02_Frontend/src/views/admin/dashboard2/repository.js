@@ -12,10 +12,17 @@ export default {
     getAllCategories: () => {
         return repository.get(`${resourceCategory}`);
     },
-    getAllLocation: () => {
-        return repository.get(`${resourceLocation}`);
+    getProvinceByArea: (data) => {
+        return repository.get(`${resourceLocation}/get-province-by-area`, {
+            params: data
+        });
     },
     getDataInit: () => {
         return repository.get(`${resourceStatistical}`);
+    },
+    statisticalByTour: (data) => {
+        return repository.post(`${resourceStatistical}/statistical-by-tour`, {
+            data
+        });
     }
 };

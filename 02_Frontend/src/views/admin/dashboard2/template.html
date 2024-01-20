@@ -63,20 +63,23 @@
                 <div class="col-12 filter-area w-100">
                     <h6 class="text-uppercase">Chọn vùng miền</h6>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <input @click="doSearch()" v-model="statisticalConditions.area" class="form-check-input"
+                            type="radio" value="Miền Bắc" id="area1">
+                        <label class="form-check-label" for="area1">
                             Miền Bắc
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
+                        <input @click="doSearch()" v-model="statisticalConditions.area" class="form-check-input"
+                            type="radio" value="Miền Trung" id="area2">
+                        <label class="form-check-label" for="area2">
                             Miền Trung
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                        <label class="form-check-label" for="flexCheckChecked">
+                        <input @click="doSearch()" v-model="statisticalConditions.area" class="form-check-input"
+                            type="radio" value="Miền Nam" id="area3">
+                        <label class="form-check-label" for="area3">
                             Miền Nam
                         </label>
                     </div>
@@ -85,10 +88,11 @@
             <div class="row mt-2">
                 <div class="col-12 filter-province w-100">
                     <h6 class="text-uppercase">Chọn tỉnh, TP</h6>
-                    <div class="form-check" v-for="(item, index) in selectOptions.provinceList" :key="index">
-                        <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            {{item.name}}
+                    <div class="form-check" v-for="item in selectOptions.provinceList" :key="item.id">
+                        <input @click="doSearch()" v-model="statisticalConditions.province" class="form-check-input"
+                            type="checkbox" :value="item.id" :id="'province_' + item.id">
+                        <label class="form-check-label" :for="'province_' + item.id">
+                            {{ item.name }}
                         </label>
                     </div>
                 </div>
@@ -97,8 +101,9 @@
                 <div class="col-12 filter-category w-100">
                     <h6 class="text-uppercase">Chọn loại tour</h6>
                     <div class="form-check" v-for="(item, index) in selectOptions.categoryList" :key="index">
-                        <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <input @click="doSearch()" v-model="statisticalConditions.category" class="form-check-input"
+                            type="checkbox" :value="item.id" :id="'category_' + item.id">
+                        <label class="form-check-label" :for="'category_' + item.id">
                             {{item.name}}
                         </label>
                     </div>
@@ -108,8 +113,9 @@
                 <div class="col-12 filter-object w-100">
                     <h6 class="text-uppercase">Chọn đối tượng</h6>
                     <div class="form-check" v-for="(item, index) in selectOptions.segmentList" :key="index">
-                        <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <input @click="doSearch()" v-model="statisticalConditions.segment" class="form-check-input"
+                            type="checkbox" :value="item.id" :id="'segment_' + item.id">
+                        <label class="form-check-label" :for="'segment_' + item.id">
                             {{item.name}}
                         </label>
                     </div>
@@ -135,25 +141,25 @@
                         </div>
                     </div>
                     <div class="row">
-                        <table class="table table-striped mt-1 w-100" style="font-size: 0.8rem;">
+                        <table class="table table-striped mt-1 w-100" style="font-size: 0.7rem;">
                             <thead>
                                 <tr>
                                     <th class="align-middle text-center" scope="col">STT</th>
-                                    <th class="align-middle" scope="col">Mã tour</th>
-                                    <th class="align-middle" scope="col">Tên tour</th>
+                                    <th class="align-middle" width="30%" scope="col">Tên tour</th>
+                                    <th class="align-middle" scope="col">TG Khởi hành</th>
                                     <th class="align-middle" scope="col">Miền</th>
-                                    <th class="align-middle" scope="col">Tỉnh thành phố</th>
+                                    <th class="align-middle" scope="col">Nơi đến</th>
                                     <th class="align-middle" scope="col">Tổng SL khách</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="i in 5">
-                                    <th class="align-middle text-center" scope="row">{{i}}</th>
-                                    <td class="align-middle">Mark</td>
-                                    <td class="align-middle">Otto</td>
-                                    <td class="align-middle">@mdo</td>
-                                    <td class="align-middle">Otto</td>
-                                    <td class="align-middle">@mdo</td>
+                                <tr v-for="(period, index) in periodData" :key="index">
+                                    <th class="align-middle text-center" scope="row">{{index}}</th>
+                                    <td class="align-middle">{{period.tour_name}}</td>
+                                    <td class="align-middle">{{period.departure_time}}</td>
+                                    <td class="align-middle">{{period.area}}</td>
+                                    <td class="align-middle">{{period.province_name}}</td>
+                                    <td class="align-middle">{{period.total_number_customer}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -165,22 +171,23 @@
                 <div class="col-6 d-flex p-0">
                     <div class="radio-filter d-flex">
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
+                            <input @click="doSearch()" v-model="statisticalConditions.hasTourist" value=" >= 0 "
+                                class="form-check-input" type="radio" name="flexRadioDefault" id="hasTourist1">
+                            <label class="form-check-label" for="hasTourist1">
                                 <p class="m-0">Tất cả</p>
                             </label>
                         </div>
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                                checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
+                            <input @click="doSearch()" v-model="statisticalConditions.hasTourist" value=" > 0 "
+                                class="form-check-input" type="radio" name="flexRadioDefault" id="hasTourist2">
+                            <label class="form-check-label" for="hasTourist2">
                                 <p class="m-0">Có khách</p>
                             </label>
                         </div>
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
-                                checked>
-                            <label class="form-check-label" for="flexRadioDefault3">
+                            <input @click="doSearch()" v-model="statisticalConditions.hasTourist" value=" = 0 "
+                                class="form-check-input" type="radio" name="flexRadioDefault" id="hasTourist3">
+                            <label class="form-check-label" for="hasTourist3">
                                 <p class="m-0">Không có khách</p>
                             </label>
                         </div>
@@ -192,55 +199,50 @@
                     </div>
                     <div class="radio-filter d-flex">
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
+                            <input @click="doSearch()" v-model="statisticalConditions.order" value=" tours.created_at desc "
+                                class="form-check-input" type="radio" name="flexRadioDefault" id="order1">
+                            <label class="form-check-label" for="order1">
                                 <p class="m-0">Thời gian</p>
                             </label>
                         </div>
                         <div class="form-check me-4">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                                checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
+                            <input @click="doSearch()" v-model="statisticalConditions.order" value=" total_number_customer desc "
+                                class="form-check-input" type="radio" name="flexRadioDefault" id="order2">
+                            <label class="form-check-label" for="order2">
                                 <p class="m-0">Số lượng</p>
                             </label>
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped mt-1" style="font-size: 0.8rem;">
+                <table class="table table-striped mt-1" style="font-size: 0.7rem;">
                     <thead>
                         <tr>
                             <th class="align-middle text-center" scope="col">STT</th>
                             <th class="align-middle" scope="col">Mã tour</th>
-                            <th class="align-middle" scope="col">Tên tour</th>
-                            <th class="align-middle" scope="col">Miền</th>
-                            <th class="align-middle" scope="col">Tỉnh thành phố</th>
+                            <th class="align-middle" width="25%" scope="col">Tên tour</th>
+                            <th class="align-middle" scope="col">Nơi khởi hành</th>
+                            <th class="align-middle" scope="col">Nơi đến</th>
                             <th class="align-middle" scope="col">Tổng SL khách</th>
-                            <th class="align-middle" scope="col">Thời gian mở tour</th>
-                            <th class="align-middle" scope="col">Nhóm đối tượng</th>
-                            <th class="align-middle text-center" scope="col">Loại tour</th>
+                            <th class="align-middle" scope="col">Thời gian tạo</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="i in 5">
-                            <th class="align-middle text-center" scope="row">{{i}}</th>
-                            <td class="align-middle">Mark</td>
-                            <td class="align-middle">Otto</td>
-                            <td class="align-middle">@mdo</td>
-                            <td class="align-middle">Otto</td>
-                            <td class="align-middle">@mdo</td>
-                            <td class="align-middle">@mdo</td>
-                            <td class="align-middle">Đang xử lý</td>
-                            <td class="align-middle text-center">
-                                xxx
-                            </td>
+                        <tr v-for="(tour, index) in tourData" :key="index" @click="doSearch(tour.id)">
+                            <th class="align-middle text-center" scope="row">{{index}}</th>
+                            <td class="align-middle">{{tour.id}}</td>
+                            <td class="align-middle">{{tour.title}}</td>
+                            <td class="align-middle">{{}}</td>
+                            <td class="align-middle">{{}}</td>
+                            <td class="align-middle">{{}}</td>
+                            <td class="align-middle">{{}}</td>
                         </tr>
                     </tbody>
                 </table>
                 <!-- pagination -->
-                <div class="w-100 row m-0 p-0 d-flex justify-content-center">
-                    <b-pagination v-model="currentPage" :total-rows="rows" align="center"
-                        :per-page="perPage"></b-pagination>
-                </div>
+                <!-- <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+                    <b-pagination v-model="statisticalConditions.page_number" :total-rows="totalRows" align="center"
+                        :per-page="5"></b-pagination>
+                </div> -->
             </div>
         </div>
     </div>

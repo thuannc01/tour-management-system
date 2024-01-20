@@ -57,7 +57,8 @@ Route::group([
     // type transportation
     Route::apiResource('/type-transportation', TypeTransportationController::class);
     // location
-    Route::apiResource('/location', LocationController::class);
+    Route::apiResource('/location', LocationController::class)->only(['index']);
+    Route::get('/location/get-province-by-area', [LocationController::class, 'getProvinceByArea']);
     // additional service
     Route::apiResource('/additional-service', AdditionalServiceController::class);
     // food spot
@@ -68,7 +69,8 @@ Route::group([
     Route::apiResource('/tour', TourController::class)->only(['index', 'store', 'destroy']);
     Route::get('/tour/home', [TourController::class, 'getTourHome']);
     // statistical
-    Route::apiResource('/statistical', StatisticalController::class);
+    Route::apiResource('/statistical', StatisticalController::class)->only(['index']);
+    Route::post('/statistical/statistical-by-tour', [StatisticalController::class, 'statisticalByTour']);
     // period
     Route::apiResource('/period', PeriodController::class)->only(['index', 'store', 'destroy', 'show']);
     Route::post('/period/search', [PeriodController::class, 'search']);

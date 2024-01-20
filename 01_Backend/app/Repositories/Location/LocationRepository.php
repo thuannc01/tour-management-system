@@ -11,4 +11,9 @@ class LocationRepository extends BaseRepository implements ILocationRepository
     {
         return \App\Models\Province::class;
     }
+
+    public function getProvinceByArea($data){
+        $province = \App\Models\Province::where('area', '=', $data["area"])->get();
+        return $province;
+    }
 }

@@ -6,4 +6,5 @@ use App\Models\Province;
 
 interface ILocationRepository
 {
+    public function getProvinceByArea($data);
 }

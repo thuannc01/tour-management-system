@@ -28,8 +28,12 @@ var Dashboard2 = {
         // init data
         this.getAllCategories();
         this.getAllSegment();
-        this.getAllLocation();
         this.getDataInit();
+        this.getProvinceByArea({
+            area: this.statisticalConditions.area
+        });
+        //
+        this.doSearch();
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -47,7 +51,13 @@ var Dashboard2 = {
         this.setRoutePagePathAdmin1('');
         this.setDataInit();
     },
-    watch: {},
+    watch: {
+        'statisticalConditions.area'() {
+            this.getProvinceByArea({
+                area: this.statisticalConditions.area
+            });
+        }
+    },
     data() {
         return {
             rows: 10,
@@ -56,7 +66,14 @@ var Dashboard2 = {
         };
     },
     computed: {
-        ...mapState('Dashboard2Store', ['data', 'selectOptions'])
+        ...mapState('Dashboard2Store', [
+            'data',
+            'selectOptions',
+            'statisticalConditions',
+            // 'totalRows',
+            'tourData',
+            'periodData'
+        ])
     },
     methods: {
         ...mapActions('app', []),
@@ -72,13 +89,27 @@ var Dashboard2 = {
         ]),
         ...mapMutations('Dashboard2Store', ['setDataInit']),
         ...mapActions('Dashboard2Store', [
-            'getAllLocation',
+            'getProvinceByArea',
             'getAllSegment',
             'getAllCategories',
-            'getDataInit'
+            'getDataInit',
+            'statisticalByTour'
         ]),
         handleButtonClick() {
             alert('Button clicked!');
+        },
+        doSearch(tourID = 0) {
+            const vm = this;
+            const conditions = {
+                area: vm.statisticalConditions.area,
+                province: vm.statisticalConditions.province.join(','),
+                category: vm.statisticalConditions.category.join(','),
+                segment: vm.statisticalConditions.segment.join(','),
+                hasTourist: vm.statisticalConditions.hasTourist,
+                order: vm.statisticalConditions.order,
+                tour: tourID
+            };
+            vm.statisticalByTour(conditions);
         }
     }
 };
