@@ -21,8 +21,9 @@ export default {
         return repository.get(`${resourceStatistical}`);
     },
     statisticalByTour: (data) => {
-        return repository.post(`${resourceStatistical}/statistical-by-tour`, {
+        return repository.post(
+            `${resourceStatistical}/statistical-by-tour`,
             data
-        });
+        );
     }
 };

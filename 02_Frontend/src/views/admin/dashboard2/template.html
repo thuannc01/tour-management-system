@@ -145,18 +145,18 @@
                             <thead>
                                 <tr>
                                     <th class="align-middle text-center" scope="col">STT</th>
-                                    <th class="align-middle" width="30%" scope="col">Tên tour</th>
+                                    <th class="align-middle" width="20%" scope="col">Tên tour</th>
                                     <th class="align-middle" scope="col">TG Khởi hành</th>
-                                    <th class="align-middle" scope="col">Miền</th>
+                                    <th class="align-middle" width="15%" scope="col">Miền</th>
                                     <th class="align-middle" scope="col">Nơi đến</th>
                                     <th class="align-middle" scope="col">Tổng SL khách</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(period, index) in periodData" :key="index">
-                                    <th class="align-middle text-center" scope="row">{{index}}</th>
-                                    <td class="align-middle">{{period.tour_name}}</td>
-                                    <td class="align-middle">{{period.departure_time}}</td>
+                                    <th class="align-middle text-center" scope="row">{{index + 1}}</th>
+                                    <td class="align-middle">{{period.title}}</td>
+                                    <td class="align-middle">{{period.to_province_name}}</td>
                                     <td class="align-middle">{{period.area}}</td>
                                     <td class="align-middle">{{period.province_name}}</td>
                                     <td class="align-middle">{{period.total_number_customer}}</td>
@@ -199,15 +199,17 @@
                     </div>
                     <div class="radio-filter d-flex">
                         <div class="form-check me-4">
-                            <input @click="doSearch()" v-model="statisticalConditions.order" value=" tours.created_at desc "
-                                class="form-check-input" type="radio" name="flexRadioDefault" id="order1">
+                            <input @click="doSearch()" v-model="statisticalConditions.order"
+                                value=" tours.created_at desc " class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="order1">
                             <label class="form-check-label" for="order1">
                                 <p class="m-0">Thời gian</p>
                             </label>
                         </div>
                         <div class="form-check me-4">
-                            <input @click="doSearch()" v-model="statisticalConditions.order" value=" total_number_customer desc "
-                                class="form-check-input" type="radio" name="flexRadioDefault" id="order2">
+                            <input @click="doSearch()" v-model="statisticalConditions.order"
+                                value=" total_number_customer desc " class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="order2">
                             <label class="form-check-label" for="order2">
                                 <p class="m-0">Số lượng</p>
                             </label>
@@ -228,13 +230,13 @@
                     </thead>
                     <tbody>
                         <tr v-for="(tour, index) in tourData" :key="index" @click="doSearch(tour.id)">
-                            <th class="align-middle text-center" scope="row">{{index}}</th>
+                            <th class="align-middle text-center" scope="row">{{index + 1}}</th>
                             <td class="align-middle">{{tour.id}}</td>
                             <td class="align-middle">{{tour.title}}</td>
-                            <td class="align-middle">{{}}</td>
-                            <td class="align-middle">{{}}</td>
-                            <td class="align-middle">{{}}</td>
-                            <td class="align-middle">{{}}</td>
+                            <td class="align-middle">{{tour.from_province_name}}</td>
+                            <td class="align-middle">{{tour.to_province_name}}</td>
+                            <td class="align-middle">{{tour.total_number_customer}}</td>
+                            <td class="align-middle">{{tour.created_at}}</td>
                         </tr>
                     </tbody>
                 </table>

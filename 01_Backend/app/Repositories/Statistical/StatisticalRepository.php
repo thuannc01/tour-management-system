@@ -45,6 +45,23 @@ class StatisticalRepository extends BaseRepository implements IStatisticalReposi
         $hasTourist = $data['hasTourist'];
         $order = $data['order'];
         $tour = $data['tour'] ?? 0;
+        // handel conditions
+        if(empty($province)){
+            $provinceConditions = " ";
+        } else {
+            $provinceConditions = " AND tours.to_province_id IN (".$province.") ";
+        }
+        if(empty($category)){
+            $categoryConditions = " ";
+        } else {
+            $categoryConditions = " AND category_details.category_id IN (".$category.") ";
+        }
+        if(empty($segment)){
+            $segmentConditions = " ";
+        } else {
+            $segmentConditions = " AND segment_details.tourist_segment_id IN (".$segment.") ";
+        }
+        $conditions = $provinceConditions . $categoryConditions . $segmentConditions;
         // tour data
         $sqlQueryTourData = "
             SELECT
@@ -74,10 +91,8 @@ class StatisticalRepository extends BaseRepository implements IStatisticalReposi
                 JOIN category_details ON category_details.tour_id = tours.id
                 JOIN segment_details ON segment_details.tour_id = tours.id
 
-                WHERE to_province.area = '".$area."'
-                AND tours.to_province_id IN (".$province.")
-                AND category_details.category_id IN (".$category.")
-                AND segment_details.tourist_segment_id IN (".$segment.")
+                WHERE to_province.area = '".$area."' 
+                " . $conditions . "
 
                 GROUP BY
                     tours.id,
@@ -98,7 +113,7 @@ class StatisticalRepository extends BaseRepository implements IStatisticalReposi
         $sqlQueryPeriodData = "
             select tours.title title, TO_CHAR(TO_DATE(periods.departure_time, 'YYYY-MM-DD'), 'DD/MM/YYYY') AS departure_time
             , to_province.area area, to_province.name AS to_province_name
-            , SUM(reservations.adult_ticket_quantity + reservations.child_ticket_quantity + reservations.child_ticket_quantity) as total_number_customer
+            , SUM( reservations.adult_ticket_quantity::integer + reservations.child_ticket_quantity::integer + reservations.child_ticket_quantity::integer ) as total_number_customer
             from periods
             join tours on tours.id = periods.tour_id
             JOIN province AS to_province ON to_province.id = tours.to_province_id
@@ -116,5 +131,9 @@ class StatisticalRepository extends BaseRepository implements IStatisticalReposi
             'infant_ticket_quantity' => $infant_ticket_quantity ?? 0
         ];
         return $response;
+    }
+
+    public function statisticalByRevenue($data){
+        dd($data);
     }
 }

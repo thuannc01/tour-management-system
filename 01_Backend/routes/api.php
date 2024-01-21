@@ -71,6 +71,7 @@ Route::group([
     // statistical
     Route::apiResource('/statistical', StatisticalController::class)->only(['index']);
     Route::post('/statistical/statistical-by-tour', [StatisticalController::class, 'statisticalByTour']);
+    Route::post('/statistical/statistical-by-revenue', [StatisticalController::class, 'statisticalByRevenue']);
     // period
     Route::apiResource('/period', PeriodController::class)->only(['index', 'store', 'destroy', 'show']);
     Route::post('/period/search', [PeriodController::class, 'search']);

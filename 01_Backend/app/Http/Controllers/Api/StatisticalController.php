@@ -124,4 +124,63 @@ class StatisticalController extends Controller
         }
         return $response;
     }
+
+    /**
+     * Get statistical by revenue
+     *  @OA\POST(
+     *      path="/statistical/statistical-by-revenue",
+     *      tags={"Statistical"},
+     *      security={{"apiAuth":{}}},
+     *      description="
+     *      Code
+     *          200 - Success
+     *          400 - Bad request
+     *          401 - Not authentication
+     *          403 - Not access
+     *          422 - Input invalidate
+     *          423 - Have other error
+     *          500 - Server error
+     *      ",
+     *      @OA\RequestBody(
+     *           description="Tour data to statistic",
+     *           @OA\JsonContent(
+     *               @OA\Property(property="typeOfTime", type="string", example=""),
+     *               @OA\Property(property="startTime", type="string", example=""),
+     *               @OA\Property(property="endTime", type="string", example=""),
+     *               @OA\Property(property="category", type="string", example=""),
+     *               @OA\Property(property="order", type="string", example=""),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Result of success",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="Code", type="integer", example="200"),
+     *              @OA\Property(
+     *                  property="Data",
+     *                  description="Result of success"
+     *              )
+     *          )
+     *      )
+     *  )
+     */
+    public function statisticalByRevenue(Request $request)
+    {
+        $response = null;
+        try {
+            $data_res = $this->statisticalRepository->statisticalByRevenue($request->all());
+
+            $response = response()->json([
+                'Code'         => ResponseCodeConstant::OK,
+                'Data'         => $data_res,
+                'MessageNo'    => "",
+                'Message'      => "",
+                'DataErrors'   => []
+            ]);
+        }
+        catch (\Exception $e) {
+            //
+        }
+        return $response;
+    }
 }

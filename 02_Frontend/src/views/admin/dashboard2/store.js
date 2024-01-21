@@ -13,9 +13,9 @@ const initData = {
 
 const statisticalConditions = {
     area: 'Miền Bắc',
-    province: [1, 2, 3, 4, 5, 6, 30, 32, 33, 34, 35],
-    category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    segment: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    province: [],
+    category: [],
+    segment: [],
     hasTourist: ' >= 0 ',
     order: ' tours.created_at desc ',
     tour: 0
@@ -58,6 +58,12 @@ export default {
         },
         setSegmentList(state, data) {
             state.selectOptions.segmentList = data;
+        },
+        setTourData(state, data) {
+            state.tourData = data;
+        },
+        setPeriodData(state, data) {
+            state.periodData = data;
         }
     },
     actions: {
@@ -113,8 +119,14 @@ export default {
             try {
                 repository.statisticalByTour(conditions).then((res) => {
                     const { data } = res;
+                    console.log(data);
                     if (data.Code == 200) {
                         console.log('statisticalByTour: ', data.Data);
+                        context.commit('setTourData', data.Data.tourData ?? '');
+                        context.commit(
+                            'setPeriodData',
+                            data.Data.periodData ?? ''
+                        );
                     }
                 });
             } catch (e) {
