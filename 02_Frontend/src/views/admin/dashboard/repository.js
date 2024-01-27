@@ -1,9 +1,13 @@
 import repository from '@/utils/repository';
 
-const resourceStatistical = '/statistical';
+const resourceStatistical = '/statistical/statistical-by-revenue';
+const resourceStatisticalHeader = '/statistical';
 
 export default {
-    getDataInit: () => {
-        return repository.get(`${resourceStatistical}`);
+    getDataInit: (data) => {
+        return repository.post(`${resourceStatistical}`, data);
+    },
+    getDataInitHeader: () => {
+        return repository.get(`${resourceStatisticalHeader}`);
     }
 };

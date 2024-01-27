@@ -26,7 +26,8 @@ var Dashboard = {
             .getElementById('sidebar-item-statistical-revenue')
             .classList.add('active');
         // init data
-        this.getDataInit();
+        this.doSearch();
+        this.getDataInitHeader();
     },
     beforeRouteLeave(to, from, next) {
         document
@@ -42,8 +43,25 @@ var Dashboard = {
         this.setPageNameAdmin('');
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
+        this.resetData();
     },
-    watch: {},
+    watch: {
+        'data.typeOfTime'() {
+            this.doSearch();
+        },
+        'data.startTime'() {
+            this.doSearch();
+        },
+        'data.endTime'() {
+            this.doSearch();
+        },
+        'data.category'() {
+            this.doSearch();
+        },
+        'data.order'() {
+            this.doSearch();
+        }
+    },
     data() {
         return {
             rows: 10,
@@ -52,7 +70,12 @@ var Dashboard = {
         };
     },
     computed: {
-        ...mapState('DashboardStore', ['data', 'selectOptions'])
+        ...mapState('DashboardStore', [
+            'data',
+            'dataTable',
+            'revenueByArea',
+            'revenueByTimeAndCategory'
+        ])
     },
     methods: {
         ...mapActions('app', ['']),
@@ -66,10 +89,34 @@ var Dashboard = {
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
         ]),
-        ...mapActions('DashboardStore', ['getDataInit']),
-        ...mapMutations('DashboardStore', []),
+        ...mapActions('DashboardStore', ['getDataInit', 'getDataInitHeader']),
+        ...mapMutations('DashboardStore', ['resetData']),
         handleButtonClick() {
             alert('Button clicked!');
+        },
+        doSearch() {
+            const vm = this;
+            const conditions = {
+                typeOfTime: vm.data.typeOfTime,
+                startTime: vm.data.startTime,
+                endTime: vm.data.endTime,
+                category: vm.data.category,
+                order: vm.data.order
+            };
+            vm.getDataInit(conditions);
+        },
+        formatNumber(number) {
+            let numStr = number.toString();
+
+            let result = [];
+
+            for (let i = numStr.length - 1, j = 0; i >= 0; i--, j++) {
+                if (j > 0 && j % 3 === 0) {
+                    result.unshift('.');
+                }
+                result.unshift(numStr[i]);
+            }
+            return result.join('');
         }
     }
 };

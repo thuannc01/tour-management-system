@@ -64,6 +64,10 @@ export default {
         },
         setPeriodData(state, data) {
             state.periodData = data;
+        },
+        resetData(state) {
+            state.data = { ...initData };
+            state.statisticalConditions = { ...statisticalConditions };
         }
     },
     actions: {

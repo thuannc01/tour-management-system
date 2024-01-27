@@ -65,22 +65,22 @@
                     </div>
                     <div class="radio-filter d-flex">
                         <div class="form-check me-4 pt-1">
-                            <input class="form-check-input mt-1" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault1">
+                            <input checked value="month" v-model="data.typeOfTime" class="form-check-input mt-1"
+                                type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 <p class="m-0">Tháng</p>
                             </label>
                         </div>
                         <div class="form-check me-4 pt-1">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                                checked>
+                            <input value="quarter" v-model="data.typeOfTime" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault2" checked>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 <p class="m-0">Quý</p>
                             </label>
                         </div>
                         <div class="form-check me-4 pt-1">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
-                                checked>
+                            <input value="year" v-model="data.typeOfTime" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault3" checked>
                             <label class="form-check-label" for="flexRadioDefault3">
                                 <p class="m-0">Năm</p>
                             </label>
@@ -91,17 +91,17 @@
                     <thuan-button label=" Thống kê" class="bi bi-pie-chart-fill" />
                 </div>
                 <div class="col-3 mt-2 m-0 p-0">
-                    <thuan-button classBtn="btn-success" label=" In báo cáo" class="bi bi-printer-fill" />
+                    <!-- <thuan-button classBtn="btn-success" label=" In báo cáo" class="bi bi-printer-fill" /> -->
                 </div>
             </div>
             <!-- button action -->
         </div>
         <div class="col-6 d-flex justify-content-between">
             <div class="col-5">
-                <thuan-input label="Thời gian bắt đầu" type="date" />
+                <thuan-input v-model="data.startTime" label="Thời gian bắt đầu" type="date" />
             </div>
             <div class="col-5">
-                <thuan-input label="Thời gian kết thúc" type="date" />
+                <thuan-input v-model="data.endTime" label="Thời gian kết thúc" type="date" />
             </div>
         </div>
     </div>
@@ -111,7 +111,7 @@
             <thuan-bar-chart></thuan-bar-chart>
         </div>
         <div class="col-4">
-            <thuan-pie-chart></thuan-pie-chart>
+            <thuan-pie-chart :datasets="revenueByArea"></thuan-pie-chart>
         </div>
     </div>
     <!-- detail data -->
@@ -119,20 +119,23 @@
         <div class="col-6 d-flex p-0">
             <div class="radio-filter d-flex">
                 <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input value="" v-model="data.category" class="form-check-input" type="radio"
+                        name="flexRadioDefault" id="flexRadioDefault11">
+                    <label class="form-check-label" for="flexRadioDefault11">
                         <p class="m-0">Tất cả</p>
                     </label>
                 </div>
                 <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input value="2" v-model="data.category" class="form-check-input" type="radio"
+                        name="flexRadioDefault" id="flexRadioDefault12" checked>
+                    <label class="form-check-label" for="flexRadioDefault12">
                         <p class="m-0">Tour dài ngày</p>
                     </label>
                 </div>
                 <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
-                    <label class="form-check-label" for="flexRadioDefault3">
+                    <input value="1" v-model="data.category" class="form-check-input" type="radio"
+                        name="flexRadioDefault" id="flexRadioDefault13" checked>
+                    <label class="form-check-label" for="flexRadioDefault13">
                         <p class="m-0">Tour ngắn ngày</p>
                     </label>
                 </div>
@@ -144,14 +147,16 @@
             </div>
             <div class="radio-filter d-flex">
                 <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <input value="time" v-model="data.order" class="form-check-input" type="radio"
+                        name="flexRadioDefault" id="flexRadioDefault111">
+                    <label class="form-check-label" for="flexRadioDefault111">
                         <p class="m-0">Theo thời gian</p>
                     </label>
                 </div>
                 <div class="form-check me-4">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <input value="revenue" v-model="data.order" class="form-check-input" type="radio"
+                        name="flexRadioDefault" id="flexRadioDefault112">
+                    <label class="form-check-label" for="flexRadioDefault112">
                         <p class="m-0">Theo doanh thu</p>
                     </label>
                 </div>
@@ -164,32 +169,32 @@
                     <th class="align-middle" scope="col">Khách hàng</th>
                     <th class="align-middle" scope="col">SL tour bán</th>
                     <th class="align-middle" scope="col">Đơn giá</th>
-                    <th class="align-middle" scope="col">SL hoàn tour</th>
-                    <th class="align-middle" scope="col">Tiền hoàn trả</th>
                     <th class="align-middle" scope="col">Thời gian thanh toán</th>
-                    <th class="align-middle" scope="col">Loại tour</th>
+                    <th class="align-middle" scope="col">Tiền hoàn trả</th>
                     <th class="align-middle text-center" scope="col">Doanh thu</th>
+                    <th class="align-middle text-center" scope="col">Tháng</th>
+                    <th class="align-middle text-center" scope="col">Quý</th>
+                    <th class="align-middle text-center" scope="col">Năm</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="i in 5">
-                    <th class="align-middle text-center" scope="row">{{i}}</th>
-                    <td class="align-middle">Mark</td>
-                    <td class="align-middle">Otto</td>
-                    <td class="align-middle">@mdo</td>
-                    <td class="align-middle">Otto</td>
-                    <td class="align-middle">@mdo</td>
-                    <td class="align-middle">@mdo</td>
-                    <td class="align-middle">Đang xử lý</td>
-                    <td class="align-middle text-center">
-                        xxx
-                    </td>
+                <tr v-for="(tour, index) in dataTable" :key="index">
+                    <th class="align-middle text-center" scope="row">{{index + 1}}</th>
+                    <td class="align-middle">{{tour.full_name}}</td>
+                    <td class="align-middle">{{tour.quantity_sold}}</td>
+                    <td class="align-middle">{{tour.adult_ticket_price}}</td>
+                    <td class="align-middle">{{tour.formatted_payment_date}}</td>
+                    <td class="align-middle">{{tour.refund_amount ?? 0}}</td>
+                    <td class="align-middle">{{formatNumber(tour.total_amount)}} ₫</td>
+                    <td class="align-middle">{{tour.months}}</td>
+                    <td class="align-middle">{{tour.quarter}}</td>
+                    <td class="align-middle">{{tour.years}}</td>
                 </tr>
             </tbody>
         </table>
         <!-- pagination -->
-        <div class="w-100 row m-0 p-0 d-flex justify-content-center">
+        <!-- <div class="w-100 row m-0 p-0 d-flex justify-content-center">
             <b-pagination v-model="currentPage" :total-rows="rows" align="center" :per-page="perPage"></b-pagination>
-        </div>
+        </div> -->
     </div>
 </div>

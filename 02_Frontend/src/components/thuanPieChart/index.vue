@@ -15,14 +15,26 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default {
     name: 'PieChart',
     components: { Pie },
+    props: {
+        datasets: {
+            type: Array,
+            default: () => [
+                { label: 'Miền Bắc', color: '#41B883', value: 40 },
+                { label: 'Miền Trung', color: '#E46651', value: 20 },
+                { label: 'Miền Nam', color: '#00D8FF', value: 80 }
+            ]
+        }
+    },
     data() {
         return {
             chartData: {
-                labels: ['Miền Bắc', 'Miền Trung', 'Miền Nam'],
+                labels: this.datasets.map((data) => data.label),
                 datasets: [
                     {
-                        backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
-                        data: [40, 20, 80]
+                        backgroundColor: this.datasets.map(
+                            (data) => data.color
+                        ),
+                        data: this.datasets.map((data) => data.value)
                     }
                 ]
             },

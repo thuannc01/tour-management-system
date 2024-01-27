@@ -50,6 +50,7 @@ var Dashboard2 = {
         this.setPagePathAdmin1('');
         this.setRoutePagePathAdmin1('');
         this.setDataInit();
+        this.resetData();
     },
     watch: {
         'statisticalConditions.area'() {
@@ -87,7 +88,7 @@ var Dashboard2 = {
             'setPagePathAdmin3',
             'setRoutePagePathAdmin3'
         ]),
-        ...mapMutations('Dashboard2Store', ['setDataInit']),
+        ...mapMutations('Dashboard2Store', ['setDataInit', 'resetData']),
         ...mapActions('Dashboard2Store', [
             'getProvinceByArea',
             'getAllSegment',

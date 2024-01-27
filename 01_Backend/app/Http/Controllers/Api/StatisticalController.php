@@ -144,11 +144,11 @@ class StatisticalController extends Controller
      *      @OA\RequestBody(
      *           description="Tour data to statistic",
      *           @OA\JsonContent(
-     *               @OA\Property(property="typeOfTime", type="string", example=""),
+     *               @OA\Property(property="typeOfTime", type="string", example="month or quarter or year"),
      *               @OA\Property(property="startTime", type="string", example=""),
      *               @OA\Property(property="endTime", type="string", example=""),
-     *               @OA\Property(property="category", type="string", example=""),
-     *               @OA\Property(property="order", type="string", example=""),
+     *               @OA\Property(property="category", type="string", example="1 or 2"),
+     *               @OA\Property(property="order", type="string", example="time or revenue"),
      *          )
      *      ),
      *      @OA\Response(
