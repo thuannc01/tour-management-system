@@ -78,7 +78,8 @@ var BookATour = {
             'statusAddress',
             'bankData',
             'fromProvinceName',
-            'isDirectProfile'
+            'isDirectProfile',
+            'uuid'
         ])
     },
     methods: {
@@ -93,7 +94,9 @@ var BookATour = {
         ...mapActions('BookATourStore', [
             'getDataPeriod',
             'getAllLocation',
-            'saveReservation'
+            'saveReservation',
+            'sendMail',
+            'checkOTP'
         ]),
         ...mapMutations('BookATourStore', [
             'setPriceOrder',
@@ -238,6 +241,11 @@ var BookATour = {
                 this.addDisplayNone(bodyInputInfo);
                 this.addDisplayNone(bodyPayment);
                 this.removeDisplayNone(bodyConfirm);
+                console.log('tới bước nhập mã OTP');
+                const conditionMail = {
+                    email: vm.customerInfo[0]?.email
+                };
+                vm.sendMail(conditionMail);
             } else {
                 const vm = this;
                 //
@@ -245,20 +253,44 @@ var BookATour = {
                     this.showHeaderError(['Vui lòng nhập mã OTP. Cảm ơn!']);
                     return;
                 }
-                //
-                vm.showModalMessage({
-                    title: 'Xác nhận đặt tour',
-                    type: MSG_TYPE.CONFIRM,
-                    content: `Đơn hàng của bạn sẽ được đặt thành công khi bạn Click vào [Đồng Ý]`,
-                    cancelText: 'Huỷ',
-                    okText: 'Đồng ý',
-                    callback: (ok) => {
-                        if (ok) {
-                            vm.saveData();
-                        }
-                    }
+                console.log('xác nhận mã OTP');
+                const conditionCheck = {
+                    uuid: this.uuid,
+                    otpCode: this.data.otp_code
+                };
+                this.checkOTP({
+                    conditionCheck: conditionCheck,
+                    callback: this.onSaveDataBookTour
                 });
+                //
+                // vm.showModalMessage({
+                //     title: 'Xác nhận đặt tour',
+                //     type: MSG_TYPE.CONFIRM,
+                //     content: `Đơn hàng của bạn sẽ được đặt thành công khi bạn Click vào [Đồng Ý]`,
+                //     cancelText: 'Huỷ',
+                //     okText: 'Đồng ý',
+                //     callback: (ok) => {
+                //         if (ok) {
+                //             vm.saveData();
+                //         }
+                //     }
+                // });
             }
+        },
+        onSaveDataBookTour() {
+            const vm = this;
+            vm.showModalMessage({
+                title: 'Xác nhận đặt tour',
+                type: MSG_TYPE.CONFIRM,
+                content: `Đơn hàng của bạn sẽ được đặt thành công khi bạn Click vào [Đồng Ý]`,
+                cancelText: 'Huỷ',
+                okText: 'Đồng ý',
+                callback: (ok) => {
+                    if (ok) {
+                        vm.saveData();
+                    }
+                }
+            });
         },
         addDisplayNone(elem) {
             elem.classList.add('d-none');

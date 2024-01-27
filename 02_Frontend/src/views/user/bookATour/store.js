@@ -59,7 +59,8 @@ export default {
         statusAddress: true,
         bankData: { ...bankData },
         fromProvinceName: '',
-        isDirectProfile: false
+        isDirectProfile: false,
+        uuid: ''
     },
     mutations: {
         setDataPeriod(state, data) {
@@ -141,6 +142,9 @@ export default {
         },
         setIsDirectProfile(state) {
             state.isDirectProfile = !state.isDirectProfile;
+        },
+        setUUID(state, data) {
+            state.uuid = data;
         }
     },
     actions: {
@@ -186,6 +190,44 @@ export default {
                                 }
                             }
                         });
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+
+        sendMail(context, conditions) {
+            try {
+                repository.sendMail(conditions).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        context.commit('setUUID', data.Data.uuid ?? '');
+                        store.commit('app/showModalMessage', {
+                            type: MSG_TYPE.SUCCESS,
+                            title: 'Đã gởi mã xác nhận OTP vào mail của bạn',
+                            content:
+                                'Vui lòng chọn tiếp tục để nhập mã OTP tiến hành xác nhận đơn hàng',
+                            okText: 'Tiếp tục',
+                            callback: (ok) => {
+                                if (ok) {
+                                    //
+                                }
+                            }
+                        });
+                    }
+                });
+            } catch (e) {
+                console.log('' + e.message);
+            }
+        },
+
+        checkOTP(context, { conditionCheck, callback }) {
+            try {
+                repository.checkOTP(conditionCheck).then((res) => {
+                    const { data } = res;
+                    if (data.Code == 200) {
+                        if (callback) callback();
                     }
                 });
             } catch (e) {

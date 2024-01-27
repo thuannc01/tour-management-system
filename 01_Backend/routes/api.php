@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\TourDetailController;
 use App\Http\Controllers\Api\TransportationController;
 use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\OtpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,9 @@ Route::group([
     Route::post('/reservation/save-notification', [ReservationController::class, 'saveNotification']);
     Route::get('/reservation/get-notification', [ReservationController::class, 'getNotificationByUser']);
     Route::post('/reservation/update-refund', [ReservationController::class, 'updateRefund']);
+    // send mail
+    Route::post('/send-otp', [OtpController::class, 'sendOtp']);
+    Route::get('/check-otp', [OtpController::class, 'checkOTP']);
 });
 
 // No auth
