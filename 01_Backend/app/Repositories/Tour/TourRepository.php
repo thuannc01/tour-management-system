@@ -211,16 +211,17 @@ class TourRepository extends BaseRepository implements ITourRepository
         $newTours = DB::select($sqlString1);
         //
         $sqlString2 = "
-         SELECT t.*, images.path AS img
+        SELECT t.*, images.path AS img
         FROM tours t
         JOIN (
-            SELECT tour_id, AVG(star_count) AS avg_rating
+            SELECT
+                tour_id,
+                AVG(star_count) AS avg_rating,
+                ROW_NUMBER() OVER (PARTITION BY tour_id ORDER BY AVG(star_count) DESC) AS row_num
             FROM ratings
-            GROUP BY tour_id
-            ORDER BY avg_rating DESC
-            LIMIT 1
-        ) r ON t.id = r.tour_id
-         LEFT JOIN (
+            GROUP BY tour_id 
+        ) r ON t.id = r.tour_id AND r.row_num = 1
+        LEFT JOIN (
             SELECT
                 foreign_key_1,
                 path,
@@ -228,8 +229,9 @@ class TourRepository extends BaseRepository implements ITourRepository
             FROM
                 images
         ) images ON images.foreign_key_1 = t.id AND images.row_num = 1 
-        where t.deleted_at is null 
-        LIMIT 8; ";
+        WHERE t.deleted_at IS NULL 
+        LIMIT 8;
+         ";
         $hotTours = DB::select($sqlString2);
         // 
         $response = [

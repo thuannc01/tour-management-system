@@ -395,6 +395,52 @@
                 ]
             }
         },
+        "/location/get-province-by-area": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Get province by area",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "33ae95e1b615022af87de9df22982b30",
+                "parameters": [
+                    {
+                        "name": "area",
+                        "in": "query",
+                        "description": "area",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/news": {
             "get": {
                 "tags": [
@@ -770,13 +816,13 @@
             }
         },
         "/period/search": {
-            "get": {
+            "post": {
                 "tags": [
                     "Period"
                 ],
                 "summary": "Get data search periods",
                 "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
-                "operationId": "d7c355e7fdbbf446fe0a7264780fad83",
+                "operationId": "aa9185723449148b0962f0fa305d4725",
                 "parameters": [
                     {
                         "name": "title",
@@ -832,6 +878,50 @@
             }
         },
         "/period/{id}": {
+            "get": {
+                "tags": [
+                    "Period"
+                ],
+                "summary": "Get period by id",
+                "description": "\n     *          Code\n     *              200 - Success\n     *              400 - Bad request\n     *              401 - Not authentication\n     *              403 - Not access\n     *              422 - Input invalidate\n     *              423 - Have other error\n     *              500 - Server error\n     *      ",
+                "operationId": "ebeab42185486d33f610d03871736ffb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id period",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
             "delete": {
                 "tags": [
                     "Period"
@@ -849,6 +939,78 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/period/update": {
+            "post": {
+                "tags": [
+                    "Period"
+                ],
+                "summary": "Update period",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "a2c1875d01699629d0e4ab49316b2d1f",
+                "requestBody": {
+                    "description": "Period data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "period_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "tour_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "departure_time": {
+                                        "type": "string",
+                                        "example": "01/01/2023"
+                                    },
+                                    "arrival_time": {
+                                        "type": "string",
+                                        "example": "01/01/2023"
+                                    },
+                                    "maximum_quantity": {
+                                        "type": "integer",
+                                        "example": "15"
+                                    },
+                                    "tourist_guide_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Result of success",
@@ -1700,6 +1862,150 @@
                 ]
             }
         },
+        "/statistical/statistical-by-tour": {
+            "post": {
+                "tags": [
+                    "Statistical"
+                ],
+                "summary": "Get statistical by tour",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "b1ebbf6a6ffd5ff8758a6fc28e88f338",
+                "requestBody": {
+                    "description": "Tour data to statistic",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "area": {
+                                        "type": "string",
+                                        "example": "Miền Trung"
+                                    },
+                                    "province": {
+                                        "type": "string",
+                                        "example": "33"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "1,2,3,4,5,6,7,8,9"
+                                    },
+                                    "segment": {
+                                        "type": "string",
+                                        "example": "1,2,3,4,5,6,7,8,9"
+                                    },
+                                    "hasTourist": {
+                                        "type": "string",
+                                        "example": " >= 0 "
+                                    },
+                                    "order": {
+                                        "type": "string",
+                                        "example": " tours.created_at desc "
+                                    },
+                                    "tour": {
+                                        "type": "integer",
+                                        "example": "13"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/statistical/statistical-by-revenue": {
+            "post": {
+                "tags": [
+                    "Statistical"
+                ],
+                "summary": "Get statistical by revenue",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "b46100fc7560a5dda990bec5f4796734",
+                "requestBody": {
+                    "description": "Tour data to statistic",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "typeOfTime": {
+                                        "type": "string",
+                                        "example": "month or quarter or year"
+                                    },
+                                    "startTime": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "endTime": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "1 or 2"
+                                    },
+                                    "order": {
+                                        "type": "string",
+                                        "example": "time or revenue"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/tour": {
             "get": {
                 "tags": [
@@ -2310,6 +2616,112 @@
                         }
                     }
                 },
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/send-otp": {
+            "post": {
+                "tags": [
+                    "Send mail"
+                ],
+                "summary": "Send mail otp",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "3192a58d1f661d6d0ec0da0bc20e6abd",
+                "requestBody": {
+                    "description": "Email",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "thuan.23701@gmail.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Result of success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "Data": {
+                                            "description": "Result of success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/check-otp": {
+            "get": {
+                "tags": [
+                    "Send mail"
+                ],
+                "summary": "Check OTP is valid",
+                "description": "\n     *      Code\n     *          200 - Success\n     *          400 - Bad request\n     *          401 - Not authentication\n     *          403 - Not access\n     *          422 - Input invalidate\n     *          423 - Have other error\n     *          500 - Server error\n     *      ",
+                "operationId": "89b5d096d9d6b8c35eaa66e280108995",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "query",
+                        "description": "Uuid",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "otpCode",
+                        "in": "query",
+                        "description": "Mã OTP",
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Result of success",

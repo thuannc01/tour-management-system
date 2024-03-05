@@ -111,6 +111,19 @@ var Dashboard2 = {
                 tour: tourID
             };
             vm.statisticalByTour(conditions);
+        },
+        formatNumber(number) {
+            let numStr = number.toString();
+
+            let result = [];
+
+            for (let i = numStr.length - 1, j = 0; i >= 0; i--, j++) {
+                if (j > 0 && j % 3 === 0) {
+                    result.unshift('.');
+                }
+                result.unshift(numStr[i]);
+            }
+            return result.join('');
         }
     }
 };

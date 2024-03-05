@@ -29,6 +29,7 @@ export default {
                 repository.getToursHome().then((res) => {
                     const { data } = res;
                     if (data.Code == 200) {
+                        console.log('setHotToursList: ', data.Data);
                         context.commit('setHotToursList', data.Data.hotTours);
                         context.commit('setNewToursList', data.Data.newTours);
                     }
